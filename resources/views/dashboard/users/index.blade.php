@@ -23,6 +23,8 @@
                                         <th>Name</th>
                                         <th>Username.</th>
                                         <th>Email</th>
+                                        <th>Contact Info.</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -32,6 +34,12 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->username }}</td>
                                             <td>{{ $user->email }}</td>
+                                            <td>Sample #</td>
+                                            <td class="d-flex justify-content-around">
+                                                <button class="btn btn-sm btn-primary">Edit</button>
+                                                <button class="btn btn-sm btn-warning">View</button>
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
