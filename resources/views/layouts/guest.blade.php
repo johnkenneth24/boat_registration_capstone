@@ -13,15 +13,14 @@
     <link rel="shortcut icon" href="{{ asset('images/lgo.png') }}" type="image/x-icon">
 
     <style>
-        body {
+        /* body {
             background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/sb.jpg') }}") left no-repeat;
             background-attachment: fixed;
             position: relative;
             height: 100vh;
             font-family: 'Roboto', sans-serif;
-        }
-
-        .overlay {
+        } */
+        .overlay-login {
             position: fixed;
             top: 0;
             right: 0;
@@ -32,13 +31,38 @@
             z-index: 1;
         }
 
+        .overlay-register {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 120%;
+            height: 100vh;
+            background-color: #F2F42E;
+            clip-path: ellipse(50% 100% at 0% 50%);
+            z-index: 1;
+        }
+
         .container-login {
+            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/sb.jpg') }}") left no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container-register {
+            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/sb.jpg') }}") right no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .con-log,
+        .con-reg {
             position: relative;
             z-index: 2;
             height: 100vh;
-            /* justify-content: center;
-            justify-items: center;
-            display: flex; */
         }
     </style>
 </head>

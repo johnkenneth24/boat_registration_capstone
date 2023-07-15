@@ -1,37 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">{{ __('Users') }}</h1>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-
-                    {{-- <div class="alert alert-info">
-                        Sample table page
-                    </div> --}}
-
                     <div class="card">
                         <div class="card-body p-0">
-
-                            <table class="table">
-                                <thead>
+                            <table class="table table-hover table-responsive-md">
+                                <thead class="thead-dark">
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>School ID No.</th>
+                                        <th>Username.</th>
                                         <th>Email</th>
                                     </tr>
                                 </thead>
@@ -40,24 +30,19 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->name }}</td>
-                                            <td>{{ $user->school_id }}</td>
+                                            <td>{{ $user->username }}</td>
                                             <td>{{ $user->email }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        <!-- /.card-body -->
-
                         <div class="card-footer clearfix">
                             {{ $users->links() }}
                         </div>
                     </div>
-
                 </div>
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </div>
-    <!-- /.content -->
 @endsection
