@@ -60,7 +60,7 @@
             </ul>
         </nav>
 
-        <aside class="main-sidebar elevation-4" style="background-color: #F1F32E">
+        <aside class="main-sidebar elevation-4" style="background-color: #F1F32E; position: fixed !important;">
             <a href="/" class="brand-link text-center">
                 <img src="{{ asset('images/lgo.png') }}" alt="Bulan Logo" class="img-fluid img-circle elevation-3"
                     style="opacity: .8; max-height: 100px;"> <br>
