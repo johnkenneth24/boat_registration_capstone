@@ -22,13 +22,21 @@
         .nav-pills .nav-link {
             color: black !important;
         }
+
+        .content-wrapper {
+            background-image: linear-gradient(rgba(255, 247, 247, 0.697), rgba(173, 173, 173, 0.638)), url("{{ asset('images/sb-ai generated.jpg') }}");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: right;
+        }
     </style>
     @yield('styles')
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light sticky-top">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
@@ -38,8 +46,10 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <a class="nav-link text-dark" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user" aria-hidden="true"></i> {{ Auth::user()->name }}
+                        <span class="text-muted small"><i class="fa fa-chevron-circle-down"
+                                aria-hidden="true"></i></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
                         <a href="{{ route('profile.show') }}" class="dropdown-item">
