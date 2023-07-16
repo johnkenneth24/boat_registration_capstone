@@ -15,6 +15,12 @@
                     <p>Dashboard</p>
                 </a>
             </li>
+            <li class="nav-item {{ request()->routeIs('borrowers.*') ? 'nav-item-active' : '' }}">
+                <a href="{{-- route('borrowers.index') --}}" class="nav-link">
+                    <i class="nav-icon fas fa-bullhorn" aria-hidden="true"></i>
+                    <p>Announcements</p>
+                </a>
+            </li>
             @if (auth()->user()->role == 'admin')
                 <li class="nav-item {{ request()->routeIs('users.*') ? 'nav-item-active' : '' }}">
                     <a href="{{ route('users.index') }}" class="nav-link ">
@@ -23,21 +29,17 @@
                     </a>
                 </li>
             @endif
-
-            <li class="nav-item {{ request()->routeIs('borrowers.*') ? 'nav-item-active' : '' }}">
-                <a href="{{-- route('borrowers.index') --}}" class="nav-link">
-                    <i class="nav-icon fas fa-bullhorn" aria-hidden="true"></i>
-                    <p>Announcements</p>
-                </a>
-            </li>
-
-            @if (auth()->user()->role == 'admin')
-                <li class="nav-header text-center">Boat Registration Management</li>
-            @endif
-            <li class="nav-item {{ request()->routeIs('books.*') ? 'nav-item-active' : '' }}">
-                <a href="{{-- route('books.index') --}}" class="nav-link">
+            <li class="nav-header text-center">Boat Registration Management</li>
+            {{-- <li class="nav-item {{ request()->routeIs('books.*') ? 'nav-item-active' : '' }}">
+                <a href="" class="nav-link">
                     <i class="nav-icon fa fa-ship" aria-hidden="true"></i>
                     <p>Boat Information</p>
+                </a>
+            </li> --}}
+            <li class="nav-item {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
+                <a href="{{ route('reg-boat.index') }}" class="nav-link">
+                    <i class="nav-icon fa fa-ship" aria-hidden="true"></i>
+                    <p>Register Boat</p>
                 </a>
             </li>
             @if (auth()->user()->role == 'admin')
