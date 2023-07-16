@@ -16,11 +16,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-body card-bcc">
-                            <p class="card-text">
-                                {{-- {{ __('You are logged in!') }} --}}
-                            </p>
-                            @if (auth()->user()->role == 'admin')
+                        @if (auth()->user()->role != 'user')
+                            <div class="card-body card-bcc">
+                                <p class="card-text">
+                                    {{-- {{ __('You are logged in!') }} --}}
+                                </p>
                                 <div class="row">
                                     <div class="col-lg-3 col-6">
                                         <!-- small box -->
@@ -81,8 +81,8 @@
                                     </div>
                                     <!-- ./col -->
                                 </div>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -92,22 +92,26 @@
                                     <h5 class="text-left text-uppercase font-weight-bolder mb-0">Welcome Back!</h5>
                                     <h3 class="text-left text-uppercase font-weight-bolder text-primary">
                                         {{ Auth::user()->username }}</h3>
-                                    <h6 class="text-left text-uppercase">ID Number: <span
-                                            class="text-lowercase">12345678</span> </h6>
+                                    <h6 class="text-left text-uppercase">ID Number:
+                                        <span class="font-weight-bold">{{ Auth::user()?->id_number ?? '' }}</span>
+                                    </h6>
                                     <h6 class="text-left text-uppercase">Email: <span
-                                            class="text-lowercase">{{ Auth::user()->email }}</span> </h6>
+                                            class="text-lowercase font-weight-bold">{{ Auth::user()->email }}</span> </h6>
                                     <h6 class="text-left text-uppercase">Mobile Number: <span
-                                            class="text-lowercase">+639123456789</span> </h6>
+                                            class="text-lowercase font-weight-bold">{{ Auth::user()?->contact_no ?? '' }}</span>
+                                    </h6>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body card-bcc">
-                                    text here
+                        @if (auth()->user()->role != 'user')
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body card-bcc">
+                                        <h3 class="text-center">Analysis here</h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->

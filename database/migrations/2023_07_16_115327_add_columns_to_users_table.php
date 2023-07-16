@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('register_boats', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('id_number')->unique()->autoIncrement();
-
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('id_number')->nullable()->after('role');
+            $table->string('contact_no')->nullable()->after('id_number');
         });
     }
 
@@ -25,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('register_boats');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['id_number', 'contact_no']);
+
+        });
     }
 };

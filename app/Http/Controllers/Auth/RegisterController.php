@@ -65,7 +65,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data);
+        $users = User::all();
+        $last_id_number = $users->last()->id_number;
+        $last_id_number = (int) substr($last_id_number, 6);
 
         return User::create([
             'name' => $data['name'],
@@ -73,6 +75,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => 'user',
+            'id_number' => 'BRIMS-' . str_pad($last_id_number + 1, 3, '0', STR_PAD_LEFT),
         ]);
     }
 }

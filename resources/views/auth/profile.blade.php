@@ -76,6 +76,23 @@
                                             @enderror
                                         </div>
                                         <div class="input-group mb-3">
+                                            <input type="text" name="contact_no"
+                                                class="form-control @error('contact_no') is-invalid @enderror"
+                                                placeholder="{{ __('Contact number') }}"
+                                                value="{{ old('contact_no', auth()->user()?->contact_no ?? '') }}"
+                                                required>
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-envelope"></span>
+                                                </div>
+                                            </div>
+                                            @error('contact_no')
+                                                <span class="error invalid-feedback">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="input-group mb-3">
                                             <input type="password" name="password"
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 placeholder="{{ __('New password') }}">
