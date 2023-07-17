@@ -16,39 +16,46 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group col-md-9">
+                                <div class="form-group col-md-12">
                                     <label for="">Name of Fisherfolk Association</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Name of Fisherfolk Association">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Name of Fisherfolk Association">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-9">
                                     <label for="">Name of Fisherfolk</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Name of Fisherfolk">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Name of Fisherfolk">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Age</label>
-                                    <input type="number" name="" id="" class="form-control" placeholder="Enter Age">
+                                    <input type="number" name="" id="" class="form-control"
+                                        placeholder="Enter Age">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="">Address</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Address">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Address">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="">Beneficiary</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Beneficiary">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Beneficiary">
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <label for="">Property to be Insured</label>
                                     <select name="" class="form-control" id="">
                                         <option value="">--Please select--</option>
-                                        <option value="">Non-Motorizedc Banca</option>
+                                        <option value="">Non-Motorized Banca</option>
                                         <option value="">Motorized Banca</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-5">
-                                    <label for="">Horse Power</label><span class="text-muted text-nowrap"> (Only applicable for Motorized Banca)</span>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Horse Power">
+                                <div class="form-group col-md-6">
+                                    <label for="">Horse Power</label><span class="text-muted text-nowrap"> (Only
+                                        applicable for Motorized Banca)</span>
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Horse Power">
                                 </div>
                             </div>
                         </div>
@@ -67,35 +74,43 @@
                             <div class="row">
                                 <div class="form-group col-md-3">
                                     <label for="">Color</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Color">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Color">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Length</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Length">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Length">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Breadth</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Breadth">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Breadth">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Depth</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Depth">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Depth">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Body Number</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Body Number">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Body Number">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Materials</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Materials">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Materials">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Year Built</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Year Built">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Year Built">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Gross Toonage</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Gross Toonage">
+                                    <input type="text" name="" id="" class="form-control"
+                                        placeholder="Enter Gross Toonage">
                                 </div>
                             </div>
                         </div>
@@ -110,33 +125,40 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label for="">Desired Amount of Cover</label>
-                                    <input type="number" name="" id="" class="form-control" placeholder="Enter">
+                                    <input type="number" name="" id="" class="form-control"
+                                        placeholder="Enter">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label for="">Registration Number</label>
-                                    <input type="number" name="" id="" class="form-control" placeholder="Enter Registration Number">
+                                    <input type="number" name="" id="" class="form-control"
+                                        placeholder="Enter Registration Number">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="">OR Number</label>
-                                    <input type="number" name="" id="" class="form-control" placeholder="Enter OR No.">
+                                    <input type="number" name="" id="" class="form-control"
+                                        placeholder="Enter OR No.">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="">Date</label>
-                                    <input type="date" name="" id="" class="form-control" placeholder="">
+                                    <input type="date" name="" id="" class="form-control"
+                                        placeholder="">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="">Cover Period From</label>
-                                    <input type="date" name="" id="" class="form-control" placeholder="">
+                                    <input type="date" name="" id="" class="form-control"
+                                        placeholder="">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="">Cover Period To</label>
-                                    <input type="date" name="" id="" class="form-control" placeholder="">
+                                    <input type="date" name="" id="" class="form-control"
+                                        placeholder="">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="">Please attached colored pictures of the property</label>
-                                    <input type="file" name="" id="" class="form-control" placeholder="">
+                                    <input type="file" name="" id="" class="form-control"
+                                        placeholder="">
                                 </div>
                             </div>
                         </div>
