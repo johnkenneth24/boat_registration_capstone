@@ -3,9 +3,11 @@
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterBoatController;
+use App\Http\Controllers\RegisteredBoatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApplicantListController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -31,12 +33,25 @@ Route::middleware('auth')->group(function () {
         Route::get('ads-form', 'adss_form')->name('reg-boat.ads-form');
     });
 
-    Route::controller(AnnouncementsController::class)->prefix('announcements')->group(function () {
-        Route::get('/', 'index')->name('announcements.index');
-        Route::get('create', 'create')->name('announcements.create');
-        Route::post('store', 'store')->name('announcements.store');
-        Route::get('edit/{announcement}', 'edit')->name('announcements.edit');
-        Route::put('update/{announcement}', 'update')->name('announcements.update');
-        Route::delete('destroy/{announcement}', 'destroy')->name('announcements.destroy');
+    Route::controller(RegisteredBoatController::class)->prefix('reged-boat')->group(function () {
+        Route::get('/', 'index')->name('reged-boat.index');
     });
+
+    Route::controller(ApplicantListController::class)->prefix('applist')->group(function () {
+        Route::get('/', 'index')->name('applist.index');
+        Route::get('process', 'process_registration')->name('applist.process');
+        Route::get('mfr-form', 'mfr_form')->name('applist.mfr-form');
+        Route::get('ads-form', 'adss_form')->name('applist.ads-form');
+    });
+
+    Route::controller(AnnouncementsController::class)->prefix('announcement')->group(function () {
+        Route::get('/', 'index')->name('announcement.index');
+        Route::get('create', 'create')->name('announcement.create');
+        Route::post('store', 'store')->name('announcement.store');
+        Route::get('edit/{announcement}', 'edit')->name('announcement.edit');
+        Route::put('update/{announcement}', 'update')->name('announcement.update');
+        Route::delete('destroy/{announcement}', 'destroy')->name('announcement.destroy');
+    });
+
+
 });

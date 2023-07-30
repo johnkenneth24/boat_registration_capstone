@@ -254,7 +254,7 @@
                         </div>
                         <div class="card-footer d-flex justify-content-end">
                             <button type="submit" class="btn btn-success mr-2">Submit</button>
-                            <a href="{{ route('reg-boat.ads-form') }}" class="btn btn-primary">Next - ADSS Form</a>
+                            <a href="{{ route('applist.ads-form') }}" class="btn btn-primary">Next - ADSS Form</a>
                         </div>
                     </div>
                 </div>
