@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterBoatController;
+use App\Http\Controllers\RegisteredBoatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,10 @@ Route::middleware('auth')->group(function () {
         Route::get('process', 'process_registration')->name('reg-boat.process');
         Route::get('mfr-form', 'mfr_form')->name('reg-boat.mfr-form');
         Route::get('ads-form', 'adss_form')->name('reg-boat.ads-form');
+    });
+
+    Route::controller(RegisteredBoatController::class)->prefix('reged-boat')->group(function () {
+        Route::get('/', 'index')->name('reged-boat.index');
     });
 
     Route::controller(AnnouncementsController::class)->prefix('announcements')->group(function () {

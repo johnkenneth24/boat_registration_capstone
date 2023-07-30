@@ -35,25 +35,17 @@
                 <li class="nav-item {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
                     <a href="{{ route('reg-boat.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-ship" aria-hidden="true"></i>
-                        <p>Register Boat</p>
-                    </a>
-                </li>
-                <li class="nav-item {{ request()->routeIs('borrowers.*') ? 'nav-item-active' : '' }}">
-                    <a href="{{-- route('borrowers.index') --}}" class="nav-link">
-                        <i class="nav-icon fa fa-users" aria-hidden="true"></i>
-                        <p>Owners Information</p>
+                        <p>Boat Registration</p>
                     </a>
                 </li>
             @endif
+                <li class="nav-item {{ request()->routeIs('reged-boat.*') ? 'nav-item-active' : '' }}">
+                    <a href="{{ route('reged-boat.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-check" aria-hidden="true"></i>
+                        <p>Registered Boat</p>
+                    </a>
+                </li> 
             <hr>
-            <li class="nav-item {{ request()->routeIs('profile.*') ? 'nav-item-active' : '' }}">
-                <a href="{{ route('profile.show') }}" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
-                    <p>
-                        My profile
-                    </p>
-                </a>
-            </li>
         </ul>
     </nav>
 </div>
