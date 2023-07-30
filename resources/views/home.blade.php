@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body text-start d-flex align-items-center">
                         <img src="{{ asset('images/kindpng_3354824.png') }}" alt="books" height="50px">
-                        <h4 class="text-left text-uppercase font-weight-bolder ml-2 mr-2">Welcome Back</h4>
+                        <h4 class="text-left text-uppercase font-weight-bolder ml-2 mr-2">Have A Nice Day</h4>
                         <h4 class="text-left text-uppercase font-weight-bolder text-primary">
                             {{ Auth::user()->username }}!</h4>
                     </div>
@@ -168,11 +168,7 @@
         @if (auth()->user()->role != 'user')
         <div class="row">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body card-bcc">
-                        <h3 class="text-center">Analysis here</h3>
-                    </div>
-                </div>
+
             </div>
         </div>
         @endif
