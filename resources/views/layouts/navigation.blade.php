@@ -32,7 +32,6 @@
                 </li>
             @endif
             @if (auth()->user()->role != 'admin')
-                <li class="nav-header text-center">Boat Registration Management</li>
                 <li class="nav-item {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
                     <a href="{{ route('reg-boat.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-ship" aria-hidden="true"></i>
