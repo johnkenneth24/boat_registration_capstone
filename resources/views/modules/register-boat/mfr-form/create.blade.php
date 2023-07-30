@@ -14,41 +14,207 @@
                                 <a href="{{ route('reg-boat.process') }}" class="btn btn-danger">Back</a>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pb-4">
                             <div class="row">
-                                <div class="form-group col-md-9">
-                                    <label for="">Name of Fisherfolk Association</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Name of Fisherfolk Association">
+                                <div class="form-group col-md-4">
+                                    <label for="">Type of Application</label>
+                                    <select name="" class="form-control" id="">
+                                        <option value="">--Please select--</option>
+                                        <option value="">New Registration</option>
+                                        <option value="">Renewal</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-9">
-                                    <label for="">Name of Fisherfolk</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Name of Fisherfolk">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="">Age</label>
-                                    <input type="number" name="" id="" class="form-control" placeholder="Enter Age">
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="">Address</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Address">
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="">Beneficiary</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Beneficiary">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">Property to be Insured</label>
+                                <div class="form-group col-md-2">
+                                    <label for="">Salutation</label>
                                     <select name="" class="form-control" id="">
                                         <option value="">--Please select--</option>
-                                        <option value="">Non-Motorizedc Banca</option>
-                                        <option value="">Motorized Banca</option>
+                                        <option value="">Mr.</option>
+                                        <option value="">Ms.</option>
+                                        <option value="">Mrs.</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-5">
-                                    <label for="">Horse Power</label><span class="text-muted text-nowrap"> (Only applicable for Motorized Banca)</span>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Horse Power">
+                                <div class="form-group col-md-3">
+                                    <label for="">Last Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Last Name ">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">First Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="Enter First Name">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="">Middle Name</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Middle Name">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="">Extension</label>
+                                    <select name="" class="form-control" id="">
+                                        <option value="">--Please select--</option>
+                                        <option value="">New Registration</option>
+                                        <option value="">Renewal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="">Contact No.</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Street/Barangay</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder=" ">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">City/Municipality</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Province</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="">Gender</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Nationality</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Residence of Municipality Since</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Educational Background</label>
+                                    <select name="" class="form-control" id="">
+                                        <option value="">--Please select--</option>
+                                        <option value="">Elementary</option>
+                                        <option value="">High School</option>
+                                        <option value="">College</option>
+                                        <option value="">Post Graduate</option>
+                                        <option value="">Vocational</option>
+                                        <option value="">Others</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Birthdate</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder=" ">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Birthplace</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Civil Status</label>
+                                    <select name="" class="form-control" id="">
+                                        <option value="">--Please select--</option>
+                                        <option value="">Single</option>
+                                        <option value="">Married</option>
+                                        <option value="">Legaly Separated</option>
+                                        <option value="">Widow/Widower</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">No. of Children</label>
+                                    <input type="number" name="" id="" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h5 class="">Person to Notify Incase of Emergency</h5>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="" class="text-nowrap">Person to Notify <span class="text-muted text-nowrap" style="font-size: 12px;">(First Name Last Name)</span></label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Relationship</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Contact No.</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="">Address</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h5 class="">Livelihood</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <h6 class="font-weight-bold">Main Source of Income</h6>
+                                    </div>
+                                    <div class="row ml-1">
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Capture Fishing</label>
+                                            <span class="ml-1"><input type="text" style="border-width: 0px 0px 1px 0px; height: 19px;" placeholder="Please specify here"></span>
+                                        </div>
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Aquaculture</label>
+                                            <span class="ml-1"><input type="text" style="border-width: 0px 0px 1px 0px; height: 19px;" placeholder="Please specify here"></span>
+                                        </div>
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Fish Vending</label>
+                                        </div>
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Cleaning</label>
+                                        </div>
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Fish Processing</label>
+                                        </div>
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Others</label>
+                                            <span class="ml-1"><input type="text" style="border-width: 0px 0px 1px 0px; height: 19px;" placeholder="Please specify here"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <h6 class="font-weight-bold">Others Source of Income</h6>
+                                    </div>
+                                    <div class="row ml-1">
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Capture Fishing</label>
+                                            <span class="ml-1"><input type="text" style="border-width: 0px 0px 1px 0px; height: 19px;" placeholder="Please specify here"></span>
+                                        </div>
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Aquaculture</label>
+                                            <span class="ml-1"><input type="text" style="border-width: 0px 0px 1px 0px; height: 19px;" placeholder="Please specify here"></span>
+                                        </div>
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Fish Vending</label>
+                                        </div>
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Cleaning</label>
+                                        </div>
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Fish Processing</label>
+                                        </div>
+                                        <div class="form-group form-check col-md-12 mb-0">
+                                            <input type="checkbox" class="form-check-input" id="">
+                                            <label class="form-check-label" for="">Others</label>
+                                            <span class="ml-1"><input type="text" style="border-width: 0px 0px 1px 0px; height: 19px;" placeholder="Please specify here"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -57,86 +223,32 @@
                             <a href="" class="btn btn-primary">Next - MFR Form</a>
                         </div> --}}
                     </div>
-                    <div class="card mt-4">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mt-3">
                         <div class="card-header">
                             <div class="card-title">
-                                <h4>Description of Property</h4>
+                                <h4>Organization</h4>
+                            </div>
+                            <div class="card-tools">
+                                <button class="btn btn-primary">Add Organization</button>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group col-md-3">
-                                    <label for="">Color</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Color">
+                                <div class="form-group col-md-5">
+                                    <label for="" class="text-nowrap">Name of Organization</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="">Length</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Length">
+                                <div class="form-group col-md-2">
+                                    <label for="" class="text-nowrap">Member Since</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="">Breadth</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Breadth">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="">Depth</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Depth">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="">Body Number</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Body Number">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="">Materials</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Materials">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="">Year Built</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Year Built">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="">Gross Toonage</label>
-                                    <input type="text" name="" id="" class="form-control" placeholder="Enter Gross Toonage">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mt-4">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <h4>Registration</h4>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <label for="">Desired Amount of Cover</label>
-                                    <input type="number" name="" id="" class="form-control" placeholder="Enter">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <label for="">Registration Number</label>
-                                    <input type="number" name="" id="" class="form-control" placeholder="Enter Registration Number">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">OR Number</label>
-                                    <input type="number" name="" id="" class="form-control" placeholder="Enter OR No.">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">Date</label>
-                                    <input type="date" name="" id="" class="form-control" placeholder="">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">Cover Period From</label>
-                                    <input type="date" name="" id="" class="form-control" placeholder="">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">Cover Period To</label>
-                                    <input type="date" name="" id="" class="form-control" placeholder="">
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="">Please attached colored pictures of the property</label>
-                                    <input type="file" name="" id="" class="form-control" placeholder="">
+                                <div class="form-group col-md-5">
+                                    <label for="" class="text-nowrap">Position/Designation</label>
+                                    <input type="text" name="" id="" class="form-control" placeholder="">
                                 </div>
                             </div>
                         </div>
