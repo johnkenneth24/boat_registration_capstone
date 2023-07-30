@@ -24,9 +24,9 @@
                                     autocomplete="name" required placeholder="Name">
                             </div>
                             @error('name')
-                                <span class="error invalid-feedback">
+                                <div class="invalid-feedback">
                                     {{ $message }}
-                                </span>
+                                </div>
                             @enderror
                         </div>
                         <div class="form-group mb-2 mt-4">
@@ -37,9 +37,9 @@
                                     value="{{ old('username') }}" autocomplete="username" required placeholder="Username">
                             </div>
                             @error('username')
-                                <span class="error invalid-feedback">
+                                <div class="invalid-feedback">
                                     {{ $message }}
-                                </span>
+                                </div>
                             @enderror
                         </div>
                         <div class="form-group mb-2 mt-4">
@@ -50,9 +50,9 @@
                                     autocomplete="email" required placeholder="Email">
                             </div>
                             @error('email')
-                                <span class="error invalid-feedback">
+                                <div class="invalid-feedback">
                                     {{ $message }}
-                                </span>
+                                </div>
                             @enderror
                         </div>
                         <div class="form-group mb-2 mt-4">
@@ -63,9 +63,9 @@
                                     value="{{ old('password') }}" autocomplete="password" required placeholder="Password">
                             </div>
                             @error('password')
-                                <span class="error invalid-feedback">
+                                <div class="invalid-feedback">
                                     {{ $message }}
-                                </span>
+                                </div>
                             @enderror
                         </div>
                         <div class="form-group mb-2 mt-4">
@@ -77,9 +77,9 @@
                                     placeholder="Password Confirmation">
                             </div>
                             @error('password_confirmation')
-                                <span class="error invalid-feedback">
+                                <div class="invalid-feedback">
                                     {{ $message }}
-                                </span>
+                                </div>
                             @enderror
                         </div>
                         <div class="mt-2">

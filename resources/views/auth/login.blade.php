@@ -29,9 +29,9 @@
                                     value="{{ old('username') }}" autocomplete="username" required placeholder="Username">
                             </div>
                             @error('username')
-                                <span class="error invalid-feedback">
+                                <div class="invalid-feedback">
                                     {{ $message }}
-                                </span>
+                                </div>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
@@ -42,9 +42,9 @@
                                     placeholder="Password" autocomplete="off password">
                             </div>
                             @error('password')
-                                <span class="error invalid-feedback">
+                                <div class="invalid-feedback">
                                     {{ $message }}
-                                </span>
+                                </div>
                             @enderror
                         </div>
                         <div class="mt-2">

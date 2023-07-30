@@ -48,8 +48,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link text-dark" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user" aria-hidden="true"></i> {{ Auth::user()->name }}
-                        <span class="text-muted small"><i class="fa fa-chevron-circle-down"
-                                aria-hidden="true"></i></span>
+                        <span class="text-muted small"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
                         <a href="{{ route('profile.show') }}" class="dropdown-item">
