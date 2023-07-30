@@ -16,6 +16,75 @@
                 </div>
             </div>
         </div>
+        @if (auth()->user()->role != 'user')
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body card-bcc">
+                        <p class="card-text">
+                            {{-- {{ __('You are logged in!') }} --}}
+                        </p>
+                        <div class="row">
+                            <div class="col-md-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>67</h3>
+                                        <p>Renewal</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                                    </div>
+                                    <a href="{{-- route('books.index') --}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-6">
+                                <div class="small-box bg-danger">
+                                    <div class="inner">
+                                        <h3>46</h3>
+                                        <p>Registered Boats</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-ship" aria-hidden="true"></i>
+                                    </div>
+                                    <a href="{{-- route('users.index') --}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-6">
+                                <div class="small-box bg-success">
+                                    <div class="inner">
+                                        <h3>18</h3>
+                                        <p>Registered Owners</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-user-check" aria-hidden="true"></i>
+                                    </div>
+                                    <a href="{{-- route('borrowers.index') --}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-warning">
+                                    <div class="inner">
+                                        <h3>11</h3>
+                                        <p>Expired Registrations</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                                    </div>
+                                    <a href="{{-- route('borrowers.index') --}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
         @if (auth()->user()->role != 'admin')
         <div class="row">
             <div class="col-md-6">
@@ -95,75 +164,7 @@
         </div>
         @endif
 
-        <div class="row">
-            @if (auth()->user()->role != 'user')
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body card-bcc">
-                        <p class="card-text">
-                            {{-- {{ __('You are logged in!') }} --}}
-                        </p>
-                        <div class="row">
-                            <div class="col-md-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-info">
-                                    <div class="inner">
-                                        <h3>67</h3>
-                                        <p>Renewal</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-sync-alt" aria-hidden="true"></i>
-                                    </div>
-                                    <a href="{{-- route('books.index') --}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
 
-                            <div class="col-lg-3 col-6">
-                                <div class="small-box bg-danger">
-                                    <div class="inner">
-                                        <h3>46</h3>
-                                        <p>Registered Boats</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-ship" aria-hidden="true"></i>
-                                    </div>
-                                    <a href="{{-- route('users.index') --}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-6">
-                                <div class="small-box bg-success">
-                                    <div class="inner">
-                                        <h3>18</h3>
-                                        <p>Registered Owners</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-user-check" aria-hidden="true"></i>
-                                    </div>
-                                    <a href="{{-- route('borrowers.index') --}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-warning">
-                                    <div class="inner">
-                                        <h3>11</h3>
-                                        <p>Expired Registrations</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-                                    </div>
-                                    <a href="{{-- route('borrowers.index') --}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
         @if (auth()->user()->role != 'user')
         <div class="row">
             <div class="col-md-6">

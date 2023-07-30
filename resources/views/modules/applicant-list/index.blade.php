@@ -8,18 +8,20 @@
                     <div class="card mt-5">
                         <div class="card-header">
                             <div class="card-title">
-                                <h4>Announcement</h4>
+                                <h4>List of Applicant</h4>
                             </div>
-                            <div class="card-tools">
-                                <a href="{{ route('announcement.create') }}" class="btn btn-success">Add Announcements</a>
-                            </div>
+                            {{-- <div class="card-tools">
+                                <a href="{{ route('reg-boat.create') }}" class="btn btn-success">Create Registration</a>
+                            </div> --}}
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-0">
                             <table class="table table-hover table-responsive-md">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Subject</th>
-                                        <th>Date Announcement</th>
+                                        <th>Serial No.</th>
+                                        <th>Owner Full Name</th>
+                                        <th>Date Registration</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -27,10 +29,11 @@
                                         <tr>
                                             <td>001</td>
                                             <td>test</td>
+                                            <td>test</td>
+                                            <td>test</td>
                                             <td class="">
+                                                <a href="{{ route('applist.process') }}" class="btn btn-sm btn-info">Process</a>
                                                 <a href="" class="btn btn-sm btn-success">View</a>
-                                                <a href="" class="btn btn-sm btn-primary">Edit</a>
-                                                <a href="" class="btn btn-sm btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                 </tbody>
