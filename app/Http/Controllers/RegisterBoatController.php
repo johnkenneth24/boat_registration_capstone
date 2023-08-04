@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\RegisterBoat;
 
 class RegisterBoatController extends Controller
 {
     public function index()
     {
-        return view('modules.register-boat.index');
+        $registeredBoats = RegisterBoat::paginate(10);
+
+        return view('modules.register-boat.index', compact('registeredBoats'));
     }
 
     public function create()

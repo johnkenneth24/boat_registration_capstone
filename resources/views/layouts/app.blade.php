@@ -24,7 +24,7 @@
         }
 
         .content-wrapper {
-            background-image: linear-gradient(rgba(255, 247, 247, 0.697), rgba(173, 173, 173, 0.638)), url("{{ asset('images/sb-ai generated.jpg') }}");
+            background-image: linear-gradient(75deg, rgba(255, 247, 247, 0.763), rgba(0, 0, 0, 0.605)), url("{{ asset('images/sb-ai generated.jpg') }}");
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
@@ -71,8 +71,8 @@
 
         <aside class="main-sidebar elevation-4" style="background-color: #F1F32E; position: fixed !important;">
             <a href="/" class="brand-link text-center">
-                <img src="{{ asset('images/lgo.png') }}" alt="Bulan Logo" class="img-fluid img-circle elevation-3"
-                    style="opacity: .8; max-height: 100px;"> <br>
+                <img src="{{ asset('images/webp/lgo.webp') }}" alt="Bulan Logo"
+                    class="img-fluid img-circle elevation-3" style="opacity: .8; max-height: 100px;"> <br>
                 <h2 class="brand-text mt-2 font-weight-bold text-center text-dark d-inline-block text-break">IMS of RMB
                 </h2> <br>
                 <p class=" brand-text small  text-dark">Municipal Agriculture Office <br> of Bulan,

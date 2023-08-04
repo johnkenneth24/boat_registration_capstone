@@ -1,12 +1,5 @@
 <!-- Sidebar -->
 <div class="sidebar">
-    {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center"> --}}
-    {{-- <div class="text-center">
-            <a href="{{ route('profile.show') }}" class="d-block brand-text text-center text-dark">
-                {{ Auth::user()->name }}</a>
-        </div> --}}
-    {{-- </div> --}}
-
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item  {{ request()->routeIs('home') ? 'nav-item-active' : '' }}">
