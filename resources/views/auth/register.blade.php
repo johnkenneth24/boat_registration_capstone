@@ -24,7 +24,7 @@
                                     autocomplete="name" required placeholder="Name">
                             </div>
                             @error('name')
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: inline-block !important;">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -37,7 +37,7 @@
                                     value="{{ old('username') }}" autocomplete="username" required placeholder="Username">
                             </div>
                             @error('username')
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: inline-block !important;">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -50,7 +50,7 @@
                                     autocomplete="email" required placeholder="Email">
                             </div>
                             @error('email')
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: inline-block !important;">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -63,7 +63,7 @@
                                     value="{{ old('password') }}" autocomplete="password" required placeholder="Password">
                             </div>
                             @error('password')
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: inline-block !important;">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -77,7 +77,7 @@
                                     placeholder="Password Confirmation">
                             </div>
                             @error('password_confirmation')
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: inline-block !important;">
                                     {{ $message }}
                                 </div>
                             @enderror

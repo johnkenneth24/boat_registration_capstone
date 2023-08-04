@@ -17,19 +17,27 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <label for="">Name of Fisherfolk Association</label>
+                                    <label for="">Name of Fisherfolk Association <span
+                                            class="text-muted font-italic">(Pangalan
+                                            ng Samahan ng mga Mangingisda)</span></label>
                                     <input type="text" name="" id="" class="form-control"
                                         placeholder="Enter Name of Fisherfolk Association">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-9">
-                                    <label for="">Name of Fisherfolk</label>
+                                <div class="form-group col-md-6">
+                                    <label for="">Name of Fisherfolk <span class="text-muted font-italic">(Pangalan
+                                            ng Mangingisda)</span></label>
                                     <input type="text" name="" id="" class="form-control"
                                         placeholder="Enter Name of Fisherfolk">
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="">Age</label>
+                                <div class="form-group col-md-4">
+                                    <label for="">Birth Date <span class="text-muted font-italic">(Araw ng
+                                            Kapanganakan)</span></label>
+                                    <input type="date" name="" id="" class="form-control">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="">Age <span class="text-muted font-italic">(Edad)</span></label>
                                     <input type="number" name="" id="" class="form-control"
                                         placeholder="Enter Age">
                                 </div>

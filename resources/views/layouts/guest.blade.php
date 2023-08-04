@@ -10,16 +10,9 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('bs5/css/bootstrap.min.css') }}">
-    <link rel="shortcut icon" href="{{ asset('images/lgo.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/webp/lgo.webp') }}" type="image/x-icon">
 
     <style>
-        /* body {
-            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/sb.jpg') }}") left no-repeat;
-            background-attachment: fixed;
-            position: relative;
-            height: 100vh;
-            font-family: 'Roboto', sans-serif;
-        } */
         .overlay-login {
             position: fixed;
             top: 0;
@@ -43,7 +36,7 @@
         }
 
         .container-login {
-            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/sb.jpg') }}") left no-repeat;
+            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/webp/sb.webp') }}") left no-repeat;
             background-attachment: fixed;
             position: relative;
             height: 100vh;
@@ -51,7 +44,7 @@
         }
 
         .container-register {
-            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/sb.jpg') }}") right no-repeat;
+            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/webp/sb.webp') }}") right no-repeat;
             background-attachment: fixed;
             position: relative;
             height: 100vh;
@@ -74,8 +67,6 @@
 
     @vite('resources/js/app.js')
     <script src="{{ asset('bs5/js/bootstrap.min.js') }}"></script>
-    {{-- <script src="{{ asset('js/adminlte.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/adminlte.min.js') }}" defer></script> --}}
 </body>
 
 </html>

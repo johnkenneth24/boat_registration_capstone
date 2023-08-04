@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-md-3 mt-3"></div>
                 <div class="col-md-3 mt-3 ms-0 ps-0 text-center d-none d-sm-block">
-                    <img src="{{ asset('images/lgo.png') }}" alt="bulan-logo" height="300px" class="img-fluid">
+                    <img src="{{ asset('images/webp/lgo.webp') }}" alt="bulan-logo" height="300px" class="img-fluid">
                 </div>
                 <div class="col-md-6 mt-3 d-flex justify-content-center">
                     <form action="{{ route('login') }}" method="post" class="mt-3 col-md-9 m-2 text-center">
@@ -29,7 +29,7 @@
                                     value="{{ old('username') }}" autocomplete="username" required placeholder="Username">
                             </div>
                             @error('username')
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: inline-block !important;">
                                     {{ $message }}
                                 </div>
                             @enderror
@@ -42,7 +42,7 @@
                                     placeholder="Password" autocomplete="off password">
                             </div>
                             @error('password')
-                                <div class="invalid-feedback">
+                                <div class="invalid-tooltip">
                                     {{ $message }}
                                 </div>
                             @enderror
