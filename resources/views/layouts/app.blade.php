@@ -23,6 +23,11 @@
             color: black !important;
         }
 
+        .form-control:focus {
+            border-color: #2187FE !important;
+            box-shadow: 0 0 0 2px #a0b4f6 !important;
+        }
+
         .content-wrapper {
             background-image: linear-gradient(75deg, rgba(255, 247, 247, 0.763), rgba(0, 0, 0, 0.605)), url("{{ asset('images/sb-ai generated.jpg') }}");
             background-repeat: no-repeat;

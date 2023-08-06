@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('register_boats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('id_number')->unique()->autoIncrement();
+            $table->string('registration_no')->unique()->autoIncrement();
 
             $table->timestamps();
         });
