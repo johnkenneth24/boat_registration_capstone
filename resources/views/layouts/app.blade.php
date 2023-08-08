@@ -4,14 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'SORSU-BC Library Management System') }}</title>
+    <title>Boat Registration</title>
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/sweetalert2/sweetalert2.all.min.js') }}">
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2/sweetalert2.all.js') }}">
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/lgo.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('bs5/css/bootstrap.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
     <style>
         .nav .nav-item-active {
             background-color: #6e7174;
@@ -75,7 +77,7 @@
         </nav>
 
         <aside class="main-sidebar elevation-4" style="background-color: #F1F32E; position: fixed !important;">
-            <a href="/" class="brand-link text-center">
+            <a href="/" class="brand-link text-center" style="text-decoration: none;">
                 <img src="{{ asset('images/webp/lgo.webp') }}" alt="Bulan Logo"
                     class="img-fluid img-circle elevation-3" style="opacity: .8; max-height: 100px;"> <br>
                 <h2 class="brand-text mt-2 font-weight-bold text-center text-dark d-inline-block text-break">IMS of RMB
@@ -90,13 +92,6 @@
             @yield('content')
         </div>
 
-        {{-- <aside class="control-sidebar control-sidebar-dark">
-            <div class="p-3">
-                <h5>Title</h5>
-                <p>Sidebar content</p>
-            </div>
-        </aside> --}}
-
         {{-- <footer class="main-footer">
             <div class="float-right d-none d-sm-inline">
                 Anything you want
@@ -108,7 +103,8 @@
 
     <!-- REQUIRED SCRIPTS -->
 
-    @vite('resources/js/app.js')
+    <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ asset('bs5/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
     <script src="{{ asset('css/sweetalert2/sweetalert2.all.min.js') }}"></script>
     @yield('scripts')

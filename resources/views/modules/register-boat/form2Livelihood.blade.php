@@ -6,48 +6,36 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mt-5">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <div class="card-title">
                                 <h4>Create Registration</h4>
                             </div>
                             <div class="card-tools">
                                 <a href="{{ route('reg-boat.index') }}" class="btn btn-danger">Cancel</a>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
                             <div class="row border border-secondary">
                                 <div class="col-md-12 mt-0 mb-2  pt-0 pb-1 bg-dark">
-                                    <h5 class="font-weight-bolder text-white m-0">Registration</h5>
+                                    <h5 class="font-weight-bolder text-white m-0">Livelihood</h5>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">Registration Number</label>
+                                <div class="form-group col-md-6">
+                                    <label for="">Source of Income</label>
                                     <input type="text" name="registration_no" class="form-control form-control-sm"
-                                        readonly required value="IMS-{{ $latestregNo }}">
+                                        required>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">Registration Date</label>
+                                <div class="form-group col-md-6">
+                                    <label for="">Other source of income</label>
                                     <input type="date" name="registration_date" class="form-control form-control-sm"
-                                        readonly value="{{ date('Y-m-d') }}">
+                                        value="{{ date('Y-m-d') }}">
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="">Registration Type</label>
-                                    <select name="registration_type" class="form-control form-control-sm" required>
-                                        <option value="">--Please Select--</option>
-                                        <option value="New">New</option>
-                                        <option value="Renewal">Renewal</option>
-                                    </select>
-                                </div>
+
                                 <div class="col-md-12 mt-1 mb-2 py-1 bg-dark">
-                                    <h5 class="font-weight-bolder text-white m-0">Personal Information</h5>
+                                    <h5 class="font-weight-bolder text-white m-0">Organization</h5>
                                 </div>
-                                <div class="form-group col-md-1">
-                                    <label for="">Salutation</label>
-                                    <select name="salutation" class="form-control form-control-sm">
-                                        <option value="">----</option>
-                                        <option value="Mr.">Mr.</option>
-                                        <option value="Mrs.">Mrs.</option>
-                                        <option value="Ms.">Ms.</option>
-                                    </select>
+                                <div class="form-group col-md-6">
+                                    <label for="">Organization Name</label>
+                                    <input type="text" name="org_name" class="form-control form-control-sm">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Lastname</label>

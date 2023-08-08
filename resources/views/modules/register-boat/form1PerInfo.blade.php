@@ -116,11 +116,13 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Birthdate</label>
-                                    <input type="date" name="birthdate" class="form-control form-control-sm">
+                                    <input type="date" name="birthdate" class="form-control form-control-sm bdate"
+                                        value="{{ old('birthdate') }}">
                                 </div>
                                 <div class="form-group col-md-1">
                                     <label for="">Age</label>
-                                    <input type="number" name="age" class="form-control form-control-sm" readonly>
+                                    <input type="number" name="age" class="form-control form-control-sm age"
+                                        readonly placeholder="0">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="">Birthplace</label>
@@ -179,3 +181,31 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    {{-- close overlay after 3 seconds --}}
+    <script>
+        $(document).ready(function() {
+            $('.overlay').delay(3000).fadeOut('slow');
+        });
+    </script>
+
+    <script>
+        function calculateAge() {
+            var bdateValue = document.querySelector('.bdate').value;
+            var bdate = new Date(bdateValue);
+            var today = new Date();
+            var age = today.getFullYear() - bdate.getFullYear();
+            var monthDiff = today.getMonth() - bdate.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < bdate.getDate())) {
+                age--;
+            }
+
+            document.querySelector('.age').value = age;
+        }
+
+        // Attach the function to the input event and change event
+        document.querySelector('.bdate').addEventListener('input', calculateAge);
+    </script>
+@endpush
