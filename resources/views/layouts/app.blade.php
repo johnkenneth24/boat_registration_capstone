@@ -10,9 +10,9 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sweetalert2/sweetalert2.all.js') }}">
+    <link rel="stylesheet" href="{{ asset('bs5/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/lgo.png') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ asset('bs5/css/bootstrap.min.css') }}">
     {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
     <style>
         .nav .nav-item-active {
@@ -36,6 +36,10 @@
             background-attachment: fixed;
             background-size: cover;
             background-position: right;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
         }
     </style>
     @yield('styles')
@@ -102,12 +106,67 @@
     </div>
 
     <!-- REQUIRED SCRIPTS -->
-
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src="{{ asset('bs5/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('bs5/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
     <script src="{{ asset('css/sweetalert2/sweetalert2.all.min.js') }}"></script>
     @yield('scripts')
+
+    {{-- script to calculate age inputted in the bdate input --}}
+    <script>
+        function calculateAge() {
+            var date = document.querySelector('.bdate').value;
+            var today = new Date();
+            var birthDate = new Date(date);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            var d = today.getDate() - birthDate.getDate();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            document.querySelector('.age').value = age;
+        }
+
+        document.querySelector('.bdate').addEventListener('input', calculateAge);
+    </script>
+
+    {{--  make the overlay to disappear after 2 seconds --}}
+    <script>
+        setTimeout(function() {
+            document.querySelector('.overlay').style.display = 'none';
+        }, 2000);
+    </script>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[name="income_sources[]"]');
+        const gearInput = document.querySelector('#gear');
+        const cultureInput = document.querySelector('#culture');
+        const specifyInput = document.querySelector('#specify');
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    if (this.value === 'Capture Fishing') {
+                        gearInput.style.display = 'block';
+                    } else if (this.value === 'Aquaculture') {
+                        cultureInput.style.display = 'block';
+                    } else if (this.value === 'Other') {
+                        specifyInput.style.display = 'block';
+                    }
+                } // if unchecked remove the input
+                else {
+                    if (this.value === 'Capture Fishing') {
+                        gearInput.style.display = 'none';
+                    } else if (this.value === 'Aquaculture') {
+                        cultureInput.style.display = 'none';
+                    } else if (this.value === 'Other') {
+                        specifyInput.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
 
 </body>
 

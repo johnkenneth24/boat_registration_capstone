@@ -11,7 +11,7 @@
                                 <h4>Registered Boats</h4>
                             </div>
                             <div class="card-tools">
-                                <a href="{{ route('reg-boat.create') }}" class="btn btn-success">Create Registration</a>
+                                <a href="{{ route('form1.create') }}" class="btn btn-success">Create Registration</a>
                             </div>
                         </div>
                         <div class="card-body p-0">
