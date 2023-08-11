@@ -11,14 +11,14 @@
                                 <h4>Registered Boats</h4>
                             </div>
                             <div class="card-tools">
-                                <a href="{{ route('reg-boat.create') }}" class="btn btn-success">Create Registration</a>
+                                <a href="{{ route('form1.create') }}" class="btn btn-success">Create Registration</a>
                             </div>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-hover table-responsive-md">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>ID No.</th>
+                                        <th>Registration No.</th>
                                         <th>Date of Registration</th>
                                         <th>Status</th>
                                         <th>Action</th>
@@ -27,9 +27,9 @@
                                 <tbody>
                                     @forelse ($registeredBoats as $rBoats)
                                         <tr>
-                                            <td>{{ $rBoats->id }}</td>
-                                            <td>test</td>
-                                            <td>test</td>
+                                            <td>{{ $rBoats->registration_no }}</td>
+                                            <td>{{ date('M. d, Y', strtotime($rBoats->registration_date)) }}</td>
+                                            <td>{{ $rBoats->status }}</td>
                                             <td class="">
                                                 <a href="{{ route('reg-boat.process') }}"
                                                     class="btn btn-sm btn-info">Process</a>

@@ -22,7 +22,7 @@
                         @csrf
                         <h4 class="text-uppercase mb-2">Log in Form</h4>
                         <div class="form-group mb-2 mt-4">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-0">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 <input type="text" name="username"
                                     class="form-control @error('username') is-invalid @enderror"
@@ -35,7 +35,7 @@
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-0">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                 <input type="password" name="password"
                                     class="form-control @error('password') is-invalid @enderror" required

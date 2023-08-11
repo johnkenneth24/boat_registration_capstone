@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\AnnouncementsController;
+use App\Http\Controllers\ApplicantListController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterBoatController;
 use App\Http\Controllers\RegisteredBoatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApplicantListController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -27,8 +27,14 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(RegisterBoatController::class)->prefix('reg-boat')->group(function () {
         Route::get('/', 'index')->name('reg-boat.index');
-        Route::get('create', 'create')->name('reg-boat.create');
-        Route::get('process', 'process_registration')->name('reg-boat.process');
+        Route::get('/createForm1', 'createForm1')->name('form1.create');
+        Route::post('/storeForm1', 'storeForm1')->name('form1.store');
+        Route::get('/createForm2', 'createForm2')->name('form2.create');
+        Route::post('/storeForm2', 'storeForm2')->name('form2.store');
+        Route::get('/createForm3', 'createForm3')->name('reg-boat3.create');
+        Route::post('/storeForm3', 'storeForm3')->name('reg-boat3.store');
+
+        Route::get('/rocess', 'process_registration')->name('reg-boat.process');
         Route::get('mfr-form', 'mfr_form')->name('reg-boat.mfr-form');
         Route::get('ads-form', 'adss_form')->name('reg-boat.ads-form');
     });
@@ -52,6 +58,5 @@ Route::middleware('auth')->group(function () {
         Route::put('update/{announcement}', 'update')->name('announcement.update');
         Route::delete('destroy/{announcement}', 'destroy')->name('announcement.destroy');
     });
-
 
 });
