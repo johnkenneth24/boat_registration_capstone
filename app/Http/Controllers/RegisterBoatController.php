@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterBoat\Form1Request;
+use App\Http\Requests\RegisterBoat\Form2Request;
 use App\Models\RegisterBoat;
+use Illuminate\Http\Request;
 
 class RegisterBoatController extends Controller
 {
@@ -17,10 +19,10 @@ class RegisterBoatController extends Controller
     public function createForm1()
     {
         $reg_no = RegisterBoat::latest()->first('registration_no');
-        // get the numbers after the year and month
         $regNo = substr($reg_no->registration_no, 8);
-        $regNo = $reg_no ? $reg_no->registration_no + 1 : 1;
-        $latestregNo = date('Y-m-') . str_pad($regNo, 4, '0', STR_PAD_LEFT);
+        // using the null coalescence, check if regNo starts with 0001 and add 1 else make it 0001
+        $latestregNo = date('Y-m-') . sprintf('%04d', $regNo ? $regNo + 1 : 1);
+        // dd($latestregNo);
 
         return view('modules.register-boat.form1PerInfo', compact('latestregNo'));
     }
@@ -59,6 +61,9 @@ class RegisterBoatController extends Controller
 
         $form1->save();
 
+        // put into session the id of the created form1
+        session(['form1_id' => $form1->id]);
+
         return redirect(route('form2.create'));
     }
 
@@ -71,16 +76,40 @@ class RegisterBoatController extends Controller
         'Other',
     ];
 
-    public function createForm2()
+    public function createForm2(Request $request)
     {
+        $form1_id = $request->session()->get('form1_id');
         $source_of_income = $this->source_of_income;
 
-        return view('modules.register-boat.form2Livelihood', compact('source_of_income'));
+        $regBoat = RegisterBoat::find($form1_id);
+        // dd($regBoat);
+
+        return view('modules.register-boat.form2Livelihood', compact('source_of_income', 'regBoat'));
     }
 
-    public function storeForm2()
+    public function storeForm2(Form2Request $request)
     {
-        return redirect(route('reg-boat3.create'));
+        $validated = $request->validated();
+        // dd($validated);
+
+        $regBoat = RegisterBoat::findOrFail($validated['form1_id']);
+
+        $regBoat->source_of_income = serialize($validated['income_sources']);
+        // $regBoat->gear_used = $validated['gear_used'];
+        // $regBoat->culture_method = $validated['culture_method'];
+        // $regBoat->specify = $validated['specify'];
+        $regBoat->other_source = serialize($validated['other_income_sources']);
+        // $regBoat->gear_used_os = $validated['gear_used_os'];
+        // $regBoat->culture_method_os = $validated['culture_method_os'];
+        // $regBoat->specify_os = $validated['specify_os'];
+        $regBoat->org_name = $validated['org_name'];
+        $regBoat->member_since = $validated['member_since'];
+        $regBoat->position = $validated['position'];
+        $regBoat->save();
+
+        session()->forget('form1_id');
+
+        return redirect(route('reg-boats.index'));
     }
 
     public function process_registration()

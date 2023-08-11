@@ -27,14 +27,14 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(RegisterBoatController::class)->prefix('reg-boat')->group(function () {
         Route::get('/', 'index')->name('reg-boat.index');
-        Route::get('createForm1', 'createForm1')->name('form1.create');
-        Route::post('storeForm1', 'storeForm1')->name('form1.store');
-        Route::get('createForm2', 'createForm2')->name('form2.create');
-        Route::post('storeForm2', 'storeForm2')->name('form2.store');
-        Route::get('createForm3', 'createForm3')->name('reg-boat3.create');
-        Route::post('storeForm3', 'storeForm3')->name('reg-boat3.store');
+        Route::get('/createForm1', 'createForm1')->name('form1.create');
+        Route::post('/storeForm1', 'storeForm1')->name('form1.store');
+        Route::get('/createForm2', 'createForm2')->name('form2.create');
+        Route::post('/storeForm2', 'storeForm2')->name('form2.store');
+        Route::get('/createForm3', 'createForm3')->name('reg-boat3.create');
+        Route::post('/storeForm3', 'storeForm3')->name('reg-boat3.store');
 
-        Route::get('process', 'process_registration')->name('reg-boat.process');
+        Route::get('/rocess', 'process_registration')->name('reg-boat.process');
         Route::get('mfr-form', 'mfr_form')->name('reg-boat.mfr-form');
         Route::get('ads-form', 'adss_form')->name('reg-boat.ads-form');
     });

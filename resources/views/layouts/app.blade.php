@@ -144,24 +144,72 @@
         const cultureInput = document.querySelector('#culture');
         const specifyInput = document.querySelector('#specify');
 
+        const otherCheckboxes = document.querySelectorAll('input[name="other_income_sources[]"]');
+        const gearInputOs = document.querySelector('#gear_os');
+        const cultureInputOs = document.querySelector('#culture_os');
+        const specifyInputOs = document.querySelector('#specify_os');
+
         checkboxes.forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
                 if (this.checked) {
                     if (this.value === 'Capture Fishing') {
                         gearInput.style.display = 'block';
+                        gearInput.setAttribute('required', 'required');
                     } else if (this.value === 'Aquaculture') {
                         cultureInput.style.display = 'block';
+                        cultureInput.setAttribute('required', 'required');
                     } else if (this.value === 'Other') {
                         specifyInput.style.display = 'block';
+                        specifyInput.setAttribute('required', 'required');
+
                     }
                 } // if unchecked remove the input
                 else {
                     if (this.value === 'Capture Fishing') {
+                        gearInput.removeAttribute('required');
+                        gearInput.value = '';
                         gearInput.style.display = 'none';
                     } else if (this.value === 'Aquaculture') {
+                        cultureInput.removeAttribute('required');
+                        cultureInput.value = '';
                         cultureInput.style.display = 'none';
                     } else if (this.value === 'Other') {
+                        specifyInput.removeAttribute('required');
+                        specifyInput.value = '';
                         specifyInput.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        otherCheckboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    if (this.value === 'Capture Fishing') {
+                        gearInputOs.style.display = 'block';
+                        gearInputOs.setAttribute('required', 'required');
+                    } else if (this.value === 'Aquaculture') {
+                        cultureInputOs.style.display = 'block';
+                        cultureInputOs.setAttribute('required', 'required');
+                    } else if (this.value === 'Other') {
+                        specifyInputOs.style.display = 'block';
+                        specifyInputOs.setAttribute('required', 'required');
+
+                    }
+                } // if unchecked remove the input
+                else {
+                    if (this.value === 'Capture Fishing') {
+                        gearInputOs.removeAttribute('required');
+                        gearInputOs.value = '';
+                        gearInputOs.style.display = 'none';
+                    } else if (this.value === 'Aquaculture') {
+                        cultureInputOs.removeAttribute('required');
+                        cultureInputOs.value = '';
+                        cultureInputOs.style.display = 'none';
+                    } else if (this.value === 'Other') {
+                        specifyInputOs.removeAttribute('required');
+                        specifyInputOs.value = '';
+                        specifyInputOs.style.display = 'none';
                     }
                 }
             });
