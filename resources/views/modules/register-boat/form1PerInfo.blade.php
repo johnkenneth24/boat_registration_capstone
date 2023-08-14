@@ -8,7 +8,7 @@
                     <div class="card card-outline card-warning mt-5">
                         <div class="card-header m-0 mb-0">
                             <div class="card-title">
-                                <h4 class="text-uppercase">Application for Municipal Fisherfolk Registration</h4>
+                                <h4 class="text-uppercase">Step 1 | Application for Municipal Fisherfolk Registration</h4>
                             </div>
                             <div class="card-tools">
                                 <a href="{{ route('reg-boat.index') }}" class="btn btn-danger">Cancel</a>
@@ -17,8 +17,22 @@
                         <form action="{{ route('form1.store') }}" method="post">
                             @csrf
                             <div class="card-body mt-0">
-                                <div class="row border
-                            border-secondary">
+                                <div class="d-flex justify-content-center mb-3">
+                                    <div class="progresses">
+                                        <div class="steps">
+                                            <span class="font-weight-bolder">1</span>
+                                        </div>
+                                        <span class="line inactive"></span>
+                                        <div class="steps inactive">
+                                            <span class="font-weight-bolder">2</span>
+                                        </div>
+                                        <span class="line inactive"></span>
+                                        <div class="steps inactive">
+                                            <span class="font-weight-bolder">3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row border border-secondary">
                                     <div class="col-md-12 mt-0 mb-2  pt-0 pb-1 bg-dark">
                                         <h6 class="font-weight-bolder text-white m-0">Registration</h6>
                                     </div>
@@ -178,7 +192,7 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary col-md-3">Submit</button>
+                                <button type="submit" class="btn btn-primary col-md-3">Next</button>
                             </div>
                         </form>
                         <div class="overlay dark">
