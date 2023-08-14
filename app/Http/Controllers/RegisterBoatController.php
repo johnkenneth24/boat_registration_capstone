@@ -109,7 +109,7 @@ class RegisterBoatController extends Controller
 
         session()->forget('form1_id');
 
-        return redirect(route('reg-boats.index'));
+        return redirect(route('reg-boat.index'))->with('success', 'Successfully registered boat!');
     }
 
     public function process_registration()

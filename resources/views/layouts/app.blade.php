@@ -41,6 +41,34 @@
         .form-group label {
             font-size: 0.9rem;
         }
+
+        .progresses {
+            display: flex;
+            align-items: center;
+        }
+
+        .line {
+            width: 120px;
+            height: 6px;
+            background: #63d19e;
+        }
+
+        .steps {
+            display: flex;
+            background-color: #63d19e;
+            color: #fff;
+            font-size: 14px;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .inactive {
+            background-color: #e9ecef;
+            color: #6c757d;
+        }
     </style>
     @yield('styles')
 </head>

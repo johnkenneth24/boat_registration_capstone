@@ -8,7 +8,7 @@
                     <div class="card mt-5">
                         <div class="card-header">
                             <div class="card-title">
-                                <h4>Registered Boats</h4>
+                                <h4>Boat Registration</h4>
                             </div>
                             <div class="card-tools">
                                 <a href="{{ route('form1.create') }}" class="btn btn-success">Create Registration</a>

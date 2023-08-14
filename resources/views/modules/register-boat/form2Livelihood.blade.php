@@ -17,6 +17,21 @@
                         <form action="{{ route('form2.store') }}" method="post">
                             @csrf
                             <div class="card-body">
+                                <div class="d-flex justify-content-center mb-3">
+                                    <div class="progresses">
+                                        <div class="steps">
+                                            <span><i class="fa fa-check" aria-hidden="true"></i></span>
+                                        </div>
+                                        <span class="line"></span>
+                                        <div class="steps">
+                                            <span class="font-weight-bolder">2</span>
+                                        </div>
+                                        <span class="line inactive"></span>
+                                        <div class="steps inactive">
+                                            <span class="font-weight-bolder">3</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row border border-secondary">
                                     <div class="col-md-12 mt-0 mb-2  pt-0 pb-1 bg-dark">
                                         <h6 class="font-weight-bolder text-white m-0">Livelihood</h6>
