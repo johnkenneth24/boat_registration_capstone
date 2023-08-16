@@ -12,10 +12,10 @@ class Owners extends Model
 
     protected $fillable = [];
 
-    protected $casts = [
-        'birthdate' => 'date',
-        'member_since' => 'date',
-        'resident_since' => 'date',
+    protected $dates = [
+        'birthdate',
+        'member_since',
+        'resident_since',
     ];
 
     public function registration()
