@@ -54,11 +54,8 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="">Registration Type</label>
-                                        <select name="registration_type" class="form-control form-control-sm" required>
-                                            <option value="">--Please Select--</option>
-                                            <option value="New">New</option>
-                                            <option value="Renewal">Renewal</option>
-                                        </select>
+                                        <input type="text" name="registration_type" class="form-control form-control-sm"
+                                            readonly value="New">
                                     </div>
                                     <div class="col-md-12 mt-1 mb-2 py-1 bg-dark">
                                         <h6 class="font-weight-bolder text-white m-0">Personal Information</h6>
