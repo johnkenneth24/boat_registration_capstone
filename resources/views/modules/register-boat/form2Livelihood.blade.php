@@ -26,10 +26,10 @@
                                         <div class="steps">
                                             <span class="font-weight-bolder">2</span>
                                         </div>
-                                        <span class="line inactive"></span>
+                                        {{-- <span class="line inactive"></span>
                                         <div class="steps inactive">
                                             <span class="font-weight-bolder">3</span>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="row border border-secondary">

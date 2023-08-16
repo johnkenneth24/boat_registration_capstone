@@ -5,6 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <x-success></x-success>
                     <div class="card mt-5">
                         <div class="card-header">
                             <div class="card-title">
@@ -15,9 +16,9 @@
                             </div>
                         </div>
                         <div class="card-body p-0">
-                            <table class="table table-hover table-responsive-md">
+                            <table class="table table-hover table-responsive-md  table-sm">
                                 <thead class="thead-dark">
-                                    <tr>
+                                    <tr class="text-center align-middle">
                                         <th>Registration No.</th>
                                         <th>Date of Registration</th>
                                         <th>Status</th>
@@ -26,7 +27,7 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($registeredBoats as $rBoats)
-                                        <tr>
+                                        <tr class="text-center align-middle">
                                             <td>{{ $rBoats->registration_no }}</td>
                                             <td>{{ date('M. d, Y', strtotime($rBoats->registration_date)) }}</td>
                                             <td>{{ $rBoats->status }}</td>

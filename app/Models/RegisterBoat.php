@@ -16,4 +16,9 @@ class RegisterBoat extends Model
         'registration_date',
         'birthdate',
     ];
+
+    public function owner()
+    {
+        return $this->hasOne(Owner::class, 'register_boat_id');
+    }
 }

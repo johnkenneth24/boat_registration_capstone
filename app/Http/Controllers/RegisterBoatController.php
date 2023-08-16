@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterBoat\Form1Request;
 use App\Http\Requests\RegisterBoat\Form2Request;
+use App\Models\Owners;
 use App\Models\RegisterBoat;
 use Illuminate\Http\Request;
 
@@ -11,17 +12,24 @@ class RegisterBoatController extends Controller
 {
     public function index()
     {
-        $registeredBoats = RegisterBoat::paginate(10);
+        $user = auth()->user();
+        if ($user->role === 'admin' || $user->role === 'staff') {
+            $registeredBoats = RegisterBoat::paginate(10);
+        } else {
+            $user_id = auth()->user()->id;
+            $registeredBoats = RegisterBoat::where('user_id', $user_id)->paginate(10);
+        }
 
         return view('modules.register-boat.index', compact('registeredBoats'));
     }
 
     public function createForm1()
     {
-        $reg_no = RegisterBoat::latest()->first('registration_no');
-        $regNo = substr($reg_no->registration_no, 8);
-        // using the null coalescence, check if regNo starts with 0001 and add 1 else make it 0001
-        $latestregNo = date('Y-m-') . sprintf('%04d', $regNo ? $regNo + 1 : 1);
+        $reg_nos = RegisterBoat::all();
+        $reg_no = $reg_nos->max('registration_no') ?? 0;
+        $latestregNo = intval(substr($reg_no, 8)) + 1;
+        $addSeries = sprintf("%04d", $latestregNo);
+        $latestregNo = date('Y-m-') . $addSeries;
         // dd($latestregNo);
 
         return view('modules.register-boat.form1PerInfo', compact('latestregNo'));
@@ -38,28 +46,32 @@ class RegisterBoatController extends Controller
         $form1->registration_date = $validated['registration_date'];
         $form1->registration_type = $validated['registration_type'];
 
-        $form1->salutation = $validated['salutation'];
-        $form1->lastname = $validated['lastname'];
-        $form1->first_name = $validated['firstname'];
-        $form1->middle_name = $validated['middlename'];
-        $form1->suffix = $validated['suffix'];
-        $form1->address = $validated['address'];
-        $form1->resident_since = $validated['resident_since'];
-        $form1->nationality = $validated['nationality'];
-        $form1->gender = $validated['gender'];
-        $form1->civil_status = $validated['civil_status'];
-        $form1->contact_no = $validated['contact_no'];
-        $form1->birthdate = $validated['birthdate'];
-        $form1->age = $validated['age'];
-        $form1->birthplace = $validated['birthplace'];
-        $form1->educational_background = $validated['educational_background'];
-        $form1->children_count = $validated['children_count'];
-        $form1->emergency_contact_name = $validated['emergency_contact_name'];
-        $form1->emergency_contact_no = $validated['emergency_contact_number'];
-        $form1->emergency_contact_address = $validated['emergency_contact_address'];
-        $form1->emergency_contact_relationship = $validated['emergency_contact_relationship'];
-
         $form1->save();
+
+        $owners = new Owners();
+        $owners->register_boat_id = $form1->id;
+        $owners->salutation = $validated['salutation'];
+        $owners->lastname = $validated['lastname'];
+        $owners->first_name = $validated['firstname'];
+        $owners->middle_name = $validated['middlename'];
+        $owners->suffix = $validated['suffix'];
+        $owners->address = $validated['address'];
+        $owners->resident_since = $validated['resident_since'];
+        $owners->nationality = $validated['nationality'];
+        $owners->gender = $validated['gender'];
+        $owners->civil_status = $validated['civil_status'];
+        $owners->contact_no = $validated['contact_no'];
+        $owners->birthdate = $validated['birthdate'];
+        $owners->age = $validated['age'];
+        $owners->birthplace = $validated['birthplace'];
+        $owners->educational_background = $validated['educational_background'];
+        $owners->children_count = $validated['children_count'];
+        $owners->emergency_contact_name = $validated['emergency_contact_name'];
+        $owners->emergency_contact_no = $validated['emergency_contact_number'];
+        $owners->emergency_contact_address = $validated['emergency_contact_address'];
+        $owners->emergency_contact_relationship = $validated['emergency_contact_relationship'];
+
+        $owners->save();
 
         // put into session the id of the created form1
         session(['form1_id' => $form1->id]);
@@ -92,24 +104,32 @@ class RegisterBoatController extends Controller
         $validated = $request->validated();
         // dd($validated);
 
-        $regBoat = RegisterBoat::findOrFail($validated['form1_id']);
+        $owner = Owners::where('register_boat_id', $validated['form1_id'])->first();
 
-        $regBoat->source_of_income = serialize($validated['income_sources']);
-        // $regBoat->gear_used = $validated['gear_used'];
-        // $regBoat->culture_method = $validated['culture_method'];
-        // $regBoat->specify = $validated['specify'];
-        $regBoat->other_source = serialize($validated['other_income_sources']);
-        // $regBoat->gear_used_os = $validated['gear_used_os'];
-        // $regBoat->culture_method_os = $validated['culture_method_os'];
-        // $regBoat->specify_os = $validated['specify_os'];
-        $regBoat->org_name = $validated['org_name'];
-        $regBoat->member_since = $validated['member_since'];
-        $regBoat->position = $validated['position'];
-        $regBoat->save();
+        // $regBoat = RegisterBoat::findOrFail($validated['form1_id']);
 
-        session()->forget('form1_id');
+        $owner->source_of_income = serialize($validated['income_sources']);
+        // $owner->gear_used = $validated['gear_used'];
+        // $owner->culture_method = $validated['culture_method'];
+        // $owner->specify = $validated['specify'];
+        $owner->other_source = serialize($validated['other_income_sources']);
+        // $owner->gear_used_os = $validated['gear_used_os'];
+        // $owner->culture_method_os = $validated['culture_method_os'];
+        // $owner->specify_os = $validated['specify_os'];
+        $owner->org_name = $validated['org_name'];
+        $owner->member_since = $validated['member_since'];
+        $owner->position = $validated['position'];
+        $owner->save();
 
-        return redirect(route('reg-boat.index'))->with('success', 'Successfully registered boat!');
+        return redirect(route('reg-boat.index'))->with('success', 'Successfully Registered');
+    }
+
+    public function confirmForm(Request $request)
+    {
+        $form1_id = $request->session()->get('form1_id');
+        $regBoat = RegisterBoat::with('owner')->find($form1_id);
+
+        return view('modules.register-boat.confirmForm', compact('regBoat'));
     }
 
     public function process_registration()

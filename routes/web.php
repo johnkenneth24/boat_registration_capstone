@@ -31,8 +31,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/storeForm1', 'storeForm1')->name('form1.store');
         Route::get('/createForm2', 'createForm2')->name('form2.create');
         Route::post('/storeForm2', 'storeForm2')->name('form2.store');
-        Route::get('/createForm3', 'createForm3')->name('reg-boat3.create');
-        Route::post('/storeForm3', 'storeForm3')->name('reg-boat3.store');
+        Route::get('/confirmForm', 'confirmForm')->name('form.confirm');
+        // Route::post('/storeForm3', 'storeForm3')->name('reg-boat3.store');
 
         Route::get('/rocess', 'process_registration')->name('reg-boat.process');
         Route::get('mfr-form', 'mfr_form')->name('reg-boat.mfr-form');
