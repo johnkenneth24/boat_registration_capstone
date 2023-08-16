@@ -12,13 +12,14 @@ class RegisterBoat extends Model
 
     protected $fillable = [];
 
-    protected $date = [
-        'registration_date',
-        'birthdate',
+    protected $dates = [
+        'registration_date' => 'date',
     ];
+
+
 
     public function owner()
     {
-        return $this->hasOne(Owner::class, 'register_boat_id');
+        return $this->hasOne(Owners::class, 'register_boat_id');
     }
 }

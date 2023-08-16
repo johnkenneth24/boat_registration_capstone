@@ -12,7 +12,5 @@ class Announcements extends Model
 
     protected $fillable = [];
 
-    protected $casts = [
-        'date' => 'date',
-    ];
+    protected $dates = ['date'];
 }
