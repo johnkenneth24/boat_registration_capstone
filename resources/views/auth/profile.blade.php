@@ -92,7 +92,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                        <div class="input-group mb-3">
+                                        {{-- <div class="input-group mb-3">
                                             <input type="password" name="password"
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 placeholder="{{ __('New password') }}">
@@ -117,9 +117,9 @@
                                                     <span class="fas fa-lock"></span>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
-                                        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                                        {{-- <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button> --}}
                                     </form>
                                 </div>
                             </div>

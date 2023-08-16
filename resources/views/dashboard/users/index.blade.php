@@ -20,7 +20,7 @@
                                 <h4>Users List</h4>
                             </div>
                             <div class="card-tools">
-                                <a href="{{ route('reg-boat.create') }}" class="btn btn-success">Add User</a>
+                                <a href="#" class="btn btn-success">Add User</a>
                             </div>
                         </div>
                         <div class="card-body p-0">
@@ -42,7 +42,7 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->username }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>Sample #</td>
+                                            <td>{{ $user->contact_no ?? '' }}</td>
                                             <td class="d-flex justify-content-around">
                                                 <button class="btn btn-sm btn-primary">Edit</button>
                                                 <button class="btn btn-sm btn-warning">View</button>

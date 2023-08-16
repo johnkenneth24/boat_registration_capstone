@@ -42,7 +42,7 @@
                                     <div class="col-lg-3 col-6">
                                         <div class="small-box bg-danger">
                                             <div class="inner">
-                                                <h3>{{ $count }}</h3>
+                                                <h3>{{ $registeredCount }}</h3>
                                                 <p>Registered Boats</p>
                                             </div>
                                             <div class="icon">

@@ -18,16 +18,17 @@ class HomeController extends Controller
     {
 
         $rBoats = RegisterBoat::all();
-        $count = $rBoats->count();
+        $registeredCount = $rBoats->where('status', 'registered')->count();
         $pendingCount = $rBoats->where('status', 'pending')->count();
         $renewalCount = $rBoats->where('status', 'renewal')->count();
         $expiredCount = $rBoats->where('status', 'expired')->count();
+
         $user = auth()->user();
-        if ($user->role === 'admin' || $user->role === 'staff') {
-            $pendings = $rBoats->where('status', 'pending')->all();
+        if ($user->role == 'admin' || $user->role == 'staff') {
+            $pendings = RegisterBoat::where('status', 'pending')->paginate(10);
         } else {
             $user_id = auth()->user()->id;
-            $pendings = $rBoats->where('status', 'pending')->where('user_id', $user_id)->all();
+            $pendings = RegisterBoat::with('owner')->where('user_id', $user_id)->where('status', 'pending')->paginate(10);
         }
 
         $owners = Owners::all();
@@ -35,6 +36,6 @@ class HomeController extends Controller
 
         $announcements = Announcements::all();
 
-        return view('home', compact('rBoats', 'count', 'pendingCount', 'pendings', 'renewalCount', 'expiredCount', 'ownerCount', 'announcements'));
+        return view('home', compact('rBoats', 'registeredCount', 'pendingCount', 'pendings', 'renewalCount', 'expiredCount', 'ownerCount', 'announcements'));
     }
 }
