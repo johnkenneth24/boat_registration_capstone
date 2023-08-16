@@ -18,21 +18,27 @@
                             <table class="table table-hover table-responsive-md">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>Subject</th>
-                                        <th>Date Announcement</th>
+                                        <th style="min-width: 250px;" class="text-center">Subject</th>
+                                        <th>Announcement Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @forelse ($announcements as $announcement)
                                         <tr>
-                                            <td>001</td>
-                                            <td>test</td>
-                                            <td class="">
+                                            <td>{{ $announcement->title }}</td>
+                                            <td>{{ $announcement->date }}</td>
+                                            <td class="text-center">
                                                 <a href="" class="btn btn-sm btn-success">View</a>
                                                 <a href="" class="btn btn-sm btn-primary">Edit</a>
                                                 <a href="" class="btn btn-sm btn-danger">Delete</a>
                                             </td>
                                         </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center">No Data</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

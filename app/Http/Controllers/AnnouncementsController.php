@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Announcements;
 
 class AnnouncementsController extends Controller
 {
     public function index()
     {
-        return view('modules.announcement.index');
+        $announcements = Announcements::all();
+
+        return view('modules.announcement.index', compact('announcements'));
     }
 
     public function create()

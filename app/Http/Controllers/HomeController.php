@@ -22,7 +22,13 @@ class HomeController extends Controller
         $pendingCount = $rBoats->where('status', 'pending')->count();
         $renewalCount = $rBoats->where('status', 'renewal')->count();
         $expiredCount = $rBoats->where('status', 'expired')->count();
-        $pendings = $rBoats->where('status', 'pending')->all();
+        $user = auth()->user();
+        if ($user->role === 'admin' || $user->role === 'staff') {
+            $pendings = $rBoats->where('status', 'pending')->all();
+        } else {
+            $user_id = auth()->user()->id;
+            $pendings = $rBoats->where('status', 'pending')->where('user_id', $user_id)->all();
+        }
 
         $owners = Owners::all();
         $ownerCount = $owners->count();

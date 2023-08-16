@@ -26,7 +26,6 @@
                                 </p>
                                 <div class="row">
                                     <div class="col-md-3 col-6">
-                                        <!-- small box -->
                                         <div class="small-box bg-info">
                                             <div class="inner">
                                                 <h3>{{ $renewalCount }}</h3>
@@ -35,7 +34,7 @@
                                             <div class="icon">
                                                 <i class="fas fa-sync-alt" aria-hidden="true"></i>
                                             </div>
-                                            <a href="{{-- route('books.index') --}}" class="small-box-footer">More info <i
+                                            <a href="#" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -49,7 +48,7 @@
                                             <div class="icon">
                                                 <i class="fa fa-ship" aria-hidden="true"></i>
                                             </div>
-                                            <a href="{{-- route('users.index') --}}" class="small-box-footer">More info <i
+                                            <a href="{{ route('reg-boat.index') }}" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -63,13 +62,12 @@
                                             <div class="icon">
                                                 <i class="fas fa-user-check" aria-hidden="true"></i>
                                             </div>
-                                            <a href="{{-- route('borrowers.index') --}}" class="small-box-footer">More info <i
+                                            <a href="#" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-3 col-6">
-                                        <!-- small box -->
                                         <div class="small-box bg-warning">
                                             <div class="inner">
                                                 <h3>{{ $expiredCount }}</h3>
@@ -78,7 +76,7 @@
                                             <div class="icon">
                                                 <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
                                             </div>
-                                            <a href="{{-- route('borrowers.index') --}}" class="small-box-footer">More info <i
+                                            <a href="#" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -99,14 +97,14 @@
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
-                                        <tr>
+                                        <tr class="text-center align-middle">
                                             <th>Serial Number</th>
                                             <th>Date Registered</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($pendings as $pending)
-                                            <tr>
+                                            <tr class="text-center align-middle">
                                                 <td>{{ $pending->registration_no }}</td>
                                                 <td>{{ date('M. d, Y', strtotime($pending->registration_date)) }}</td>
                                             </tr>
@@ -128,7 +126,7 @@
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
-                                        <tr>
+                                        <tr class="text-center align-middle">
                                             <th>Subject</th>
                                             <th>Announcement Date</th>
                                             <th>Action</th>
@@ -136,7 +134,7 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($announcements as $announcement)
-                                            <tr>
+                                            <tr class="text-center align-middle">
                                                 <td>{{ $announcement->title }}</td>
                                                 <td>{{ $announcement->date }}</td>
                                                 <td><a href="">View</a></td>

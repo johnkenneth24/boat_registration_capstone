@@ -9,4 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Announcements extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = [];
+
+    protected $casts = [
+        'date' => 'date',
+    ];
 }

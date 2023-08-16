@@ -12,17 +12,24 @@ class RegisterBoatController extends Controller
 {
     public function index()
     {
-        $registeredBoats = RegisterBoat::paginate(10);
+        $user = auth()->user();
+        if ($user->role === 'admin' || $user->role === 'staff') {
+            $registeredBoats = RegisterBoat::paginate(10);
+        } else {
+            $user_id = auth()->user()->id;
+            $registeredBoats = RegisterBoat::where('user_id', $user_id)->paginate(10);
+        }
 
         return view('modules.register-boat.index', compact('registeredBoats'));
     }
 
     public function createForm1()
     {
-        $reg_no = RegisterBoat::latest()->first('registration_no');
-        $regNo = substr($reg_no->registration_no, 8);
-        // using the null coalescence, check if regNo starts with 0001 and add 1 else make it 0001
-        $latestregNo = date('Y-m-') . sprintf('%04d', $regNo ? $regNo + 1 : 1);
+        $reg_nos = RegisterBoat::all();
+        $reg_no = $reg_nos->max('registration_no') ?? 0;
+        $latestregNo = intval(substr($reg_no, 8)) + 1;
+        $addSeries = sprintf("%04d", $latestregNo);
+        $latestregNo = date('Y-m-') . $addSeries;
         // dd($latestregNo);
 
         return view('modules.register-boat.form1PerInfo', compact('latestregNo'));
@@ -114,7 +121,7 @@ class RegisterBoatController extends Controller
         $owner->position = $validated['position'];
         $owner->save();
 
-        return redirect(route('form.confirm'));
+        return redirect(route('reg-boat.index'))->with('success', 'Successfully Registered');
     }
 
     public function confirmForm(Request $request)
