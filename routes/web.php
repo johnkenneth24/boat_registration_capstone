@@ -33,8 +33,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/storeForm2', 'storeForm2')->name('form2.store');
         Route::get('/confirmForm', 'confirmForm')->name('form.confirm');
         // Route::post('/storeForm3', 'storeForm3')->name('reg-boat3.store');
+        Route::get('/sample', 'sample')->name('reg-boat.sample');
 
-        Route::get('/rocess', 'process_registration')->name('reg-boat.process');
+        Route::get('/process', 'process_registration')->name('reg-boat.process');
         Route::get('mfr-form', 'mfr_form')->name('reg-boat.mfr-form');
         Route::get('ads-form', 'adss_form')->name('reg-boat.ads-form');
     });

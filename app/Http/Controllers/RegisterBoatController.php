@@ -124,12 +124,17 @@ class RegisterBoatController extends Controller
         return redirect(route('reg-boat.index'))->with('success', 'Successfully Registered');
     }
 
-    public function confirmForm(Request $request)
-    {
-        $form1_id = $request->session()->get('form1_id');
-        $regBoat = RegisterBoat::with('owner')->find($form1_id);
+    // public function confirmForm(Request $request)
+    // {
+    //     $form1_id = $request->session()->get('form1_id');
+    //     $regBoat = RegisterBoat::with('owner')->find($form1_id);
 
-        return view('modules.register-boat.confirmForm', compact('regBoat'));
+    //     return view('modules.register-boat.confirmForm', compact('regBoat'));
+    // }
+
+    public function sample()
+    {
+        return view('modules.register-boat.samplewithaddItem');
     }
 
     public function process_registration()
