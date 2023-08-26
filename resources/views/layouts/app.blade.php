@@ -21,6 +21,18 @@
             border-radius: 3px;
         }
 
+        .nav .nav-item .nav-link:hover {
+            background-color: #96989b;
+            color: white !important;
+            border-radius: 3px;
+        }
+
+        .nav .nav-item .nav-treeview .nav-link:hover {
+            background-color: #b1b3b7;
+            color: white !important;
+            border-radius: 3px;
+        }
+
         .nav-pills .nav-link {
             color: black !important;
         }

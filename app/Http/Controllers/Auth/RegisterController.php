@@ -35,7 +35,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $users = User::all();
-        $last_id_number = $users->last()->id_number;
+        $last_id_number = $users->last()->id_number ?? 'BRIMS-000';
         $last_id_number = (int) substr($last_id_number, 6);
 
         $user = User::create([

@@ -32,21 +32,50 @@
                     </a>
                 </li>
             @endif
-            @if (auth()->user()->role != 'user' )
-                <li class="nav-item {{ request()->routeIs('applist.*') ? 'nav-item-active' : '' }}">
-                    <a href="{{ route('applist.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-file-alt" aria-hidden="true"></i>
-                        <p>List of Applicant</p>
-                    </a>
-                </li>
-            @endif
-                <li class="nav-item {{ request()->routeIs('reged-boat.*') ? 'nav-item-active' : '' }}">
-                    <a href="{{ route('reged-boat.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-check" aria-hidden="true"></i>
-                        <p>Registered Boat</p>
-                    </a>
-                </li>
-            <hr>
+            <li class="nav-item {{-- request()->routeIs('applist.*')?'nav-item-active':'' --}}">
+                <a href="{{-- route('applist.index') --}}" class="nav-link">
+                    <i class="nav-icon fa fa-users" aria-hidden="true"></i>
+                    <p>Owner Information
+                        <i class="right fas fa-angle-right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item text-center ">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            <p>Registered Owners</p>
+                        </a>
+                    </li>
+                    <li class="nav-item text-center ">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            <p>Pending Registration</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item {{ request()->routeIs(['reged-boat.*']) ? 'nav-item-active' : '' }}">
+                <a href="{{-- route('applist.index') --}}" class="nav-link">
+                    <i class="nav-icon fa fa-file-alt" aria-hidden="true"></i>
+                    <p>Boat Information<i class="right fas fa-angle-right"></i></p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item text-center  {{ request()->routeIs('reged-boat.*') ? 'nav-item-active' : '' }}">
+                        <a href="{{ route('reged-boat.index') }}" class="nav-link">
+                            <i class="nav-icon fa fa-check-circle" aria-hidden="true"></i>
+                            <p>Registered Boat</p>
+                        </a>
+                    </li>
+                    <li class="nav-item text-center ">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            <p>Pending Registration</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            {{-- <hr> --}}
         </ul>
     </nav>
 </div>
