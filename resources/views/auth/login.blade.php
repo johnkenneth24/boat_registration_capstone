@@ -20,6 +20,7 @@
                 <div class="col-md-6 mt-3 d-flex justify-content-center">
                     <form action="{{ route('login') }}" method="post" class="mt-3 col-md-9 m-2 text-center">
                         @csrf
+                        <x-success></x-success>
                         <h4 class="text-uppercase mb-2">Log in Form</h4>
                         <div class="form-group mb-2 mt-4">
                             <div class="input-group mb-0">
