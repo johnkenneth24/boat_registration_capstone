@@ -23,7 +23,7 @@
                                 <label>Sample with delete</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control form-control-sm" name="" />
-                                    <div class="input-group-append d-none" data-item-hide>
+                                    <div class="input-group-append input-group-sm d-none" data-item-hide>
                                         <button class="btn btn-danger" type="button" data-remove-item>
                                             <span class="fa fa-trash"></span>
                                         </button>
