@@ -9,6 +9,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2/sweetalert2.all.js') }}">
     <link rel="stylesheet" href="{{ asset('bs5/css/bootstrap.min.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/webp/lgo.webp') }}" type="image/x-icon">
 
@@ -65,8 +66,16 @@
         @yield('content')
     </div>
 
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="{{ asset('bs5/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('css/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
+    {{--  make the overlay to disappear after 2 seconds --}}
+    <script>
+        setTimeout(function() {
+            document.querySelector('.overlay').style.display = 'none';
+        }, 2000);
+    </script>
 </body>
 
 </html>

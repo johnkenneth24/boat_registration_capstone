@@ -56,6 +56,6 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
 
-        return redirect($this->redirectPath()); //can add message here using ->with('message', 'Your message')
+        return redirect($this->redirectPath())->with('success', 'Your account is successfully registered! Please login to continue.');
     }
 }
