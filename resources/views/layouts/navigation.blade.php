@@ -33,7 +33,7 @@
                 </li>
             @endif
             <li class="nav-item {{-- request()->routeIs('applist.*')?'nav-item-active':'' --}}">
-                <a href="{{-- route('applist.index') --}}" class="nav-link">
+                <a href="#" class="nav-link">
                     <i class="nav-icon fa fa-users" aria-hidden="true"></i>
                     <p>Owner Information
                         <i class="right fas fa-angle-right"></i>
@@ -55,7 +55,7 @@
                 </ul>
             </li>
             <li class="nav-item {{ request()->routeIs(['reged-boat.*']) ? 'nav-item-active' : '' }}">
-                <a href="{{-- route('applist.index') --}}" class="nav-link">
+                <a href="#" class="nav-link">
                     <i class="nav-icon fa fa-file-alt" aria-hidden="true"></i>
                     <p>Boat Information<i class="right fas fa-angle-right"></i></p>
                 </a>
