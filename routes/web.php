@@ -27,9 +27,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'index')->name('users.index');
         Route::get('create', 'create')->name('users.create');
         Route::post('store', 'store')->name('users.store');
-        Route::get('edit/{user}', 'edit')->name('users.edit');
-        Route::put('update/{user}', 'update')->name('users.update');
-        Route::delete('destroy/{user}', 'destroy')->name('users.destroy');
+        Route::get('edit/{id}', 'edit')->name('users.edit');
+        Route::get('show/{id}', 'show')->name('users.show');
+        Route::put('update/{id}', 'update')->name('users.update');
+        Route::delete('destroy/{id}', 'destroy')->name('users.destroy');
     });
 
     Route::controller(RegisterBoatController::class)->prefix('reg-boat')->group(function () {
