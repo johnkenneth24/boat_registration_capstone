@@ -15,129 +15,173 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body card-bcc">
-                            <h2 class="text-center font-weight-bold">Account Information</h2>
-                            <div class="row">
-                                <div class="col-md-4 text-center">
-                                    <img src="{{ asset('images/a-card.png') }}" alt="address-card" class="img-fluid">
-                                </div>
-                                <div class="col-md-8 p-2">
-                                    <form action="{{ route('profile.update') }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <span class="text-muted text-center mb-1">Manage your account details here</span>
-                                        <div class="input-group mb-3">
-                                            <input type="text" name="name"
-                                                class="form-control @error('name') is-invalid @enderror"
-                                                placeholder="{{ __('Name') }}"
-                                                value="{{ old('name', auth()->user()->name) }}" required>
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-user"></span>
+                    <x-success></x-success>
+                    <div class="card card-outline card-warning">
+                        <div class="row">
+                            <div class="col-md-4 lni-text-align-center d-none d-md-block">
+                                <img src="{{ asset('images/per.png') }}" class="img-fluid mt-4 px-3" alt="personal info"
+                                    title="Derived from: https://www.flaticon.com/free-icons/personal-information">
+                            </div>
+                            <div class="col-md-8">
+                                <form action="{{ route('users.profileUpdate', auth()->user()->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="card-body">
+                                        <div class="row border border-secondary">
+                                            <div class="col-md-12 mt-0 mb-2  pt-0 pb-1 bg-dark">
+                                                <h5 class="font-weight-bolder text-white m-0">Manage your account details
+                                                    here</h5>
+                                            </div>
+                                            <div class="form-group col-md-9">
+                                                <label>Fullname</label>
+                                                <input type="text" name="name"
+                                                    class="form-control form-control-sm @error('name') is-invalid @enderror"
+                                                    value="{{ old('name', auth()->user()->name) }}">
+                                                @error('name')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label>Username</label>
+                                                <input type="text" name="username"
+                                                    class="form-control form-control-sm @error('username') is-invalid @enderror"
+                                                    value="{{ old('username', auth()->user()->username) }}">
+                                                @error('username')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Email</label>
+                                                <input type="email" name="email"
+                                                    class="form-control form-control-sm @error('email') is-invalid @enderror"
+                                                    value="{{ old('email', auth()->user()->email) }}">
+                                                @error('email')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <input type="hidden" name="role" value="{{ auth()->user()->role }}">
+                                            <div class="form-group col-md-6">
+                                                <label>Contact Number</label>
+                                                <input type="text" name="contact_no"
+                                                    class="form-control form-control-sm @error('contact_no') is-invalid @enderror"
+                                                    value="{{ auth()->user()->contact_no }}">
+                                                @error('contact_no')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-12 mt-0 mb-2  pt-0 pb-1 bg-dark">
+                                                <h6 class="font-weight-bolder text-white m-0">Change Password</h6>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" name="password" id="password"
+                                                        class="form-control form-control-sm" autocomplete="new-password"
+                                                        value="{{ old('password') }}" required>
+                                                    <button type="button" class="btn btn-sm btn-secondary"
+                                                        id="showPasswordBtn">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
                                                 </div>
                                             </div>
-                                            @error('name')
-                                                <span class="error invalid-feedback">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
+                                            <div class="form-group col-md-6">
+                                                <label>Confirm Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" name="password_confirmation"
+                                                        id="passwordConfirmation" autocomplete="new-password"
+                                                        class="form-control form-control-sm @error('password_confirmation') is-invalid @enderror"
+                                                        required>
+                                                    <button type="button" class="btn btn-sm btn-secondary"
+                                                        id="showPasswordConfirmationBtn">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                                @error('password_confirmation')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-12 mb-2 d-flex justify-content-end">
+                                                <a href="{{ route('home') }}" class="btn btn-sm btn-danger mr-3 "><span><i
+                                                            class="fa fa-arrow-left" aria-hidden="true"></i></span> Go
+                                                    Back</a>
+                                                <button type="submit" class="btn btn-sm btn-primary ">
+                                                    <i class="fas fa-save"></i> Save Changes
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="input-group mb-3">
-                                            <input type="text" name="username"
-                                                class="form-control @error('username') is-invalid @enderror"
-                                                placeholder="Username"
-                                                value="{{ old('username', auth()->user()->username) }}" required>
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fa fa-id-badge"></span>
-                                                </div>
-                                            </div>
-                                            @error('username')
-                                                <span class="error invalid-feedback">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <input type="email" name="email"
-                                                class="form-control @error('email') is-invalid @enderror"
-                                                placeholder="{{ __('Email') }}"
-                                                value="{{ old('email', auth()->user()->email) }}" required>
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-envelope"></span>
-                                                </div>
-                                            </div>
-                                            @error('email')
-                                                <span class="error invalid-feedback">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <input type="text" name="contact_no"
-                                                class="form-control @error('contact_no') is-invalid @enderror"
-                                                placeholder="{{ __('Contact number') }}"
-                                                value="{{ old('contact_no', auth()->user()?->contact_no ?? '') }}"
-                                                required>
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-envelope"></span>
-                                                </div>
-                                            </div>
-                                            @error('contact_no')
-                                                <span class="error invalid-feedback">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        {{-- <div class="input-group mb-3">
-                                            <input type="password" name="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                placeholder="{{ __('New password') }}">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-lock"></span>
-                                                </div>
-                                            </div>
-                                            @error('password')
-                                                <span class="error invalid-feedback">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <input type="password" name="password_confirmation"
-                                                class="form-control @error('password_confirmation') is-invalid @enderror"
-                                                placeholder="{{ __('New password confirmation') }}"
-                                                autocomplete="new-password">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <span class="fas fa-lock"></span>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-
-                                        {{-- <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button> --}}
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-
+                        <div class="overlay dark">
+                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </div>
-    <!-- /.content -->
 @endsection
 
-@section('styles')
+@section('scripts')
+    <script>
+        const passwordField = document.getElementById('password');
+        const passwordConfirmationField = document.getElementById('passwordConfirmation');
+        const showPasswordBtn = document.getElementById('showPasswordBtn');
+        const showPasswordConfirmationBtn = document.getElementById('showPasswordConfirmationBtn');
+
+        showPasswordBtn.addEventListener('click', function() {
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                showPasswordBtn.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+                passwordField.type = 'password';
+                showPasswordBtn.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+        });
+
+        showPasswordConfirmationBtn.addEventListener('click', function() {
+            if (passwordConfirmationField.type === 'password') {
+                passwordConfirmationField.type = 'text';
+                showPasswordConfirmationBtn.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+                passwordConfirmationField.type = 'password';
+                showPasswordConfirmationBtn.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+        });
+
+        passwordField.addEventListener('input', function() {
+            if (passwordField.value !== passwordConfirmationField.value) {
+                passwordConfirmationField.classList.add('is-invalid');
+            } else {
+                passwordConfirmationField.classList.remove('is-invalid');
+            }
+        });
+
+        passwordConfirmationField.addEventListener('input', function() {
+            if (passwordField.value !== passwordConfirmationField.value) {
+                passwordConfirmationField.classList.add('is-invalid');
+            } else {
+                passwordConfirmationField.classList.remove('is-invalid');
+            }
+        });
+    </script>
+@endsection
+
+{{-- @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-@endsection
-
+@endsection --}}
+{{-- 
 @section('scripts')
     @if ($message = Session::get('success'))
         <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
@@ -157,4 +201,4 @@
             toastr.success('{{ $message }}')
         </script>
     @endif
-@endsection
+@endsection --}}

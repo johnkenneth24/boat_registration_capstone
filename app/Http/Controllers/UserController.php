@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate();
+        $users = User::paginate(10);
 
         return view('dashboard.users.index', compact('users'));
     }
@@ -26,6 +26,26 @@ class UserController extends Controller
         return view('dashboard.users.create', compact('latestId'));
     }
 
+    protected function messages()
+    {
+        return [
+            'id_number.required' => 'The ID number field is required.',
+            'id_number.unique' => 'The ID number has already been taken.',
+            'name.required' => 'The name field is required.',
+            'username.required' => 'The username field is required.',
+            'username.unique' => 'The username has already been taken.',
+            'email.required' => 'The email field is required.',
+            'email.unique' => 'The email has already been taken.',
+            'contact_no.required' => 'The contact number field is required.',
+            'contact_no.min' => 'The contact number must be 11 digits.',
+            'contact_no.max' => 'The contact number must be 11 digits.',
+            'contact_no.regex' => 'The contact number must be a valid mobile number.',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 8 characters.',
+            'password.confirmed' => 'The password confirmation does not match.',
+        ];
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -33,9 +53,13 @@ class UserController extends Controller
             'name' => 'required',
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
-            'contact_no' => 'required|min:11|max:11',
+            'contact_no' => [
+                'required',
+                'string',
+                'regex:/^(09\d{9})|(0\d{10})$/',
+            ],
             'password' => 'required',
-        ]);
+        ], $this->messages());
 
         $user = new User();
         $user->id_number = $validated['id_number'];
@@ -64,12 +88,16 @@ class UserController extends Controller
         $validated = $request->validate([
             'id_number' => 'required|unique:users,id_number,' . $id,
             'name' => 'required',
-            'role' => 'required',
+            'role' => 'nullable',
             'username' => 'required|unique:users,username,' . $id,
             'email' => 'required|unique:users,email,' . $id,
-            'contact_no' => 'required|min:11|max:11',
-            'password' => 'required|confirmed',
-        ]); // validates the request from the input fields
+            'contact_no' => [
+                'required',
+                'string',
+                'regex:/^(09\d{9})|(0\d{10})$/',
+            ],
+            'password' => 'required|min:8|confirmed',
+        ], $this->messages()); // validates the request from the input fields
 
         $user = User::findOrFail($id); // find the user by id
 
@@ -100,5 +128,50 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index')->with('success', 'User Account deleted successfully.');
+    }
+
+    // public function changePassword(Request $request, $id)
+    // {
+    //     $validated = $request->validate([
+    //         'password' => 'required|confirmed',
+    //     ]);
+
+    //     $user = User::findOrFail($id);
+
+    //     $user->password = bcrypt($validated['password']);
+
+    //     return back()->with('success', 'Password changed successfully.');
+    // }
+
+    public function profile()
+    {
+        return view('auth.profile');
+    }
+
+    public function profileupdate(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email,' . auth()->user()->id,
+            'contact_no' => [
+                'required',
+                'string',
+                'regex:/^(09\d{9})|(0\d{10})$/',
+            ],
+            'username' => 'required|unique:users,username,' . auth()->user()->id,
+            'password' => 'required|min:8|confirmed',
+        ], $this->messages());
+
+        $user = User::findOrFail($id); // find the user by id
+
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->contact_no = $validated['contact_no'];
+        $user->username = $validated['username'];
+        $user->password = bcrypt($validated['password']);
+
+        $user->save(); //
+
+        return redirect()->back()->with('success', 'Profile successfully updated!');
     }
 }

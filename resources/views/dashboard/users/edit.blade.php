@@ -154,5 +154,21 @@
                 showPasswordConfirmationBtn.innerHTML = '<i class="fas fa-eye"></i>';
             }
         });
+
+        passwordField.addEventListener('input', function() {
+            if (passwordField.value !== passwordConfirmationField.value) {
+                passwordConfirmationField.classList.add('is-invalid');
+            } else {
+                passwordConfirmationField.classList.remove('is-invalid');
+            }
+        });
+
+        passwordConfirmationField.addEventListener('input', function() {
+            if (passwordField.value !== passwordConfirmationField.value) {
+                passwordConfirmationField.classList.add('is-invalid');
+            } else {
+                passwordConfirmationField.classList.remove('is-invalid');
+            }
+        });
     </script>
 @endsection

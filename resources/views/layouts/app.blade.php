@@ -112,7 +112,7 @@
                         <span class="text-muted small"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
-                        <a href="{{ route('profile.show') }}" class="dropdown-item">
+                        <a href="{{ route('users.profile') }}" class="dropdown-item">
                             <i class="mr-2 fas fa-file"></i>
                             {{ __('My profile') }}
                         </a>

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\ApplicantListController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterBoatController;
 use App\Http\Controllers\RegisteredBoatController;
 use App\Http\Controllers\UserController;
@@ -19,9 +18,8 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::view('about', 'about')->name('about');
-    Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
-    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
+    // Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::controller(UserController::class)->prefix('users')->group(function () {
         Route::get('/', 'index')->name('users.index');
@@ -31,6 +29,9 @@ Route::middleware('auth')->group(function () {
         Route::get('show/{id}', 'show')->name('users.show');
         Route::put('update/{id}', 'update')->name('users.update');
         Route::delete('destroy/{id}', 'destroy')->name('users.destroy');
+
+        Route::get('profile', 'profile')->name('users.profile');
+        Route::put('profile/{id}', 'profileUpdate')->name('users.profileUpdate');
     });
 
     Route::controller(RegisterBoatController::class)->prefix('reg-boat')->group(function () {
