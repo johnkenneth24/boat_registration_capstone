@@ -70,7 +70,7 @@
                                                 <label>Contact Number</label>
                                                 <input type="text" name="contact_no"
                                                     class="form-control form-control-sm @error('contact_no') is-invalid @enderror"
-                                                    value="{{ auth()->user()->contact_no }}">
+                                                    required value="{{ auth()->user()->contact_no }}">
                                                 @error('contact_no')
                                                     <div class="invalid-feedback" style="display: inline-block !important;">
                                                         {{ $message }}
