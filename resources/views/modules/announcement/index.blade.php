@@ -5,16 +5,18 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card mt-5">
+                    <div class="card  card-outline card-warning mt-5">
                         <div class="card-header">
                             <div class="card-title">
                                 <h4>Announcement</h4>
                             </div>
                             <div class="card-tools">
-                                <a href="{{ route('announcement.create') }}" class="btn btn-success">Add Announcements</a>
+                                <a href="{{ route('announcement.create') }}" class="btn btn-success"><span><i
+                                            class="fa fa-plus" aria-hidden="true"></i></span> Add
+                                    Announcements</a>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-0">
                             <table class="table table-hover table-responsive-md">
                                 <thead class="thead-dark">
                                     <tr>

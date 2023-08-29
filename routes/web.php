@@ -18,9 +18,6 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    // Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
-    // Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
-
     Route::controller(UserController::class)->prefix('users')->group(function () {
         Route::get('/', 'index')->name('users.index');
         Route::get('create', 'create')->name('users.create');

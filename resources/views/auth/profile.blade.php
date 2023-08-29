@@ -18,7 +18,7 @@
                     <x-success></x-success>
                     <div class="card card-outline card-warning">
                         <div class="row">
-                            <div class="col-md-4 lni-text-align-center d-none d-md-block">
+                            <div class="col-md-4 d-none d-md-block">
                                 <img src="{{ asset('images/per.png') }}" class="img-fluid mt-4 px-3" alt="personal info"
                                     title="Derived from: https://www.flaticon.com/free-icons/personal-information">
                             </div>
