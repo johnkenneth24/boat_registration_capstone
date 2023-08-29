@@ -37,7 +37,7 @@
                                         <h6 class="font-weight-bolder text-white m-0">Registration</h6>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="">Registration Number</label>
+                                        <label>Registration Number</label>
                                         <div class="input-group input-group-sm">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">IMS -</span>
@@ -48,12 +48,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="">Registration Date</label>
+                                        <label>Registration Date</label>
                                         <input type="date" name="registration_date" class="form-control form-control-sm"
                                             readonly value="{{ date('Y-m-d') }}">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="">Registration Type</label>
+                                        <label>Registration Type</label>
                                         <input type="text" name="registration_type" class="form-control form-control-sm"
                                             readonly value="New">
                                     </div>
@@ -61,7 +61,7 @@
                                         <h6 class="font-weight-bolder text-white m-0">Personal Information</h6>
                                     </div>
                                     <div class="form-group col-md-1">
-                                        <label for="">Salutation</label>
+                                        <label>Salutation</label>
                                         <select name="salutation" class="form-control form-control-sm">
                                             <option value="">----</option>
                                             <option value="Mr.">Mr.</option>
@@ -70,22 +70,22 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">Lastname</label>
+                                        <label>Lastname</label>
                                         <input type="text" name="lastname" class="form-control form-control-sm"
                                             placeholder="Last Name (e.g., De la Cruz)" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">Firstname</label>
+                                        <label>Firstname</label>
                                         <input type="text" name="firstname" class="form-control form-control-sm"
                                             placeholder="First Name (e.g., Juan)" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">Middlename</label>
+                                        <label>Middlename</label>
                                         <input type="text" name="middlename" class="form-control form-control-sm"
                                             placeholder="Middle Name (e.g., Dalisay)">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label for="">Suffix</label>
+                                        <label>Suffix</label>
                                         <select name="suffix" class="form-control form-control-sm">
                                             <option value="">--Please Select--</option>
                                             <option value="Jr.">Jr.</option>
@@ -95,23 +95,23 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="">Address</label>
+                                        <label>Address</label>
                                         <input type="text" name="address" class="form-control form-control-sm"
                                             placeholder="Enter Address (House/St. No, Brgy, Municipality, Province/City)"
                                             required>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label for="">Resident since</label>
+                                        <label>Resident since</label>
                                         <input type="month" name="resident_since" class="form-control form-control-sm"
                                             required>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="">Nationality</label>
+                                        <label>Nationality</label>
                                         <input type="text" name="nationality" class="form-control form-control-sm"
                                             placeholder="Enter your Nationality" required>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label for="">Gender</label>
+                                        <label>Gender</label>
                                         <select name="gender" class="form-control form-control-sm" required>
                                             <option value="">--Select--</option>
                                             <option value="Male">Male</option>
@@ -119,7 +119,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label for="">Civil Status</label>
+                                        <label>Civil Status</label>
                                         <select name="civil_status" class="form-control form-control-sm" required>
                                             <option value="">--Select--</option>
                                             <option value="Single">Single</option>
@@ -129,33 +129,33 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="">Contact No.</label>
+                                        <label>Contact No.</label>
                                         <input type="text" name="contact_no" class="form-control form-control-sm"
                                             placeholder="Enter Contact No." required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">Birthdate</label>
+                                        <label>Birthdate</label>
                                         <input type="date" name="birthdate" class="form-control form-control-sm bdate"
                                             value="{{ old('birthdate') }}">
                                     </div>
                                     <div class="form-group col-md-1">
-                                        <label for="">Age</label>
+                                        <label>Age</label>
                                         <input type="number" name="age" class="form-control form-control-sm age"
                                             value="{{ old('age') }}" readonly placeholder="0">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="">Birthplace</label>
+                                        <label>Birthplace</label>
                                         <input type="text" name="birthplace" class="form-control form-control-sm"
                                             value="{{ old('birthplace') }}" placeholder="Enter Birthplace" required>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="">Educational Background</label>
+                                        <label>Educational Background</label>
                                         <input type="text" name="educational_background"
                                             class="form-control form-control-sm"
                                             placeholder="Enter Educational Background" required>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label for="">Number of Children</label>
+                                        <label>Number of Children</label>
                                         <input type="number" name="children_count" class="form-control form-control-sm">
                                     </div>
                                     <div class="col-md-12 my-0">
@@ -164,24 +164,24 @@
                                         </small>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">Emergency contact person</label>
+                                        <label>Emergency contact person</label>
                                         <input type="text" name="emergency_contact_name"
                                             class="form-control form-control-sm"
                                             placeholder="Enter Name of emergency contact">
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">Relationship</label>
+                                        <label>Relationship</label>
                                         <input type="text" name="emergency_contact_relationship"
                                             class="form-control form-control-sm" placeholder="Enter Relationship">
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">Contact No.</label>
+                                        <label>Contact No.</label>
                                         <input type="text" name="emergency_contact_number"
                                             class="form-control form-control-sm"
                                             placeholder="Contact No. of emergency contact">
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">Address</label>
+                                        <label>Address</label>
                                         <input type="text" name="emergency_contact_address"
                                             class="form-control form-control-sm"
                                             placeholder="Address of emergency contact">
@@ -200,4 +200,25 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    {{-- script to calculate age inputted in the bdate input --}}
+    <script>
+        function calculateAge() {
+            var date = document.querySelector('.bdate').value;
+            var today = new Date();
+            var birthDate = new Date(date);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            var d = today.getDate() - birthDate.getDate();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            document.querySelector('.age').value = age;
+        }
+
+        document.querySelector('.bdate').addEventListener('input', calculateAge);
+    </script>
 @endsection

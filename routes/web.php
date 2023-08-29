@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+// on open of site
 Route::redirect('/', '/login');
 
 // Laravel authentication routes
@@ -19,9 +20,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::view('about', 'about')->name('about');
-    Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::controller(UserController::class)->prefix('users')->group(function () {
+        Route::get('/', 'index')->name('users.index');
+        Route::get('create', 'create')->name('users.create');
+        Route::post('store', 'store')->name('users.store');
+        Route::get('edit/{user}', 'edit')->name('users.edit');
+        Route::put('update/{user}', 'update')->name('users.update');
+        Route::delete('destroy/{user}', 'destroy')->name('users.destroy');
+    });
 
     Route::controller(RegisterBoatController::class)->prefix('reg-boat')->group(function () {
         Route::get('/', 'index')->name('reg-boat.index');

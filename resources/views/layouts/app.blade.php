@@ -19,6 +19,15 @@
             background-color: #6e7174;
             color: white !important;
             border-radius: 3px;
+            padding-bottom: 0;
+        }
+
+        .nav-link {
+            width: auto !important;
+        }
+
+        .nav .nav-item {
+            overflow: hidden !important;
         }
 
         .nav .nav-item .nav-link:hover {
@@ -31,6 +40,7 @@
             background-color: #b1b3b7;
             color: white !important;
             border-radius: 3px;
+            overflow: hidden !important;
         }
 
         .nav-pills .nav-link {
@@ -150,26 +160,8 @@
     <script src="{{ asset('bs5/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
     <script src="{{ asset('css/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
     @yield('scripts')
-
-    {{-- script to calculate age inputted in the bdate input --}}
-    <script>
-        function calculateAge() {
-            var date = document.querySelector('.bdate').value;
-            var today = new Date();
-            var birthDate = new Date(date);
-            var age = today.getFullYear() - birthDate.getFullYear();
-            var m = today.getMonth() - birthDate.getMonth();
-            var d = today.getDate() - birthDate.getDate();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
-
-            document.querySelector('.age').value = age;
-        }
-
-        document.querySelector('.bdate').addEventListener('input', calculateAge);
-    </script>
 
     {{--  make the overlay to disappear after 2 seconds --}}
     <script>

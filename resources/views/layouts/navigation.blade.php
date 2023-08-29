@@ -24,14 +24,14 @@
                     </a>
                 </li>
             @endif
-            @if (auth()->user()->role != 'admin')
-                <li class="nav-item {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
-                    <a href="{{ route('reg-boat.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-ship" aria-hidden="true"></i>
-                        <p>Boat Registration</p>
-                    </a>
-                </li>
-            @endif
+            {{-- @if (auth()->user()->role != 'admin') --}}
+            <li class="nav-item {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
+                <a href="{{ route('reg-boat.index') }}" class="nav-link">
+                    <i class="nav-icon fa fa-ship" aria-hidden="true"></i>
+                    <p>Boat Registration</p>
+                </a>
+            </li>
+            {{-- @endif --}}
             <li class="nav-item {{-- request()->routeIs('applist.*')?'nav-item-active':'' --}}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fa fa-users" aria-hidden="true"></i>
@@ -40,13 +40,13 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
-                    <li class="nav-item text-center ">
+                    <li class="nav-item pl-3 pr-0 ">
                         <a href="#" class="nav-link">
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                             <p>Registered Owners</p>
                         </a>
                     </li>
-                    <li class="nav-item text-center ">
+                    <li class="nav-item pl-3 pr-0 ">
                         <a href="#" class="nav-link">
                             <i class="fa fa-times-circle" aria-hidden="true"></i>
                             <p>Pending Registration</p>
@@ -60,13 +60,13 @@
                     <p>Boat Information<i class="right fas fa-angle-right"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
-                    <li class="nav-item text-center  {{ request()->routeIs('reged-boat.*') ? 'nav-item-active' : '' }}">
+                    <li class="nav-item pl-3 pr-0  {{ request()->routeIs('reged-boat.*') ? 'nav-item-active' : '' }}">
                         <a href="{{ route('reged-boat.index') }}" class="nav-link">
-                            <i class="nav-icon fa fa-check-circle" aria-hidden="true"></i>
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
                             <p>Registered Boat</p>
                         </a>
                     </li>
-                    <li class="nav-item text-center ">
+                    <li class="nav-item pl-3 pr-0 ">
                         <a href="#" class="nav-link">
                             <i class="fa fa-times-circle" aria-hidden="true"></i>
                             <p>Pending Registration</p>
@@ -74,8 +74,6 @@
                     </li>
                 </ul>
             </li>
-
-            {{-- <hr> --}}
         </ul>
     </nav>
 </div>
