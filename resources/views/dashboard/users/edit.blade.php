@@ -41,7 +41,7 @@
                                             <div class="form-group col-md-2">
                                                 <label>Role</label>
                                                 <input type="text" name="role" class="form-control form-control-sm"
-                                                    readonly value="{{ $user->role }}">
+                                                    readonly value="{{ $user->roles }}">
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label>Email</label>

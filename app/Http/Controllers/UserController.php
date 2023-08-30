@@ -21,8 +21,6 @@ class UserController extends Controller
         $formatted = substr($latestId, 6);
         $latestId = 'BRIMS-' . sprintf('%03d', $formatted + 1);
 
-        // dd($latestId);
-
         return view('dashboard.users.create', compact('latestId'));
     }
 
@@ -68,7 +66,8 @@ class UserController extends Controller
         $user->email = $validated['email'];
         $user->contact_no = $validated['contact_no'];
         $user->password = bcrypt($validated['password']);
-        $user->role = 'staff';
+
+        $user->assignRole('staff');
 
         $user->save();
 
@@ -88,7 +87,6 @@ class UserController extends Controller
         $validated = $request->validate([
             'id_number' => 'required|unique:users,id_number,' . $id,
             'name' => 'required',
-            'role' => 'nullable',
             'username' => 'required|unique:users,username,' . $id,
             'email' => 'required|unique:users,email,' . $id,
             'contact_no' => [
@@ -100,6 +98,8 @@ class UserController extends Controller
         ], $this->messages()); // validates the request from the input fields
 
         $user = User::findOrFail($id); // find the user by id
+        // get role of user
+        // $role = $user->getRoleNames();
 
         $user->id_number = $validated['id_number'];
         $user->name = $validated['name'];
@@ -107,7 +107,7 @@ class UserController extends Controller
         $user->email = $validated['email'];
         $user->contact_no = $validated['contact_no'];
         $user->password = bcrypt($validated['password']);
-        $user->role = $validated['role'];
+        // $user->role = $validated['role'];
 
         $user->save(); // saves the user with the above validated data
 
@@ -125,23 +125,17 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->delete();
+        if ($user->hasRole('admin')) {
+            return back()->with('error', 'You cannot delete an admin account.');
+        }
 
-        return redirect()->route('users.index')->with('success', 'User Account deleted successfully.');
+        if (!$user) {
+            return back()->with('error', 'User Account not found.');
+        } else {
+            $user->delete();
+            return redirect()->route('users.index')->with('success', 'User Account deleted successfully.');
+        }
     }
-
-    // public function changePassword(Request $request, $id)
-    // {
-    //     $validated = $request->validate([
-    //         'password' => 'required|confirmed',
-    //     ]);
-
-    //     $user = User::findOrFail($id);
-
-    //     $user->password = bcrypt($validated['password']);
-
-    //     return back()->with('success', 'Password changed successfully.');
-    // }
 
     public function profile()
     {
