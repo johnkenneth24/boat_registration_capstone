@@ -68,4 +68,17 @@ class AnnouncementsController extends Controller
 
         return redirect()->route('announcement.index')->with('success', 'Announcement updated successfully');
     }
+
+    public function destroy($id)
+    {
+        $announcement = Announcements::find($id);
+
+        if ($announcement) {
+            $announcement->delete();
+        } else {
+            return redirect()->route('announcement.index')->with('error', 'Announcement not found');
+        }
+
+        return redirect()->route('announcement.index')->with('success', 'Announcement deleted successfully');
+    }
 }

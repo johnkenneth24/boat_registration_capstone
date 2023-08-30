@@ -40,7 +40,11 @@
                                                 </button>
                                                 <a href="{{ route('announcement.edit', $announcement->id) }}"
                                                     class="btn btn-sm btn-primary mr-2">EDIT</a>
-                                                <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                                <button type="button" class="btn btn-sm btn-danger" title="Delete"
+                                                    data-toggle="modal"
+                                                    data-target="#confirmationModal{{ $announcement->id }}">
+                                                    DELETE
+                                                </button>
                                             </td>
                                         </tr>
                                     @empty
@@ -57,7 +61,8 @@
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="viewModalLabel">Announcement Details
+                                                    <h5 class="modal-title" id="viewModalLabel{{ $announcement->id }}">
+                                                        Announcement Details
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -76,6 +81,37 @@
                                                     <button type="button" class="btn btn-secondary float-right"
                                                         data-dismiss="modal">Close</button>
                                                 </div> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="confirmationModal{{ $announcement->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="confirmationModalLabel{{ $announcement->id }}"
+                                        aria-hidden="true" data-backdrop="static">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content modal-static">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"
+                                                        id="confirmationModalLabel{{ $announcement->id }}">Confirm Deletion
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body mt-2 mb-2 text-center">
+                                                    <i class="fas fa-exclamation-triangle fa-4x text-warning"></i>
+                                                    <h3>Are you sure you want to delete this announcement?</h3>
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-center">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Cancel</button>
+                                                    <form action="{{ route('announcement.destroy', $announcement->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
