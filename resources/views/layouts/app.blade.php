@@ -171,6 +171,14 @@
     </script>
 
     <script>
+        window.setTimeout(function() {
+            $(".alert").fadeTo(1000, 0).slideUp(2000, function() {
+                $(this).remove();
+            });
+        }, 4000);
+    </script>
+
+    <script>
         const checkboxes = document.querySelectorAll('input[name="income_sources[]"]');
         const gearInput = document.querySelector('#gear');
         const cultureInput = document.querySelector('#culture');
