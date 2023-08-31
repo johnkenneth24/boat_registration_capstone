@@ -8,30 +8,28 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            @if (auth()->user()->role != 'user')
+            @unlessrole('user')
                 <li class="nav-item {{ request()->routeIs('announcement.*') ? 'nav-item-active' : '' }}">
                     <a href="{{ route('announcement.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-bullhorn" aria-hidden="true"></i>
                         <p>Announcements</p>
                     </a>
                 </li>
-            @endif
-            @if (auth()->user()->role == 'admin')
+            @endunlessrole
+            @role('admin')
                 <li class="nav-item {{ request()->routeIs('users.*') ? 'nav-item-active' : '' }}">
                     <a href="{{ route('users.index') }}" class="nav-link ">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Users</p>
                     </a>
                 </li>
-            @endif
-            {{-- @if (auth()->user()->role != 'admin') --}}
+            @endrole
             <li class="nav-item {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
                 <a href="{{ route('reg-boat.index') }}" class="nav-link">
                     <i class="nav-icon fa fa-ship" aria-hidden="true"></i>
                     <p>Boat Registration</p>
                 </a>
             </li>
-            {{-- @endif --}}
             <li class="nav-item {{-- request()->routeIs('applist.*')?'nav-item-active':'' --}}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fa fa-users" aria-hidden="true"></i>

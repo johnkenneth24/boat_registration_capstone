@@ -19,13 +19,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::controller(UserController::class)->prefix('users')->group(function () {
-        Route::get('/', 'index')->name('users.index');
-        Route::get('create', 'create')->name('users.create');
-        Route::post('store', 'store')->name('users.store');
-        Route::get('edit/{id}', 'edit')->name('users.edit');
-        Route::get('show/{id}', 'show')->name('users.show');
-        Route::put('update/{id}', 'update')->name('users.update');
-        Route::delete('destroy/{id}', 'destroy')->name('users.destroy');
+
+        // routes admin only can access
+        Route::middleware('role:admin')->group(function () {
+            Route::get('index', 'index')->name('users.index');
+            Route::get('create', 'create')->name('users.create');
+            Route::post('store', 'store')->name('users.store');
+            Route::get('edit/{id}', 'edit')->name('users.edit');
+            Route::get('show/{id}', 'show')->name('users.show');
+            Route::put('update/{id}', 'update')->name('users.update');
+            Route::delete('destroy/{id}', 'destroy')->name('users.destroy');
+        });
 
         Route::get('profile', 'profile')->name('users.profile');
         Route::put('profile/{id}', 'profileUpdate')->name('users.profileUpdate');
@@ -57,7 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::get('ads-form', 'adss_form')->name('applist.ads-form');
     });
 
-    Route::controller(AnnouncementsController::class)->prefix('announcement')->group(function () {
+    Route::controller(AnnouncementsController::class)->middleware(['role:admin', 'role:staff'])->prefix('announcement')->group(function () {
         Route::get('/', 'index')->name('announcement.index');
         Route::get('create', 'create')->name('announcement.create');
         Route::post('store', 'store')->name('announcement.store');

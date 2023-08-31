@@ -16,7 +16,8 @@
                     </div>
                 </div>
             </div>
-            @if (auth()->user()->role != 'user')
+            @unlessrole('user')
+                {{-- @if (auth()->user()->role != 'user') --}}
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -86,8 +87,9 @@
                         </div>
                     </div>
                 </div>
-            @endif
-            @if (auth()->user()->role != 'admin')
+            @endunlessrole
+            @unlessrole('admin')
+                {{-- @if (auth()->user()->role != 'admin')n --}}
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card" style="height: 335px;">
@@ -150,15 +152,16 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endunlessrole
+            {{-- @endif --}}
 
-            @if (auth()->user()->role != 'user')
+            {{-- @if (auth()->user()->role != 'user')
                 <div class="row">
                     <div class="col-md-6">
 
                     </div>
                 </div>
-            @endif
+            @endif --}}
         </div>
     </div>
 @endsection

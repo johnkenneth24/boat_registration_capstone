@@ -43,9 +43,9 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'user',
             'id_number' => 'BRIMS-' . str_pad($last_id_number + 1, 3, '0', STR_PAD_LEFT),
         ]);
+        $user->assignRole('user');
 
         return $user;
     }

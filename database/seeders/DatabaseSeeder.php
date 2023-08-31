@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Municipal Agriculture Office',
                 'username' => 'admin',
                 'email' => 'admin@gmail.com',
-                'role' => 'admin',
                 'password' => Hash::make('admin1234'),
                 'id_number' => 'BRIMS-001',
                 'contact_no' => '09123456789',
             ]);
+            $user->assignRole('admin');
         }
 
         if (!User::where('email', 'staff@example.com')->first()) {
@@ -32,11 +32,11 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Staff',
                 'username' => 'staff',
                 'email' => 'staff@gmail.com',
-                'role' => 'staff',
                 'password' => Hash::make('staff1234'),
                 'id_number' => 'BRIMS-002',
                 'contact_no' => '09123456790',
             ]);
+            $user->assignRole('staff');
         }
     }
 }
