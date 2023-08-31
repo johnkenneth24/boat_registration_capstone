@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::get('ads-form', 'adss_form')->name('applist.ads-form');
     });
 
+    // only admin and staff can access these routes
     Route::controller(AnnouncementsController::class)->middleware(['role:admin', 'role:staff'])->prefix('announcement')->group(function () {
         Route::get('/', 'index')->name('announcement.index');
         Route::get('create', 'create')->name('announcement.create');
