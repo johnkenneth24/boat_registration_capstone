@@ -40,7 +40,7 @@
                 @role('user')
                     <ul class="nav nav-treeview">
                         <li class="nav-item pl-3 pr-0 ">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('owner-info.index') }}" class="nav-link">
                                 <i class="fa fa-check-circle" aria-hidden="true"></i>
                                 <p>My information</p>
                             </a>
