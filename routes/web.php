@@ -4,7 +4,6 @@ use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\ApplicantListController;
 use App\Http\Controllers\RegisterBoatController;
 use App\Http\Controllers\RegisteredBoatController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,21 +17,21 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::controller(UserController::class)->prefix('users')->group(function () {
+    Route::prefix('users')->group(function () {
 
         // routes admin only can access
-        Route::middleware('role:admin')->group(function () {
-            Route::get('index', 'index')->name('users.index');
-            Route::get('create', 'create')->name('users.create');
-            Route::post('store', 'store')->name('users.store');
-            Route::get('edit/{id}', 'edit')->name('users.edit');
-            Route::get('show/{id}', 'show')->name('users.show');
-            Route::put('update/{id}', 'update')->name('users.update');
-            Route::delete('destroy/{id}', 'destroy')->name('users.destroy');
+        Route::middleware(['role:admin'])->group(function () {
+            Route::get('index', 'UserController@index')->name('users.index');
+            Route::get('create', 'UserController@create')->name('users.create');
+            Route::post('store', 'UserController@store')->name('users.store');
+            Route::get('edit/{id}', 'UserController@edit')->name('users.edit');
+            Route::get('show/{id}', 'UserController@show')->name('users.show');
+            Route::put('update/{id}', 'UserController@update')->name('users.update');
+            Route::delete('destroy/{id}', 'UserController@destroy')->name('users.destroy');
         });
 
-        Route::get('profile', 'profile')->name('users.profile');
-        Route::put('profile/{id}', 'profileUpdate')->name('users.profileUpdate');
+        Route::get('profile', 'UserController@profile')->name('users.profile');
+        Route::put('profile/{id}', 'UserController@profileUpdate')->name('users.profileUpdate');
     });
 
     Route::controller(RegisterBoatController::class)->prefix('reg-boat')->group(function () {
@@ -61,13 +60,13 @@ Route::middleware('auth')->group(function () {
         Route::get('ads-form', 'adss_form')->name('applist.ads-form');
     });
 
-    Route::controller(AnnouncementsController::class)->middleware(['role:admin', 'role:staff'])->prefix('announcement')->group(function () {
+    Route::controller(AnnouncementsController::class)->prefix('announcement')->group(function () {
         Route::get('/', 'index')->name('announcement.index');
         Route::get('create', 'create')->name('announcement.create');
         Route::post('store', 'store')->name('announcement.store');
         Route::get('edit/{announcement}', 'edit')->name('announcement.edit');
         Route::put('update/{announcement}', 'update')->name('announcement.update');
         Route::delete('destroy/{announcement}', 'destroy')->name('announcement.destroy');
-    });
+    })->middleware(['role:admin', 'role:staff']);
 
 });
