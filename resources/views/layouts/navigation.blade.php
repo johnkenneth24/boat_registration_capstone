@@ -30,7 +30,7 @@
                     <p>Boat Registration</p>
                 </a>
             </li> --}}
-            <li class="nav-item {{-- request()->routeIs('applist.*')?'nav-item-active':'' --}}">
+            <li class="nav-item {{ request()->routeIs(['owner-info.*']) ? 'nav-item-active' : '' }}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fa fa-users" aria-hidden="true"></i>
                     <p>Owner Information

@@ -31,4 +31,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function ownerInfo()
+    {
+        return $this->hasOne(OwnerInfo::class);
+    }
+
+    public function boat()
+    {
+        return $this->hasMany(Boat::class);
+    }
+
+    public function livelihood()
+    {
+        return $this->hasOneThrough(Livelihood::class, OwnerInfo::class);
+    }
 }

@@ -13,7 +13,15 @@ class OwnerInfoController extends Controller
     public $genders = ['Male', 'Female'];
     public $civil_status = ['Single', 'Married', 'Widowed', 'Legally Separated'];
     public $educ_bcc = ['Elementary', 'High School', 'College', 'Vocational', 'Post Graduate'];
+
     public function index()
+    {
+        $ownerInfo = OwnerInfo::where('user_id', auth()->user()->id)->first();
+
+        // dd($ownerInfo);
+        return view('modules.owner-info.index', compact('ownerInfo'));
+    }
+    public function personal($id)
     {
         $salutations = $this->salutations;
         $suffixes = $this->suffixes;
@@ -21,7 +29,7 @@ class OwnerInfoController extends Controller
         $civil_status = $this->civil_status;
         $educ_bcc = $this->educ_bcc;
 
-        return view('modules.owner-info.index', compact('salutations', 'suffixes', 'genders', 'civil_status', 'educ_bcc'));
+        return view('modules.owner-info.personal', compact('salutations', 'suffixes', 'genders', 'civil_status', 'educ_bcc'));
     }
 
     public function store(Request $request)
@@ -33,7 +41,7 @@ class OwnerInfoController extends Controller
             'middle_name' => 'nullable',
             'suffix' => 'nullable',
             'address' => 'required',
-            'resident_since' => 'required',
+            'resident_since' => ['required', 'date:Y-m'],
             'nationality' => 'required',
             'gender' => 'required',
             'civil_status' => 'required',
@@ -49,9 +57,94 @@ class OwnerInfoController extends Controller
             'emAddress' => 'nullable',
         ]);
 
+        // dd($validated);
+
         $form1 = new OwnerInfo();
         $form1->user_id = auth()->user()->id;
+        $form1->salutation = $validated['salutation'];
+        $form1->last_name = $validated['last_name'];
+        $form1->first_name = $validated['first_name'];
+        $form1->middle_name = $validated['middle_name'];
+        $form1->suffix = $validated['suffix'];
+        $form1->address = $validated['address'];
+        $form1->resident_since = $validated['resident_since'] . '-01';
+        $form1->nationality = $validated['nationality'];
+        $form1->gender = $validated['gender'];
+        $form1->civil_status = $validated['civil_status'];
+        $form1->contact_no = $validated['contact_no'];
+        $form1->birthdate = $validated['birthdate'];
+        $form1->age = $validated['age'];
+        $form1->birthplace = $validated['birthplace'];
+        $form1->educ_background = $validated['educ_background'];
+        $form1->children_count = $validated['children_count'];
+        $form1->emContact_person = $validated['emContact_person'];
+        $form1->emRelationship = $validated['emRelationship'];
+        $form1->emContact_no = $validated['emContact_no'];
+        $form1->emAddress = $validated['emAddress'];
+        $form1->save();
 
-        return redirect()->back();
+        session(['owner_info' => $form1->id]);
+        return redirect(route('owner-info.livelihood'));
+    }
+
+    public $source_of_income = [
+        'Capture Fishing',
+        'Aquaculture',
+        'Fish Vending',
+        'Gleaning',
+        'Fish Processing',
+        'Other',
+    ];
+
+    public function livelihood(Request $request)
+    {
+        $source_of_income = $this->source_of_income;
+        $form1_id = $request->session()->get('owner_info');
+
+        $form1 = OwnerInfo::find($form1_id);
+
+        return view('modules.owner-info.livelihood', compact('source_of_income', 'form1'));
+    }
+
+    public function livelihoodStore(Request $request)
+    {
+        $validated = $request->validate([
+            'source_of_income' => ['nullable', 'array'],
+            'source_of_income.*' => 'in:Capture Fishing,Aquaculture,Fish Vending,Fish Processing,Gleaning,Other',
+            'gear_used' => 'nullable',
+            'culture_method' => 'nullable',
+            'specify' => 'nullable',
+            'other_income_sources' => ['nullable', 'array'],
+            'other_income_sources.*' => 'in:Capture Fishing,Aquaculture,Fish Vending,Fish Processing,Gleaning,Other',
+            'gear_used_os' => 'nullable',
+            'culture_method_os' => 'nullable',
+            'specify_os' => 'nullable',
+            'org_name' => 'nullable',
+            'member_since' => 'nullable',
+            'position' => 'nullable',
+
+        ]);
+
+        dd($validated);
+
+        $form1_id = $request->session()->get('owner_info');
+
+        $form1 = OwnerInfo::find($form1_id);
+
+        $form1->source_of_income = $validated['source_of_income'];
+        $form1->gear_used = $validated['gear_used'];
+        $form1->culture_method = $validated['culture_method'];
+        $form1->specify = $validated['specify'];
+        $form1->other_income_sources = $validated['other_income_sources'];
+        $form1->gear_used_os = $validated['gear_used_os'];
+        $form1->culture_method_os = $validated['culture_method_os'];
+        $form1->specify_os = $validated['specify_os'];
+        $form1->org_name = $validated['org_name'];
+        $form1->member_since = $validated['member_since'];
+        $form1->position = $validated['position'];
+
+        $form1->save();
+
+        return redirect()->route('owner-info.index')->with('success', 'Owner Information successfully saved!');
     }
 }

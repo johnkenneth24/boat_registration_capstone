@@ -4,6 +4,7 @@ use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\OwnerInfoController;
 use App\Http\Controllers\RegisterBoatController;
 use App\Http\Controllers\RegisteredBoatController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,17 +18,15 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::prefix('users')->group(function () {
-
-        // routes admin only can access
+    Route::controller(UserController::class)->prefix('users')->group(function () {
         Route::middleware(['role:admin'])->group(function () {
-            Route::get('index', 'UserController@index')->name('users.index');
-            Route::get('create', 'UserController@create')->name('users.create');
-            Route::post('store', 'UserController@store')->name('users.store');
-            Route::get('edit/{id}', 'UserController@edit')->name('users.edit');
-            Route::get('show/{id}', 'UserController@show')->name('users.show');
-            Route::put('update/{id}', 'UserController@update')->name('users.update');
-            Route::delete('destroy/{id}', 'UserController@destroy')->name('users.destroy');
+            Route::get('index', 'index')->name('users.index');
+            Route::get('create', 'create')->name('users.create');
+            Route::post('store', 'store')->name('users.store');
+            Route::get('edit/{id}', 'edit')->name('users.edit');
+            Route::get('show/{id}', 'show')->name('users.show');
+            Route::put('update/{id}', 'update')->name('users.update');
+            Route::delete('destroy/{id}', 'destroy')->name('users.destroy');
         });
 
         Route::get('profile', 'profile')->name('users.profile');
@@ -60,6 +59,7 @@ Route::middleware('auth')->group(function () {
         Route::get('ads-form', 'adss_form')->name('applist.ads-form');
     });
 
+    // routes admin and staff only can access
     Route::controller(AnnouncementsController::class)->prefix('announcement')->group(function () {
         Route::get('/', 'index')->name('announcement.index');
         Route::get('create', 'create')->name('announcement.create');
@@ -69,5 +69,10 @@ Route::middleware('auth')->group(function () {
         Route::delete('destroy/{announcement}', 'destroy')->name('announcement.destroy');
     })->middleware(['role:admin', 'role:staff']);
 
-
+    Route::controller(OwnerInfoController::class)->prefix('owner-info')->group(function () {
+        Route::get('/', 'index')->name('owner-info.index');
+        Route::get('/edit{id}', 'personal')->name('owner-info.edit');
+        Route::post('/store', 'store')->name('owner-info.store');
+        Route::get('/livelihood', 'livelihood')->name('owner-info.livelihood');
+    });
 });

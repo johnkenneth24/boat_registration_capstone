@@ -1,169 +1,96 @@
 @extends('layouts.app')
 
-@section('title', 'Owner Information')
+@section('styles')
+    <style>
+        tr th {
+            /* text-align: right; */
+            width: 20%;
+            /* display: flex; */
+            /* align-items: center; */
+        }
+    </style>
+@endsection
 
 @section('content')
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card card-outline card-warning mt-5">
-                        <form action="{{ route('owner-info.store') }}" method="post">
-                            <div class="card-body mt-0">
-                                <div class="row border border-secondary">
-                                    <div class="col-md-12 mt-0 mb-2 py-1 bg-dark">
-                                        <h6 class="font-weight-bolder text-white m-0">Personal Information</h6>
-                                    </div>
-                                    <div class="form-group col-md-1">
-                                        <label>Salutation</label>
-                                        <select name="salutation" class="form-control form-control-sm">
-                                            <option value="">----</option>
-                                            @foreach ($salutations as $salutation)
-                                                <option value="{{ $salutation }}" @selected(old('salutation') == $salutation)>
-                                                    {{ $salutation }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Lastname</label>
-                                        <input type="text" name="lastname" class="form-control form-control-sm"
-                                            placeholder="Last Name (e.g., De la Cruz)" required>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Firstname</label>
-                                        <input type="text" name="firstname" class="form-control form-control-sm"
-                                            placeholder="First Name (e.g., Juan)" required>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Middlename</label>
-                                        <input type="text" name="middlename" class="form-control form-control-sm"
-                                            placeholder="Middle Name (e.g., Dalisay)">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Suffix</label>
-                                        <select name="suffix" class="form-control form-control-sm">
-                                            <option value="">--Please Select--</option>
-                                            @foreach ($suffixes as $suffix)
-                                                <option value="{{ $suffix }}" @selected(old('suffix') == $suffix)>
-                                                    {{ $suffix }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Address</label>
-                                        <input type="text" name="address" class="form-control form-control-sm"
-                                            placeholder="Enter Address (House/St. No, Brgy, Municipality, Province/City)"
-                                            required>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Resident since</label>
-                                        <input type="month" name="resident_since" class="form-control form-control-sm"
-                                            required>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Nationality</label>
-                                        <input type="text" name="nationality" class="form-control form-control-sm"
-                                            placeholder="Enter your Nationality" required>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Gender</label>
-                                        <select name="gender" class="form-control form-control-sm" required>
-                                            <option value="">--Select--</option>
-                                            @foreach ($genders as $gender)
-                                                <option value="{{ $gender }}" @selected(old('gender') == $gender)>
-                                                    {{ $gender }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Civil Status</label>
-                                        <select name="civil_status" class="form-control form-control-sm" required>
-                                            <option value="">--Select--</option>
-                                            @foreach ($civil_status as $civil_status)
-                                                <option value="{{ $civil_status }}" @selected(old('civil_status') == $civil_status)>
-                                                    {{ $civil_status }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Contact No.</label>
-                                        <input type="text" name="contact_no" class="form-control form-control-sm"
-                                            placeholder="Enter Contact No." required>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Birthdate</label>
-                                        <input type="date" name="birthdate" class="form-control form-control-sm bdate"
-                                            value="{{ old('birthdate') }}">
-                                    </div>
-                                    <div class="form-group col-md-1">
-                                        <label>Age</label>
-                                        <input type="number" name="age" class="form-control form-control-sm age"
-                                            value="{{ old('age') }}" readonly placeholder="0">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Birthplace</label>
-                                        <input type="text" name="birthplace" class="form-control form-control-sm"
-                                            value="{{ old('birthplace') }}" placeholder="Enter Birthplace" required>
-                                    </div>
-                                    <div class="form-group col-md-4" id="educ">
-                                        <label>Educational Background</label>
-                                        <select name="educational_background" required id="educational_background"
-                                            class="form-control form-control-sm">
-                                            <option value="">--Please select--</option>
-                                            @foreach ($educ_bcc as $educ)
-                                                <option value="{{ $educ }}" @selected(old('educational_background') == $educ)>
-                                                    {{ $educ }}</option>
-                                            @endforeach
-                                            <option value="Others">Others (Please specify)
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-4" id="otherEducationalBackground" style="display: none;">
-                                        <label>Specify Other Educational Background</label>
-                                        <input type="text" name="other_educational_background"
-                                            class="form-control form-control-sm">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Number of Children</label>
-                                        <input type="number" name="children_count" class="form-control form-control-sm">
-                                    </div>
-                                    <div class="col-md-12 my-0">
-                                        <small class="text-muted font-italic">
-                                            *Please input your emergency contact information below
-                                        </small>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Emergency contact person</label>
-                                        <input type="text" name="emergency_contact_name"
-                                            class="form-control form-control-sm"
-                                            placeholder="Enter Name of emergency contact">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Relationship</label>
-                                        <input type="text" name="emergency_contact_relationship"
-                                            class="form-control form-control-sm" placeholder="Enter Relationship">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Contact No.</label>
-                                        <input type="text" name="emergency_contact_number"
-                                            class="form-control form-control-sm"
-                                            placeholder="Contact No. of emergency contact">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>Address</label>
-                                        <input type="text" name="emergency_contact_address"
-                                            class="form-control form-control-sm"
-                                            placeholder="Address of emergency contact">
-                                    </div>
+                    <div class="card mt-5">
+                        <div class="card-body mt-0">
+                            <div class="row border border-secondary">
+                                <div class="col-md-12 mt-0 mb-2 py-1 bg-dark">
+                                    <h6 class="font-weight-bolder text-white m-0">Personal Information</h6>
+                                </div>
+                                <div class="col-md-4 d-none d-md-block">
+                                    <img src="{{ asset('images/per.png') }}" class="img-fluid mt-4 px-3" alt="personal info"
+                                        title="Derived from: https://www.flaticon.com/free-icons/personal-information">
+                                </div>
+                                <div class="col-md-8">
+                                    <table class="table table-sm table-borderless table-hover table-responsive-sm">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Fullname:</th>
+                                                <td>
+                                                    {{ $ownerInfo->full_name ?? '<empty/>' }}
+                                                </td>
+                                                <th scope="row">Gender:</th>
+                                                <td>{{ $ownerInfo->gender ?? '<empty/>' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Address:</th>
+                                                <td>{{ $ownerInfo->address ?? '<empty/>' }}</td>
+                                                <th scope="row">Resident Since:</th>
+                                                <td>{{ $ownerInfo?->resident_since?->format('F Y') ?? '<empty/>' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Nationality:</th>
+                                                <td>{{ $ownerInfo->nationality ?? '<empty/>' }}</td>
+                                                <th scope="row">Civil Status:</th>
+                                                <td>{{ $ownerInfo->civil_status ?? '<empty/>' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Contact Number:</th>
+                                                <td>{{ $ownerInfo->contact_no ?? '<empty/>' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Birthdate:</th>
+                                                <td>{{ $ownerInfo?->birthdate?->format('F d, Y') ?? '<empty/>' }}</td>
+                                                <th scope="row">Age:</th>
+                                                <td>{{ $ownerInfo->age ?? '<empty/>' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Birthplace:</th>
+                                                <td>{{ $ownerInfo->birthplace ?? '<empty/>' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Educational Background:</th>
+                                                <td>{{ $ownerInfo->educ_background ?? '<empty/>' }}</td>
+                                                <th scope="row">No. of Children:</th>
+                                                <td>{{ $ownerInfo->children_count ?? '<empty/>' }}</td>
+                                            </tr>
+                                            <tr class="table-danger">
+                                                <th scope="row">Emergency contact person:</th>
+                                                <td>{{ $ownerInfo->emContact_person ?? '<empty/>' }}</td>
+                                                <th scope="row">Relationship</th>
+                                                <td>{{ $ownerInfo->emRelationship ?? '<empty/>' }}</td>
+                                            </tr>
+                                            <tr class="table-danger">
+                                                <th scope="row">Contact no.:</th>
+                                                <td>{{ $ownerInfo->emContact_no ?? '<empty/>' }}</td>
+                                                <th scope="row">Address</th>
+                                                <td>{{ $ownerInfo->emAddress ?? '<empty/>' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {{-- insert button --}}
+                                <div class="col-md-12 text-right">
+                                    <a href="{{ route('owner-info.edit', $ownerInfo->id ?? auth()->user()->id) }}"
+                                        class="btn btn-sm btn-primary">Edit</a>
                                 </div>
                             </div>
-                            <div class="card-footer d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary col-md-3">Next</button>
-                            </div>
-                            {{-- <div class="overlay dark">
-                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                        </div> --}}
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -171,20 +98,18 @@
     </div>
 @endsection
 
-@section('scripts')
-    <script>
-        const $educ_select = document.querySelector('#educational_background');
-        const $other_educ = document.querySelector('#otherEducationalBackground');
-        const $educ = document.querySelector('#educ');
+{{-- <div class="mb-0">
+                                                    <label>Fullname: <span class="font-weight-normal">
+                                                            {{ implode(' ', array_filter([$ownerInfo->salutation, $ownerInfo->first_name, $ownerInfo->middle_name, $ownerInfo->last_name, $ownerInfo->suffix])) }}
+                                                        </span></label>
+                                                </div>                                               <div class="col-md-3"><label>Address:</label></div>
+                                                <div class="col-md-9">{{ $ownerInfo->address }}</div>
+                                                <div class="col-md-3"><label>Resident since:</label></div>
+                                                <div class="col-md-9">{{ $ownerInfo->resident_since->format('F Y') }}</div>
 
-        $educ_select.addEventListener('change', function() {
-            if (this.value === 'Others') {
-                $other_educ.style.display = 'block';
-                $other_educ.querySelector('input').setAttribute('required', true);
-            } else {
-                $other_educ.style.display = 'none';
-                $other_educ.querySelector('input').removeAttribute('required');
-            }
-        });
-    </script>
-@endsection
+                                                <div class="col-md-5"><label>Gender:</label></div>
+                                                <div class="col-md-7">{{ $ownerInfo->gender }}</div>
+                                                <div class="col-md-5"><label>Educational Background:</label></div>
+                                                <div class="col-md-7">{{ $ownerInfo->educ_background }}</div>
+                                                <div class="col-md-5"><label>Nationality:</label></div>
+                                                <div class="col-md-7">{{ $ownerInfo->nationality }}</div> --}}

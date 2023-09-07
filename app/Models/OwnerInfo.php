@@ -36,7 +36,13 @@ class OwnerInfo extends Model
 
     protected $casts = [
         'birthdate' => 'date',
+        'resident_since' => 'datetime:Y-m',
     ];
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->salutation} {$this->first_name} {$this->middle_name} {$this->last_name} {$this->suffix}";
+    }
 
     public function user()
     {
@@ -46,6 +52,11 @@ class OwnerInfo extends Model
     public function boat()
     {
         return $this->belongsTo(Boat::class);
+    }
+
+    public function livelihood()
+    {
+        return $this->hasOne(Livelihood::class);
     }
 
 }
