@@ -161,8 +161,6 @@
     <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
     <script src="{{ asset('css/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
-    @yield('scripts')
-
     {{--  make the overlay to disappear after 2 seconds --}}
     <script>
         setTimeout(function() {
@@ -255,6 +253,8 @@
             });
         });
     </script>
+
+    @yield('scripts')
 
 </body>
 

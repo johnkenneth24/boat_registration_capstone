@@ -59,6 +59,7 @@
             height: 100vh;
         }
     </style>
+    @yield('styles')
 </head>
 
 <body class="hold-transition login-page">
@@ -68,8 +69,10 @@
 
     <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="{{ asset('bs5/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
     <script src="{{ asset('css/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
+    @yield('scripts')
     {{--  make the overlay to disappear after 2 seconds --}}
     <script>
         setTimeout(function() {

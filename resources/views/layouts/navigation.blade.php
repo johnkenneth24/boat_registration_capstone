@@ -24,12 +24,12 @@
                     </a>
                 </li>
             @endrole
-            <li class="nav-item {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
+            {{-- <li class="nav-item {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
                 <a href="{{ route('reg-boat.index') }}" class="nav-link">
                     <i class="nav-icon fa fa-ship" aria-hidden="true"></i>
                     <p>Boat Registration</p>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item {{-- request()->routeIs('applist.*')?'nav-item-active':'' --}}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fa fa-users" aria-hidden="true"></i>
@@ -37,39 +37,53 @@
                         <i class="right fas fa-angle-right"></i>
                     </p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item pl-3 pr-0 ">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-check-circle" aria-hidden="true"></i>
-                            <p>Registered Owners</p>
-                        </a>
-                    </li>
-                    <li class="nav-item pl-3 pr-0 ">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            <p>Pending Registration</p>
-                        </a>
-                    </li>
-                </ul>
+                @role('user')
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item pl-3 pr-0 ">
+                            <a href="{{ route('owner-info.index') }}" class="nav-link">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                <p>My information</p>
+                            </a>
+                        </li>
+                    </ul>
+                @endrole
+                @unlessrole('user')
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item pl-3 pr-0 ">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                <p>Registered Owners</p>
+                            </a>
+                        </li>
+                        <li class="nav-item pl-3 pr-0 ">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                <p>Pending Registration</p>
+                            </a>
+                        </li>
+                    </ul>
+                @endunlessrole
             </li>
             <li class="nav-item {{ request()->routeIs(['reged-boat.*']) ? 'nav-item-active' : '' }}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fa fa-file-alt" aria-hidden="true"></i>
-                    <p>Boat Information<i class="right fas fa-angle-right"></i></p>
+                    <p>Boat Registration<i class="right fas fa-angle-right"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
-                    <li class="nav-item pl-3 pr-0  {{ request()->routeIs('reged-boat.*') ? 'nav-item-active' : '' }}">
-                        <a href="{{ route('reged-boat.index') }}" class="nav-link">
-                            <i class="fa fa-check-circle" aria-hidden="true"></i>
-                            <p>Registered Boat</p>
+                    <li class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
+                        <a href="{{ route('reg-boat.index') }}" class="nav-link">
+                            <i class="fa fa-ship" aria-hidden="true"></i>
+                            <p>Register Boat</p>
                         </a>
                     </li>
-                    <li class="nav-item pl-3 pr-0 ">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            <p>Pending Registration</p>
-                        </a>
-                    </li>
+                    @unlessrole('user')
+                        <li class="nav-item pl-3 pr-0 ">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                <p>Pending Registration</p>
+                            </a>
+                        </li>
+                    @endunlessrole
                 </ul>
             </li>
         </ul>
