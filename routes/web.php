@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnnouncementsController;
-use App\Http\Controllers\ApplicantListController;
+use App\Http\Controllers\OwnerInfoController;
 use App\Http\Controllers\RegisterBoatController;
 use App\Http\Controllers\RegisteredBoatController;
 use Illuminate\Support\Facades\Auth;
@@ -30,8 +30,8 @@ Route::middleware('auth')->group(function () {
             Route::delete('destroy/{id}', 'UserController@destroy')->name('users.destroy');
         });
 
-        Route::get('profile', 'UserController@profile')->name('users.profile');
-        Route::put('profile/{id}', 'UserController@profileUpdate')->name('users.profileUpdate');
+        Route::get('profile', 'profile')->name('users.profile');
+        Route::put('profile/{id}', 'profileUpdate')->name('users.profileUpdate');
     });
 
     Route::controller(RegisterBoatController::class)->prefix('reg-boat')->group(function () {
@@ -68,5 +68,6 @@ Route::middleware('auth')->group(function () {
         Route::put('update/{announcement}', 'update')->name('announcement.update');
         Route::delete('destroy/{announcement}', 'destroy')->name('announcement.destroy');
     })->middleware(['role:admin', 'role:staff']);
+
 
 });

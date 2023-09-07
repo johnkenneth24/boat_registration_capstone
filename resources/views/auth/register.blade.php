@@ -56,25 +56,24 @@
                             @enderror
                         </div>
                         <div class="form-group mb-2 mt-4">
-                            <div class="input-group mb-3">
+                            <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                <input type="password" name="password"
-                                    class="form-control @error('password') is-invalid @enderror"
-                                    value="{{ old('password') }}" autocomplete="password" required placeholder="Password">
+                                <input type="password" name="password" id="password" placeholder="Password"
+                                    class="form-control" autocomplete="new-password" value="{{ old('password') }}" required>
+                                <button type="button" class="btn btn-sm btn-light" id="showPasswordBtn">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </div>
-                            @error('password')
-                                <div class="invalid-feedback" style="display: inline-block !important;">
-                                    {{ $message }}
-                                </div>
-                            @enderror
                         </div>
                         <div class="form-group mb-2 mt-4">
-                            <div class="input-group mb-3">
+                            <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                <input type="password" name="password_confirmation"
-                                    class="form-control @error('password_confirmation') is-invalid @enderror"
-                                    value="{{ old('password_confirmation') }}" autocomplete="new-password" required
-                                    placeholder="Password Confirmation">
+                                <input type="password" name="password_confirmation" placeholder="Confirm Password"
+                                    id="passwordConfirmation" autocomplete="new-password"
+                                    class="form-control @error('password_confirmation') is-invalid @enderror" required>
+                                <button type="button" class="btn btn-sm btn-light" id="showPasswordConfirmationBtn">
+                                    <i class="fas fa-eye"></i>
+                                </button>
                             </div>
                             @error('password_confirmation')
                                 <div class="invalid-feedback" style="display: inline-block !important;">
@@ -100,4 +99,49 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        const passwordField = document.getElementById('password');
+        const passwordConfirmationField = document.getElementById('passwordConfirmation');
+        const showPasswordBtn = document.getElementById('showPasswordBtn');
+        const showPasswordConfirmationBtn = document.getElementById('showPasswordConfirmationBtn');
+
+        showPasswordBtn.addEventListener('click', function() {
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                showPasswordBtn.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+                passwordField.type = 'password';
+                showPasswordBtn.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+        });
+
+        showPasswordConfirmationBtn.addEventListener('click', function() {
+            if (passwordConfirmationField.type === 'password') {
+                passwordConfirmationField.type = 'text';
+                showPasswordConfirmationBtn.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+                passwordConfirmationField.type = 'password';
+                showPasswordConfirmationBtn.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+        });
+
+        passwordField.addEventListener('input', function() {
+            if (passwordField.value !== passwordConfirmationField.value) {
+                passwordConfirmationField.classList.add('is-invalid');
+            } else {
+                passwordConfirmationField.classList.remove('is-invalid');
+            }
+        });
+
+        passwordConfirmationField.addEventListener('input', function() {
+            if (passwordField.value !== passwordConfirmationField.value) {
+                passwordConfirmationField.classList.add('is-invalid');
+            } else {
+                passwordConfirmationField.classList.remove('is-invalid');
+            }
+        });
+    </script>
 @endsection
