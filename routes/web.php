@@ -74,5 +74,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit{id}', 'personal')->name('owner-info.edit');
         Route::post('/store', 'store')->name('owner-info.store');
         Route::get('/livelihood', 'livelihood')->name('owner-info.livelihood');
+        Route::post('/storelivelihood', 'livelihoodStore')->name('owner-info.livelihoodStore');
     });
 });

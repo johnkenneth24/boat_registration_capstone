@@ -11,7 +11,7 @@ class Livelihood extends Model
 
     protected $fillable = [
         'user_id',
-        'income_sources',
+        'source_of_income',
         'gear_used',
         'culture_method',
         'specify',

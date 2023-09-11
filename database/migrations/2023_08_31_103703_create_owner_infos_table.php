@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('emRelationship')->nullable();
             $table->string('emContact_no')->nullable();
             $table->string('emAddress')->nullable();
-            $table->string('status')->default('pemding');
+            $table->string('status')->default('pending');
             $table->softDeletes();
             $table->timestamps();
         });

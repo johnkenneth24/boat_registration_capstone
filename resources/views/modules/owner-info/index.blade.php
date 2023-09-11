@@ -22,64 +22,64 @@
                                 <div class="col-md-12 mt-0 mb-2 py-1 bg-dark">
                                     <h6 class="font-weight-bolder text-white m-0">Personal Information</h6>
                                 </div>
-                                <div class="col-md-4 d-none d-md-block">
+                                <div class="col-md-3 d-none d-md-block">
                                     <img src="{{ asset('images/per.png') }}" class="img-fluid mt-4 px-3" alt="personal info"
                                         title="Derived from: https://www.flaticon.com/free-icons/personal-information">
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <table class="table table-sm table-borderless table-hover table-responsive-sm">
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Fullname:</th>
                                                 <td>
-                                                    {{ $ownerInfo->full_name ?? '<empty/>' }}
+                                                    {{ $ownerInfo->full_name ?? '' }}
                                                 </td>
                                                 <th scope="row">Gender:</th>
-                                                <td>{{ $ownerInfo->gender ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->gender ?? '' }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Address:</th>
-                                                <td>{{ $ownerInfo->address ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->address ?? '' }}</td>
                                                 <th scope="row">Resident Since:</th>
-                                                <td>{{ $ownerInfo?->resident_since?->format('F Y') ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo?->resident_since?->format('F Y') ?? '' }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Nationality:</th>
-                                                <td>{{ $ownerInfo->nationality ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->nationality ?? '' }}</td>
                                                 <th scope="row">Civil Status:</th>
-                                                <td>{{ $ownerInfo->civil_status ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->civil_status ?? '' }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Contact Number:</th>
-                                                <td>{{ $ownerInfo->contact_no ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->contact_no ?? '' }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Birthdate:</th>
-                                                <td>{{ $ownerInfo?->birthdate?->format('F d, Y') ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo?->birthdate?->format('F d, Y') ?? '' }}</td>
                                                 <th scope="row">Age:</th>
-                                                <td>{{ $ownerInfo->age ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->age ?? '' }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Birthplace:</th>
-                                                <td>{{ $ownerInfo->birthplace ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->birthplace ?? '' }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Educational Background:</th>
-                                                <td>{{ $ownerInfo->educ_background ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->educ_background ?? '' }}</td>
                                                 <th scope="row">No. of Children:</th>
-                                                <td>{{ $ownerInfo->children_count ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->children_count ?? 'none' }}</td>
                                             </tr>
                                             <tr class="table-danger">
                                                 <th scope="row">Emergency contact person:</th>
-                                                <td>{{ $ownerInfo->emContact_person ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->emContact_person ?? '' }}</td>
                                                 <th scope="row">Relationship</th>
-                                                <td>{{ $ownerInfo->emRelationship ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->emRelationship ?? '' }}</td>
                                             </tr>
                                             <tr class="table-danger">
                                                 <th scope="row">Contact no.:</th>
-                                                <td>{{ $ownerInfo->emContact_no ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->emContact_no ?? '' }}</td>
                                                 <th scope="row">Address</th>
-                                                <td>{{ $ownerInfo->emAddress ?? '<empty/>' }}</td>
+                                                <td>{{ $ownerInfo->emAddress ?? '' }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -87,7 +87,7 @@
                                 {{-- insert button --}}
                                 <div class="col-md-12 text-right">
                                     <a href="{{ route('owner-info.edit', $ownerInfo->id ?? auth()->user()->id) }}"
-                                        class="btn btn-sm btn-primary">Edit</a>
+                                        class="btn col-md-2 mb-2 btn-primary">Edit</a>
                                 </div>
                             </div>
                         </div>
@@ -97,19 +97,3 @@
         </div>
     </div>
 @endsection
-
-{{-- <div class="mb-0">
-                                                    <label>Fullname: <span class="font-weight-normal">
-                                                            {{ implode(' ', array_filter([$ownerInfo->salutation, $ownerInfo->first_name, $ownerInfo->middle_name, $ownerInfo->last_name, $ownerInfo->suffix])) }}
-                                                        </span></label>
-                                                </div>                                               <div class="col-md-3"><label>Address:</label></div>
-                                                <div class="col-md-9">{{ $ownerInfo->address }}</div>
-                                                <div class="col-md-3"><label>Resident since:</label></div>
-                                                <div class="col-md-9">{{ $ownerInfo->resident_since->format('F Y') }}</div>
-
-                                                <div class="col-md-5"><label>Gender:</label></div>
-                                                <div class="col-md-7">{{ $ownerInfo->gender }}</div>
-                                                <div class="col-md-5"><label>Educational Background:</label></div>
-                                                <div class="col-md-7">{{ $ownerInfo->educ_background }}</div>
-                                                <div class="col-md-5"><label>Nationality:</label></div>
-                                                <div class="col-md-7">{{ $ownerInfo->nationality }}</div> --}}
