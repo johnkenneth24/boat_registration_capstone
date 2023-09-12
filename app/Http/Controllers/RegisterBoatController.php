@@ -80,6 +80,7 @@ class RegisterBoatController extends Controller
 
         $owners = Boat::create([
             'user_id' => auth()->user()->id,
+            'register_boat_id' => $form1->id,
             'owner_id' => $validated['owner_id'],
             'boat_type' => $validated['vessel_type'],
             'vessel_name' => $validated['vessel_name'],
