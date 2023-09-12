@@ -24,12 +24,6 @@
                     </a>
                 </li>
             @endrole
-            {{-- <li class="nav-item {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
-                <a href="{{ route('reg-boat.index') }}" class="nav-link">
-                    <i class="nav-icon fa fa-ship" aria-hidden="true"></i>
-                    <p>Boat Registration</p>
-                </a>
-            </li> --}}
             <li class="nav-item {{ request()->routeIs(['owner-info.*']) ? 'nav-item-active' : '' }}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fa fa-users" aria-hidden="true"></i>

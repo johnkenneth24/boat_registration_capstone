@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/reg-boat', 'create')->name('reg-boat.create');
         Route::post('/storeBoat', 'regBoat')->name('reg-boat.store');
         Route::get('/pendingBoats', 'pendingRegBoats')->name('reg-boat.pending');
+        Route::get('/edit/{id}', 'edit')->name('reg-boat.edit');
+        Route::put('/update/{id}', 'update')->name('reg-boat.update');
+        Route::get('/show/{id}', 'show')->name('reg-boat.show');
 
         Route::get('/process', 'process_registration')->name('reg-boat.process');
 

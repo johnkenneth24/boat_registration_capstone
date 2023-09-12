@@ -97,58 +97,44 @@ class RegisterBoatController extends Controller
         return redirect()->route('reg-boat.index')->with('success', 'Boat record added. Please wait for confirmation regarding your registration!');
     }
 
-    public $source_of_income = [
-        'Capture Fishing',
-        'Aquaculture',
-        'Fish Vending',
-        'Gleaning',
-        'Fish Processing',
-        'Other',
-    ];
+    public function edit($id)
+    {
+        $boatReg = RegisterBoat::with('boat')->find($id);
 
-    // public function createForm2(Request $request)
-    // {
-    //     $form1_id = $request->session()->get('form1_id');
-    //     $source_of_income = $this->source_of_income;
+        return view('modules.register-boat.edit', compact('boatReg'));
+    }
 
-    //     $regBoat = RegisterBoat::find($form1_id);
-    //     // dd($regBoat);
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'vessel_name' => 'required',
+            'vessel_type' => 'required',
+            'horsepower' => 'required',
+            'color' => 'required',
+            'length' => 'required',
+            'breadth' => 'required',
+            'depth' => 'required',
+            'body_number' => 'required',
+            'materials_used' => 'required',
+            'year_built' => 'required',
+            'gross_tonnage' => 'required',
+        ]);
 
-    //     return view('modules.register-boat.form2Livelihood', compact('source_of_income', 'regBoat'));
-    // }
+        // dd($validated);
 
-    // public function storeForm2(Form2Request $request)
-    // {
-    //     $validated = $request->validated();
-    //     // dd($validated);
+        $boat = Boat::with('registerBoat')->where('register_boat_id', $id)->first();
+        // dd($boat);
+        $boat->update($validated);
 
-    //     $owner = Owners::where('register_boat_id', $validated['form1_id'])->first();
+        return redirect()->route('reg-boat.index')->with('success', 'Boat record updated. Please wait for confirmation regarding your registration!');
+    }
 
-    //     // $regBoat = RegisterBoat::findOrFail($validated['form1_id']);
+    public function show($id)
+    {
+        $boatReg = RegisterBoat::with('boat')->find($id);
 
-    //     $owner->source_of_income = serialize($validated['income_sources']);
-    //     // $owner->gear_used = $validated['gear_used'];
-    //     // $owner->culture_method = $validated['culture_method'];
-    //     // $owner->specify = $validated['specify'];
-    //     $owner->other_source = serialize($validated['other_income_sources']);
-    //     // $owner->gear_used_os = $validated['gear_used_os'];
-    //     // $owner->culture_method_os = $validated['culture_method_os'];
-    //     // $owner->specify_os = $validated['specify_os'];
-    //     $owner->org_name = $validated['org_name'];
-    //     $owner->member_since = $validated['member_since'];
-    //     $owner->position = $validated['position'];
-    //     $owner->save();
-
-    //     return redirect(route('reg-boat.index'))->with('success', 'Successfully Registered');
-    // }
-
-    // public function confirmForm(Request $request)
-    // {
-    //     $form1_id = $request->session()->get('form1_id');
-    //     $regBoat = RegisterBoat::with('owner')->find($form1_id);
-
-    //     return view('modules.register-boat.confirmForm', compact('regBoat'));
-    // }
+        return view('modules.register-boat.view', compact('boatReg'));
+    }
 
     public function sample()
     {

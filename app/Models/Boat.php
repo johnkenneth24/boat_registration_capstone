@@ -36,4 +36,9 @@ class Boat extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function registerBoat()
+    {
+        return $this->belongsTo(Boat::class);
+    }
+
 }

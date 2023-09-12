@@ -44,8 +44,9 @@
                                 <a href="{{ route('reg-boat.index') }}" class="btn btn-danger">Cancel</a>
                             </div> --}}
                         </div>
-                        <form action="{{ route('reg-boat.store') }}" method="post">
+                        <form method="post">
                             @csrf
+                            @method('PUT')
                             <div class="card-body mt-0">
                                 {{-- <div class="d-flex justify-content-center mb-3">
                                     <div class="progresses">
@@ -62,7 +63,7 @@
                                     <div class="col-md-12 mt-0 mb-2  pt-0 pb-1 bg-dark">
                                         <h6 class="font-weight-bolder text-white m-0">Registration</h6>
                                     </div>
-                                    <input type="hidden" name="owner_id" value="{{ $ownerInfo?->id ?: '' }}">
+                                    {{-- <input type="hidden" name="owner_id" value="{{ $boatReg?->owner_id }}"> --}}
                                     <div class="form-group col-md-6">
                                         <label>Registration Number</label>
                                         <div class="input-group input-group-sm">
@@ -70,14 +71,14 @@
                                                 <span class="input-group-text">IMS -</span>
                                             </div>
                                             <input type="text" name="registration_no"
-                                                class="form-control form-control-sm" readonly required
-                                                value="{{ $latestregNo }}">
+                                                class="form-control form-control-sm" readonly
+                                                value="{{ $boatReg->registration_no }}">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Registration Date</label>
                                         <input type="date" name="registration_date" class="form-control form-control-sm"
-                                            readonly value="{{ date('Y-m-d') }}">
+                                            readonly value="{{ $boatReg->registration_date }}">
                                     </div>
                                     <div class="col-md-12 mt-1 mb-2 py-1 bg-dark">
                                         <h6 class="font-weight-bolder text-white m-0">Boat Details</h6>
@@ -86,8 +87,8 @@
                                         <label>Name of Fishing Vessel <span class="text-danger">*</span></label>
                                         <input type="text" name="vessel_name"
                                             class="form-control form-control-sm @error('vessel_name') is-invalid @enderror"
-                                            value="{{ old('vessel_name') }}" placeholder="Vessel Name (e.g., M.V. Gregorio)"
-                                            required>
+                                            value="{{ $boatReg->boat->vessel_name }}"
+                                            placeholder="Vessel Name (e.g., M.V. Gregorio)" readonly>
                                         @error('vessel_name')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -96,10 +97,11 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label>Type of Fishing Vessel <span class="text-danger">*</span></label>
-                                        <select name="vessel_type" required class="form-control form-control-sm">
+                                        <select name="vessel_type" disabled class="form-control form-control-sm">
                                             <option value="">--Please Select--</option>
-                                            <option value="Motorized">Motorized</option>
-                                            <option value="Non-Motorized">Non-Motorized</option>
+                                            <option value="Motorized" @selected($boatReg->boat->boat_type == 'Motorized')>Motorized</option>
+                                            <option value="Non-Motorized" @selected($boatReg->boat->boat_type == 'Non-Motorized')>Non-Motorized
+                                            </option>
                                         </select>
                                         @error('vessel_type')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
@@ -108,11 +110,11 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label>Horsepower <span class="font-italic fw-normal">(required for Motorized Vessel
+                                        <label>Horsepower <span class="font-italic fw-normal">(readonly for Motorized Vessel
                                                 only)</span></label>
-                                        <input type="text" name="horsepower"
+                                        <input type="text" name="horsepower" readonly
                                             class="form-control form-control-sm @error('horsepower') is-invalid @enderror"
-                                            value="{{ old('horsepower') }}" placeholder="Horsepower (e.g., 100HP)">
+                                            value="{{ $boatReg->boat->horsepower }}" placeholder="Horsepower (e.g., 100HP)">
                                         @error('horsepower')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -126,8 +128,8 @@
                                         <label>Body Number <span class="text-danger">*</span></label>
                                         <input type="text" name="body_number"
                                             class="form-control form-control-sm @error('body_number') is-invalid @enderror"
-                                            value="{{ old('body_number') }}" placeholder="Body number of the Vessel"
-                                            required>
+                                            value="{{ $boatReg->boat->body_number }}"
+                                            placeholder="Body number of the Vessel" readonly>
                                         @error('body_number')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -138,8 +140,8 @@
                                         <label>Color <span class="text-danger">*</span></label>
                                         <input type="text" name="color"
                                             class="form-control form-control-sm @error('color') is-invalid @enderror"
-                                            value="{{ old('color') }}" placeholder="Color (e.g., gray, dark-blue, yellow)"
-                                            required>
+                                            value="{{ $boatReg->boat->color }}"
+                                            placeholder="Color (e.g., gray, dark-blue, yellow)" readonly>
                                         @error('color')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -150,8 +152,8 @@
                                         <label>Length <span class="text-danger">*</span></label>
                                         <input type="text" name="length"
                                             class="form-control form-control-sm @error('length') is-invalid @enderror"
-                                            value="{{ old('length') }}" placeholder="Length of the Vessel (in meters)"
-                                            required>
+                                            value="{{ $boatReg->boat->length }}"
+                                            placeholder="Length of the Vessel (in meters)" readonly>
                                         @error('length')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -162,7 +164,8 @@
                                         <label>Breadth <span class="text-danger">*</span></label>
                                         <input type="text" name="breadth"
                                             class="form-control form-control-sm @error('breadth') is-invalid @enderror"
-                                            value="{{ old('breadth') }}" placeholder="Breadth of the Vessel" required>
+                                            value="{{ $boatReg->boat->breadth }}" placeholder="Breadth of the Vessel"
+                                            readonly>
                                         @error('breadth')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -173,7 +176,7 @@
                                         <label>Depth <span class="text-danger">*</span></label>
                                         <input type="text" name="depth"
                                             class="form-control form-control-sm @error('depth') is-invalid @enderror"
-                                            value="{{ old('depth') }}" placeholder="Depth of the Vessel" required>
+                                            value="{{ $boatReg->boat->depth }}" placeholder="Depth of the Vessel" readonly>
                                         @error('depth')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -184,8 +187,8 @@
                                         <label>Gross Tonnage <span class="text-danger">*</span></label>
                                         <input type="text" name="gross_tonnage"
                                             class="form-control form-control-sm @error('gross_tonnage') is-invalid @enderror"
-                                            value="{{ old('gross_tonnage') }}" placeholder="Gross Tonnage of the Vessel"
-                                            required>
+                                            value="{{ $boatReg->boat->gross_tonnage }}"
+                                            placeholder="Gross Tonnage of the Vessel" readonly>
                                         @error('gross_tonnage')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -196,8 +199,8 @@
                                         <label>Year Built <span class="text-danger">*</span></label>
                                         <input type="month" name="year_built"
                                             class="form-control form-control-sm @error('year_built') is-invalid @enderror"
-                                            value="{{ old('year_built') }}"
-                                            placeholder="Year Built when the vessel is built" required>
+                                            value="{{ $boatReg->boat->year_built }}"
+                                            placeholder="Year Built when the vessel is built" readonly>
                                         @error('year_built')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -209,7 +212,7 @@
                                         <textarea type="text" name="materials_used" rows="3"
                                             class="form-control form-control-sm
                                             @error('materials_used') is-invalid @enderror"
-                                            placeholder="Materials used in building the vessel" required>{{ old('materials_used') }}</textarea>
+                                            placeholder="Materials used in building the vessel" readonly>{{ $boatReg->boat->materials }}</textarea>
                                         @error('materials_used')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -219,13 +222,15 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
-                                <a href="{{ route('reg-boat.index') }}" class="btn btn-danger col-md-2 mr-2">Cancel</a>
-                                <button type="submit" class="btn btn-primary col-md-2">Submit</button>
+                                <a href="{{ route('reg-boat.index') }}" class="btn btn-primary col-md-2 mr-2">
+                                    <span><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+                                    Go Back</a>
+                                {{-- <button type="submit" class="btn btn-primary col-md-2">Submit</button> --}}
                             </div>
                         </form>
-                        {{-- <div class="overlay dark">
+                        <div class="overlay dark">
                             <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>

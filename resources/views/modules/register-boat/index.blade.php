@@ -50,11 +50,13 @@
                                                 <td>{{ $rBoats->status }}</td>
                                             @endrole
                                             <td class="">
-                                                <a href="{{ route('reg-boat.process') }}"
-                                                    class="btn btn-sm btn-info">Process</a>
-                                                <a href="" class="btn btn-sm btn-success">View</a>
-                                                <a href="" class="btn btn-sm btn-primary">Edit</a>
-                                                <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                                {{-- <a href="{{ route('reg-boat.process') }}"
+                                                    class="btn btn-sm btn-info">Process</a> --}}
+                                                <a href="{{ route('reg-boat.show', $rBoats->id) }}"
+                                                    class="btn btn-sm btn-success">View</a>
+                                                <a href="{{ route('reg-boat.edit', $rBoats->id) }}"
+                                                    class="btn btn-sm btn-primary">Edit</a>
+                                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                     @empty
