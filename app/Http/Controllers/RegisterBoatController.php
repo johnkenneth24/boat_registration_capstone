@@ -106,16 +106,16 @@ class RegisterBoatController extends Controller
         'Other',
     ];
 
-    public function createForm2(Request $request)
-    {
-        $form1_id = $request->session()->get('form1_id');
-        $source_of_income = $this->source_of_income;
+    // public function createForm2(Request $request)
+    // {
+    //     $form1_id = $request->session()->get('form1_id');
+    //     $source_of_income = $this->source_of_income;
 
-        $regBoat = RegisterBoat::find($form1_id);
-        // dd($regBoat);
+    //     $regBoat = RegisterBoat::find($form1_id);
+    //     // dd($regBoat);
 
-        return view('modules.register-boat.form2Livelihood', compact('source_of_income', 'regBoat'));
-    }
+    //     return view('modules.register-boat.form2Livelihood', compact('source_of_income', 'regBoat'));
+    // }
 
     // public function storeForm2(Form2Request $request)
     // {
