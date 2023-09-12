@@ -40,9 +40,6 @@
                             <div class="card-title">
                                 <h4 class="text-uppercase">Boat Registration</h4>
                             </div>
-                            {{-- <div class="card-tools">
-                                <a href="{{ route('reg-boat.index') }}" class="btn btn-danger">Cancel</a>
-                            </div> --}}
                         </div>
                         <form method="post">
                             @csrf
@@ -225,7 +222,6 @@
                                 <a href="{{ route('reg-boat.index') }}" class="btn btn-primary col-md-2 mr-2">
                                     <span><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
                                     Go Back</a>
-                                {{-- <button type="submit" class="btn btn-primary col-md-2">Submit</button> --}}
                             </div>
                         </form>
                         <div class="overlay dark">
@@ -237,7 +233,3 @@
         </div>
     </div>
 @endsection
-{{-- 
-@section('scripts')
-  
-@endsection --}}
