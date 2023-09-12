@@ -41,7 +41,7 @@
                                             <div class="form-group col-md-2">
                                                 <label>Role</label>
                                                 <input type="text" name="role" class="form-control form-control-sm"
-                                                    readonly value="{{ $user->roles }}">
+                                                    readonly value="{{ ucfirst($user->roles->first()->name) }}">
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label>Email</label>
@@ -111,7 +111,8 @@
                                     </div>
                                     <div class="card-footer d-flex justify-content-end">
                                         <a href="{{ route('users.index') }}"
-                                            class="btn btn-danger col-md-2 mr-2">Cancel</a>
+                                            class="btn btn-danger col-md-2 mr-2"><span><i
+                                                            class="fa fa-arrow-left" aria-hidden="true"></i></span>Cancel</a>
                                         <button type="submit" class="btn btn-primary col-md-2">Update</button>
                                     </div>
                                 </form>

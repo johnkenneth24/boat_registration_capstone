@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('boats', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('register_boats', function (Blueprint $table) {
+            $table->foreignId('owner_info_id')->nullable()->constrained('owner_infos')->onDelete('cascade');
         });
     }
 
@@ -22,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('boats');
+        Schema::table('register_boats', function (Blueprint $table) {
+            $table->dropForeign(['owner_info_id']);
+            $table->dropColumn('owner_info_id');
+        });
     }
 };

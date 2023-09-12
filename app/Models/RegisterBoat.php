@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\OwnerInfo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,10 +17,13 @@ class RegisterBoat extends Model
         'registration_date' => 'date',
     ];
 
-
-
-    public function owner()
+    public function ownerInfo()
     {
-        return $this->hasOne(Owners::class, 'register_boat_id');
+        return $this->belongsTo(OwnerInfo::class);
+    }
+
+    public function boat()
+    {
+        return $this->hasOne(Boat::class);
     }
 }

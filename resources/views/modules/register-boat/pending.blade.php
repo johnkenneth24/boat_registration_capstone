@@ -9,18 +9,10 @@
                     <div class="card mt-5">
                         <div class="card-header">
                             <div class="card-title">
-                                @role('user')
-                                    <h4>Boat Registration</h4>
-                                @endrole
                                 @role('staff')
-                                    <h4>Registered Boats</h4>
+                                    <h4>Pending Boat Registrations</h4>
                                 @endrole
                             </div>
-                            @role('user')
-                                <div class="card-tools">
-                                    <a href="{{ route('reg-boat.create') }}" class="btn btn-success">Create Registration</a>
-                                </div>
-                            @endrole
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-hover table-responsive-md  table-sm">
@@ -31,42 +23,39 @@
                                             <th>Owner</th>
                                         @endrole
                                         <th>Date of Registration</th>
-                                        @role('user')
-                                            <th>Status</th>
-                                        @endrole
-                                        <th>Action</th>
+                                        {{-- @role('user') --}}
+                                        <th>Status</th>
+                                        {{-- @endrole --}}
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($registeredBoats as $rBoats)
+                                    @forelse ($pendingBoats as $pBoats)
                                         <tr class="text-center align-middle">
-                                            <td>{{ $rBoats->registration_no }}</td>
+                                            <td>{{ $pBoats->registration_no }}</td>
                                             @role('staff')
-                                                <td>{{ $rBoats->ownerInfo->fullname }}</td>
+                                                <td>{{ $pBoats->ownerInfo->fullname }}</td>
                                             @endrole
 
-                                            <td>{{ date('M. d, Y', strtotime($rBoats->registration_date)) }}</td>
-                                            @role('user')
-                                                <td>{{ $rBoats->status }}</td>
-                                            @endrole
+                                            <td>{{ date('M. d, Y', strtotime($pBoats->registration_date)) }}</td>
+                                            <td>{{ $pBoats->status }}</td>
                                             <td class="">
-                                                <a href="{{ route('reg-boat.process') }}"
-                                                    class="btn btn-sm btn-info">Process</a>
-                                                <a href="" class="btn btn-sm btn-success">View</a>
-                                                <a href="" class="btn btn-sm btn-primary">Edit</a>
-                                                <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                                <a href="#" class="btn btn-sm btn-warning">Process</a>
+                                                <a href="#" class="btn btn-sm btn-success">View</a>
+                                                {{-- <a href="" class="btn btn-sm btn-primary">Edit</a> --}}
+                                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="4" class="text-center">No data available</td>
+                                            <td colspan="5" class="text-center">No data available</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
                             </table>
                         </div>
                         <div class="card-footer clearfix">
-                            {{ $registeredBoats->links() }}
+                            {{ $pendingBoats->links() }}
                         </div>
                     </div>
                 </div>

@@ -35,11 +35,12 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(RegisterBoatController::class)->prefix('reg-boat')->group(function () {
         Route::get('/', 'index')->name('reg-boat.index');
-        Route::get('/createForm1', 'createForm1')->name('form1.create');
-        Route::post('/storeForm1', 'storeForm1')->name('form1.store');
-        Route::get('/createForm2', 'createForm2')->name('form2.create');
-        Route::post('/storeForm2', 'storeForm2')->name('form2.store');
-        Route::get('/confirmForm', 'confirmForm')->name('form.confirm');
+        Route::get('/reg-boat', 'create')->name('reg-boat.create');
+        Route::post('/storeBoat', 'regBoat')->name('reg-boat.store');
+        Route::get('/pendingBoats', 'pendingRegBoats')->name('reg-boat.pending');
+        // Route::get('/createForm2', 'createForm2')->name('form2.create');
+        // Route::post('/storeForm2', 'storeForm2')->name('form2.store');
+        // Route::get('/confirmForm', 'confirmForm')->name('form.confirm');
         // Route::post('/storeForm3', 'storeForm3')->name('reg-boat3.store');
         Route::get('/sample', 'sample')->name('reg-boat.sample');
 
@@ -75,5 +76,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('owner-info.store');
         Route::get('/livelihood', 'livelihood')->name('owner-info.livelihood');
         Route::post('/storelivelihood', 'livelihoodStore')->name('owner-info.livelihoodStore');
+
+        Route::middleware(['role:admin|staff'])->group(function () {
+            Route::get('/registeredOwners', 'regOwners')->name('owner-info.registered-owners');
+            Route::get('/pendingOwners', 'pendingOwners')->name('owner-info.pending-owners');
+            Route::get('/approve/{id}', 'approve')->name('owner-info.approve');
+        });
+
     });
 });

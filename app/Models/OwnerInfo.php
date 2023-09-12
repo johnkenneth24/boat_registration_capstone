@@ -41,7 +41,13 @@ class OwnerInfo extends Model
 
     public function getFullNameAttribute()
     {
-        return "{$this->salutation} {$this->first_name} {$this->middle_name} {$this->last_name} {$this->suffix}";
+        $parts = [$this->salutation, $this->first_name, $this->middle_name, $this->last_name, $this->suffix];
+        $nonEmptyParts = array_filter($parts, function ($part) {
+            return !empty($part);
+        });
+
+        return implode(' ', $nonEmptyParts);
+
     }
 
     public function user()
@@ -59,4 +65,8 @@ class OwnerInfo extends Model
         return $this->hasOne(Livelihood::class);
     }
 
+    public function registerBoat()
+    {
+        return $this->hasMany(RegisterBoat::class);
+    }
 }

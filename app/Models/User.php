@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasOneThrough(Livelihood::class, OwnerInfo::class);
     }
+
+    // public function role()
+    // {
+    //     return $this->hasOne(Role::class);
+    // }
 }

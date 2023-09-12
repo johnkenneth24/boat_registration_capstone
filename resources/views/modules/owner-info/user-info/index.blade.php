@@ -16,6 +16,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <x-success></x-success>
+
                     <div class="card mt-5">
                         <div class="card-body mt-0">
                             <div class="row border border-secondary">

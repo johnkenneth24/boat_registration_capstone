@@ -35,7 +35,7 @@
                                             <div class="form-group col-md-3">
                                                 <label>Role</label>
                                                 <input type="text" name="role" class="form-control form-control-sm"
-                                                    readonly value="{{ $user->role }}">
+                                                    readonly value="{{ ucfirst($user->roles->first()->name) }}">
                                             </div>
                                             <div class="form-group col-md-9">
                                                 <label>Username</label>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Announcements;
-use App\Models\Owners;
+use App\Models\OwnerInfo;
 use App\Models\RegisterBoat;
 
 class HomeController extends Controller
@@ -28,10 +28,10 @@ class HomeController extends Controller
             $pendings = RegisterBoat::where('status', 'pending')->paginate(10);
         } else {
             $user_id = auth()->user()->id;
-            $pendings = RegisterBoat::with('owner')->where('user_id', $user_id)->where('status', 'pending')->paginate(10);
+            $pendings = RegisterBoat::where('user_id', $user_id)->where('status', 'pending')->paginate(10);
         }
 
-        $owners = Owners::all();
+        $owners = OwnerInfo::all();
         $ownerCount = $owners->count();
 
         $announcements = Announcements::all();

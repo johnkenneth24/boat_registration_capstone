@@ -21,26 +21,26 @@
                                             <option value="">----</option>
                                             @foreach ($salutations as $salutation)
                                                 <option value="{{ $salutation }}"
-                                                    {{ ($ownerInfo->salutation ?: old('salutation')) == $salutation ? 'selected' : '' }}>
+                                                    {{ ($ownerInfo?->salutation ?: old('salutation')) == $salutation ? 'selected' : '' }}>
                                                     {{ $salutation }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label>Lastname</label>
+                                        <label>Lastname <span class="text-danger">*</span></label>
                                         <input type="text" name="last_name" class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->last_name ?: old('last_name') }}"
                                             placeholder="Last Name (e.g., De la Cruz)" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label>Firstname</label>
+                                        <label>Firstname <span class="text-danger">*</span></label>
                                         <input type="text" name="first_name" class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->first_name ?: old('first_name') }}"
                                             placeholder="First Name (e.g., Juan)" required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label>Middlename</label>
+                                        <label>Middlename <span class="text-danger">*</span></label>
                                         <input type="text" name="middle_name" class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->middle_name ?: old('middle_name') }}"
                                             placeholder="Middle Name (e.g., Dalisay)">
@@ -48,7 +48,7 @@
                                     <div class="form-group col-md-2">
                                         <label>Suffix</label>
                                         <select name="suffix" class="form-control form-control-sm">
-                                            <option value="">--Please Select--</option>
+                                            <option value="">--N/A--</option>
                                             @foreach ($suffixes as $suffix)
                                                 <option
                                                     value="{{ $suffix }}"{{ ($ownerInfo?->suffix ?: old('suffix')) == $suffix ? 'selected' : '' }}>
@@ -57,26 +57,28 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label>Address</label>
+                                        <label>Address <span class="text-danger">*</span> <span
+                                                class="font-italic fw-normal">(St./House #, Barangay, Municipality,
+                                                Province/City)</span></label>
                                         <input type="text" name="address" class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->address ?: old('address') }}"
                                             placeholder="Enter Address (House/St. No, Brgy, Municipality, Province/City)"
                                             required>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label>Resident since</label>
+                                        <label>Resident since <span class="text-danger">*</span></label>
                                         <input type="month" name="resident_since"
                                             value="{{ $ownerInfo?->resident_since->format('Y-m') ?: old('resident_since') }}"class="form-control form-control-sm"
                                             required>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label>Nationality</label>
+                                        <label>Nationality <span class="text-danger">*</span></label>
                                         <input type="text" name="nationality" class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->nationality ?: old('nationality') }}"
                                             placeholder="Enter your Nationality" required>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label>Gender</label>
+                                        <label>Gender <span class="text-danger">*</span></label>
                                         <select name="gender" class="form-control form-control-sm" required>
                                             <option value="">--Select--</option>
                                             @foreach ($genders as $gender)
@@ -87,7 +89,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label>Civil Status</label>
+                                        <label>Civil Status <span class="text-danger">*</span></label>
                                         <select name="civil_status" class="form-control form-control-sm" required>
                                             <option value="">--Select--</option>
                                             @foreach ($civil_status as $civil_status)
@@ -98,31 +100,31 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label>Contact No.</label>
+                                        <label>Contact No. <span class="text-danger">*</span></label>
                                         <input type="text" name="contact_no" class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->contact_no ?: old('contact_no') }}"
                                             placeholder="Enter Contact No." required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label>Birthdate</label>
+                                        <label>Birthdate <span class="text-danger">*</span></label>
                                         <input type="date" name="birthdate" class="form-control form-control-sm bdate"
                                             value="{{ $ownerInfo?->birthdate->format('Y-m-d') ?: old('birthdate') }}"
                                             value="{{ old('birthdate') }}">
                                     </div>
                                     <div class="form-group col-md-1">
-                                        <label>Age</label>
+                                        <label>Age <span class="text-danger">*</span></label>
                                         <input type="number" name="age" class="form-control form-control-sm age"
                                             value="{{ $ownerInfo?->age ?: old('age') }}" value="{{ old('age') }}"
                                             readonly placeholder="0">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label>Birthplace</label>
+                                        <label>Birthplace <span class="text-danger">*</span></label>
                                         <input type="text" name="birthplace" class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->birthplace ?: old('birthplace') }}"
                                             value="{{ old('birthplace') }}" placeholder="Enter Birthplace" required>
                                     </div>
                                     <div class="form-group col-md-4" id="educ">
-                                        <label>Educational Background</label>
+                                        <label>Educational Background <span class="text-danger">*</span></label>
                                         <select name="educ_background" required id="educational_background"
                                             class="form-control form-control-sm">
                                             <option value="">--Please select--</option>
@@ -137,7 +139,8 @@
                                     </div>
                                     <div class="form-group col-md-4" id="otherEducationalBackground"
                                         style="display: none;">
-                                        <label>Specify Other Educational Background</label>
+                                        <label>Specify Other Educational Background <span
+                                                class="text-danger">*</span></label>
                                         <input type="text" name="other_educational_background"
                                             value="{{ $ownerInfo?->other_educational_background ?: old('other_educational_background') }}"
                                             class="form-control form-control-sm">
@@ -153,26 +156,26 @@
                                         </small>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label>Emergency contact person</label>
+                                        <label>Emergency contact person <span class="text-danger">*</span></label>
                                         <input type="text" name="emContact_person"
                                             class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->emContact_person ?: old('emContact_person') }}"
                                             placeholder="Enter Name of emergency contact">
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label>Relationship</label>
+                                        <label>Relationship <span class="text-danger">*</span></label>
                                         <input type="text" name="emRelationship" class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->emRelationship ?: old('emRelationship') }}"
                                             placeholder="Enter Relationship">
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label>Contact No.</label>
+                                        <label>Contact No. <span class="text-danger">*</span></label>
                                         <input type="text" name="emContact_no" class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->emContact_no ?: old('emContact_no') }}"
                                             placeholder="Contact No. of emergency contact">
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label>Address</label>
+                                        <label>Address <span class="text-danger">*</span></label>
                                         <input type="text" name="emAddress" class="form-control form-control-sm"
                                             value="{{ $ownerInfo?->emAddress ?: old('emAddress') }}"
                                             placeholder="Address of emergency contact">
@@ -180,14 +183,17 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
-                                <a href="{{ route('owner-info.index') }}" class="btn btn-danger col-md-2 mr-2">Go
-                                    back</a>
-                                <button type="submit" class="btn btn-primary col-md-2">Next</button>
-                            </div>
-                            <div class="overlay dark">
-                                <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                                <a href="{{ route('owner-info.index') }}" class="btn btn-danger col-md-2 mr-2">
+                                    <span><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+                                    Go back</a>
+                                <button type="submit" class="btn btn-primary col-md-2">Next
+                                    <span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                                </button>
                             </div>
                         </form>
+                        <div class="overlay dark">
+                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                        </div>
                     </div>
                 </div>
             </div>

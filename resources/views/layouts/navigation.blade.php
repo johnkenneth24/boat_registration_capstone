@@ -50,13 +50,13 @@
                 @unlessrole('user')
                     <ul class="nav nav-treeview">
                         <li class="nav-item pl-3 pr-0 ">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('owner-info.registered-owners') }}" class="nav-link">
                                 <i class="fa fa-check-circle" aria-hidden="true"></i>
                                 <p>Registered Owners</p>
                             </a>
                         </li>
                         <li class="nav-item pl-3 pr-0 ">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('owner-info.pending-owners') }}" class="nav-link">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                                 <p>Pending Registration</p>
                             </a>
@@ -64,7 +64,7 @@
                     </ul>
                 @endunlessrole
             </li>
-            <li class="nav-item {{ request()->routeIs(['reged-boat.*']) ? 'nav-item-active' : '' }}">
+            <li class="nav-item {{ request()->routeIs(['reg-boat.*']) ? 'nav-item-active' : '' }}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fa fa-file-alt" aria-hidden="true"></i>
                     <p>Boat Registration<i class="right fas fa-angle-right"></i></p>
@@ -78,7 +78,7 @@
                     </li>
                     @unlessrole('user')
                         <li class="nav-item pl-3 pr-0 ">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('reg-boat.pending') }}" class="nav-link">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                                 <p>Pending Registration</p>
                             </a>

@@ -20,7 +20,7 @@ class OwnerInfoController extends Controller
         $ownerInfo = OwnerInfo::where('user_id', auth()->user()->id)->first();
 
         // dd($ownerInfo);
-        return view('modules.owner-info.index', compact('ownerInfo'));
+        return view('modules.owner-info.user-info.index', compact('ownerInfo'));
     }
     public function personal($id = null)
     {
@@ -36,7 +36,7 @@ class OwnerInfoController extends Controller
             $ownerInfo = OwnerInfo::find(auth()->user()->id);
         }
 
-        return view('modules.owner-info.personal', compact('salutations', 'suffixes', 'genders', 'civil_status', 'educ_bcc', 'ownerInfo'));
+        return view('modules.owner-info.user-info.personal', compact('salutations', 'suffixes', 'genders', 'civil_status', 'educ_bcc', 'ownerInfo'));
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class OwnerInfoController extends Controller
             'nationality' => 'required',
             'gender' => 'required',
             'civil_status' => 'required',
-            'contact_no' => 'required',
+            'contact_no' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
             'birthdate' => 'required',
             'age' => 'required',
             'birthplace' => 'required',
@@ -110,7 +110,7 @@ class OwnerInfoController extends Controller
                 'age' => $validated['age'],
                 'birthplace' => $validated['birthplace'],
                 'educ_background' => $validated['educ_background'],
-                'other_educational_background' => $validated['other_educational_background'],
+                'other_educational_background' => $validated['other_educational_background'] ?? '',
                 'children_count' => $validated['children_count'],
                 'emContact_person' => $validated['emContact_person'],
                 'emRelationship' => $validated['emRelationship'],
@@ -142,7 +142,7 @@ class OwnerInfoController extends Controller
 
         // dd($livelihood);
 
-        return view('modules.owner-info.livelihood', compact('source_of_income', 'livelihood', 'form1_id'));
+        return view('modules.owner-info.user-info.livelihood', compact('source_of_income', 'livelihood', 'form1_id'));
     }
 
     public function livelihoodStore(Request $request)
@@ -164,7 +164,9 @@ class OwnerInfoController extends Controller
             'position' => 'nullable',
         ]);
 
-        // dd($validated);
+        // Initialize empty arrays for cases when the 'other_income_sources' key is not provided.
+        $source_of_income = $validated['source_of_income'] ?? [];
+        $other_income_sources = $validated['other_income_sources'] ?? [];
 
         $form1_id = $request->session()->get('owner_info');
 
@@ -175,11 +177,11 @@ class OwnerInfoController extends Controller
 
             $livelihood->user_id = auth()->user()->id;
             $livelihood->owner_info_id = $form1_id;
-            $livelihood->source_of_income = serialize($validated['source_of_income']);
+            $livelihood->source_of_income = serialize($source_of_income);
             $livelihood->gear_used = $validated['gear_used'];
             $livelihood->culture_method = $validated['culture_method'];
             $livelihood->specify = $validated['specify'];
-            $livelihood->other_income_sources = serialize($validated['other_income_sources']);
+            $livelihood->other_income_sources = serialize($other_income_sources);
             $livelihood->gear_used_os = $validated['gear_used_os'];
             $livelihood->culture_method_os = $validated['culture_method_os'];
             $livelihood->specify_os = $validated['specify_os'];
@@ -191,11 +193,11 @@ class OwnerInfoController extends Controller
         } else {
             // update Livelihood if already exists
             $livelihood->update([
-                'source_of_income' => serialize($validated['source_of_income']),
+                'source_of_income' => serialize($source_of_income),
                 'gear_used' => $validated['gear_used'],
                 'culture_method' => $validated['culture_method'],
                 'specify' => $validated['specify'],
-                'other_income_sources' => serialize($validated['other_income_sources']),
+                'other_income_sources' => serialize($other_income_sources),
                 'gear_used_os' => $validated['gear_used_os'],
                 'culture_method_os' => $validated['culture_method_os'],
                 'specify_os' => $validated['specify_os'],
@@ -206,5 +208,30 @@ class OwnerInfoController extends Controller
         }
 
         return redirect()->route('owner-info.index')->with('success', 'Owner Information successfully saved!');
+    }
+
+    public function regOwners()
+    {
+        $regOwners = OwnerInfo::with('livelihood')->where('status', 'registered')->paginate(10);
+
+        return view('modules.owner-info.reg-owners', compact('regOwners'));
+    }
+
+    public function pendingOwners()
+    {
+        $pendingOwners = OwnerInfo::with('livelihood')->where('status', 'pending')->paginate(10);
+
+        return view('modules.owner-info.pending-owners', compact('pendingOwners'));
+    }
+
+    public function approve($id)
+    {
+        // find OwnerInfo with id of $id and update status to registered
+        $ownerInfo = OwnerInfo::find($id);
+        $ownerInfo->status = 'registered';
+        $ownerInfo->save();
+
+        return redirect()->route('owner-info.pending-owners')->with('success', 'Owner Information successfully approved!');
+
     }
 }
