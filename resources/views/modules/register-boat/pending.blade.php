@@ -41,8 +41,6 @@
                                             <td>{{ $pBoats->status }}</td>
                                             <td class="">
                                                 <a href="#" class="btn btn-sm btn-warning">Process</a>
-                                                <a href="#" class="btn btn-sm btn-success">View</a>
-                                                {{-- <a href="" class="btn btn-sm btn-primary">Edit</a> --}}
                                                 <a href="#" class="btn btn-sm btn-danger">Delete</a>
                                             </td>
                                         </tr>

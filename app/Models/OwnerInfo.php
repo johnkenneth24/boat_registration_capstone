@@ -41,13 +41,24 @@ class OwnerInfo extends Model
 
     public function getFullNameAttribute()
     {
-        $parts = [$this->salutation, $this->first_name, $this->middle_name, $this->last_name, $this->suffix];
+        $parts = [$this->salutation, $this->first_name];
+
+        // Check if middle_name is not empty
+        if (!empty($this->middle_name)) {
+            // Get the first letter of middle_name and add a period
+            $middleInitial = substr($this->middle_name, 0, 1) . '.';
+            // Add the middleInitial to the parts array
+            $parts[] = $middleInitial;
+        }
+
+        $parts[] = $this->last_name;
+        $parts[] = $this->suffix;
+
         $nonEmptyParts = array_filter($parts, function ($part) {
             return !empty($part);
         });
 
         return implode(' ', $nonEmptyParts);
-
     }
 
     public function user()

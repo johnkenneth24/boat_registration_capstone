@@ -3,7 +3,6 @@
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\OwnerInfoController;
 use App\Http\Controllers\RegisterBoatController;
-use App\Http\Controllers\RegisteredBoatController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,19 +37,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/reg-boat', 'create')->name('reg-boat.create');
         Route::post('/storeBoat', 'regBoat')->name('reg-boat.store');
         Route::get('/pendingBoats', 'pendingRegBoats')->name('reg-boat.pending');
-        // Route::get('/createForm2', 'createForm2')->name('form2.create');
-        // Route::post('/storeForm2', 'storeForm2')->name('form2.store');
-        // Route::get('/confirmForm', 'confirmForm')->name('form.confirm');
-        // Route::post('/storeForm3', 'storeForm3')->name('reg-boat3.store');
-        Route::get('/sample', 'sample')->name('reg-boat.sample');
 
         Route::get('/process', 'process_registration')->name('reg-boat.process');
-        Route::get('mfr-form', 'mfr_form')->name('reg-boat.mfr-form');
-        Route::get('ads-form', 'adss_form')->name('reg-boat.ads-form');
-    });
 
-    Route::controller(RegisteredBoatController::class)->prefix('reged-boat')->group(function () {
-        Route::get('/', 'index')->name('reged-boat.index');
+        Route::get('/sample', 'sample')->name('reg-boat.sample');
     });
 
     Route::controller(ApplicantListController::class)->prefix('applist')->group(function () {
