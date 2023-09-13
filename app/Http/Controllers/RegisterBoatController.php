@@ -6,6 +6,7 @@ use App\Models\Boat;
 use App\Models\OwnerInfo;
 use App\Models\RegisterBoat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class RegisterBoatController extends Controller
 {
@@ -67,20 +68,25 @@ class RegisterBoatController extends Controller
             'gross_tonnage' => 'required',
         ]);
 
-        // dd($validated);
+        // to prevent duplicate entries
+        $boatReg = RegisterBoat::where('registration_no', $validated['registration_no'])->first();
 
-        $form1 = new RegisterBoat();
-        $form1->user_id = auth()->user()->id;
-        $form1->registration_no = $validated['registration_no'];
-        $form1->registration_date = $validated['registration_date'];
-        $form1->owner_info_id = $validated['owner_id'];
-        $form1->registration_type = 'new';
+        if ($boatReg) {
+            $boatReg->update(Arr::only($validated, ['registration_date']));
+        } else {
+            $boatReg = new RegisterBoat();
+            $boatReg->user_id = auth()->user()->id;
+            $boatReg->registration_no = $validated['registration_no'];
+            $boatReg->registration_date = $validated['registration_date'];
+            $boatReg->owner_info_id = $validated['owner_id'];
+            $boatReg->registration_type = 'new';
 
-        $form1->save();
+            $boatReg->save();
+        }
 
         $owners = Boat::create([
             'user_id' => auth()->user()->id,
-            'register_boat_id' => $form1->id,
+            'register_boat_id' => $boatReg->id,
             'owner_id' => $validated['owner_id'],
             'boat_type' => $validated['vessel_type'],
             'vessel_name' => $validated['vessel_name'],
@@ -135,6 +141,14 @@ class RegisterBoatController extends Controller
         $boatReg = RegisterBoat::with('boat')->find($id);
 
         return view('modules.register-boat.view', compact('boatReg'));
+    }
+
+    public function destroy($id)
+    {
+        $boatReg = RegisterBoat::find($id);
+
+        $boatReg->delete();
+        return redirect()->route('reg-boat.index')->with('success', 'Boat record deleted successfully!');
     }
 
     public function sample()

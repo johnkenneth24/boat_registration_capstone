@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', 'edit')->name('reg-boat.edit');
         Route::put('/update/{id}', 'update')->name('reg-boat.update');
         Route::get('/show/{id}', 'show')->name('reg-boat.show');
+        Route::delete('destroy/{id}', 'destroy')->name('reg-boat.destroy');
 
         Route::get('/process', 'process_registration')->name('reg-boat.process');
 

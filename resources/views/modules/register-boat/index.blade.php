@@ -56,9 +56,45 @@
                                                     class="btn btn-sm btn-success">View</a>
                                                 <a href="{{ route('reg-boat.edit', $rBoats->id) }}"
                                                     class="btn btn-sm btn-primary">Edit</a>
-                                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+
+                                                <button type="button" class="btn btn-sm btn-danger" title="Delete"
+                                                    data-toggle="modal" data-target="#confirmationModal{{ $rBoats->id }}">
+                                                    DELETE
+                                                </button>
                                             </td>
                                         </tr>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="confirmationModal{{ $rBoats->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true"
+                                            data-backdrop="static">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content modal-static">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body mt-2 mb-2 text-center">
+                                                        <i class="fas fa-exclamation-triangle fa-4x text-warning"></i>
+                                                        <h3>Are you sure you want to delete this boat record? This cannot be
+                                                            undone.</h3>
+                                                    </div>
+                                                    <div class="modal-footer d-flex justify-content-center">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cancel</button>
+                                                        <form action="{{ route('reg-boat.destroy', $rBoats->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @empty
                                         <tr>
                                             <td colspan="4" class="text-center">No data available</td>
