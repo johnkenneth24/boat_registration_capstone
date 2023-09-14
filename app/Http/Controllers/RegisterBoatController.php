@@ -10,13 +10,32 @@ use Illuminate\Support\Arr;
 
 class RegisterBoatController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
         $roleName = $user->getRoleNames()->first();
 
         if ($roleName === 'admin' || $roleName === 'staff') {
-            $registeredBoats = RegisterBoat::with('ownerInfo')->where('status', 'registered')->paginate(10);
+            $search = $request->input('search');
+
+            $query = RegisterBoat::query()->with(['ownerInfo', 'boat'])->where('status', 'registered')->orderBy('created_at', 'asc');
+
+            if ($query) {
+                $query->where('registration_no', 'like', '%' . $search . '%')
+                    ->orWhere('registration_date', 'like', '%' . $search . '%')
+                    ->orWhere('status', 'like', '%' . $search . '%')
+                    ->orWhereHas('ownerInfo', function ($query) use ($search) {
+                        $query->where('first_name', 'like', '%' . $search . '%')
+                            ->orWhere('middle_name', 'like', '%' . $search . '%')
+                            ->orWhere('last_name', 'like', '%' . $search . '%');
+                    })
+                    ->orWhereHas('boat', function ($query) use ($search) {
+                        $query->where('vessel_name', 'like', '%' . $search . '%')
+                            ->orWhere('boat_type', 'like', '%' . $search . '%');
+                    });
+            }
+
+            $registeredBoats = $query->paginate(10);
 
             return view('modules.register-boat.index', compact('registeredBoats'));
         } else {
@@ -33,7 +52,6 @@ class RegisterBoatController extends Controller
         $pendingBoats = RegisterBoat::with('ownerInfo')->where('status', 'pending')->paginate(10);
 
         return view('modules.register-boat.pending', compact('pendingBoats'));
-
     }
 
     public function create()

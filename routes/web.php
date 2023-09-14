@@ -4,6 +4,7 @@ use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\OwnerInfoController;
 use App\Http\Controllers\RegisterBoatController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WalkInController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -78,4 +79,8 @@ Route::middleware('auth')->group(function () {
         });
 
     });
+
+    Route::controller(WalkInController::class)->prefix('walk-in')->group(function () {
+        Route::get('/create', 'create')->name('walk-in.create');
+    })->middleware('role:admin|staff');
 });

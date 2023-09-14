@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -59,17 +60,14 @@ class UserController extends Controller
             'password' => 'required',
         ], $this->messages());
 
-        $user = new User();
-        $user->id_number = $validated['id_number'];
-        $user->name = $validated['name'];
-        $user->username = $validated['username'];
-        $user->email = $validated['email'];
-        $user->contact_no = $validated['contact_no'];
-        $user->password = bcrypt($validated['password']);
-
-        $user->assignRole('staff');
-
-        $user->save();
+        $user = User::create([
+            'id_number' => $validated['id_number'],
+            'name' => $validated['name'],
+            'username' => $validated['username'],
+            'email' => $validated['email'],
+            'contact_no' => $validated['contact_no'],
+            'password' => Hash::make($validated['password']),
+        ])->assignRole('staff');
 
         return redirect()->route('users.index')->with('success', 'Staff Account created successfully.');
 

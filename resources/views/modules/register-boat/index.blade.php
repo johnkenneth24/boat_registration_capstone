@@ -7,15 +7,34 @@
                 <div class="col-md-12">
                     <x-success></x-success>
                     <div class="card mt-5">
-                        <div class="card-header">
-                            <div class="card-title">
+                        <div class="card-header pb-0">
+                            <div class="card-title align-middle mb-0">
                                 @role('user')
                                     <h4>Boat Registration</h4>
                                 @endrole
-                                @role('staff')
+                                @role('staff|admin')
                                     <h4>Registered Boats</h4>
                                 @endrole
                             </div>
+                            @role('admin|staff')
+                                <div class="card-tools d-flex justify-content-end">
+                                    <div>
+                                        <form action="{{ route('reg-boat.index') }}" method="get">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input class="form-control form-control-md d-sm-none d-md-block mr-3"
+                                                    type="search" placeholder="Search..." name="search" style="width: 300px;"
+                                                    autofocus>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('walk-in.create') }}" class="btn btn-success"> <span><i
+                                                    class="fa fa-plus" aria-hidden="true"></i></span>
+                                            Create Registration (Walk-in)</a>
+                                    </div>
+                                </div>
+                            @endrole
                             @role('user')
                                 <div class="card-tools">
                                     <a href="{{ route('reg-boat.create') }}" class="btn btn-success">Create Registration</a>
