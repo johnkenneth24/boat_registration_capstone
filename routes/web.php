@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('profile', 'profile')->name('users.profile');
         Route::put('profile/{id}', 'profileUpdate')->name('users.profileUpdate');
+        Route::put('profilePassword/{id}', 'passwordUpdate')->name('users.passwordUpdate');
     });
 
     Route::controller(RegisterBoatController::class)->prefix('reg-boat')->group(function () {
