@@ -43,7 +43,7 @@
                                     placeholder="Password" autocomplete="off password">
                             </div>
                             @error('password')
-                                <div class="invalid-tooltip">
+                                <div class="invalid-feedback" style="display: inline-block !important;">
                                     {{ $message }}
                                 </div>
                             @enderror
