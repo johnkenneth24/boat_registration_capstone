@@ -39,59 +39,86 @@ class OwnerInfoController extends Controller
         return view('modules.owner-info.user-info.personal', compact('salutations', 'suffixes', 'genders', 'civil_status', 'educ_bcc', 'ownerInfo'));
     }
 
+    protected function messages()
+    {
+        return [
+            'salutation.required' => 'Salutation  os required',
+            'first_name.required' => 'First Name is required',
+            'first_name.regex' => 'Must be a valid firstname and must not contain special characters',
+            'last_name.required' => 'Last Name is required',
+            'last_name.regex' => 'Must be a valid lastname and must not contain special characters',
+            'middle_name.regex' => 'Must be a valid middlename and must not contain special characters',
+            'address.required' => 'Address is required',
+            'address.max' => 'Must not exceed more than 255 characters',
+            'resident_since.required' => 'Required',
+            'nationality.required' => 'Required',
+            'nationality.regex' => 'Must not contain special characters or numbers',
+            'gender.required' => 'Required',
+            'contact_no.regex' => 'Must not contain letters or special characters',
+            'birthplace.required' => 'Required',
+            'other_educational_background.string' => 'Must be a string',
+            'emContact_person.regex' => 'Must not contain special characters or numbers',
+            'emRelationship.regex' => 'Must not contain special characters or numbers',
+            'emContact_no.regex' => 'Must not contain letters or special characters',
+            'emAddress.regex' => 'Must not contain special characters or numbers',
+
+        ];
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'salutation' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'middle_name' => 'nullable',
+            'salutation' => ['required'],
+            'first_name' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/'],
+            'last_name' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/'],
+            'middle_name' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'suffix' => 'nullable',
-            'address' => 'required',
+            'address' => ['required', 'max:255'],
             'resident_since' => ['required', 'date:Y-m'],
-            'nationality' => 'required',
+            'nationality' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'gender' => 'required',
             'civil_status' => 'required',
             'contact_no' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
             'birthdate' => 'required',
             'age' => 'required',
-            'birthplace' => 'required',
+            'birthplace' => ['required', 'string'],
             'educ_background' => 'required',
-            'other_educational_background' => 'nullable',
-            'children_count' => 'nullable',
-            'emContact_person' => 'nullable',
-            'emRelationship' => 'nullable',
-            'emContact_no' => 'nullable',
-            'emAddress' => 'nullable',
-        ]);
+            'other_educational_background' => ['nullable', 'string'],
+            'children_count' => ['nullable', 'min:0'],
+            'emContact_person' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
+            'emRelationship' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
+            'emContact_no' => ['nullable', 'string', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            'emAddress' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
+        ], $this->messages());
 
+        // dd($validated);
         //    check first if OwnerInfo exists with user_id same as auth()->user()->id and if not exists then create new OwnerInfo
         $form1 = OwnerInfo::where('user_id', auth()->user()->id)->first();
         if (!$form1) {
-            $form1 = new OwnerInfo();
-            $form1->user_id = auth()->user()->id;
-            $form1->salutation = $validated['salutation'];
-            $form1->last_name = $validated['last_name'];
-            $form1->first_name = $validated['first_name'];
-            $form1->middle_name = $validated['middle_name'];
-            $form1->suffix = $validated['suffix'];
-            $form1->address = $validated['address'];
-            $form1->resident_since = $validated['resident_since'] . '-01';
-            $form1->nationality = $validated['nationality'];
-            $form1->gender = $validated['gender'];
-            $form1->civil_status = $validated['civil_status'];
-            $form1->contact_no = $validated['contact_no'];
-            $form1->birthdate = $validated['birthdate'];
-            $form1->age = $validated['age'];
-            $form1->birthplace = $validated['birthplace'];
-            $form1->educ_background = $validated['educ_background'];
-            $form1->other_educational_background = $validated['other_educational_background'];
-            $form1->children_count = $validated['children_count'];
-            $form1->emContact_person = $validated['emContact_person'];
-            $form1->emRelationship = $validated['emRelationship'];
-            $form1->emContact_no = $validated['emContact_no'];
-            $form1->emAddress = $validated['emAddress'];
-            $form1->save();
+            $form1 = OwnerInfo::create([
+                'user_id' => auth()->user()->id,
+                'salutation' => $validated['salutation'],
+                'last_name' => $validated['last_name'],
+                'first_name' => $validated['first_name'],
+                'middle_name' => $validated['middle_name'],
+                'suffix' => $validated['suffix'],
+                'address' => $validated['address'],
+                'resident_since' => $validated['resident_since'] . '-01',
+                'nationality' => $validated['nationality'],
+                'gender' => $validated['gender'],
+                'civil_status' => $validated['civil_status'],
+                'contact_no' => $validated['contact_no'],
+                'birthdate' => $validated['birthdate'],
+                'age' => $validated['age'],
+                'birthplace' => $validated['birthplace'],
+                'educ_background' => $validated['educ_background'],
+                'other_educational_background' => $validated['other_educational_background'],
+                'children_count' => $validated['children_count'],
+                'emContact_person' => $validated['emContact_person'],
+                'emRelationship' => $validated['emRelationship'],
+                'emContact_no' => $validated['emContact_no'],
+                'emAddress' => $validated['emAddress'],
+            ]);
         } else {
             // else if exists, then update only
             $form1->update([
