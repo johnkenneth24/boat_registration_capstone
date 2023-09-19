@@ -47,7 +47,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->username }}</td>
-                                            <td>{{ $user->role }}</td>
+                                            <td>{{ $user->roles->first()->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->contact_no ?? '' }}</td>
                                             <td class="d-flex justify-content-center align-middle">

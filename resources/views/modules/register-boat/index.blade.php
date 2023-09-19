@@ -31,8 +31,8 @@
                                         </form>
                                     </div>
                                     <div>
-                                        <a href="{{ route('walk-in.create') }}" class="btn btn-success"> <span><i
-                                                    class="fa fa-plus" aria-hidden="true"></i></span>
+                                        <a href="#" class="btn btn-success"> <span><i class="fa fa-plus"
+                                                    aria-hidden="true"></i></span>
                                             Create Registration (Walk-in)</a>
                                     </div>
                                 </div>
@@ -98,8 +98,7 @@
                                                     class="btn btn-sm btn-primary">Edit</a>
 
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
-                                                    data-toggle="modal"
-                                                    data-target="#confirmationModal{{ $rBoats->id }}">
+                                                    data-toggle="modal" data-target="#confirmationModal{{ $rBoats->id }}">
                                                     DELETE
                                                 </button>
                                             </td>

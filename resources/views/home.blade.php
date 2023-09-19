@@ -107,7 +107,11 @@
                                     <tbody>
                                         @forelse ($pendings as $pending)
                                             <tr class="text-center align-middle">
-                                                <td>{{ $pending->registration_no }}</td>
+                                                <td>
+                                                    <a href="{{ route('reg-boat.index') }}">
+                                                        {{ $pending->registration_no }}
+                                                    </a>
+                                                </td>
                                                 <td>{{ date('M. d, Y', strtotime($pending->registration_date)) }}</td>
                                             </tr>
                                         @empty
@@ -138,9 +142,43 @@
                                         @forelse ($announcements as $announcement)
                                             <tr class="text-center align-middle">
                                                 <td>{{ $announcement->title }}</td>
-                                                <td>{{ $announcement->date }}</td>
-                                                <td><a href="">View</a></td>
+                                                <td>{{ $announcement->date->format('F d, Y') }}</td>
+                                                <td><button type="button" class="btn btn-sm btn-primary mr-2" title="VIEW"
+                                                        data-toggle="modal" data-target="#viewModal{{ $announcement->id }}">
+                                                        VIEW
+                                                    </button></td>
                                             </tr>
+                                            <div class="modal fade" id="viewModal{{ $announcement->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="viewModalLabel{{ $announcement->id }}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="viewModalLabel{{ $announcement->id }}">
+                                                                Announcement Details
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true" class="text-danger"
+                                                                    title="Close">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body mt-2 mb-2 text-center">
+                                                            <h4 class="text-center">{{ $announcement->title }}</h4>
+                                                            <span
+                                                                class="font-italic">{{ $announcement->date->format('F d, Y') }}
+                                                            </span>
+                                                            <p class="text-center text-justify mt-3">
+                                                                {{ $announcement->content }}
+                                                            </p>
+                                                        </div>
+                                                        {{-- <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary float-right"
+                                                        data-dismiss="modal">Close</button>
+                                                </div> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @empty
                                             <tr>
                                                 <td colspan="3" class="text-center">No Announcements</td>
