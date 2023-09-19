@@ -202,7 +202,9 @@
             if (checkbox.checked && specifyInput.value !== '') {
                 specifyDiv.style.display = 'block';
             }
+        });
 
+        otherCheckboxes.forEach(function(checkbox) {
             if (checkbox.checked && gearInputOs.value !== '') {
                 gearInputOsDiv.style.display = 'block';
             }
@@ -215,6 +217,7 @@
                 specifyInputOsDiv.style.display = 'block';
             }
         });
+
 
         checkboxes.forEach(function(checkbox) {
             checkbox.addEventListener('input', function() {
@@ -253,13 +256,13 @@
             checkbox.addEventListener('input', function() {
                 if (this.checked) {
                     if (this.value === 'Capture Fishing') {
-                        gearInputOs.style.display = 'block';
+                        gearInputOsDiv.style.display = 'block';
                         gearInputOs.setAttribute('required', 'required');
                     } else if (this.value === 'Aquaculture') {
-                        cultureInputOs.style.display = 'block';
+                        cultureInputOsDiv.style.display = 'block';
                         cultureInputOs.setAttribute('required', 'required');
                     } else if (this.value === 'Other') {
-                        specifyInputOs.style.display = 'block';
+                        specifyInputOsDiv.style.display = 'block';
                         specifyInputOs.setAttribute('required', 'required');
 
                     }
@@ -268,15 +271,15 @@
                     if (this.value === 'Capture Fishing') {
                         gearInputOs.removeAttribute('required');
                         gearInputOs.value = '';
-                        gearInputOs.style.display = 'none';
+                        gearInputOsDiv.style.display = 'none';
                     } else if (this.value === 'Aquaculture') {
                         cultureInputOs.removeAttribute('required');
                         cultureInputOs.value = '';
-                        cultureInputOs.style.display = 'none';
+                        cultureInputOsDiv.style.display = 'none';
                     } else if (this.value === 'Other') {
                         specifyInputOs.removeAttribute('required');
                         specifyInputOs.value = '';
-                        specifyInputOs.style.display = 'none';
+                        specifyInputOsDiv.style.display = 'none';
                     }
                 }
             });

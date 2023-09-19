@@ -64,7 +64,9 @@
                                                     <label>Contact Number</label>
                                                     <input type="text" name="contact_no"
                                                         class="form-control form-control-sm @error('contact_no') is-invalid @enderror"
-                                                        required value="{{ auth()->user()->contact_no }}">
+                                                        required value="{{ auth()->user()->contact_no }}"
+                                                        pattern="[0-9]{11}"
+                                                        title="Please enter a 11-digit numeric contact number">
                                                     @error('contact_no')
                                                         <div class="invalid-feedback" style="display: inline-block !important;">
                                                             {{ $message }}
