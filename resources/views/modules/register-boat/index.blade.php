@@ -10,7 +10,9 @@
                         <div class="card-header pb-0">
                             <div class="card-title align-middle mb-0">
                                 @role('user')
-                                    <h4>Boat Registration</h4>
+                                    @if ($ownerInfo != null)
+                                        <h4>Boat Registration</h4>
+                                    @endif
                                 @endrole
                                 @role('staff|admin')
                                     <h4>Registered Boats</h4>
@@ -36,9 +38,28 @@
                                 </div>
                             @endrole
                             @role('user')
-                                <div class="card-tools">
-                                    <a href="{{ route('reg-boat.create') }}" class="btn btn-success">Create Registration</a>
-                                </div>
+                                @if ($ownerInfo == null)
+                                    <div class="alert alert-warning">
+                                        <h4 class="pl-0 ml-0 mb-0"><span><i class="fas fa-exclamation-triangle"
+                                                    aria-hidden="true"></i></span> No owner
+                                            information yet!</h4> <br />
+                                        <p class="mb-0 text-center">You need to create your owner information first before you
+                                            can
+                                            register a boat. Click the button below to create your owner information.</p>
+                                        <div class="d-flex justify-content-end">
+                                            <a href="{{ route('owner-info.edit', auth()->user()->id) }}"
+                                                class="btn btn-success mt-3" style="text-decoration:none;"> <span><i
+                                                        class="fa fa-plus mr-2" aria-hidden="true"></i></span> Create Owner
+                                                Information first</a>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="card-tools">
+                                        <a href="{{ route('reg-boat.create') }}" class="btn btn-success mb-1 mt-0"> <span><i
+                                                    class="fa fa-plus mr-2" aria-hidden="true"></i></span>Create
+                                            Registration</a>
+                                    </div>
+                                @endif
                             @endrole
                         </div>
                         <div class="card-body p-0">
@@ -77,7 +98,8 @@
                                                     class="btn btn-sm btn-primary">Edit</a>
 
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
-                                                    data-toggle="modal" data-target="#confirmationModal{{ $rBoats->id }}">
+                                                    data-toggle="modal"
+                                                    data-target="#confirmationModal{{ $rBoats->id }}">
                                                     DELETE
                                                 </button>
                                             </td>

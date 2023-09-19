@@ -29,21 +29,39 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>Lastname <span class="text-danger">*</span></label>
-                                        <input type="text" name="last_name" class="form-control form-control-sm"
+                                        <input type="text" name="last_name"
+                                            class="form-control form-control-sm @error('last_name') is-invalid @enderror"
                                             value="{{ $ownerInfo?->last_name ?: old('last_name') }}"
                                             placeholder="Last Name (e.g., De la Cruz)" required>
+                                        @error('last_name')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>Firstname <span class="text-danger">*</span></label>
-                                        <input type="text" name="first_name" class="form-control form-control-sm"
+                                        <input type="text" name="first_name"
+                                            class="form-control form-control-sm @error('first_name') is-invalid @enderror"
                                             value="{{ $ownerInfo?->first_name ?: old('first_name') }}"
                                             placeholder="First Name (e.g., Juan)" required>
+                                        @error('first_name')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>Middlename <span class="text-danger">*</span></label>
-                                        <input type="text" name="middle_name" class="form-control form-control-sm"
+                                        <input type="text" name="middle_name"
+                                            class="form-control form-control-sm @error('middle_name') is-invalid @enderror"
                                             value="{{ $ownerInfo?->middle_name ?: old('middle_name') }}"
                                             placeholder="Middle Name (e.g., Dalisay)">
+                                        @error('middle_name')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label>Suffix</label>
@@ -60,22 +78,39 @@
                                         <label>Address <span class="text-danger">*</span> <span
                                                 class="font-italic fw-normal">(St./House #, Barangay, Municipality,
                                                 Province/City)</span></label>
-                                        <input type="text" name="address" class="form-control form-control-sm"
+                                        <input type="text" name="address"
+                                            class="form-control form-control-sm @error('address') is-invalid @enderror"
                                             value="{{ $ownerInfo?->address ?: old('address') }}"
                                             placeholder="Enter Address (House/St. No, Brgy, Municipality, Province/City)"
                                             required>
+                                        @error('address')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label>Resident since <span class="text-danger">*</span></label>
                                         <input type="month" name="resident_since"
-                                            value="{{ $ownerInfo?->resident_since->format('Y-m') ?: old('resident_since') }}"class="form-control form-control-sm"
+                                            value="{{ $ownerInfo?->resident_since->format('Y-m') ?: old('resident_since') }}"class="form-control form-control-sm @error('resident_since') is-invalid @enderror"
                                             required>
+                                        @error('resident_since')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label>Nationality <span class="text-danger">*</span></label>
-                                        <input type="text" name="nationality" class="form-control form-control-sm"
+                                        <input type="text" name="nationality"
+                                            class="form-control form-control-sm @error('nationality') is-invalid @enderror"
                                             value="{{ $ownerInfo?->nationality ?: old('nationality') }}"
                                             placeholder="Enter your Nationality" required>
+                                        @error('nationality')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label>Gender <span class="text-danger">*</span></label>
@@ -101,15 +136,21 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label>Contact No. <span class="text-danger">*</span></label>
-                                        <input type="text" name="contact_no" class="form-control form-control-sm"
+                                        <input type="text" name="contact_no"
+                                            class="form-control form-control-sm @error('contact_no') is-invalid @enderror"
                                             value="{{ $ownerInfo?->contact_no ?: old('contact_no') }}"
                                             placeholder="Enter Contact No." required>
+                                        @error('contact_no')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>Birthdate <span class="text-danger">*</span></label>
                                         <input type="date" name="birthdate" class="form-control form-control-sm bdate"
-                                            value="{{ $ownerInfo?->birthdate->format('Y-m-d') ?: old('birthdate') }}"
-                                            value="{{ old('birthdate') }}">
+                                            required
+                                            value="{{ $ownerInfo?->birthdate->format('Y-m-d') ?: old('birthdate') }}">
                                     </div>
                                     <div class="form-group col-md-1">
                                         <label>Age <span class="text-danger">*</span></label>
@@ -119,9 +160,15 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label>Birthplace <span class="text-danger">*</span></label>
-                                        <input type="text" name="birthplace" class="form-control form-control-sm"
+                                        <input type="text" name="birthplace"
+                                            class="form-control form-control-sm @error('birthplace') is-invalid @enderror"
                                             value="{{ $ownerInfo?->birthplace ?: old('birthplace') }}"
                                             value="{{ old('birthplace') }}" placeholder="Enter Birthplace" required>
+                                        @error('birthplace')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-4" id="educ">
                                         <label>Educational Background <span class="text-danger">*</span></label>
@@ -133,7 +180,8 @@
                                                     {{ ($ownerInfo?->educ_background ?: old('educational_background')) == $educ ? 'selected' : '' }}>
                                                     {{ $educ }}</option>
                                             @endforeach
-                                            <option value="Others">Others (Please specify)
+                                            <option value="Others">
+                                                Others (Please specify)
                                             </option>
                                         </select>
                                     </div>
@@ -143,12 +191,22 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="other_educational_background"
                                             value="{{ $ownerInfo?->other_educational_background ?: old('other_educational_background') }}"
-                                            class="form-control form-control-sm">
+                                            class="form-control form-control-sm @error('emAddress') is-invalid @enderror">
+                                        @error('other_educational_background')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label>Number of Children</label>
                                         <input type="number" name="children_count"
-                                            value="{{ $ownerInfo?->children_count ?: old('children_count') }}"class="form-control form-control-sm">
+                                            value="{{ $ownerInfo?->children_count ?: old('children_count') }}"class="form-control form-control-sm @error('children_count') is-invalid @enderror">
+                                        @error('children_count')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-12 my-0">
                                         <small class="text-muted font-italic">
@@ -158,27 +216,50 @@
                                     <div class="form-group col-md-3">
                                         <label>Emergency contact person <span class="text-danger">*</span></label>
                                         <input type="text" name="emContact_person"
-                                            class="form-control form-control-sm"
+                                            class="form-control form-control-sm @error('emContact_person') is-invalid @enderror"
                                             value="{{ $ownerInfo?->emContact_person ?: old('emContact_person') }}"
                                             placeholder="Enter Name of emergency contact">
+                                        @error('emContact_person')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>Relationship <span class="text-danger">*</span></label>
-                                        <input type="text" name="emRelationship" class="form-control form-control-sm"
+                                        <input type="text" name="emRelationship"
+                                            class="form-control form-control-sm @error('emRelationship') is-invalid @enderror"
                                             value="{{ $ownerInfo?->emRelationship ?: old('emRelationship') }}"
                                             placeholder="Enter Relationship">
+                                        @error('emRelationship')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>Contact No. <span class="text-danger">*</span></label>
-                                        <input type="text" name="emContact_no" class="form-control form-control-sm"
+                                        <input type="text" name="emContact_no"
+                                            class="form-control form-control-sm @error('emContact_no') is-invalid @enderror"
                                             value="{{ $ownerInfo?->emContact_no ?: old('emContact_no') }}"
                                             placeholder="Contact No. of emergency contact">
+                                        @error('emContact_no')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>Address <span class="text-danger">*</span></label>
-                                        <input type="text" name="emAddress" class="form-control form-control-sm"
+                                        <input type="text" name="emAddress"
+                                            class="form-control form-control-sm @error('emAddress') is-invalid @enderror"
                                             value="{{ $ownerInfo?->emAddress ?: old('emAddress') }}"
                                             placeholder="Address of emergency contact">
+                                        @error('emAddress')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

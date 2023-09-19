@@ -168,13 +168,13 @@
         }, 2000);
     </script>
 
-    <script>
+    {{-- <script>
         window.setTimeout(function() {
             $(".alert").fadeTo(1000, 0).slideUp(2000, function() {
                 $(this).remove();
             });
         }, 4000);
-    </script>
+    </script> --}}
 
     @yield('scripts')
 
