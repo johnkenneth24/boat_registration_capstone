@@ -72,7 +72,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <div class="form-group">
+                                                <div class="form-group col-md-12">
                                                     <label>Name of Fishing Vessel <span class="text-danger">*</span></label>
                                                     <input type="text" name="vessel_name"
                                                         class="form-control form-control-sm @error('vessel_name') is-invalid @enderror"
@@ -84,7 +84,7 @@
                                                         </div>
                                                     @enderror
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group col-md-12">
                                                     <label>Home Port <span class="text-danger">*</span></label>
                                                     <input type="text" name="home_port" required
                                                         class="form-control form-control-sm @error('home_port') is-invalid @enderror"
@@ -124,7 +124,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <div class="form-group">
+                                                <div class="form-group col-md-12">
                                                     <label>Type of Fishing Vessel <span class="text-danger">*</span></label>
                                                     <select name="vessel_type" required class="form-control form-control-sm"
                                                         id="vessel_type">
@@ -138,49 +138,54 @@
                                                         </div>
                                                     @enderror
                                                 </div>
-                                                <div class="form-group col-md-6" id="motorized-group"
-                                                    style="display: none;">
-                                                    <label>Engine Make <span class="text-danger">*</span></label>
-                                                    <input type="text"name="engine_make"
-                                                        class="form-control form-control-sm @error('engine_make') is-invalid @enderror"
-                                                        value="{{ old('engine_make') }}" placeholder="e.g., Fuso, Yamaha">
-                                                    @error('engine_make')
-                                                        <div class="invalid-feedback" style="display: inline-block !important;">
-                                                            {{ $message }}
+                                                <div class="col-md-12" id="motorized-group" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label>Engine Make <span class="text-danger">*</span></label>
+                                                            <input type="text" name="engine_make" id="engine-make"
+                                                                class="form-control form-control-sm @error('engine_make') is-invalid @enderror"
+                                                                value="{{ old('engine_make') }}"
+                                                                placeholder="e.g., Fuso, Yamaha">
+                                                            @error('engine_make')
+                                                                <div class="invalid-feedback"
+                                                                    style="display: inline-block !important;">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
                                                         </div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group col-md-6" id="motorized-group"
-                                                    style="display: none;">
-                                                    <label>Horsepower <span class="text-danger">*</span></label>
-                                                    <div class="input-group input-group-sm">
-                                                        <input type="number" min="1" step="0.01"
-                                                            name="horsepower"
-                                                            class="form-control form-control-sm text-right @error('horsepower') is-invalid @enderror"
-                                                            value="{{ old('horsepower') }}" placeholder="0">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">HP (Horsepower)</span>
+                                                        <div class="form-group col-md-6">
+                                                            <label>Horsepower <span class="text-danger">*</span></label>
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="number" min="1" step="0.01"
+                                                                    name="horsepower" id="horsepower"
+                                                                    class="form-control form-control-sm text-right @error('horsepower') is-invalid @enderror"
+                                                                    value="{{ old('horsepower') }}" placeholder="0">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text">HP (Horsepower)</span>
+                                                                </div>
+                                                            </div>
+                                                            @error('horsepower')
+                                                                <div class="invalid-feedback"
+                                                                    style="display: inline-block !important;">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label>Engine Serial Number <span
+                                                                    class="text-danger">*</span></label>
+                                                            <input type="text" name="serial_number" id="serial_number"
+                                                                class="form-control form-control-sm @error('serial_number') is-invalid @enderror"
+                                                                value="{{ old('serial_number') }}"
+                                                                placeholder="e.g., 123-45678-ABC">
+                                                            @error('serial_number')
+                                                                <div class="invalid-feedback"
+                                                                    style="display: inline-block !important;">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
                                                         </div>
                                                     </div>
-                                                    @error('horsepower')
-                                                        <div class="invalid-feedback"
-                                                            style="display: inline-block !important;">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group" id="motorized-group" style="display: none;">
-                                                    <label>Engine Serial Number <span class="text-danger">*</span></label>
-                                                    <input type="text" name="engine_serial_number"
-                                                        class="form-control form-control-sm @error('engine_serial_number') is-invalid @enderror"
-                                                        value="{{ old('engine_serial_number') }}"
-                                                        placeholder="123-45678-ABC">
-                                                    @error('engine_serial_number')
-                                                        <div class="invalid-feedback"
-                                                            style="display: inline-block !important;">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -189,98 +194,6 @@
                                     <div class="col-md-12 mt-1 mb-2 py-1 bg-dark">
                                         <h6 class="font-weight-bolder text-center text-uppercase text-white m-0">Dimension
                                             and Tonnages</h6>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="form-group col-md-4">
-                                                <label>Registered Length <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="reg_length"
-                                                    class="form-control form-control-sm @error('reg_length') is-invalid @enderror"
-                                                    value="{{ old('reg_length') }}"
-                                                    placeholder="Registered Length of the Vessel (in meters)" required>
-                                                @error('reg_length')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label>Registered Breadth <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="reg_breadth"
-                                                    class="form-control form-control-sm @error('reg_breadth') is-invalid @enderror"
-                                                    value="{{ old('reg_breadth') }}"
-                                                    placeholder="Registered Breadth of the Vessel  (in meters)" required>
-                                                @error('reg_breadth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label>Registered Depth <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="reg_depth"
-                                                    class="form-control form-control-sm @error('reg_depth') is-invalid @enderror"
-                                                    value="{{ old('reg_depth') }}"
-                                                    placeholder="Registered Depth of the Vessel  (in meters)" required>
-                                                @error('reg_depth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="form-group col-md-4">
-                                                <label>Tonnage Length <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="ton_length"
-                                                    class="form-control form-control-sm @error('ton_length') is-invalid @enderror"
-                                                    value="{{ old('ton_length') }}"
-                                                    placeholder="Tonnage Length of the Vessel (in meters)" required>
-                                                @error('ton_length')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label>Tonnage Breadth <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="ton_breadth"
-                                                    class="form-control form-control-sm @error('ton_breadth') is-invalid @enderror"
-                                                    value="{{ old('ton_breadth') }}"
-                                                    placeholder="Tonnage Breadth of the Vessel  (in meters)" required>
-                                                @error('ton_breadth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label>Tonnage Depth <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="ton_depth"
-                                                    class="form-control form-control-sm @error('ton_depth') is-invalid @enderror"
-                                                    value="{{ old('ton_depth') }}"
-                                                    placeholder="Tonnage Depth of the Vessel  (in meters)" required>
-                                                @error('ton_depth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Gross Tonnage</label>
-                                                <input type="number" min="0" step="0.01" name="gross_tonnage"
-                                                    required value="{{ old('gross_tonnage') }}"
-                                                    class="form-control form-control-sm">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Net Tonnage</label>
-                                                <input type="number" min="0" step="0.01" name="net_tonnage"
-                                                    required value="{{ old('net_tonnage') }}"
-                                                    class="form-control form-control-sm">
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="row">
@@ -323,6 +236,102 @@
                                             </div>
                                         @enderror
                                     </div>
+                                    <hr class="dark horizontal">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label>Registered Length <span class="text-danger">*</span></label>
+                                                <input type="number" min="0" step="0.01" name="length"
+                                                    class="form-control form-control-sm @error('length') is-invalid @enderror"
+                                                    value="{{ old('length') }}"
+                                                    placeholder="Registered Length of the Vessel (in meters)" required>
+                                                @error('length')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Registered Breadth <span class="text-danger">*</span></label>
+                                                <input type="number" min="0" step="0.01" name="breadth"
+                                                    class="form-control form-control-sm @error('breadth') is-invalid @enderror"
+                                                    value="{{ old('breadth') }}"
+                                                    placeholder="Registered Breadth of the Vessel  (in meters)" required>
+                                                @error('breadth')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Registered Depth <span class="text-danger">*</span></label>
+                                                <input type="number" min="0" step="0.01" name="depth"
+                                                    class="form-control form-control-sm @error('depth') is-invalid @enderror"
+                                                    value="{{ old('depth') }}"
+                                                    placeholder="Registered Depth of the Vessel  (in meters)" required>
+                                                @error('depth')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label>Tonnage Length <span class="text-danger">*</span></label>
+                                                <input type="number" min="0" step="0.01"
+                                                    name="tonnage_length"
+                                                    class="form-control form-control-sm @error('tonnage_length') is-invalid @enderror"
+                                                    value="{{ old('tonnage_length') }}"
+                                                    placeholder="Tonnage Length of the Vessel (in meters)" required>
+                                                @error('tonnage_length')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Tonnage Breadth <span class="text-danger">*</span></label>
+                                                <input type="number" min="0" step="0.01"
+                                                    name="tonnage_breadth"
+                                                    class="form-control form-control-sm @error('tonnage_breadth') is-invalid @enderror"
+                                                    value="{{ old('tonnage_breadth') }}"
+                                                    placeholder="Tonnage Breadth of the Vessel  (in meters)" required>
+                                                @error('tonnage_breadth')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Tonnage Depth <span class="text-danger">*</span></label>
+                                                <input type="number" min="0" step="0.01" name="tonnage_depth"
+                                                    class="form-control form-control-sm @error('tonnage_depth') is-invalid @enderror"
+                                                    value="{{ old('tonnage_depth') }}"
+                                                    placeholder="Tonnage Depth of the Vessel  (in meters)" required>
+                                                @error('tonnage_depth')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Gross Tonnage</label>
+                                                <input type="number" min="0" step="0.01" name="gross_tonnage"
+                                                    required value="{{ old('gross_tonnage') }}"
+                                                    class="form-control form-control-sm">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Net Tonnage</label>
+                                                <input type="number" min="0" step="0.01" name="net_tonnage"
+                                                    required value="{{ old('net_tonnage') }}"
+                                                    class="form-control form-control-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
@@ -339,7 +348,27 @@
         </div>
     </div>
 @endsection
-{{-- 
+
 @section('scripts')
-  
-@endsection --}}
+    <script>
+        const vessel_type = document.querySelector('#vessel_type');
+        const motorized_group = document.querySelector('#motorized-group');
+        const engine_make = document.querySelector('#engine-make');
+        const horsepower = document.querySelector('#horsepower');
+        const serial_number = document.querySelector('#serial_number');
+
+        vessel_type.addEventListener('change', function() {
+            if (this.value === 'Motorized') {
+                motorized_group.style.display = 'block';
+                engine_make.setAttribute('required', true);
+                horsepower.setAttribute('required', true);
+                serial_number.setAttribute('required', true);
+            } else {
+                motorized_group.style.display = 'none';
+                engine_make.removeAttribute('required');
+                horsepower.removeAttribute('required');
+                serial_number.removeAttribute('required');
+            }
+        });
+    </script>
+@endsection

@@ -11,7 +11,13 @@ class RegisterBoat extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'user_id',
+        'registration_no',
+        'registration_date',
+        'owner_info_id',
+        'registration_type',
+    ];
 
     protected $dates = [
         'registration_date' => 'date',
