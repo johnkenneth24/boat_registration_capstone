@@ -73,18 +73,28 @@ class RegisterBoatController extends Controller
             'owner_id' => 'nullable',
             'registration_no' => 'required',
             'registration_date' => 'required',
-            'vessel_name' => 'required',
-            'vessel_type' => 'required',
-            'horsepower' => 'required',
-            'color' => 'required',
-            'length' => 'required',
-            'breadth' => 'required',
-            'depth' => 'required',
-            'body_number' => 'required',
-            'materials_used' => 'required',
-            'year_built' => 'required',
-            'gross_tonnage' => 'required',
+            'vessel_name' => ['required'],
+            'vessel_type' => ['required'],
+            'home_port' => ['required'],
+            'place_built' => ['required'],
+            'year_built' => ['required'],
+            'engine_make' => ['nullable'],
+            'serial_number' => ['nullable'],
+            'horsepower' => ['nullable'],
+            'body_number' => ['required'],
+            'color' => ['required', 'regex:/^[a-zA-Z\s]*$/'], // letters only
+            'length' => ['required'],
+            'breadth' => ['required'],
+            'tonnage_length' => ['required'],
+            'tonnage_breadth' => ['required'],
+            'tonnage_depth' => ['required'],
+            'gross_tonnage' => ['required'],
+            'net_tonnage' => ['required'],
+            'depth' => ['required'],
+            'materials_used' => ['required'],
         ]);
+
+        // dd($validated);
 
         // to prevent duplicate entries
         $boatReg = RegisterBoat::where('registration_no', $validated['registration_no'])->first();
@@ -92,31 +102,38 @@ class RegisterBoatController extends Controller
         if ($boatReg) {
             $boatReg->update(Arr::only($validated, ['registration_date']));
         } else {
-            $boatReg = new RegisterBoat();
-            $boatReg->user_id = auth()->user()->id;
-            $boatReg->registration_no = $validated['registration_no'];
-            $boatReg->registration_date = $validated['registration_date'];
-            $boatReg->owner_info_id = $validated['owner_id'];
-            $boatReg->registration_type = 'new';
-
-            $boatReg->save();
+            $boatReg = RegisterBoat::create([
+                'user_id' => auth()->user()->id,
+                'registration_no' => $validated['registration_no'],
+                'registration_date' => $validated['registration_date'],
+                'owner_info_id' => $validated['owner_id'],
+                'registration_type' => 'new',
+            ]);
         }
 
         $owners = Boat::create([
             'user_id' => auth()->user()->id,
             'register_boat_id' => $boatReg->id,
             'owner_id' => $validated['owner_id'],
-            'boat_type' => $validated['vessel_type'],
             'vessel_name' => $validated['vessel_name'],
-            'horsepower' => $validated['horsepower'],
+            'boat_type' => $validated['vessel_type'],
+            'home_port' => $validated['home_port'],
+            'place_built' => $validated['place_built'],
+            'year_built' => $validated['year_built'],
+            'engine_make' => $validated['engine_make'],
+            'serial_number' => $validated['serial_number'],
+            'horsepower' => $validated['horsepower'] ?? '',
             'color' => $validated['color'],
             'length' => $validated['length'],
             'breadth' => $validated['breadth'],
             'depth' => $validated['depth'],
             'body_number' => $validated['body_number'],
             'materials' => $validated['materials_used'],
-            'year_built' => $validated['year_built'],
+            'tonnage_length' => $validated['tonnage_length'],
+            'tonnage_breadth' => $validated['tonnage_breadth'],
+            'tonnage_depth' => $validated['tonnage_depth'],
             'gross_tonnage' => $validated['gross_tonnage'],
+            'net_tonnage' => $validated['net_tonnage'],
         ]);
 
         return redirect()->route('reg-boat.index')->with('success', 'Boat record added. Please wait for confirmation regarding your registration!');
@@ -132,17 +149,25 @@ class RegisterBoatController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'vessel_name' => 'required',
-            'vessel_type' => 'required',
-            'horsepower' => 'required',
-            'color' => 'required',
-            'length' => 'required',
-            'breadth' => 'required',
-            'depth' => 'required',
-            'body_number' => 'required',
-            'materials_used' => 'required',
-            'year_built' => 'required',
-            'gross_tonnage' => 'required',
+            'vessel_name' => ['required'],
+            'vessel_type' => ['required'],
+            'home_port' => ['required'],
+            'place_built' => ['required'],
+            'year_built' => ['required'],
+            'engine_make' => ['nullable'],
+            'serial_number' => ['nullable'],
+            'horsepower' => ['nullable'],
+            'body_number' => ['required'],
+            'color' => ['required', 'regex:/^[a-zA-Z\s]*$/'], // letters only
+            'length' => ['required'],
+            'breadth' => ['required'],
+            'tonnage_length' => ['required'],
+            'tonnage_breadth' => ['required'],
+            'tonnage_depth' => ['required'],
+            'gross_tonnage' => ['required'],
+            'net_tonnage' => ['required'],
+            'depth' => ['required'],
+            'materials_used' => ['required'],
         ]);
 
         // dd($validated);
