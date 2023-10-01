@@ -38,12 +38,13 @@
         }
 
         .container-login {
-            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/webp/sb.webp') }}") left no-repeat;
+            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/webp/sb-orig.webp') }}") left no-repeat;
             background-attachment: fixed;
             position: relative;
-            height: auto;
+            height: 100vh;
             font-family: 'Roboto', sans-serif;
             background-size: contain;
+            background-position: left;
         }
 
         .container-register {
