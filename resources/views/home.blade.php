@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    -
-    <div class="content">
+    <div class="content mt-3 mb-0">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="card-body text-start d-flex align-items-center">
                             <img src="{{ asset('images/kindpng_3354824.png') }}" alt="books" height="50px">
                             <h4 class="text-left text-uppercase font-weight-bolder ml-2 mr-2">Have A Nice Day</h4>
@@ -17,13 +16,11 @@
                 </div>
             </div>
             @unlessrole('user')
-                {{-- @if (auth()->user()->role != 'user') --}}
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card">
+                        <div class="card shadow">
                             <div class="card-body card-bcc">
                                 <p class="card-text">
-                                    {{-- {{ __('You are logged in!') }} --}}
                                 </p>
                                 <div class="row">
                                     <div class="col-md-3 col-6">
@@ -81,7 +78,6 @@
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
-                                    <!-- ./col -->
                                 </div>
                             </div>
                         </div>
@@ -89,12 +85,11 @@
                 </div>
             @endunlessrole
             @unlessrole('admin')
-                {{-- @if (auth()->user()->role != 'admin')n --}}
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card" style="height: 335px;">
+                        <div class="card shadow" style="height: 335px;">
                             <div class="card-header border-0">
-                                <h3 class="card-title">Pending Registrations</h3>
+                                <h3 class="card-title fw-bold">Pending Registrations</h3>
                             </div>
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
@@ -125,9 +120,9 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card" style="height: 335px;">
+                        <div class="card shadow " style="height: 335px;">
                             <div class="card-header border-0">
-                                <h3 class="card-title">Announcements</h3>
+                                <h3 class="card-title fw-bold">Announcements</h3>
                             </div>
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
@@ -172,10 +167,6 @@
                                                                 {{ $announcement->content }}
                                                             </p>
                                                         </div>
-                                                        {{-- <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary float-right"
-                                                        data-dismiss="modal">Close</button>
-                                                </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,15 +182,6 @@
                     </div>
                 </div>
             @endunlessrole
-            {{-- @endif --}}
-
-            {{-- @if (auth()->user()->role != 'user')
-                <div class="row">
-                    <div class="col-md-6">
-
-                    </div>
-                </div>
-            @endif --}}
         </div>
     </div>
 @endsection

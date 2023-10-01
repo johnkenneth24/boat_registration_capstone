@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <x-success></x-success>
-                    <div class="card mt-5">
+                    <div class="card mt-5 shadow-lg">
                         <div class="card-header pb-0">
                             <div class="card-title align-middle mb-0">
                                 @role('user')
