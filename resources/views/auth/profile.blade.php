@@ -58,7 +58,7 @@
                                                             {{ $message }}
                                                         </div>
                                                     @enderror
-                                                </div>
+                                                </div>8
                                                 <input type="hidden" name="role" value="{{ auth()->user()->role }}">
                                                 <div class="form-group col-md-6">
                                                     <label>Contact Number</label>

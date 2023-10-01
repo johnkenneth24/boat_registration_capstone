@@ -64,7 +64,8 @@
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
-                            <p class="text-danger small" id="passwordError"></p>
+                            <p class="text-danger small ml-3" id="passwordError"
+                                style="text-align: left; margin-left: 40px;"></p>
                         </div>
                         <div class="form-group mb-2 mt-4">
                             <div class="input-group">
@@ -76,7 +77,7 @@
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
-                            <p class="text-danger" id="passwordConfirmationError"></p>
+                            <p class="text-danger small" id="passwordConfirmationError"></p>
                             @error('password_confirmation')
                                 <div class="invalid-feedback" style="display: inline-block !important;">
                                     {{ $message }}
@@ -98,7 +99,6 @@
                     <img src="{{ asset('images/lgo.png') }}" alt="bulan-logo" height="300px" class="img-fluid">
                 </div>
                 <div class="col-md-3 mt-3"></div>
-
             </div>
         </div>
     </div>
@@ -106,13 +106,49 @@
 
 @section('scripts')
     <script>
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('passwordError');
+
+            // Define your validation conditions
+            const conditions = [
+                password.length >= 8,
+                /(?=.*[A-Z])(?=.*[a-z])/.test(password),
+                /\d/.test(password)
+            ];
+
+            // Display checkmark (green) or X mark (red) for each condition
+            const icons = conditions.map(condition => condition ? '<i class="fas fa-check text-success"></i>' :
+                '<i class="fas fa-times text-danger"></i>');
+
+            // Create a list of validation messages
+            const messages = [
+                'Minimum of 8 characters',
+                'Should have an uppercase and lowercase letter',
+                'Should have a number'
+            ];
+
+            // Generate the final error message
+            errorElement.innerHTML = '';
+            for (let i = 0; i < conditions.length; i++) {
+                const message = conditions[i] ? `<span class="text-success">${icons[i]} ${messages[i]}</span>` :
+                    `${icons[i]} ${messages[i]}`;
+                errorElement.innerHTML += message + '<br>';
+            }
+        }
+
+        // Add an event listener to validate the password confirmation on input
+        document.getElementById('password').addEventListener('input', validatePassword);
+    </script>
+
+    {{-- make a script to hide or show the password value on click of showPasswordBtn --}}
+    <script>
         const passwordField = document.getElementById('password');
         const passwordConfirmationField = document.getElementById('passwordConfirmation');
         const passwordConfirmationError = document.getElementById('passwordConfirmationError');
         const passwordError = document.getElementById('passwordError');
         const showPasswordBtn = document.getElementById('showPasswordBtn');
         const showPasswordConfirmationBtn = document.getElementById('showPasswordConfirmationBtn');
-
 
         showPasswordBtn.addEventListener('click', function() {
             if (passwordField.type === 'password') {
@@ -134,29 +170,6 @@
             }
         });
 
-
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}$/;
-        // At least one uppercase letter, one lowercase letter, and one number
-
-        // Real-time password validation
-        passwordField.addEventListener('input', function() {
-            // Check if the password passes the validation rules
-            if (!passwordRegex.test(passwordField.value)) {
-                // Add the `is-invalid` class to the password field and display error message
-                passwordField.classList.add('is-invalid');
-                passwordField.setCustomValidity(
-                    'The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.'
-                );
-                passwordError.innerHTML =
-                    'The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.';
-            } else {
-                // Remove the `is-invalid` class from the password field and the message
-                passwordField.classList.remove('is-invalid');
-                passwordField.setCustomValidity('');
-                passwordError.innerHTML = '';
-            }
-        });
-
         passwordConfirmationField.addEventListener('input', function() {
             // Check if the passwords match
             if (passwordField.value !== passwordConfirmationField.value) {
@@ -164,12 +177,17 @@
                 passwordConfirmationField.classList.add('is-invalid');
                 // Display an error message
                 passwordConfirmationField.setCustomValidity('The passwords do not match.');
-                passwordConfirmationError.innerHTML = 'The passwords do not match.';
+                // icon for x mark
+                passwordConfirmationError.innerHTML = '<i class="fas fa-times text-danger"></i>' +
+                    ' The passwords do not match.';
             } else {
                 // remove error message
                 passwordConfirmationField.classList.remove('is-invalid');
                 passwordConfirmationField.setCustomValidity('');
-                passwordConfirmationError.innerHTML = '';
+                // a message with class of text-success
+                passwordConfirmationError.innerHTML = '<span class="text-success">' +
+                    '<i class="fas fa-check text-success"></i>' +
+                    ' The passwords match.' + '</span>';
             }
         });
     </script>

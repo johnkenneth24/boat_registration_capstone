@@ -34,29 +34,36 @@
             background-color: #F2F42E;
             clip-path: ellipse(50% 100% at 0% 50%);
             z-index: 1;
+            overflow: hidden;
         }
 
         .container-login {
             background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/webp/sb.webp') }}") left no-repeat;
             background-attachment: fixed;
             position: relative;
-            height: 100vh;
+            height: auto;
             font-family: 'Roboto', sans-serif;
+            background-size: contain;
         }
 
         .container-register {
-            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/webp/sb.webp') }}") right no-repeat;
+            background: linear-gradient(rgba(66, 68, 142, 0.5), rgba(66, 68, 142, 0.5)), url("{{ asset('images/webp/sb-ai generated.webp') }}") right no-repeat;
             background-attachment: fixed;
             position: relative;
-            height: 100vh;
+            height: 110vh;
             font-family: 'Roboto', sans-serif;
+            background-size: cover;
         }
 
         .con-log,
         .con-reg {
             position: relative;
             z-index: 2;
-            height: 100vh;
+            height: 100%;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
         }
     </style>
     @yield('styles')
