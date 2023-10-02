@@ -29,7 +29,7 @@
                             @endrole
                         </div>
                         <div class="card-body p-0">
-                            <table class="table table-sm table-hover table-borderless">
+                            <table class="table table-responsive-md table-sm table-hover table-borderless">
                                 <thead class="thead-dark">
                                     <tr class="align-middle">
                                         <th>#</th>
@@ -51,7 +51,7 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->contact_no ?? '' }}</td>
                                             <td class="d-flex justify-content-center align-middle">
-                                                {{-- hides this action buttons once uses has role of admin --}}
+                                                {{-- hides this action buttons once user has role of admin --}}
                                                 @if (!$user->hasRole('admin'))
                                                     @role('admin')
                                                         <a href="{{ route('users.edit', $user->id) }}"

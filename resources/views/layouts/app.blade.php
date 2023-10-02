@@ -15,21 +15,21 @@
     <link rel="shortcut icon" href="{{ asset('images/lgo.png') }}" type="image/x-icon">
     {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
     <style>
-        .nav .nav-item-active {
+        .nav .nav-item .nav-item-active {
             background-color: #2094f4;
             color: white !important;
             border-radius: 3px;
             padding-bottom: 0;
         }
 
-        .nav-tree-view-active {
-            background-color: #43b3d1;
+        .nav .nav-item .nav-treeview .nav-item.nav-tree-view-active {
+            background-color: #61ddff;
             color: white !important;
             border-radius: 3px;
             padding-bottom: 0;
         }
 
-        .nav-link {
+        .nav .nav-item .nav-link {
             width: auto !important;
         }
 
@@ -43,10 +43,11 @@
             border-radius: 3px;
         }
 
-        .nav .nav-item .nav-treeview .nav-link:hover {
+        .nav .nav-item .nav-treeview .nav-item.nav-tree-view-active:hover {
             background-color: #43b3d1;
             color: white !important;
             border-radius: 3px;
+            padding-bottom: 0;
             overflow: hidden !important;
         }
 

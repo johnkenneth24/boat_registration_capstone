@@ -18,22 +18,22 @@ class RegisterBoatController extends Controller
         if ($roleName === 'admin' || $roleName === 'staff') {
             $search = $request->input('search');
 
-            $query = RegisterBoat::query()->with(['ownerInfo', 'boat'])->where('status', 'registered')->orderBy('created_at', 'asc');
-
-            if ($query) {
-                $query->where('registration_no', 'like', '%' . $search . '%')
-                    ->orWhere('registration_date', 'like', '%' . $search . '%')
-                    ->orWhere('status', 'like', '%' . $search . '%')
-                    ->orWhereHas('ownerInfo', function ($query) use ($search) {
-                        $query->where('first_name', 'like', '%' . $search . '%')
-                            ->orWhere('middle_name', 'like', '%' . $search . '%')
-                            ->orWhere('last_name', 'like', '%' . $search . '%');
-                    })
-                    ->orWhereHas('boat', function ($query) use ($search) {
-                        $query->where('vessel_name', 'like', '%' . $search . '%')
-                            ->orWhere('boat_type', 'like', '%' . $search . '%');
-                    });
-            }
+            $query = RegisterBoat::where('status', 'registered')
+                ->with(['ownerInfo', 'boat'])
+                ->where(function ($query) use ($search) {
+                    $query->where('registration_no', 'like', '%' . $search . '%')
+                        ->orWhere('registration_date', 'like', '%' . $search . '%')
+                        ->orWhereHas('ownerInfo', function ($query) use ($search) {
+                            $query->where('first_name', 'like', '%' . $search . '%')
+                                ->orWhere('middle_name', 'like', '%' . $search . '%')
+                                ->orWhere('last_name', 'like', '%' . $search . '%');
+                        })
+                        ->orWhereHas('boat', function ($query) use ($search) {
+                            $query->where('vessel_name', 'like', '%' . $search . '%')
+                                ->orWhere('boat_type', 'like', '%' . $search . '%');
+                        });
+                })
+                ->orderBy('created_at', 'asc');
 
             $registeredBoats = $query->paginate(10);
 
@@ -47,12 +47,32 @@ class RegisterBoatController extends Controller
         }
     }
 
-    public function pendingRegBoats()
+    public function pendingRegBoats(Request $request)
     {
-        $pendingBoats = RegisterBoat::with('ownerInfo')->where('status', 'pending')->paginate(10);
+        $search = $request->input('search');
+
+        $query = RegisterBoat::where('status', 'pending')
+            ->with(['ownerInfo', 'boat'])
+            ->where(function ($query) use ($search) {
+                $query->where('registration_no', 'like', '%' . $search . '%')
+                    ->orWhere('registration_date', 'like', '%' . $search . '%')
+                    ->orWhereHas('ownerInfo', function ($query) use ($search) {
+                        $query->where('first_name', 'like', '%' . $search . '%')
+                            ->orWhere('middle_name', 'like', '%' . $search . '%')
+                            ->orWhere('last_name', 'like', '%' . $search . '%');
+                    })
+                    ->orWhereHas('boat', function ($query) use ($search) {
+                        $query->where('vessel_name', 'like', '%' . $search . '%')
+                            ->orWhere('boat_type', 'like', '%' . $search . '%');
+                    });
+            })
+            ->orderBy('created_at', 'asc');
+
+        $pendingBoats = $query->paginate(10);
 
         return view('modules.register-boat.pending', compact('pendingBoats'));
     }
+
 
     public function create()
     {
@@ -73,16 +93,16 @@ class RegisterBoatController extends Controller
             'owner_id' => 'nullable',
             'registration_no' => 'required',
             'registration_date' => 'required',
-            'vessel_name' => ['required'],
+            'vessel_name' => ['required', 'unique:boats,vessel_name'],
             'vessel_type' => ['required'],
             'home_port' => ['required'],
             'place_built' => ['required'],
             'year_built' => ['required'],
             'engine_make' => ['nullable'],
-            'serial_number' => ['nullable'],
+            'serial_number' => ['nullable', 'unique:boats,serial_number'],
             'horsepower' => ['nullable'],
             'body_number' => ['required'],
-            'color' => ['required', 'regex:/^[a-zA-Z\s]*$/'], // letters only
+            'color' => ['required', 'regex:/^[a-zA-Z, ]*$/'], // letters and comma only
             'length' => ['required'],
             'breadth' => ['required'],
             'tonnage_length' => ['required'],
@@ -199,18 +219,28 @@ class RegisterBoatController extends Controller
         return view('modules.register-boat.samplewithaddItem');
     }
 
-    public function process_registration()
+    public function view($id)
     {
-        return view('modules.register-boat.process.index');
+        $boatReg = RegisterBoat::with('boat')->find($id);
+
+        return view('modules.register-boat.pending-view', compact('boatReg'));
     }
 
-    public function mfr_form()
+    public function approve($id)
     {
-        return view('modules.register-boat.mfr-form.create');
+        $boatReg = RegisterBoat::find($id);
+        $boatReg->status = 'registered';
+        $boatReg->save();
+
+        return redirect()->route('reg-boat.pending')->with('success', 'Boat Registration successfully approved!');
     }
 
-    public function adss_form()
+    public function disapprove($id)
     {
-        return view('modules.register-boat.ads-form.create');
+        $boatReg = RegisterBoat::find($id);
+        $boatReg->status = 'disapprove';
+        $boatReg->save();
+
+        return redirect()->route('reg-boat.pending')->with('success', 'Boat Registration successfully disapproved!');
     }
 }

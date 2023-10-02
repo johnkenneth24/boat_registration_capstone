@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="card-body p-0">
-                            <table class="table table-hover table-responsive-md">
+                            <table class="table table-sm table-hover">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th style="min-width: 250px;" class="text-center">Subject</th>

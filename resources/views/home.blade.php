@@ -5,6 +5,19 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    @role('user')
+                        @if (!$owner_info)
+                            <div class="alert alert-custom shadow bg-warning fade show d-flex justify-content-start"
+                                role="alert">
+                                <div class="alert-icon me-2"><i class="fas fa-exclamation-triangle"></i></div>
+                                <div class="alert-text">Please complete owner information before proceeding with the
+                                    registration. <a href="{{ route('owner-info.index') }}" class="text-black fw-bold">Click
+                                        here</a> for
+                                    more information.
+                                </div>
+                            </div>
+                        @endif
+                    @endrole
                     <div class="card shadow">
                         <div class="card-body text-start d-flex align-items-center">
                             <img src="{{ asset('images/kindpng_3354824.png') }}" alt="books" height="50px">
@@ -60,8 +73,8 @@
                                             <div class="icon">
                                                 <i class="fas fa-user-check" aria-hidden="true"></i>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
+                                            <a href="{{ route('owner-info.registered-owners') }}" class="small-box-footer">More
+                                                info <i class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
 
@@ -96,7 +109,7 @@
                                     <thead>
                                         <tr class="text-center align-middle">
                                             <th>Serial Number</th>
-                                            <th>Date Registered</th>
+                                            <th>Registration Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
