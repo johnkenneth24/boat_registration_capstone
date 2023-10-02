@@ -34,11 +34,15 @@ class HomeController extends Controller
             $pendings = RegisterBoat::where('user_id', $user_id)->where('status', 'pending')->paginate(10);
         }
 
-        $owners = OwnerInfo::all();
+        $owner_info = OwnerInfo::where('user_id', auth()->user()->id)->first();
+        // dd($owner_info);
+
+
+        $owners = OwnerInfo::where('status', 'registered')->get();
         $ownerCount = $owners->count();
 
         $announcements = Announcements::all();
 
-        return view('home', compact('rBoats', 'registeredCount', 'pendingCount', 'pendings', 'renewalCount', 'expiredCount', 'ownerCount', 'announcements'));
+        return view('home', compact('rBoats', 'registeredCount', 'pendingCount', 'pendings', 'renewalCount', 'expiredCount', 'ownerCount', 'announcements', 'owner_info'));
     }
 }

@@ -17,7 +17,7 @@
                                     </div>
                                     <div class="form-group col-md-1">
                                         <label>Salutation</label>
-                                        <select name="salutation" class="form-control form-control-sm">
+                                        <select name="salutation" class="form-control form-control-sm" autofocus required>
                                             <option value="">----</option>
                                             @foreach ($salutations as $salutation)
                                                 <option value="{{ $salutation }}"
@@ -52,7 +52,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label>Middlename <span class="text-danger">*</span></label>
+                                        <label>Middlename </label>
                                         <input type="text" name="middle_name"
                                             class="form-control form-control-sm @error('middle_name') is-invalid @enderror"
                                             value="{{ $ownerInfo?->middle_name ?: old('middle_name') }}"
@@ -199,7 +199,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-md-2">
+                                    <div class="form-group col-md-4">
                                         <label>Number of Children</label>
                                         <input type="number" name="children_count"
                                             value="{{ $ownerInfo?->children_count ?: old('children_count') }}"class="form-control form-control-sm @error('children_count') is-invalid @enderror">

@@ -127,7 +127,7 @@
                                                 <div class="form-group col-md-12">
                                                     <label>Type of Fishing Vessel <span class="text-danger">*</span></label>
                                                     <select name="vessel_type" required class="form-control form-control-sm"
-                                                        id="vessel_type">
+                                                        required id="vessel_type">
                                                         <option value="">--Please Select--</option>
                                                         <option value="Motorized">Motorized</option>
                                                         <option value="Non-Motorized">Non-Motorized</option>

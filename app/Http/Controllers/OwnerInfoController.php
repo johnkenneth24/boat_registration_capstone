@@ -259,6 +259,14 @@ class OwnerInfoController extends Controller
         $ownerInfo->save();
 
         return redirect()->route('owner-info.pending-owners')->with('success', 'Owner Information successfully approved!');
+    }
 
+    public function archive($id)
+    {
+        $ownerInfo = OwnerInfo::find($id);
+        $ownerInfo->status = 'archived';
+        $ownerInfo->save();
+
+        return redirect()->route('owner-info.pending-owners')->with('success', 'Owner Information archived successfully!');
     }
 }
