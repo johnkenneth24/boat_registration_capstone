@@ -52,13 +52,13 @@
                                 <p>Registered Owners</p>
                             </a>
                         </li>
-                        <li
+                        {{-- <li
                             class="nav-item pl-3 pr-0 {{ request()->routeIs('owner-info.pending-owners') ? 'nav-tree-view-active' : '' }}">
                             <a href="{{ route('owner-info.pending-owners') }}" class="nav-link">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                                 <p>Pending Registration</p>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 @endunlessrole
             </li>

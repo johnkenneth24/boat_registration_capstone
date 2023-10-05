@@ -15,7 +15,14 @@
     <link rel="shortcut icon" href="{{ asset('images/lgo.png') }}" type="image/x-icon">
     {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
     <style>
-        .nav .nav-item .nav-item-active {
+        .nav>li.nav-item.nav-item-active {
+            background-color: #2094f4;
+            color: white !important;
+            border-radius: 3px;
+            padding-bottom: 0;
+        }
+
+        .nav-item>a.nav-link.nav-item-active {
             background-color: #2094f4;
             color: white !important;
             border-radius: 3px;

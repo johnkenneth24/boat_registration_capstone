@@ -239,27 +239,27 @@ class OwnerInfoController extends Controller
 
     public function regOwners()
     {
-        $regOwners = OwnerInfo::with('livelihood')->where('status', 'registered')->paginate(10);
+        $regOwners = OwnerInfo::with('livelihood')->paginate(10);
 
         return view('modules.owner-info.reg-owners', compact('regOwners'));
     }
 
-    public function pendingOwners()
-    {
-        $pendingOwners = OwnerInfo::with('livelihood')->where('status', 'pending')->paginate(10);
+    // public function pendingOwners()
+    // {
+    //     $pendingOwners = OwnerInfo::with('livelihood')->where('status', 'pending')->paginate(10);
 
-        return view('modules.owner-info.pending-owners', compact('pendingOwners'));
-    }
+    //     return view('modules.owner-info.pending-owners', compact('pendingOwners'));
+    // }
 
-    public function approve($id)
-    {
-        // find OwnerInfo with id of $id and update status to registered
-        $ownerInfo = OwnerInfo::find($id);
-        $ownerInfo->status = 'registered';
-        $ownerInfo->save();
+    // public function approve($id)
+    // {
+    //     // find OwnerInfo with id of $id and update status to registered
+    //     $ownerInfo = OwnerInfo::find($id);
+    //     $ownerInfo->status = 'registered';
+    //     $ownerInfo->save();
 
-        return redirect()->route('owner-info.pending-owners')->with('success', 'Owner Information successfully approved!');
-    }
+    //     return redirect()->route('owner-info.pending-owners')->with('success', 'Owner Information successfully approved!');
+    // }
 
     public function archive($id)
     {
