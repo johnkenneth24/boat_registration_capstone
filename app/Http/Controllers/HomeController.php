@@ -38,7 +38,7 @@ class HomeController extends Controller
         // dd($owner_info);
 
 
-        $owners = OwnerInfo::where('status', 'registered')->get();
+        $owners = OwnerInfo::all();
         $ownerCount = $owners->count();
 
         $announcements = Announcements::all();

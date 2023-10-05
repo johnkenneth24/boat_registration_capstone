@@ -67,7 +67,8 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">Educational Background:</th>
-                                                <td>{{ $ownerInfo->educ_background ?? '' }}</td>
+                                                <td>{{ $ownerInfo->educ_background ?? ($ownerInfo->other_educ_background ?? '') }}
+                                                </td>
                                                 <th scope="row">No. of Children:</th>
                                                 <td>{{ $ownerInfo->children_count ?? 'none' }}</td>
                                             </tr>

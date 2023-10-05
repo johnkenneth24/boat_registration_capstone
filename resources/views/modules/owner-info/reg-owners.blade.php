@@ -30,9 +30,8 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Application Date</th>
-                                        <th>Date Approved</th>
                                         <th>Address</th>
-                                        <th>Status</th>
+                                        {{-- <th>Status</th> --}}
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -41,9 +40,8 @@
                                         <tr>
                                             <td>{{ $regOwner->full_name }}</td>
                                             <td>{{ $regOwner->created_at->format('M. d, Y') }}</td>
-                                            <td>{{ $regOwner->updated_at->format('M. d, Y') }}</td>
                                             <td>{{ $regOwner->address }}</td>
-                                            <td>{{ ucfirst($regOwner->status) }}</td>
+                                            {{-- <td>{{ ucfirst($regOwner->status) }}</td> --}}
                                             <td class="d-flex justify-content-center align-middle">
                                                 <button type="button" class="btn btn-sm btn-warning mr-2" title="VIEW"
                                                     data-toggle="modal" data-target="#viewModal{{ $regOwner->id }}">
