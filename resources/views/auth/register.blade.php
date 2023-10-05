@@ -9,7 +9,7 @@
                 <div class="col-md-6 p-0 mt-5">
                     <h4 class="text-center text-uppercase">BOAT REGISTRATION AND INFORMATION MANAGEMENT SYSTEM</h4>
                     <h6 class="text-center">Municipal Agriculture Office in Bulan, Sorsogon</h6>
-                    <hr class="border-white border-2 border text-white opacity-75 mb-5">
+                    <hr class="border-white border-2 border text-white opacity-75">
                 </div>
                 <div class="col-md-6"></div>
                 <div class="col-md-6 mt-0 d-flex justify-content-center">
@@ -64,6 +64,8 @@
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
+                            <p class="text-danger small ml-3" id="passwordError"
+                                style="text-align: left; margin-left: 40px;"></p>
                         </div>
                         <div class="form-group mb-2 mt-4">
                             <div class="input-group">
@@ -75,12 +77,14 @@
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
+                            <p class="text-danger small" id="passwordConfirmationError"></p>
                             @error('password_confirmation')
                                 <div class="invalid-feedback" style="display: inline-block !important;">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mt-2">
                             <input class="btn btn-primary btn-md col-md-5 mt-2 rounded-pill text-uppercase" type="submit"
                                 value="Register">
@@ -95,7 +99,6 @@
                     <img src="{{ asset('images/lgo.png') }}" alt="bulan-logo" height="300px" class="img-fluid">
                 </div>
                 <div class="col-md-3 mt-3"></div>
-
             </div>
         </div>
     </div>
@@ -103,8 +106,47 @@
 
 @section('scripts')
     <script>
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('passwordError');
+
+            // Define your validation conditions
+            const conditions = [
+                password.length >= 8,
+                /(?=.*[A-Z])(?=.*[a-z])/.test(password),
+                /\d/.test(password)
+            ];
+
+            // Display checkmark (green) or X mark (red) for each condition
+            const icons = conditions.map(condition => condition ? '<i class="fas fa-check text-success"></i>' :
+                '<i class="fas fa-times text-danger"></i>');
+
+            // Create a list of validation messages
+            const messages = [
+                'Minimum of 8 characters',
+                'Should have an uppercase and lowercase letter',
+                'Should have a number'
+            ];
+
+            // Generate the final error message
+            errorElement.innerHTML = '';
+            for (let i = 0; i < conditions.length; i++) {
+                const message = conditions[i] ? `<span class="text-success">${icons[i]} ${messages[i]}</span>` :
+                    `${icons[i]} ${messages[i]}`;
+                errorElement.innerHTML += message + '<br>';
+            }
+        }
+
+        // Add an event listener to validate the password confirmation on input
+        document.getElementById('password').addEventListener('input', validatePassword);
+    </script>
+
+    {{-- make a script to hide or show the password value on click of showPasswordBtn --}}
+    <script>
         const passwordField = document.getElementById('password');
         const passwordConfirmationField = document.getElementById('passwordConfirmation');
+        const passwordConfirmationError = document.getElementById('passwordConfirmationError');
+        const passwordError = document.getElementById('passwordError');
         const showPasswordBtn = document.getElementById('showPasswordBtn');
         const showPasswordConfirmationBtn = document.getElementById('showPasswordConfirmationBtn');
 
@@ -128,19 +170,24 @@
             }
         });
 
-        passwordField.addEventListener('input', function() {
-            if (passwordField.value !== passwordConfirmationField.value) {
-                passwordConfirmationField.classList.add('is-invalid');
-            } else {
-                passwordConfirmationField.classList.remove('is-invalid');
-            }
-        });
-
         passwordConfirmationField.addEventListener('input', function() {
+            // Check if the passwords match
             if (passwordField.value !== passwordConfirmationField.value) {
+                // Add the `is-invalid` class to the password confirmation field
                 passwordConfirmationField.classList.add('is-invalid');
+                // Display an error message
+                passwordConfirmationField.setCustomValidity('The passwords do not match.');
+                // icon for x mark
+                passwordConfirmationError.innerHTML = '<i class="fas fa-times text-danger"></i>' +
+                    ' The passwords do not match.';
             } else {
+                // remove error message
                 passwordConfirmationField.classList.remove('is-invalid');
+                passwordConfirmationField.setCustomValidity('');
+                // a message with class of text-success
+                passwordConfirmationError.innerHTML = '<span class="text-success">' +
+                    '<i class="fas fa-check text-success"></i>' +
+                    ' The passwords match.' + '</span>';
             }
         });
     </script>

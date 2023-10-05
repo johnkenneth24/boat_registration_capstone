@@ -6,34 +6,70 @@
             <div class="row">
                 <div class="col-md-12">
                     <x-success></x-success>
-                    <div class="card mt-5">
-                        <div class="card-header">
-                            <div class="card-title">
+                    <div class="card  card-outline card-warning mt-5 shadow-lg">
+                        <div class="card-header pb-0">
+                            <div class="card-title align-middle mb-0">
                                 @role('user')
-                                    <h4>Boat Registration</h4>
+                                    @if ($ownerInfo != null)
+                                        <h4>Boat Registration</h4>
+                                    @endif
                                 @endrole
-                                @role('staff')
+                                @role('staff|admin')
                                     <h4>Registered Boats</h4>
                                 @endrole
                             </div>
-                            @role('user')
-                                <div class="card-tools">
-                                    <a href="{{ route('reg-boat.create') }}" class="btn btn-success">Create Registration</a>
+                            @role('admin|staff')
+                                <div class="card-tools d-flex justify-content-end">
+                                    <div class="d-sm-none d-md-block">
+                                        <form action="{{ route('reg-boat.index') }}" method="get">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input class="form-control form-control-md d-sm-none d-md-block mr-3"
+                                                    type="search" placeholder="Search..." name="search" style="width: 300px;"
+                                                    autofocus>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <a href="#" class="btn btn-success mb-1"> <span><i class="fa fa-plus"
+                                                    aria-hidden="true"></i></span>
+                                            Create Registration (Walk-in)</a>
+                                    </div>
                                 </div>
+                            @endrole
+                            @role('user')
+                                @if ($ownerInfo == null)
+                                    <div class="alert shadow alert-custom shadow bg-warning fade show d-flex justify-content-start"
+                                        role="alert">
+                                        <div class="alert-icon me-2"><i class="fas fa-exclamation-triangle"></i></div>
+                                        <div class="alert-text">Please complete owner information before proceeding with the
+                                            registration. <a href="{{ route('owner-info.index') }}"
+                                                class="text-black fw-bold">Click
+                                                here</a> to edit owner information.
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="card-tools">
+                                        <a href="{{ route('reg-boat.create') }}" class="btn btn-success mb-1 mt-0"> <span><i
+                                                    class="fa fa-plus mr-2 mb-1" aria-hidden="true"></i></span>Create
+                                            Registration</a>
+                                    </div>
+                                @endif
                             @endrole
                         </div>
                         <div class="card-body p-0">
-                            <table class="table table-hover table-responsive-md  table-sm">
+                            <table class="table table-hover table-sm">
                                 <thead class="thead-dark">
                                     <tr class="text-center align-middle">
                                         <th>Registration No.</th>
-                                        @role('staff')
+                                        <th>Vessel Name</th>
+                                        @role('staff|admin')
                                             <th>Owner</th>
                                         @endrole
                                         <th>Date of Registration</th>
-                                        @role('user')
-                                            <th>Status</th>
-                                        @endrole
+                                        {{-- @role('user') --}}
+                                        <th>Status</th>
+                                        {{-- @endrole --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -41,14 +77,15 @@
                                     @forelse ($registeredBoats as $rBoats)
                                         <tr class="text-center align-middle">
                                             <td>{{ $rBoats->registration_no }}</td>
-                                            @role('staff')
+                                            <td>{{ $rBoats->boat->vessel_name ?? '' }}</td>
+                                            @role('staff|admin')
                                                 <td>{{ $rBoats->ownerInfo->fullname }}</td>
                                             @endrole
 
                                             <td>{{ date('M. d, Y', strtotime($rBoats->registration_date)) }}</td>
-                                            @role('user')
-                                                <td>{{ $rBoats->status }}</td>
-                                            @endrole
+                                            {{-- @role('user') --}}
+                                            <td>{{ $rBoats->status }}</td>
+                                            {{-- @endrole --}}
                                             <td class="">
                                                 {{-- <a href="{{ route('reg-boat.process') }}"
                                                     class="btn btn-sm btn-info">Process</a> --}}
@@ -58,7 +95,8 @@
                                                     class="btn btn-sm btn-primary">Edit</a>
 
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
-                                                    data-toggle="modal" data-target="#confirmationModal{{ $rBoats->id }}">
+                                                    data-toggle="modal"
+                                                    data-target="#confirmationModal{{ $rBoats->id }}">
                                                     DELETE
                                                 </button>
                                             </td>
@@ -97,7 +135,7 @@
                                         </div>
                                     @empty
                                         <tr>
-                                            <td colspan="4" class="text-center">No data available</td>
+                                            <td colspan="5" class="text-center">No data available</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

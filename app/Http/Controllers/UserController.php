@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -51,25 +52,18 @@ class UserController extends Controller
             'name' => 'required',
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
-            'contact_no' => [
-                'required',
-                'string',
-                'regex:/^(09\d{9})|(0\d{10})$/',
-            ],
-            'password' => 'required',
+            'contact_no' => ['required', 'decimal', 'regex:/^(09\d{9})|(0\d{10})$/'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
         ], $this->messages());
 
-        $user = new User();
-        $user->id_number = $validated['id_number'];
-        $user->name = $validated['name'];
-        $user->username = $validated['username'];
-        $user->email = $validated['email'];
-        $user->contact_no = $validated['contact_no'];
-        $user->password = bcrypt($validated['password']);
-
-        $user->assignRole('staff');
-
-        $user->save();
+        $user = User::create([
+            'id_number' => $validated['id_number'],
+            'name' => $validated['name'],
+            'username' => $validated['username'],
+            'email' => $validated['email'],
+            'contact_no' => $validated['contact_no'],
+            'password' => Hash::make($validated['password']),
+        ])->assignRole('staff');
 
         return redirect()->route('users.index')->with('success', 'Staff Account created successfully.');
 
@@ -147,25 +141,34 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users,email,' . auth()->user()->id,
-            'contact_no' => [
-                'required',
-                'string',
-                'regex:/^(09\d{9})|(0\d{10})$/',
-            ],
+            'contact_no' => ['required', 'min:11', 'regex:/^09\d{9}$/'],
             'username' => 'required|unique:users,username,' . auth()->user()->id,
-            'password' => 'required|min:8|confirmed',
         ], $this->messages());
 
         $user = User::findOrFail($id); // find the user by id
 
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-        $user->contact_no = $validated['contact_no'];
-        $user->username = $validated['username'];
-        $user->password = bcrypt($validated['password']);
-
-        $user->save(); //
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'contact_no' => $validated['contact_no'],
+            'username' => $validated['username'],
+        ]);
 
         return redirect()->back()->with('success', 'Profile successfully updated!');
+    }
+
+    public function passwordUpdate(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
+        ], $this->messages());
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return redirect()->back()->with('success', 'Password successfully updated!');
     }
 }

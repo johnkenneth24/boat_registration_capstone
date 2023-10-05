@@ -1,12 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    -
-    <div class="content">
+    <div class="content mt-3 mb-0">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
+                    @role('user')
+                        @if (!$owner_info)
+                            <div class="alert alert-custom shadow bg-warning fade show d-flex justify-content-start"
+                                role="alert">
+                                <div class="alert-icon me-2"><i class="fas fa-exclamation-triangle"></i></div>
+                                <div class="alert-text">Please complete owner information before proceeding with the
+                                    registration. <a href="{{ route('owner-info.index') }}" class="text-black fw-bold">Click
+                                        here</a> for
+                                    more information.
+                                </div>
+                            </div>
+                        @endif
+                    @endrole
+                    <div class="card shadow">
                         <div class="card-body text-start d-flex align-items-center">
                             <img src="{{ asset('images/kindpng_3354824.png') }}" alt="books" height="50px">
                             <h4 class="text-left text-uppercase font-weight-bolder ml-2 mr-2">Have A Nice Day</h4>
@@ -17,13 +29,11 @@
                 </div>
             </div>
             @unlessrole('user')
-                {{-- @if (auth()->user()->role != 'user') --}}
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card">
+                        <div class="card shadow">
                             <div class="card-body card-bcc">
                                 <p class="card-text">
-                                    {{-- {{ __('You are logged in!') }} --}}
                                 </p>
                                 <div class="row">
                                     <div class="col-md-3 col-6">
@@ -63,8 +73,8 @@
                                             <div class="icon">
                                                 <i class="fas fa-user-check" aria-hidden="true"></i>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
+                                            <a href="{{ route('owner-info.registered-owners') }}" class="small-box-footer">More
+                                                info <i class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
 
@@ -81,7 +91,6 @@
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
-                                    <!-- ./col -->
                                 </div>
                             </div>
                         </div>
@@ -89,25 +98,28 @@
                 </div>
             @endunlessrole
             @unlessrole('admin')
-                {{-- @if (auth()->user()->role != 'admin')n --}}
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card" style="height: 335px;">
+                        <div class="card shadow" style="height: 335px;">
                             <div class="card-header border-0">
-                                <h3 class="card-title">Pending Registrations</h3>
+                                <h3 class="card-title fw-bold">Pending Registrations</h3>
                             </div>
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
                                         <tr class="text-center align-middle">
                                             <th>Serial Number</th>
-                                            <th>Date Registered</th>
+                                            <th>Registration Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($pendings as $pending)
                                             <tr class="text-center align-middle">
-                                                <td>{{ $pending->registration_no }}</td>
+                                                <td>
+                                                    <a href="{{ route('reg-boat.index') }}">
+                                                        {{ $pending->registration_no }}
+                                                    </a>
+                                                </td>
                                                 <td>{{ date('M. d, Y', strtotime($pending->registration_date)) }}</td>
                                             </tr>
                                         @empty
@@ -121,9 +133,9 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card" style="height: 335px;">
+                        <div class="card shadow " style="height: 335px;">
                             <div class="card-header border-0">
-                                <h3 class="card-title">Announcements</h3>
+                                <h3 class="card-title fw-bold">Announcements</h3>
                             </div>
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
@@ -138,9 +150,39 @@
                                         @forelse ($announcements as $announcement)
                                             <tr class="text-center align-middle">
                                                 <td>{{ $announcement->title }}</td>
-                                                <td>{{ $announcement->date }}</td>
-                                                <td><a href="">View</a></td>
+                                                <td>{{ $announcement->date->format('F d, Y') }}</td>
+                                                <td><button type="button" class="btn btn-sm btn-primary mr-2" title="VIEW"
+                                                        data-toggle="modal" data-target="#viewModal{{ $announcement->id }}">
+                                                        VIEW
+                                                    </button></td>
                                             </tr>
+                                            <div class="modal fade" id="viewModal{{ $announcement->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="viewModalLabel{{ $announcement->id }}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="viewModalLabel{{ $announcement->id }}">
+                                                                Announcement Details
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true" class="text-danger"
+                                                                    title="Close">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body mt-2 mb-2 text-center">
+                                                            <h4 class="text-center">{{ $announcement->title }}</h4>
+                                                            <span
+                                                                class="font-italic">{{ $announcement->date->format('F d, Y') }}
+                                                            </span>
+                                                            <p class="text-center text-justify mt-3">
+                                                                {{ $announcement->content }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @empty
                                             <tr>
                                                 <td colspan="3" class="text-center">No Announcements</td>
@@ -153,15 +195,6 @@
                     </div>
                 </div>
             @endunlessrole
-            {{-- @endif --}}
-
-            {{-- @if (auth()->user()->role != 'user')
-                <div class="row">
-                    <div class="col-md-6">
-
-                    </div>
-                </div>
-            @endif --}}
         </div>
     </div>
 @endsection

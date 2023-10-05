@@ -4,6 +4,7 @@ use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\OwnerInfoController;
 use App\Http\Controllers\RegisterBoatController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WalkInController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('profile', 'profile')->name('users.profile');
         Route::put('profile/{id}', 'profileUpdate')->name('users.profileUpdate');
+        Route::put('profilePassword/{id}', 'passwordUpdate')->name('users.passwordUpdate');
     });
 
     Route::controller(RegisterBoatController::class)->prefix('reg-boat')->group(function () {
@@ -42,9 +44,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/show/{id}', 'show')->name('reg-boat.show');
         Route::delete('destroy/{id}', 'destroy')->name('reg-boat.destroy');
 
-        Route::get('/process', 'process_registration')->name('reg-boat.process');
-
-        Route::get('/sample', 'sample')->name('reg-boat.sample');
+        Route::middleware(['role:admin|staff'])->group(function () {
+            Route::get('/approve/{id}', 'approve')->name('reg-boat.approve');
+            Route::get('/disapprove/{id}', 'disapprove')->name('reg-boat.disapprove');
+            Route::get('/view/{id}', 'view')->name('reg-boat.view');
+        });
     });
 
     Route::controller(ApplicantListController::class)->prefix('applist')->group(function () {
@@ -75,7 +79,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/registeredOwners', 'regOwners')->name('owner-info.registered-owners');
             Route::get('/pendingOwners', 'pendingOwners')->name('owner-info.pending-owners');
             Route::get('/approve/{id}', 'approve')->name('owner-info.approve');
+            Route::get('/archive/[id}', 'archive')->name('owner-info.archive');
         });
-
     });
+
+    Route::controller(WalkInController::class)->prefix('walk-in')->group(function () {
+        Route::get('/create', 'create')->name('walk-in.create');
+    })->middleware('role:admin|staff');
 });

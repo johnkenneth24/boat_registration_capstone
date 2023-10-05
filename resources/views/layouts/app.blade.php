@@ -15,14 +15,21 @@
     <link rel="shortcut icon" href="{{ asset('images/lgo.png') }}" type="image/x-icon">
     {{-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
     <style>
-        .nav .nav-item-active {
-            background-color: #6e7174;
+        .nav .nav-item .nav-item-active {
+            background-color: #2094f4;
             color: white !important;
             border-radius: 3px;
             padding-bottom: 0;
         }
 
-        .nav-link {
+        .nav .nav-item .nav-treeview .nav-item.nav-tree-view-active {
+            background-color: #61ddff;
+            color: white !important;
+            border-radius: 3px;
+            padding-bottom: 0;
+        }
+
+        .nav .nav-item .nav-link {
             width: auto !important;
         }
 
@@ -31,15 +38,16 @@
         }
 
         .nav .nav-item .nav-link:hover {
-            background-color: #96989b;
+            background-color: #43b3d1;
             color: white !important;
             border-radius: 3px;
         }
 
-        .nav .nav-item .nav-treeview .nav-link:hover {
-            background-color: #b1b3b7;
+        .nav .nav-item .nav-treeview .nav-item.nav-tree-view-active:hover {
+            background-color: #43b3d1;
             color: white !important;
             border-radius: 3px;
+            padding-bottom: 0;
             overflow: hidden !important;
         }
 
@@ -53,11 +61,12 @@
         }
 
         .content-wrapper {
-            background-image: linear-gradient(75deg, rgba(255, 247, 247, 0.763), rgba(0, 0, 0, 0.605)), url("{{ asset('images/sb-ai generated.jpg') }}");
+            /* background-image: linear-gradient(75deg, rgba(255, 247, 247, 0.763), rgba(0, 0, 0, 0.605)), url("{{ asset('images/sb-ai generated.jpg') }}");
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
-            background-position: right;
+            background-position: right; */
+            background-color: rgba(250, 250, 250, 0.979);
         }
 
         .form-group label {
@@ -91,13 +100,18 @@
             background-color: #e9ecef;
             color: #6c757d;
         }
+
+        /* hides the scrollbar */
+        body::-webkit-scrollbar {
+            display: none;
+        }
     </style>
     @yield('styles')
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light sticky-top">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light shadow-lg sticky-top">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
@@ -168,13 +182,13 @@
         }, 2000);
     </script>
 
-    <script>
+    {{-- <script>
         window.setTimeout(function() {
             $(".alert").fadeTo(1000, 0).slideUp(2000, function() {
                 $(this).remove();
             });
         }, 4000);
-    </script>
+    </script> --}}
 
     @yield('scripts')
 

@@ -24,8 +24,9 @@
                     </a>
                 </li>
             @endrole
-            <li class="nav-item {{ request()->routeIs(['owner-info.*']) ? 'nav-item-active' : '' }}">
-                <a href="#" class="nav-link">
+            <li class="nav-item">
+                <a href="#"
+                    class="nav-link pb-2 {{ request()->routeIs(['owner-info.*']) ? 'nav-item-active' : '' }}">
                     <i class="nav-icon fa fa-users" aria-hidden="true"></i>
                     <p>Owner Information
                         <i class="right fas fa-angle-right"></i>
@@ -33,7 +34,8 @@
                 </a>
                 @role('user')
                     <ul class="nav nav-treeview">
-                        <li class="nav-item pl-3 pr-0 ">
+                        <li
+                            class="nav-item {{ request()->routeIs(['owner-info.index']) ? 'nav-tree-view-active' : '' }} pl-3 pr-0 ">
                             <a href="{{ route('owner-info.index') }}" class="nav-link">
                                 <i class="fa fa-check-circle" aria-hidden="true"></i>
                                 <p>My information</p>
@@ -42,14 +44,16 @@
                     </ul>
                 @endrole
                 @unlessrole('user')
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item pl-3 pr-0 ">
+                    <ul class="nav-treeview">
+                        <li
+                            class="nav-item pl-3 pr-0 {{ request()->routeIs('owner-info.registered-owners') ? 'nav-tree-view-active' : '' }}">
                             <a href="{{ route('owner-info.registered-owners') }}" class="nav-link">
                                 <i class="fa fa-check-circle" aria-hidden="true"></i>
                                 <p>Registered Owners</p>
                             </a>
                         </li>
-                        <li class="nav-item pl-3 pr-0 ">
+                        <li
+                            class="nav-item pl-3 pr-0 {{ request()->routeIs('owner-info.pending-owners') ? 'nav-tree-view-active' : '' }}">
                             <a href="{{ route('owner-info.pending-owners') }}" class="nav-link">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                                 <p>Pending Registration</p>
@@ -58,28 +62,38 @@
                     </ul>
                 @endunlessrole
             </li>
-            <li class="nav-item {{ request()->routeIs(['reg-boat.*']) ? 'nav-item-active' : '' }}">
-                <a href="#" class="nav-link">
+            <li class="nav-item">
+                <a href="#"
+                    class="nav-link pb-2 {{ request()->routeIs(['reg-boat.*']) ? 'nav-item-active' : '' }}">
                     <i class="nav-icon fa fa-file-alt" aria-hidden="true"></i>
                     <p>Boat Registration<i class="right fas fa-angle-right"></i></p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.*') ? 'nav-item-active' : '' }}">
+                <ul class="nav-treeview">
+                    <li
+                        class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.index') ? 'nav-tree-view-active' : '' }}">
                         <a href="{{ route('reg-boat.index') }}" class="nav-link">
                             <i class="fa fa-ship" aria-hidden="true"></i>
                             <p>Register Boat</p>
                         </a>
                     </li>
                     @unlessrole('user')
-                        <li class="nav-item pl-3 pr-0 ">
+                        <li
+                            class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.pending') ? 'nav-tree-view-active' : '' }}">
                             <a href="{{ route('reg-boat.pending') }}" class="nav-link">
-                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                <i class="fa fa-sync-alt" aria-hidden="true"></i>
                                 <p>Pending Registration</p>
+                            </a>
+                        </li>
+                        <li class="nav-item pl-3 pr-0 {{-- request()->routeIs('reg-boat.archived')?'nav-tree-view-active':'' --}}">
+                            <a href="{{-- route('reg-boat.archived') --}}" class="nav-link">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                <p>Archived Registration</p>
                             </a>
                         </li>
                     @endunlessrole
                 </ul>
             </li>
+
         </ul>
     </nav>
 </div>

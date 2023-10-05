@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // id of user from users table
             $table->foreignId('owner_id')->constrained('owner_infos')->cascadeOnDelete(); // id of owner from owner-infos table
             $table->string('boat_type');
-            $table->string('vessel_name');
+            $table->string('vessel_name')->unique();
             $table->string('color');
             $table->string('length');
             $table->string('breadth');
