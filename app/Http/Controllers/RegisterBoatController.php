@@ -230,6 +230,7 @@ class RegisterBoatController extends Controller
     {
         $boatReg = RegisterBoat::find($id);
         $boatReg->status = 'registered';
+        $boatReg->approved_at = now();
         $boatReg->save();
 
         return redirect()->route('reg-boat.pending')->with('success', 'Boat Registration successfully approved!');

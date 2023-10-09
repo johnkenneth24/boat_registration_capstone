@@ -26,6 +26,18 @@
                                 {{ Auth::user()->username }}!</h4>
                         </div>
                     </div>
+                    @role('user')
+                        @if ($expiredCount > 0)
+                            <div class="alert alert-custom shadow bg-danger fade show d-flex justify-content-start"
+                                role="alert">
+                                <div class="alert-icon me-2"><i class="fas fa-exclamation-triangle"></i></div>
+                                <div class="alert-text">You have <strong>{{ $expiredCount }}</strong> expired registration/s. <a
+                                        href="javascript:void(0)" class="text-black fw-bold">Click
+                                        here</a> to renew your registration.
+                                </div>
+                            </div>
+                        @endif
+                    @endrole
                 </div>
             </div>
             @unlessrole('user')
@@ -45,7 +57,7 @@
                                             <div class="icon">
                                                 <i class="fas fa-sync-alt" aria-hidden="true"></i>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="{{ route('reg-boat.index') }}" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -87,7 +99,7 @@
                                             <div class="icon">
                                                 <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="{{ route('reg-boat.index') }}" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -169,7 +181,8 @@
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="viewModalLabel{{ $announcement->id }}">
+                                                            <h5 class="modal-title"
+                                                                id="viewModalLabel{{ $announcement->id }}">
                                                                 Announcement Details
                                                             </h5>
                                                             <button type="button" class="close" data-dismiss="modal"
