@@ -87,9 +87,13 @@
                                                     <span class="badge badge-pill badge-warning" style="font-size: 1rem">
                                                         {{ ucFirst($rBoats->status) }}
                                                     </span>
-                                                @elseif($rBoats->status == 'registered')
+                                                @elseif ($rBoats->status == 'registered' && $rBoats->approved_at > now()->subYear() ?? '')
                                                     <span class="badge badge-pill badge-success" style="font-size: 1rem;">
                                                         {{ ucFirst($rBoats->status) }}
+                                                    </span>
+                                                @elseif ($rBoats->status == 'registered' && $rBoats->approved_at <= now()->subYear())
+                                                    <span class="badge badge-pill badge-danger" style="font-size: 1rem;">
+                                                        Expired
                                                     </span>
                                                 @elseif($rBoats->status == 'disapproved')
                                                     <span class="badge badge-pill badge-danger" style="font-size: 1rem;">
@@ -137,7 +141,8 @@
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                            <button type="submit" class="btn btn-danger">Yes,
+                                                                Delete</button>
                                                         </form>
                                                     </div>
                                                 </div>
