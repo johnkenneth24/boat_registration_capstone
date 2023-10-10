@@ -57,7 +57,7 @@
             </li>
             <li class="nav-item">
                 <a href="#"
-                    class="nav-link pb-2 {{ request()->routeIs(['reg-boat.*']) ? 'nav-item-active' : '' }}">
+                    class="nav-link pb-2 {{ request()->routeIs(['reg-boat.*', 'walk-in.*']) ? 'nav-item-active' : '' }}">
                     <i class="nav-icon fa fa-file-alt" aria-hidden="true"></i>
                     <p>Boat Registration<i class="right fas fa-angle-right"></i></p>
                 </a>
@@ -70,11 +70,16 @@
                         </a>
                     </li>
                     @unlessrole('user')
-                        <li
-                            class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.pending') ? 'nav-tree-view-active' : '' }}">
+                        <li class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.pending') ? 'nav-tree-view-active' : '' }}">
                             <a href="{{ route('reg-boat.pending') }}" class="nav-link">
                                 <i class="fa fa-sync-alt" aria-hidden="true"></i>
                                 <p>Pending Registration</p>
+                            </a>
+                        </li>
+                        <li class="nav-item pl-3 pr-0 {{ request()->routeIs('walk-in.*') ? 'nav-tree-view-active' : '' }}">
+                            <a href="{{ route('walk-in.index') }}" class="nav-link">
+                                <i class="fa fa-anchor" aria-hidden="true"></i>
+                                <p>Walk In Registration</p>
                             </a>
                         </li>
                         <li class="nav-item pl-3 pr-0 {{-- request()->routeIs('reg-boat.archived')?'nav-tree-view-active':'' --}}">

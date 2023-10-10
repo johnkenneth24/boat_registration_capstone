@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-class OwnerInfo extends Model
+class WalkInBoatOwner extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'user_id',
         'salutation',
         'first_name',
         'last_name',
@@ -62,23 +60,16 @@ class OwnerInfo extends Model
         return implode(' ', $nonEmptyParts);
     }
 
-    public function user()
+    public function walkInLivelihood()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(WalkInLivelihood::class);
     }
 
-    public function boat()
+    public function walkInAdss()
     {
-        return $this->belongsTo(Boat::class);
+        return $this->hasOne(WalkInAdss::class);
     }
 
-    public function livelihood()
-    {
-        return $this->hasOne(Livelihood::class);
-    }
 
-    public function registerBoat()
-    {
-        return $this->hasMany(RegisterBoat::class);
-    }
+
 }
