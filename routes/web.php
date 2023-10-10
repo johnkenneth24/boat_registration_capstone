@@ -77,8 +77,8 @@ Route::middleware('auth')->group(function () {
 
         Route::middleware(['role:admin|staff'])->group(function () {
             Route::get('/registeredOwners', 'regOwners')->name('owner-info.registered-owners');
-            Route::get('/pendingOwners', 'pendingOwners')->name('owner-info.pending-owners');
-            Route::get('/approve/{id}', 'approve')->name('owner-info.approve');
+            // Route::get('/pendingOwners', 'pendingOwners')->name('owner-info.pending-owners');
+            // Route::get('/approve/{id}', 'approve')->name('owner-info.approve');
             Route::get('/archive/[id}', 'archive')->name('owner-info.archive');
         });
     });

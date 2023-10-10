@@ -105,20 +105,27 @@
                                 <h3 class="card-title fw-bold">Pending Registrations</h3>
                             </div>
                             <div class="card-body table-responsive p-0">
-                                <table class="table table-striped table-valign-middle">
+                                <table class="table table-hover table-valign-middle">
                                     <thead>
-                                        <tr class="text-center align-middle">
-                                            <th>Serial Number</th>
+                                        <tr class="align-middle">
+                                            <th>Registration Number</th>
                                             <th>Registration Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($pendings as $pending)
-                                            <tr class="text-center align-middle">
+                                            <tr class="align-middle">
                                                 <td>
-                                                    <a href="{{ route('reg-boat.index') }}">
-                                                        {{ $pending->registration_no }}
-                                                    </a>
+                                                    @role('user')
+                                                        <a href="{{ route('reg-boat.index') }}">
+                                                            {{ $pending->registration_no }}
+                                                        </a>
+                                                    @endrole
+                                                    @role('staff|admin')
+                                                        <a href="{{ route('reg-boat.pending') }}">
+                                                            {{ $pending->registration_no }}
+                                                        </a>
+                                                    @endrole
                                                 </td>
                                                 <td>{{ date('M. d, Y', strtotime($pending->registration_date)) }}</td>
                                             </tr>
@@ -138,7 +145,7 @@
                                 <h3 class="card-title fw-bold">Announcements</h3>
                             </div>
                             <div class="card-body table-responsive p-0">
-                                <table class="table table-striped table-valign-middle">
+                                <table class="table table-hover table-valign-middle">
                                     <thead>
                                         <tr class="text-center align-middle">
                                             <th>Subject</th>
@@ -185,7 +192,7 @@
                                             </div>
                                         @empty
                                             <tr>
-                                                <td colspan="3" class="text-center">No Announcements</td>
+                                                <td colspan="3" class="text-center">No Announcements Yet!</td>
                                             </tr>
                                         @endforelse
                                     </tbody>

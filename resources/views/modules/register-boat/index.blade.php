@@ -81,11 +81,22 @@
                                             @role('staff|admin')
                                                 <td>{{ $rBoats->ownerInfo->fullname }}</td>
                                             @endrole
-
                                             <td>{{ date('M. d, Y', strtotime($rBoats->registration_date)) }}</td>
-                                            {{-- @role('user') --}}
-                                            <td>{{ $rBoats->status }}</td>
-                                            {{-- @endrole --}}
+                                            <td class="align-middle">
+                                                @if ($rBoats->status == 'pending')
+                                                    <span class="badge badge-pill badge-warning" style="font-size: 1rem">
+                                                        {{ ucFirst($rBoats->status) }}
+                                                    </span>
+                                                @elseif($rBoats->status == 'registered')
+                                                    <span class="badge badge-pill badge-success" style="font-size: 1rem;">
+                                                        {{ ucFirst($rBoats->status) }}
+                                                    </span>
+                                                @elseif($rBoats->status == 'disapproved')
+                                                    <span class="badge badge-pill badge-danger" style="font-size: 1rem;">
+                                                        {{ ucFirst($rBoats->status) }}
+                                                    </span>
+                                                @endif
+                                            </td>
                                             <td class="">
                                                 {{-- <a href="{{ route('reg-boat.process') }}"
                                                     class="btn btn-sm btn-info">Process</a> --}}
@@ -93,7 +104,6 @@
                                                     class="btn btn-sm btn-success">View</a>
                                                 <a href="{{ route('reg-boat.edit', $rBoats->id) }}"
                                                     class="btn btn-sm btn-primary">Edit</a>
-
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
                                                     data-toggle="modal"
                                                     data-target="#confirmationModal{{ $rBoats->id }}">
