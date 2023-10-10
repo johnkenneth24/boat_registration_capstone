@@ -148,7 +148,7 @@
             <a href="/" class="brand-link text-center" style="text-decoration: none;">
                 <img src="{{ asset('images/webp/lgo.webp') }}" alt="Bulan Logo"
                     class="img-fluid img-circle elevation-3" style="opacity: .8; max-height: 100px;"> <br>
-                <h2 class="brand-text mt-2 font-weight-bold text-center text-dark d-inline-block text-break">IMS of RMB
+                <h2 class="brand-text mt-2 font-weight-bold text-center text-dark d-inline-block text-break">BR & IMS
                 </h2> <br>
                 <p class=" brand-text small  text-dark">Municipal Agriculture Office <br> of Bulan,
                     Sorsogon</p>

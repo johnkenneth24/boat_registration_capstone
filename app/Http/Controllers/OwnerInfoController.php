@@ -74,7 +74,8 @@ class OwnerInfoController extends Controller
             'middle_name' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'suffix' => 'nullable',
             'address' => ['required', 'max:255'],
-            'resident_since' => ['required', 'date:Y-m'],
+            'resident_since' => ['required', '
+            date:Y-m'],
             'nationality' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'gender' => 'required',
             'civil_status' => 'required',
@@ -253,7 +254,7 @@ class OwnerInfoController extends Controller
 
     public function approve($id)
     {
-        // find OwnerInfo with id of $id and update status to registered
+        // find OwnerInfo with id of $i d and update status to registered
         $ownerInfo = OwnerInfo::find($id);
         $ownerInfo->status = 'registered';
         $ownerInfo->save();

@@ -51,7 +51,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="">Name of Spause</label>
+                                    <label for="">Name of Spouse</label>
                                     <input type="text" name="" id="" class="form-control" placeholder="Enter Name of Spause">
                                 </div>
                                 <div class="form-group col-md-3">
