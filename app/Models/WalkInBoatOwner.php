@@ -70,8 +70,6 @@ class WalkInBoatOwner extends Model
         return $this->hasOne(WalkInAdss::class);
     }
 
-    public function boats()
-    {
-        return $this->hasMany(Boat::class);
-    }
+
+
 }

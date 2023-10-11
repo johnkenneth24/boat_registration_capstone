@@ -9,7 +9,9 @@
                     <div class="card  card-outline card-warning mt-5">
                         <div class="card-header">
                             <div class="card-title mb-0">
+                                {{-- @role('staff|admin') --}}
                                 <h4>Pending Boat Registrations</h4>
+                                {{-- @endrole --}}
                             </div>
                             <div class="card-tools d-flex justify-content-end mb-0">
                                 <div class="d-sm-none d-md-block">

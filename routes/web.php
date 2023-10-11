@@ -48,7 +48,6 @@ Route::middleware('auth')->group(function () {
             Route::get('/approve/{id}', 'approve')->name('reg-boat.approve');
             Route::get('/disapprove/{id}', 'disapprove')->name('reg-boat.disapprove');
             Route::get('/view/{id}', 'view')->name('reg-boat.view');
-            Route::get('/archivedBoats', 'archived')->name('reg-boat.archived');
         });
     });
 
@@ -85,13 +84,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(WalkInController::class)->prefix('walk-in')->group(function () {
-        Route::get('/', 'index')->name('walk-in.index');
-        Route::get('/create', 'create')->name('walk-in.create');
+        Route::get('/' , 'index')->name('walk-in.index');
+        Route::get('/create/{id?}', 'create')->name('walk-in.create');
         Route::get('/walk-in-owner-edit{id}', 'create')->name('walkin-owner.edit');
         Route::post('/store', 'store')->name('walk-in.store');
         Route::get('/walkin-livelihood', 'walkInLivelihood')->name('walk-in.livelihood');
         Route::post('/walkin-livelihood-store', 'walkInLivelihoodStore')->name('walk-in.livelihoodStore');
         Route::get('/walkin-adss-form', 'walkInAdss')->name('walk-in.adss');
         Route::post('/walkin-adss-store', 'walkInAdssStore')->name('walk-in.adssStore');
+
     })->middleware('role:admin|staff');
 });

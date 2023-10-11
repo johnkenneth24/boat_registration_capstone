@@ -15,28 +15,16 @@
             <x-success></x-success>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card card-outline card-warning">
+                    <div class="card">
                         <div class="card-header">
                             <div class="card-title">
                                 <h4>Users List</h4>
                             </div>
                             @role('admin')
-                                <div class="card-tools d-flex justify-content-end">
-                                    <div class="d-sm-none d-md-block">
-                                        <form action="{{ route('users.index') }}" method="get">
-                                            @csrf
-                                            <div class="form-group">
-                                                <input class="form-control form-control-md d-sm-none d-md-block mr-3"
-                                                    type="search" placeholder="Search..." name="search" style="width: 300px;"
-                                                    autofocus>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div>
-                                        <a href="{{ route('users.create') }}" class="btn btn-success px-5">
-                                            <span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Add a Staff Account
-                                        </a>
-                                    </div>
+                                <div class="card-tools">
+                                    <a href="{{ route('users.create') }}" class="btn btn-success px-5">
+                                        <span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Add a Staff Account
+                                    </a>
                                 </div>
                             @endrole
                         </div>

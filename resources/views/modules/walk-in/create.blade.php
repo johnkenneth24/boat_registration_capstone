@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
-                                <a href="{{ route('owner-info.index') }}" class="btn btn-danger col-md-2 mr-2">
+                                <a href="{{ route('walk-in.index') }}" class="btn btn-danger col-md-2 mr-2">
                                     <span><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
                                     Go back</a>
                                 <button type="submit" class="btn btn-primary col-md-2">Next

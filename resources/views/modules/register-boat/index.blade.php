@@ -30,6 +30,11 @@
                                             </div>
                                         </form>
                                     </div>
+                                    <div>
+                                        {{-- <a href="#" class="btn btn-success mb-1"> <span><i class="fa fa-plus"
+                                                    aria-hidden="true"></i></span>
+                                            Create Registration (Walk-in)</a> --}}
+                                    </div>
                                 </div>
                             @endrole
                             @role('user')
@@ -82,13 +87,9 @@
                                                     <span class="badge badge-pill badge-warning" style="font-size: 1rem">
                                                         {{ ucFirst($rBoats->status) }}
                                                     </span>
-                                                @elseif ($rBoats->status == 'registered' && $rBoats->approved_at > now()->subYear() ?? '')
+                                                @elseif($rBoats->status == 'registered')
                                                     <span class="badge badge-pill badge-success" style="font-size: 1rem;">
                                                         {{ ucFirst($rBoats->status) }}
-                                                    </span>
-                                                @elseif ($rBoats->status == 'registered' && $rBoats->approved_at <= now()->subYear())
-                                                    <span class="badge badge-pill badge-danger" style="font-size: 1rem;">
-                                                        Expired
                                                     </span>
                                                 @elseif($rBoats->status == 'disapproved')
                                                     <span class="badge badge-pill badge-danger" style="font-size: 1rem;">
@@ -136,8 +137,7 @@
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Yes,
-                                                                Delete</button>
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
                                                         </form>
                                                     </div>
                                                 </div>

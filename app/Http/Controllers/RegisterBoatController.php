@@ -73,36 +73,6 @@ class RegisterBoatController extends Controller
         return view('modules.register-boat.pending', compact('pendingBoats'));
     }
 
-    public function archived(Request $request)
-    {
-        $search = $request->input('search');
-
-        $query = RegisterBoat::withTrashed()
-            ->where(function ($query) use ($search) {
-                $query->where('status', 'disapprove')
-                    ->orWhere('deleted_at', '<>', null); // archived
-            })
-            ->with(['ownerInfo', 'boat'])
-            ->where(function ($query) use ($search) {
-                $query->where('registration_no', 'like', '%' . $search . '%')
-                    ->orWhere('registration_date', 'like', '%' . $search . '%')
-                    ->orWhereHas('ownerInfo', function ($query) use ($search) {
-                        $query->where('first_name', 'like', '%' . $search . '%')
-                            ->orWhere('middle_name', 'like', '%' . $search . '%')
-                            ->orWhere('last_name', 'like', '%' . $search . '%');
-                    })
-                    ->orWhereHas('boat', function ($query) use ($search) {
-                        $query->where('vessel_name', 'like', '%' . $search . '%')
-                            ->orWhere('boat_type', 'like', '%' . $search . '%');
-                    });
-            })
-            ->orderBy('created_at', 'asc');
-
-        $archivedBoats = $query->paginate(10);
-
-
-        return view('modules.register-boat.archived', compact('archivedBoats'));
-    }
 
     public function create()
     {
@@ -116,37 +86,6 @@ class RegisterBoatController extends Controller
 
         return view('modules.register-boat.boat-reg', compact('latestregNo', 'ownerInfo'));
     }
-
-    protected function messages()
-    {
-        return [
-            'registration_no.required' => 'Registration number is required.',
-            'registration_date.required' => 'Registration date is required.',
-            'vessel_name.required' => 'Vessel name is required.',
-            'vessel_name.unique' => 'Vessel name already exists.',
-            'vessel_type.required' => 'Vessel type is required.',
-            'home_port.required' => 'Home port is required.',
-            'place_built.required' => 'Place built is required.',
-            'year_built.required' => 'Year built is required.',
-            'body_number.required' => 'Body number is required.',
-            'color.required' => 'Color is required.',
-            'color.regex' => 'Color must be letters only and a comma.',
-            'length.required' => 'Length is required.',
-            'breadth.required' => 'Breadth is required.',
-            'tonnage_length.required' => 'Tonnage length is required.',
-            'tonnage_breadth.required' => 'Tonnage breadth is required.',
-            'tonnage_depth.required' => 'Tonnage depth is required.',
-            'gross_tonnage.required' => 'Gross tonnage is required.',
-            'net_tonnage.required' => 'Net tonnage is required.',
-            'depth.required' => 'Depth is required.',
-            'materials_used.required' => 'Materials used is required.',
-            'boat_image.required' => 'Boat image is required.',
-            'boat_image.image' => 'Boat image must be an image.',
-            'boat_image.mimes' => 'Boat image must be a file of type: jpeg, png, jpg, gif.',
-            'boat_image.max' => 'Boat image must not exceed 5MB.',
-        ];
-    }
-
 
     public function regBoat(Request $request)
     {
@@ -173,25 +112,9 @@ class RegisterBoatController extends Controller
             'net_tonnage' => ['required'],
             'depth' => ['required'],
             'materials_used' => ['required'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5048'],
-        ], $this->messages());
+        ]);
 
         // dd($validated);
-
-        // check if validated image is not null
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $ext = $image->getClientOriginalExtension();
-            $imageName = uniqid() . '.' . $ext;
-
-            // if images/user-upload does not exist, create it and move image into that folder
-            if (!is_dir(public_path('images/user-upload'))) {
-                mkdir(public_path('images/user-upload'), 0777, true);
-            }
-
-            $image->move(public_path('images/user-upload'), $imageName);
-        }
-
 
         // to prevent duplicate entries
         $boatReg = RegisterBoat::where('registration_no', $validated['registration_no'])->first();
@@ -213,7 +136,6 @@ class RegisterBoatController extends Controller
             'register_boat_id' => $boatReg->id,
             'owner_id' => $validated['owner_id'],
             'vessel_name' => $validated['vessel_name'],
-            'image' => $imageName,
             'boat_type' => $validated['vessel_type'],
             'home_port' => $validated['home_port'],
             'place_built' => $validated['place_built'],
@@ -256,7 +178,7 @@ class RegisterBoatController extends Controller
             'serial_number' => ['nullable'],
             'horsepower' => ['nullable'],
             'body_number' => ['required'],
-            'color' => ['required', 'regex:/^[a-zA-Z, ]*$/'], // letters and comma only
+            'color' => ['required', 'regex:/^[a-zA-Z\s]*$/'], // letters only
             'length' => ['required'],
             'breadth' => ['required'],
             'tonnage_length' => ['required'],
@@ -266,55 +188,13 @@ class RegisterBoatController extends Controller
             'net_tonnage' => ['required'],
             'depth' => ['required'],
             'materials_used' => ['required'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5048'],
-        ], $this->messages());
+        ]);
+
         // dd($validated);
 
         $boat = Boat::with('registerBoat')->where('register_boat_id', $id)->first();
-
-        // if validated image is null, use the old image name
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $ext = $image->getClientOriginalExtension();
-            $imageName = uniqid() . '.' . $ext;
-
-            // if images/user-upload does not exist, create it and move image into that folder
-            if (!is_dir(public_path('images/user-upload'))) {
-                mkdir(public_path('images/user-upload'), 0777, true);
-            }
-
-            $image->move(public_path('images/user-upload'), $imageName);
-
-            // check first if image exists in the folder, if it does, delete it, else, do nothing
-            if (file_exists(public_path('images/user-upload/' . $boat->image))) {
-                unlink(public_path('images/user-upload/' . $boat->image));
-            }
-        } else {
-            $imageName = $boat->image;
-        }
-
-        $boat->update([
-            'vessel_name' => $validated['vessel_name'],
-            'image' => $imageName,
-            'boat_type' => $validated['vessel_type'],
-            'home_port' => $validated['home_port'],
-            'place_built' => $validated['place_built'],
-            'year_built' => $validated['year_built'],
-            'engine_make' => $validated['engine_make'] ?? '',
-            'serial_number' => $validated['serial_number'] ?? '',
-            'horsepower' => $validated['horsepower'] ?? '',
-            'color' => $validated['color'],
-            'length' => $validated['length'],
-            'breadth' => $validated['breadth'],
-            'depth' => $validated['depth'],
-            'body_number' => $validated['body_number'],
-            'materials' => $validated['materials_used'],
-            'tonnage_length' => $validated['tonnage_length'],
-            'tonnage_breadth' => $validated['tonnage_breadth'],
-            'tonnage_depth' => $validated['tonnage_depth'],
-            'gross_tonnage' => $validated['gross_tonnage'],
-            'net_tonnage' => $validated['net_tonnage'],
-        ]);
+        // dd($boat);
+        $boat->update($validated);
 
         return redirect()->route('reg-boat.index')->with('success', 'Boat record updated. Please wait for confirmation regarding your registration!');
     }
@@ -334,6 +214,11 @@ class RegisterBoatController extends Controller
         return redirect()->route('reg-boat.index')->with('success', 'Boat record deleted successfully!');
     }
 
+    public function sample()
+    {
+        return view('modules.register-boat.samplewithaddItem');
+    }
+
     public function view($id)
     {
         $boatReg = RegisterBoat::with('boat')->find($id);
@@ -345,7 +230,6 @@ class RegisterBoatController extends Controller
     {
         $boatReg = RegisterBoat::find($id);
         $boatReg->status = 'registered';
-        $boatReg->approved_at = now();
         $boatReg->save();
 
         return redirect()->route('reg-boat.pending')->with('success', 'Boat Registration successfully approved!');
