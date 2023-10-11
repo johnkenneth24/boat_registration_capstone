@@ -10,25 +10,18 @@
                         <div class="card-header pb-0">
                             <div class="card-title align-middle mb-0">
                                 @role('staff|admin')
-                                    <h4>Walk In Registered Boats</h4>
+                                    <h4>{{ $walkin->fullname }} | Registered Boats</h4>
                                 @endrole
                             </div>
                             @role('admin|staff')
                                 <div class="card-tools d-flex justify-content-end">
                                     <div class="d-sm-none d-md-block">
-                                        <form action="{{-- route('reg-boat.index') --}}" method="get">
-                                            @csrf
-                                            <div class="form-group">
-                                                <input class="form-control form-control-md d-sm-none d-md-block mr-3"
-                                                    type="search" placeholder="Search..." name="search" style="width: 300px;"
-                                                    autofocus>
-                                            </div>
-                                        </form>
+
                                     </div>
                                     <div>
-                                        <a href="{{ route('walk-in.create') }}" class="btn btn-success mb-1"> <span><i class="fa fa-plus"
+                                        <a href="{{ route('walkin-regboat.create' , $walkin->id) }}" class="btn btn-success mb-1"> <span><i class="fa fa-plus"
                                                     aria-hidden="true"></i></span>
-                                            Create Registration (Walk-in)</a>
+                                            Create Registration Boat (Walk-in)</a>
                                     </div>
                                 </div>
                             @endrole
@@ -37,32 +30,33 @@
                             <table class="table table-hover table-sm">
                                 <thead class="thead-dark">
                                     <tr class=" align-middle">
-                                        <th>Owner Fullname</th>
-                                        <th>Address</th>
-                                        <th>Contact Number</th>
+                                        <th>Registration No.</th>
+                                        <th>Vessel Name</th>
+                                        <th>Vessel Type</th>
+                                        <th>Registration Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($walk_in as $w_in)
+                                    @forelse ($walkin_reg_boat as $wrg)
                                         <tr class=" align-middle">
-                                            <td>{{ $w_in->fullname }}</td>
-                                            <td>{{ $w_in->address }}</td>
-                                            <td>{{ $w_in->contact_no }}</td>
+                                            <td>{{ $wrg->registration_no }}</td>
+                                            <td>{{ $wrg->vessel_name }}</td>
+                                            <td>{{ $wrg->vessel_type }}</td>
+                                            <td>{{ $wrg->registration_date->format('F d, Y') }}</td>
                                             <td class="">
-                                                <a href="{{ route('walkin-regboat.index' , $w_in->id) }}" class="btn btn-sm btn-info">REGISTERED BOAT</a>
                                                 <a href="" class="btn btn-sm btn-primary">EXPORT</a>
-                                                <a href="{{ route('walk-in.create', $w_in->id) }}"
+                                                <a href="{{-- route('walk-in.create',$wrg->id) --}}"
                                                     class="btn btn-sm btn-success">VIEW</a>
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
                                                     data-toggle="modal"
-                                                    data-target="#confirmationModal{{$w_in->id }}">
+                                                    data-target="#confirmationModal{{$wrg->id }}">
                                                     DELETE
                                                 </button>
                                             </td>
                                         </tr>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="confirmationModal{{ $w_in->id }}" tabindex="-1"
+                                        <! Modal >
+                                        <div class="modal fade" id="confirmationModal{{ $wrg->id }}" tabindex="-1"
                                             role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true"
                                             data-backdrop="static">
                                             <div class="modal-dialog modal-dialog-centered">
@@ -83,7 +77,7 @@
                                                     <div class="modal-footer d-flex justify-content-center">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Cancel</button>
-                                                        <form action="{{ route('walk-in.destroy', $w_in->id) }}"
+                                                        <form action="{{ route('walk-in.destroy', $wrg->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')
@@ -102,7 +96,7 @@
                             </table>
                         </div>
                         <div class="card-footer clearfix">
-                           {{ $walk_in->links()}}
+                           {{-- {{ $walk_in->links()}} --}}
                         </div>
                     </div>
                 </div>
