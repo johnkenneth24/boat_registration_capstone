@@ -48,11 +48,11 @@
                                                     data-target="#viewModal{{ $regOwner->id }}">
                                                     VIEW
                                                 </button>
-                                                <a href="{{-- route('regOwner.edit',$regOwner->id) --}}" class="btn btn-sm btn-primary mr-2">EDIT</a>
+                                                {{-- <a href="{{ route('regOwner.edit',$regOwner->id) }}" class="btn btn-sm btn-primary mr-2">EDIT</a>
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
                                                     data-toggle="modal" data-target="#confirmationModal{{ $regOwner->id }}">
                                                     DELETE
-                                                </button>
+                                                </button> --}}
                                             </td>
                                         </tr>
                                         <div class="modal fade" id="viewModal{{ $regOwner->id }}" tabindex="-1"

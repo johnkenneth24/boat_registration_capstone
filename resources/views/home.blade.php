@@ -115,35 +115,27 @@
                                 <tbody>
                                     @forelse ($pendings as $pending)
                                         <tr class="align-middle">
-                                            <th>Registration Number</th>
-                                            <th>Registration Date</th>
+                                            <td>
+                                                @role('user')
+                                                    <a href="{{ route('reg-boat.index') }}">
+                                                        {{ $pending->registration_no }}
+                                                    </a>
+                                                @endrole
+                                                @role('staff|admin')
+                                                    <a href="{{ route('reg-boat.pending') }}">
+                                                        {{ $pending->registration_no }}
+                                                    </a>
+                                                @endrole
+                                            </td>
+                                            <td>{{ date('M. d, Y', strtotime($pending->registration_date)) }}</td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($pendings as $pending)
-                                            <tr class="align-middle">
-                                                <td>
-                                                    @role('user')
-                                                        <a href="{{ route('reg-boat.index') }}">
-                                                            {{ $pending->registration_no }}
-                                                        </a>
-                                                    @endrole
-                                                    @role('staff|admin')
-                                                        <a href="{{ route('reg-boat.pending') }}">
-                                                            {{ $pending->registration_no }}
-                                                        </a>
-                                                    @endrole
-                                                </td>
-                                                <td>{{ date('M. d, Y', strtotime($pending->registration_date)) }}</td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="2" class="text-center">No Pending Registrations</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @empty
+                                        <tr>
+                                            <td colspan="2" class="text-center">No Pending Registrations</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -164,60 +156,55 @@
                                 <tbody>
                                     @forelse ($announcements as $announcement)
                                         <tr class="text-center align-middle">
-                                            <th>Subject</th>
-                                            <th>Announcement Date</th>
-                                            <th>Action</th>
+                                            <td>{{ $announcement->title }}</td>
+                                            <td>{{ $announcement->date->format('F d, Y') }}</td>
+                                            <td><button type="button" class="btn btn-sm btn-primary mr-2 my-0 py-0"
+                                                    title="VIEW" data-toggle="modal"
+                                                    data-target="#viewModal{{ $announcement->id }}">
+                                                    VIEW
+                                                </button></td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($announcements as $announcement)
-                                            <tr class="text-center align-middle">
-                                                <td>{{ $announcement->title }}</td>
-                                                <td>{{ $announcement->date->format('F d, Y') }}</td>
-                                                <td><button type="button" class="btn btn-sm btn-primary mr-2" title="VIEW"
-                                                        data-toggle="modal" data-target="#viewModal{{ $announcement->id }}">
-                                                        VIEW
-                                                    </button></td>
-                                            </tr>
-                                            <div class="modal fade" id="viewModal{{ $announcement->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="viewModalLabel{{ $announcement->id }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="viewModalLabel{{ $announcement->id }}">
-                                                                Announcement Details
-                                                            </h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true" class="text-danger"
-                                                                    title="Close">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body mt-2 mb-2 text-center">
-                                                            <h4 class="text-center">{{ $announcement->title }}</h4>
-                                                            <span
-                                                                class="font-italic">{{ $announcement->date->format('F d, Y') }}
-                                                            </span>
-                                                            <p class="text-center text-justify mt-3">
-                                                                {{ $announcement->content }}
-                                                            </p>
-                                                        </div>
+                                        <div class="modal fade" id="viewModal{{ $announcement->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="viewModalLabel{{ $announcement->id }}"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewModalLabel{{ $announcement->id }}">
+                                                            Announcement Details
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true" class="text-danger"
+                                                                title="Close">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body mt-2 mb-2 text-center">
+                                                        <h4 class="text-center">{{ $announcement->title }}</h4>
+                                                        <span
+                                                            class="font-italic">{{ $announcement->date->format('F d, Y') }}
+                                                        </span>
+                                                        <p class="text-center text-justify mt-3">
+                                                            {{ $announcement->content }}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @empty
-                                            <tr>
-                                                <td colspan="3" class="text-center">No Announcements Yet!</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </div>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center">No Announcements Yet!</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-           {{-- @endunlessrole --}}
+            </div>
+
         </div>
+        {{-- @endunlessrole --}}
+    </div>
     </div>
 @endsection

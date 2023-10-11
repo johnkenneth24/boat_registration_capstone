@@ -133,11 +133,7 @@
                                                     class="form-control form-control-sm @error('body_number') is-invalid @enderror"
                                                     value="{{ $boatReg->boat->body_number }}"
                                                     placeholder="Body number of the Vessel" readonly>
-                                                @error('body_number')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Color <span class="text-danger">*</span></label>
@@ -145,11 +141,7 @@
                                                     class="form-control form-control-sm @error('color') is-invalid @enderror"
                                                     value="{{ $boatReg->boat->color }}"
                                                     placeholder="Color (e.g., gray, dark-blue, yellow)" readonly>
-                                                @error('color')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label>Materials Used <span class="text-danger">*</span></label>
@@ -157,11 +149,7 @@
                                                     class="form-control form-control-sm @error('materials_used') is-invalid @enderror"
                                                     placeholder="Materials used in building the vessel" readonly
                                                     value="{{ $boatReg->boat->materials }}">
-                                                @error('materials_used')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
                                             <hr class="dark horizontal">
                                             <div class="form-group col-md-4">
@@ -170,11 +158,7 @@
                                                     class="form-control form-control-sm @error('length') is-invalid @enderror"
                                                     value="{{ $boatReg->boat->length }}"
                                                     placeholder="Registered Length of the Vessel (in meters)" readonly>
-                                                @error('length')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label>Registered Breadth <span class="text-danger">*</span></label>
@@ -182,11 +166,7 @@
                                                     class="form-control form-control-sm @error('breadth') is-invalid @enderror"
                                                     value="{{ $boatReg->boat->breadth }}"
                                                     placeholder="Registered Breadth of the Vessel  (in meters)" readonly>
-                                                @error('breadth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label>Registered Depth <span class="text-danger">*</span></label>
@@ -194,11 +174,7 @@
                                                     class="form-control form-control-sm @error('depth') is-invalid @enderror"
                                                     value="{{ $boatReg->boat->depth }}"
                                                     placeholder="Registered Depth of the Vessel  (in meters)" readonly>
-                                                @error('depth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label>Tonnage Length <span class="text-danger">*</span></label>
@@ -207,11 +183,7 @@
                                                     class="form-control form-control-sm @error('tonnage_length') is-invalid @enderror"
                                                     value="{{ $boatReg->boat->tonnage_length }}"
                                                     placeholder="Tonnage Length of the Vessel (in meters)" readonly>
-                                                @error('tonnage_length')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label>Tonnage Breadth <span class="text-danger">*</span></label>
@@ -220,11 +192,7 @@
                                                     class="form-control form-control-sm @error('tonnage_breadth') is-invalid @enderror"
                                                     value="{{ $boatReg->boat->tonnage_breadth }}"
                                                     placeholder="Tonnage Breadth of the Vessel  (in meters)" readonly>
-                                                @error('tonnage_breadth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label>Tonnage Depth <span class="text-danger">*</span></label>
@@ -232,11 +200,7 @@
                                                     class="form-control form-control-sm @error('tonnage_depth') is-invalid @enderror"
                                                     value="{{ $boatReg->boat->tonnage_depth }}"
                                                     placeholder="Tonnage Depth of the Vessel  (in meters)" readonly>
-                                                @error('tonnage_depth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Gross Tonnage</label>
@@ -256,7 +220,7 @@
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="form-group">
-                                                <label>Image of the Boat</label>
+                                                <label>Image of the Boat</label> <br>
                                                 <img src="/images/user-upload/{{ $boatReg->boat->image }}"
                                                     alt="image-preview" id="preview" class="img-fluid img-thumbnail"
                                                     data-image="{{ $boatReg->boat->image }}">
@@ -302,5 +266,42 @@
             horsepower.removeAttribute('required');
             serial_number.removeAttribute('required');
         }
+    </script>
+
+    <script>
+        function previewImage() {
+            var preview = document.querySelector('#preview');
+            var file = document.querySelector('#image').files[0];
+            var reader = new FileReader();
+            reader.onloadend = function() {
+                preview.src = reader.result;
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        }
+        var imageInput = document.querySelector('#image');
+        imageInput.addEventListener('change', previewImage);
+    </script>
+
+    <script>
+        // Get the image element
+        const image = document.getElementById('preview');
+        // Get the data-image attribute value (the image filename)
+        const imageName = image.getAttribute('data-image');
+        // Check if the image exists
+        const imageExists = new Image();
+        imageExists.onload = function() {
+            // Image exists, set the src attribute to the original path
+            image.src = `/images/user-upload/${imageName}`;
+        };
+        imageExists.onerror = function() {
+            // Image doesn't exist, set the src attribute to the default image path
+            image.src = '/images/imgnotfound.png';
+        };
+        // Set the source of the imageExists to trigger the load or error event
+        imageExists.src = `/images/user-upload/${imageName}`;
     </script>
 @endsection

@@ -22,6 +22,10 @@
             padding-bottom: 0;
         }
 
+        body {
+            font-family: 'Open Sans', 'Montserrat', sans-serif !important;
+        }
+
         .nav-item>a.nav-link.nav-item-active {
             background-color: #2094f4;
             color: white !important;
