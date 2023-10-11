@@ -91,5 +91,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/walkin-livelihood', 'walkInLivelihood')->name('walk-in.livelihood');
         Route::post('/walkin-livelihood-store', 'walkInLivelihoodStore')->name('walk-in.livelihoodStore');
         Route::get('/walkin-adss-form', 'walkInAdss')->name('walk-in.adss');
+        Route::post('/walkin-adss-store', 'walkInAdssStore')->name('walk-in.adssStore');
+
     })->middleware('role:admin|staff');
 });
