@@ -70,20 +70,24 @@
                         </a>
                     </li>
                     @unlessrole('user')
-                        <li class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.pending') ? 'nav-tree-view-active' : '' }}">
+                        <li
+                            class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.pending') ? 'nav-tree-view-active' : '' }}">
                             <a href="{{ route('reg-boat.pending') }}" class="nav-link">
                                 <i class="fa fa-sync-alt" aria-hidden="true"></i>
                                 <p>Pending Registration</p>
                             </a>
                         </li>
-                        <li class="nav-item pl-3 pr-0 {{ request()->routeIs('walk-in.*') ? 'nav-tree-view-active' : '' }}">
-                            <a href="{{ route('walk-in.index') }}" class="nav-link">
-                                <i class="fa fa-anchor" aria-hidden="true"></i>
-                                <p>Walk In Registration</p>
-                            </a>
-                        </li>
-                        <li class="nav-item pl-3 pr-0 {{-- request()->routeIs('reg-boat.archived')?'nav-tree-view-active':'' --}}">
-                            <a href="{{-- route('reg-boat.archived') --}}" class="nav-link">
+                        @role('staff')
+                            <li class="nav-item pl-3 pr-0 {{ request()->routeIs('walk-in.*') ? 'nav-tree-view-active' : '' }}">
+                                <a href="{{ route('walk-in.index') }}" class="nav-link">
+                                    <i class="fa fa-anchor" aria-hidden="true"></i>
+                                    <p>Walk In Registration</p>
+                                </a>
+                            </li>
+                        @endrole
+                        <li
+                            class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.archived') ? 'nav-tree-view-active' : '' }}">
+                            <a href="{{ route('reg-boat.archived') }}" class="nav-link">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                 <p>Archived Registration</p>
                             </a>

@@ -30,11 +30,6 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div>
-                                        {{-- <a href="#" class="btn btn-success mb-1"> <span><i class="fa fa-plus"
-                                                    aria-hidden="true"></i></span>
-                                            Create Registration (Walk-in)</a> --}}
-                                    </div>
                                 </div>
                             @endrole
                             @role('user')

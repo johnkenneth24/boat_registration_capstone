@@ -112,6 +112,10 @@
         body::-webkit-scrollbar {
             display: none;
         }
+
+        body {
+            font-family: 'Open Sans', 'Montserrat', sans-serif !important;
+        }
     </style>
     @yield('styles')
 </head>
