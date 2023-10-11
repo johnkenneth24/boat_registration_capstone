@@ -52,6 +52,8 @@
                                                 </button> --}}
                                             </td>
                                         </tr>
+                                        {{-- modal with regOwner information triggered by view button --}}
+
                                     @empty
                                         <tr>
                                             <td colspan="6" class="text-center">No Data</td>

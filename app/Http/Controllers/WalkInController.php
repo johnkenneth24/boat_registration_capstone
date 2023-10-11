@@ -27,7 +27,26 @@ class WalkInController extends Controller
 
     public function index(Request $request)
     {
-        $walk_in = WalkInBoatOwner::paginate('10');
+        // $search = $request->input('search');
+
+        // $query = WalkInBoatOwner::where(function ($query) use ($search) {
+        //         $query->where('registration_no', 'like', '%' . $search . '%')
+        //             ->orWhere('registration_date', 'like', '%' . $search . '%')
+        //             ->orWhereHas('ownerInfo', function ($query) use ($search) {
+        //                 $query->where('first_name', 'like', '%' . $search . '%')
+        //                     ->orWhere('middle_name', 'like', '%' . $search . '%')
+        //                     ->orWhere('last_name', 'like', '%' . $search . '%');
+        //             })
+        //             ->orWhereHas('boat', function ($query) use ($search) {
+        //                 $query->where('vessel_name', 'like', '%' . $search . '%')
+        //                     ->orWhere('boat_type', 'like', '%' . $search . '%');
+        //             });
+        //     })
+        //     ->orderBy('created_at', 'asc');
+
+        // $walk_in = $query->paginate(10);
+
+        $walk_in = WalkInBoatOwner::paginate(10);
 
         return view('modules.walk-in.index', compact('walk_in'));
     }

@@ -41,7 +41,8 @@
                                 <h4 class="text-uppercase">Boat Registration</h4>
                             </div>
                         </div>
-                        <form action="{{ route('reg-boat.update', $boatReg->id) }}" method="post">
+                        <form action="{{ route('reg-boat.update', $boatReg->id) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body mt-0">
@@ -224,24 +225,19 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Materials Used <span class="text-danger">*</span></label>
-                                        <input type="text" name="materials_used"
-                                            class="form-control form-control-sm
-                                            @error('materials_used') is-invalid @enderror"
-                                            placeholder="Materials used in building the vessel" required
-                                            value="{{ $boatReg->boat->materials }}">
-                                        @error('materials_used')
-                                            <div class="invalid-feedback" style="display: inline-block !important;">
-                                                {{ $message }}
+                                            <div class="form-group col-md-12">
+                                                <label>Materials Used <span class="text-danger">*</span></label>
+                                                <input type="text" name="materials_used"
+                                                    class="form-control form-control-sm @error('materials_used') is-invalid @enderror"
+                                                    placeholder="Materials used in building the vessel" required
+                                                    value="{{ $boatReg->boat->materials }}">
+                                                @error('materials_used')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
-                                        @enderror
-                                    </div>
-                                    <hr class="dark horizontal">
-                                    <div class="col-md-12">
-                                        <div class="row">
+                                            <hr class="dark horizontal">
                                             <div class="form-group col-md-4">
                                                 <label>Registered Length <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01" name="length"
@@ -278,10 +274,6 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="row">
                                             <div class="form-group col-md-4">
                                                 <label>Tonnage Length <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01"
@@ -331,6 +323,32 @@
                                                 <input type="number" min="0" step="0.01" name="net_tonnage"
                                                     required value="{{ $boatReg->boat->net_tonnage }}"
                                                     class="form-control form-control-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label>Upload Colored Image of the Boat</label>
+                                                @if ($boatReg->boat->image)
+                                                    <input type="file" name="image"
+                                                        class="form-control form-control-sm  @error('image') is-invalid @enderror"
+                                                        value="{{ $boatReg->boat->image }}" id="image">
+                                                @else
+                                                    <input type="file" name="image"
+                                                        class="form-control form-control-sm  @error('image') is-invalid @enderror"
+                                                        value="{{ $boatReg->boat->image }}" id="image" required>
+                                                @endif
+                                                @error('image')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                                <img src="/images/user-upload/{{ $boatReg->boat->image }}"
+                                                    alt="image-preview" id="preview" class="img-fluid img-thumbnail"
+                                                    data-image="{{ $boatReg->boat->image }}">
+
                                             </div>
                                         </div>
                                     </div>
@@ -386,5 +404,48 @@
                 serial_number.removeAttribute('required');
             }
         });
+    </script>
+
+    <script>
+        function previewImage() {
+            var preview = document.querySelector('#preview');
+            var file = document.querySelector('#image').files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function() {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        }
+
+        var imageInput = document.querySelector('#image');
+        imageInput.addEventListener('change', previewImage);
+    </script>
+
+    <script>
+        // Get the image element
+        const image = document.getElementById('preview');
+
+        // Get the data-image attribute value (the image filename)
+        const imageName = image.getAttribute('data-image');
+
+        // Check if the image exists
+        const imageExists = new Image();
+        imageExists.onload = function() {
+            // Image exists, set the src attribute to the original path
+            image.src = `/images/user-upload/${imageName}`;
+        };
+        imageExists.onerror = function() {
+            // Image doesn't exist, set the src attribute to the default image path
+            image.src = '/images/imgnotfound.png';
+        };
+
+        // Set the source of the imageExists to trigger the load or error event
+        imageExists.src = `/images/user-upload/${imageName}`;
     </script>
 @endsection
