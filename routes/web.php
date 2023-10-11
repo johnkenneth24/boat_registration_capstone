@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(WalkInController::class)->prefix('walk-in')->group(function () {
         Route::get('/' , 'index')->name('walk-in.index');
-        Route::get('/create', 'create')->name('walk-in.create');
+        Route::get('/create/{id?}', 'create')->name('walk-in.create');
         Route::get('/walk-in-owner-edit{id}', 'create')->name('walkin-owner.edit');
         Route::post('/store', 'store')->name('walk-in.store');
         Route::get('/walkin-livelihood', 'walkInLivelihood')->name('walk-in.livelihood');

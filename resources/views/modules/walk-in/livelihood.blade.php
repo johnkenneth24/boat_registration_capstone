@@ -150,7 +150,7 @@
 
                             </div>
                             <div class="card-footer d-flex justify-content-end">
-                                <a href="{{ route('owner-info.edit', $owner_livelihood ?? auth()->user()->id) }}"
+                                <a href="{{ route('walk-in.create', $owner_livelihood) }}"
                                     class="btn btn-danger col-md-2 mr-2">Go
                                     back</a>
                                 <button type="submit" class="btn btn-primary col-md-2">Next</button>
