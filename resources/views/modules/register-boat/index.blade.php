@@ -30,11 +30,6 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div>
-                                        {{-- <a href="#" class="btn btn-success mb-1"> <span><i class="fa fa-plus"
-                                                    aria-hidden="true"></i></span>
-                                            Create Registration (Walk-in)</a> --}}
-                                    </div>
                                 </div>
                             @endrole
                             @role('user')
@@ -102,8 +97,10 @@
                                                     class="btn btn-sm btn-info">Process</a> --}}
                                                 <a href="{{ route('reg-boat.show', $rBoats->id) }}"
                                                     class="btn btn-sm btn-success">View</a>
-                                                <a href="{{ route('reg-boat.edit', $rBoats->id) }}"
-                                                    class="btn btn-sm btn-primary">Edit</a>
+                                                @role('user')
+                                                    <a href="{{ route('reg-boat.edit', $rBoats->id) }}"
+                                                        class="btn btn-sm btn-primary">Edit</a>
+                                                @endrole
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
                                                     data-toggle="modal"
                                                     data-target="#confirmationModal{{ $rBoats->id }}">
@@ -126,7 +123,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body mt-2 mb-2 text-center">
-                                                        <i class="fas fa-exclamation-triangle fa-4x text-warning"></i>
+                                                        <i class="fas fa-exclamation-triangle fa-4x text-warning mb-3"></i>
                                                         <h3>Are you sure you want to delete this boat record? This cannot be
                                                             undone.</h3>
                                                     </div>
