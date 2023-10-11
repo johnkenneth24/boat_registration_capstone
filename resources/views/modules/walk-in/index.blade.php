@@ -40,7 +40,6 @@
                                         <th>Owner Fullname</th>
                                         <th>Vessel Name</th>
                                         <th>Date of Registration</th>
-                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -49,23 +48,21 @@
                                         <tr class="text-center align-middle">
                                             <td>{{ $w_in->fullname }}</td>
                                             <td>Not yet available</td>
-                                            <td>Not yet available</td>
-                                            <td>Not yet available</td>
+                                            <td>Not yet available</td> 
                                             <td class="">
-                                                <a href="{{-- route('reg-boat.show', $w_in->id) --}}"
-                                                    class="btn btn-sm btn-success">View</a>
-                                                <a href="{{-- route('reg-boat.edit', $w_in->id) --}}"
-                                                    class="btn btn-sm btn-primary">Edit</a>
-
+                                                <a href="" class="btn btn-sm btn-info">REGISTER BOAT</a>
+                                                <a href="" class="btn btn-sm btn-primary">EXPORT</a>
+                                                <a href="{{ route('walk-in.create', $w_in->id) }}"
+                                                    class="btn btn-sm btn-success">VIEW</a>
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
                                                     data-toggle="modal"
-                                                    data-target="{{-- #confirmationModal$w_in->id }}--}}">
+                                                    data-target="#confirmationModal{{$w_in->id }}">
                                                     DELETE
                                                 </button>
                                             </td>
                                         </tr>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="confirmationModal{{-- $w_in->id --}}" tabindex="-1"
+                                        <div class="modal fade" id="confirmationModal{{ $w_in->id }}" tabindex="-1"
                                             role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true"
                                             data-backdrop="static">
                                             <div class="modal-dialog modal-dialog-centered">
@@ -86,7 +83,7 @@
                                                     <div class="modal-footer d-flex justify-content-center">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Cancel</button>
-                                                        <form action="{{-- route('reg-boat.destroy', $w_in->id) --}}"
+                                                        <form action="{{ route('walk-in.destroy', $w_in->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')

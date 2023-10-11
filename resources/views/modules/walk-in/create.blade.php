@@ -15,6 +15,7 @@
                                     <div class="col-md-12 mt-0 mb-2 py-1 bg-dark">
                                         <h6 class="font-weight-bolder text-white m-0">Walk In - Personal Information</h6>
                                     </div>
+                                    <input type="hidden" value="{{ $ownerInfo?->id ?: '' }}" name="ownerInfo">
                                     <div class="form-group col-md-1">
                                         <label>Salutation</label>
                                         <select name="salutation" class="form-control @error('salutation') is-invalid @enderror form-control-sm">
@@ -249,9 +250,17 @@
                                 <a href="{{ route('walk-in.index') }}" class="btn btn-danger col-md-2 mr-2">
                                     <span><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
                                     Go back</a>
-                                <button type="submit" class="btn btn-primary col-md-2">Next
-                                    <span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
-                                </button>
+                                    {{-- @if($route !== 'walk-in.view') --}}
+                                    <button type="submit" class="btn btn-primary col-md-2">Next
+                                        <span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                                    </button>
+                                {{-- @else
+                                    <a href="{{ route('walk-in.livelihood', $ownerInfo) }}" class="btn btn-primary col-md-2">
+                                        Next
+                                        <span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                                    </a>
+                                @endif --}}
+
                             </div>
                         </form>
                         <div class="overlay dark">
