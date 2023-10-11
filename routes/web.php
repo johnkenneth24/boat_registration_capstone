@@ -48,7 +48,6 @@ Route::middleware('auth')->group(function () {
             Route::get('/approve/{id}', 'approve')->name('reg-boat.approve');
             Route::get('/disapprove/{id}', 'disapprove')->name('reg-boat.disapprove');
             Route::get('/view/{id}', 'view')->name('reg-boat.view');
-            Route::get('/archivedBoats', 'archived')->name('reg-boat.archived');
         });
     });
 
@@ -93,5 +92,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/walkin-livelihood-store', 'walkInLivelihoodStore')->name('walk-in.livelihoodStore');
         Route::get('/walkin-adss-form', 'walkInAdss')->name('walk-in.adss');
         Route::post('/walkin-adss-store', 'walkInAdssStore')->name('walk-in.adssStore');
+
     })->middleware('role:admin|staff');
 });

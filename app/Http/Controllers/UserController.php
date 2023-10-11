@@ -8,19 +8,9 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request->input('search');
-
-        $query = User::where(function ($query) use ($search) {
-            $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('id_number', 'like', '%' . $search . '%')
-                ->orWhere('username', 'like', '%' . $search . '%')
-                ->orWhere('contact_no', 'like', '%' . $search . '%')
-                ->orWhere('email', 'like', '%' . $search . '%');
-        })->orderBy('id_number', 'asc');
-
-        $users = $query->paginate(10);
+        $users = User::paginate(10);
 
         return view('dashboard.users.index', compact('users'));
     }
@@ -76,6 +66,7 @@ class UserController extends Controller
         ])->assignRole('staff');
 
         return redirect()->route('users.index')->with('success', 'Staff Account created successfully.');
+
     }
 
     public function edit($id)
