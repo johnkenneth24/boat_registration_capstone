@@ -10,7 +10,7 @@ class WalkInAdss extends Model
     use HasFactory;
 
     protected $fillable = [
-        'walkin_owner_id', 
+        'walkin_owner_adss_id',
         'name_spouse',
         'number_dependent',
         'name_employer',

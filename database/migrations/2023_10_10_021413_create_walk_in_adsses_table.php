@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('walk_in_adsses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('walkin_owner_id')->references('id')->on('walk_in_boat_owners')->onDelete('cascade');
+            $table->foreignId('walkin_owner_adss_id')->references('id')->on('walk_in_boat_owners')->onDelete('cascade');
             $table->string('name_spouse');
             $table->string('number_dependent');
             $table->string('name_employer');

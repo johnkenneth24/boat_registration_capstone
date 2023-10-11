@@ -27,8 +27,9 @@ class WalkInController extends Controller
 
     public function index()
     {
+        $walk_in = WalkInBoatOwner::paginate('10');
 
-        return view('modules.walk-in.index');
+        return view('modules.walk-in.index', compact('walk_in'));
     }
     public function create($id = null)
     {
@@ -242,7 +243,7 @@ class WalkInController extends Controller
     public function walkInAdss(Request $request)
     {
         $owner_adss = $request->session()->get('walkInOwner');
-        $adss = WalkInAdss::where('walkin_owner_id', $owner_adss)->first();
+        $adss = WalkInAdss::where('walkin_owner_adss_id', $owner_adss)->first();
         $yes_no = ['Yes', 'No'];
 
         return view('modules.walk-in.adss', compact('yes_no', 'owner_adss'));
@@ -251,7 +252,7 @@ class WalkInController extends Controller
     public function walkInAdssStore(Request $request)
     {
         $validated = $request->validate([
-        'walkin_owner_id' => 'required',
+        'walkin_owner_adss_id' => 'required',
         'name_spouse' => 'required',
         'number_dependent'  => 'required',
         'name_employer'  => 'required',
@@ -270,15 +271,55 @@ class WalkInController extends Controller
         'pcic_address'   => 'nullable',
         ]);
 
+
         $owner_adss = $request->session()->get('walkInOwner');
-        $adss = WalkInAdss::where('walkin_owner_id', $owner_adss)->first();
+        $adss = WalkInAdss::where('walkin_owner_adss_id', $owner_adss)->first();
 
         if(!$adss)
         {
             $adss = new WalkInAdss();
 
-            
+            $adss->walkin_owner_adss_id = $validated['walkin_owner_adss_id'];
+            $adss->name_spouse = $validated['name_spouse'];
+            $adss->number_dependent = $validated['number_dependent'];
+            $adss->name_employer = $validated['name_employer'];
+            $adss->desired_coverage = $validated['desired_coverage'];
+            $adss->premium = $validated['premium'];
+            $adss->cover_from = $validated['cover_from'];
+            $adss->cover_to = $validated['cover_to'];
+            $adss->primary_beneficiary = $validated['primary_beneficiary'];
+            $adss->primary_relationship = $validated['primary_relationship'];
+            $adss->secondary_beneficiary = $validated['secondary_beneficiary'];
+            $adss->secondary_relationship = $validated['secondary_relationship'];
+            $adss->minor_trustee = $validated['minor_trustee'];
+            $adss->pcic_coverage = $validated['pcic_coverage'];
+            $adss->pcic_name = $validated['pcic_name'];
+            $adss->pcic_relationship = $validated['pcic_relationship'];
+            $adss->pcic_address = $validated['pcic_address'];
+
+            $adss->save();
+        } else {
+            $adss->update([
+            $adss->name_spouse = $validated['name_spouse'],
+            $adss->number_dependent = $validated['number_dependent'],
+            $adss->name_employer = $validated['name_employer'],
+            $adss->desired_coverage = $validated['desired_coverage'],
+            $adss->premium = $validated['premium'],
+            $adss->cover_from = $validated['cover_from'],
+            $adss->cover_to = $validated['cover_to'],
+            $adss->primary_beneficiary = $validated['primary_beneficiary'],
+            $adss->primary_relationship = $validated['primary_relationship'],
+            $adss->secondary_beneficiary = $validated['secondary_beneficiary'],
+            $adss->secondary_relationship = $validated['secondary_relationship'],
+            $adss->minor_trustee = $validated['minor_trustee'],
+            $adss->pcic_coverage = $validated['pcic_coverage'],
+            $adss->pcic_name = $validated['pcic_name'],
+            $adss->pcic_relationship = $validated['pcic_relationship'],
+            $adss->pcic_address = $validated['pcic_address'],
+            ]);
+
         }
+        return redirect()->route('walk-in.index')->with('success', 'Owner Information successfully saved!');
 
     }
 
