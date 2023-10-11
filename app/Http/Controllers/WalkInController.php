@@ -27,8 +27,9 @@ class WalkInController extends Controller
 
     public function index()
     {
+        $walk_in = WalkInBoatOwner::paginate('10');
 
-        return view('modules.walk-in.index');
+        return view('modules.walk-in.index', compact('walk_in'));
     }
     public function create($id = null)
     {
