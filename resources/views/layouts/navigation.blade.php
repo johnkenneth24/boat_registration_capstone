@@ -77,7 +77,8 @@
                         </a>
                     </li>
                     @unlessrole('user')
-                        <li class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.pending') ? 'nav-tree-view-active' : '' }}">
+                        <li
+                            class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.pending') ? 'nav-tree-view-active' : '' }}">
                             <a href="{{ route('reg-boat.pending') }}" class="nav-link">
                                 <i class="fa fa-sync-alt" aria-hidden="true"></i>
                                 <p>Pending Registration</p>
@@ -89,8 +90,9 @@
                                 <p>Walk In Registration</p>
                             </a>
                         </li>
-                        <li class="nav-item pl-3 pr-0 {{-- request()->routeIs('reg-boat.archived')?'nav-tree-view-active':'' --}}">
-                            <a href="{{-- route('reg-boat.archived') --}}" class="nav-link">
+                        <li
+                            class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.archived') ? 'nav-tree-view-active' : '' }}">
+                            <a href="{{ route('reg-boat.archived') }}" class="nav-link">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                 <p>Archived Registration</p>
                             </a>

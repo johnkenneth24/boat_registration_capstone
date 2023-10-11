@@ -41,7 +41,7 @@
                                 <h4 class="text-uppercase">Boat Registration</h4>
                             </div>
                         </div>
-                        <form action="{{ route('reg-boat.store') }}" method="post">
+                        <form action="{{ route('reg-boat.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body mt-0">
                                 <div class="row border border-secondary">
@@ -126,8 +126,8 @@
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label>Type of Fishing Vessel <span class="text-danger">*</span></label>
-                                                    <select name="vessel_type" required class="form-control form-control-sm"
-                                                        required id="vessel_type">
+                                                    <select name="vessel_type" class="form-control form-control-sm" required
+                                                        id="vessel_type">
                                                         <option value="">--Please Select--</option>
                                                         <option value="Motorized">Motorized</option>
                                                         <option value="Non-Motorized">Non-Motorized</option>
@@ -221,30 +221,25 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Materials Used <span class="text-danger">*</span></label>
-                                        <input type="text" name="materials_used"
-                                            class="form-control form-control-sm
+                                            <div class="form-group col-md-12">
+                                                <label>Materials Used <span class="text-danger">*</span></label>
+                                                <input type="text" name="materials_used"
+                                                    class="form-control form-control-sm
                                             @error('materials_used') is-invalid @enderror"
-                                            placeholder="Materials used in building the vessel" required
-                                            value="{{ old('materials_used') }}">
-                                        @error('materials_used')
-                                            <div class="invalid-feedback" style="display: inline-block !important;">
-                                                {{ $message }}
+                                                    placeholder="Materials used in building the vessel" required
+                                                    value="{{ old('materials_used') }}">
+                                                @error('materials_used')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
-                                        @enderror
-                                    </div>
-                                    <hr class="dark horizontal">
-                                    <div class="col-md-12">
-                                        <div class="row">
+                                            <hr class="dark horizontal">
                                             <div class="form-group col-md-4">
                                                 <label>Registered Length <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01" name="length"
                                                     class="form-control form-control-sm @error('length') is-invalid @enderror"
-                                                    value="{{ old('length') }}"
-                                                    placeholder="Registered Length of the Vessel (in meters)" required>
+                                                    value="{{ old('length') }}" placeholder="(in meters)" required>
                                                 @error('length')
                                                     <div class="invalid-feedback" style="display: inline-block !important;">
                                                         {{ $message }}
@@ -255,8 +250,7 @@
                                                 <label>Registered Breadth <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01" name="breadth"
                                                     class="form-control form-control-sm @error('breadth') is-invalid @enderror"
-                                                    value="{{ old('breadth') }}"
-                                                    placeholder="Registered Breadth of the Vessel  (in meters)" required>
+                                                    value="{{ old('breadth') }}" placeholder="(in meters)" required>
                                                 @error('breadth')
                                                     <div class="invalid-feedback" style="display: inline-block !important;">
                                                         {{ $message }}
@@ -267,25 +261,20 @@
                                                 <label>Registered Depth <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01" name="depth"
                                                     class="form-control form-control-sm @error('depth') is-invalid @enderror"
-                                                    value="{{ old('depth') }}"
-                                                    placeholder="Registered Depth of the Vessel  (in meters)" required>
+                                                    value="{{ old('depth') }}" placeholder="(in meters)" required>
                                                 @error('depth')
                                                     <div class="invalid-feedback" style="display: inline-block !important;">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="row">
                                             <div class="form-group col-md-4">
                                                 <label>Tonnage Length <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01"
                                                     name="tonnage_length"
                                                     class="form-control form-control-sm @error('tonnage_length') is-invalid @enderror"
-                                                    value="{{ old('tonnage_length') }}"
-                                                    placeholder="Tonnage Length of the Vessel (in meters)" required>
+                                                    value="{{ old('tonnage_length') }}" placeholder="(in meters)"
+                                                    required>
                                                 @error('tonnage_length')
                                                     <div class="invalid-feedback" style="display: inline-block !important;">
                                                         {{ $message }}
@@ -297,8 +286,8 @@
                                                 <input type="number" min="0" step="0.01"
                                                     name="tonnage_breadth"
                                                     class="form-control form-control-sm @error('tonnage_breadth') is-invalid @enderror"
-                                                    value="{{ old('tonnage_breadth') }}"
-                                                    placeholder="Tonnage Breadth of the Vessel  (in meters)" required>
+                                                    value="{{ old('tonnage_breadth') }}" placeholder="(in meters)"
+                                                    required>
                                                 @error('tonnage_breadth')
                                                     <div class="invalid-feedback" style="display: inline-block !important;">
                                                         {{ $message }}
@@ -309,8 +298,8 @@
                                                 <label>Tonnage Depth <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01" name="tonnage_depth"
                                                     class="form-control form-control-sm @error('tonnage_depth') is-invalid @enderror"
-                                                    value="{{ old('tonnage_depth') }}"
-                                                    placeholder="Tonnage Depth of the Vessel  (in meters)" required>
+                                                    value="{{ old('tonnage_depth') }}" placeholder="(in meters)"
+                                                    required>
                                                 @error('tonnage_depth')
                                                     <div class="invalid-feedback" style="display: inline-block !important;">
                                                         {{ $message }}
@@ -320,14 +309,42 @@
                                             <div class="form-group col-md-6">
                                                 <label>Gross Tonnage</label>
                                                 <input type="number" min="0" step="0.01" name="gross_tonnage"
-                                                    required value="{{ old('gross_tonnage') }}"
-                                                    class="form-control form-control-sm">
+                                                    required value="{{ old('gross_tonnage') }}" required
+                                                    class="form-control form-control-sm @error('gross_tonnage') is-invalid @enderror">
+                                                @error('gross_tonnage')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Net Tonnage</label>
                                                 <input type="number" min="0" step="0.01" name="net_tonnage"
-                                                    required value="{{ old('net_tonnage') }}"
-                                                    class="form-control form-control-sm">
+                                                     required value="{{ old('net_tonnage') }}" required
+                                                    class="form-control form-control-sm @error('net_tonnage') is-invalid @enderror">
+                                                @error('net_tonnage')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label>Upload Colored Image of the Boat</label>
+                                                <input type="file" name="image"
+                                                    class="form-control form-control-sm  @error('image') is-invalid @enderror"
+                                                    value="{{ old('image') }}" id="image" required>
+                                                @error('image')
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                                <img src="/images/upload.gif" alt="" id="preview"
+                                                    class="img-fluid img-thumbnail mb-2">
                                             </div>
                                         </div>
                                     </div>
@@ -370,5 +387,23 @@
                 serial_number.removeAttribute('required');
             }
         });
+    </script>
+
+    <script>
+        function previewImage() {
+            var preview = document.querySelector('#preview');
+            var file = document.querySelector('#image').files[0];
+            var reader = new FileReader();
+            reader.onloadend = function() {
+                preview.src = reader.result;
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        }
+        var imageInput = document.querySelector('#image');
+        imageInput.addEventListener('change', previewImage);
     </script>
 @endsection
