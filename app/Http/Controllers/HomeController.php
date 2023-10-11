@@ -21,10 +21,7 @@ class HomeController extends Controller
         $registeredCount = $rBoats->where('status', 'registered')->count();
         $pendingCount = $rBoats->where('status', 'pending')->count();
         $renewalCount = $rBoats->where('status', 'renewal')->count();
-
-        $expiredCount = $rBoats->where('status', 'registered')->where('approved_at', '<', now()->subYear())->count();
-
-        // dd($expiredCount);
+        $expiredCount = $rBoats->where('status', 'expired')->count();
 
         $user = auth()->user()->roles->first()->name;
 

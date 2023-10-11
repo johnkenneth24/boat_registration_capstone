@@ -130,7 +130,7 @@
                                             <div class="form-group col-md-6">
                                                 <label>Body Number <span class="text-danger">*</span></label>
                                                 <input type="number" min="1" name="body_number"
-                                                    class="form-control form-control-sm @error('body_number') is-invalid @enderror"
+                                                    class="form-control form-control-sm"
                                                     value="{{ $boatReg->boat->body_number }}"
                                                     placeholder="Body number of the Vessel" readonly>
                                                 @error('body_number')
@@ -141,8 +141,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Color <span class="text-danger">*</span></label>
-                                                <input type="text" name="color"
-                                                    class="form-control form-control-sm @error('color') is-invalid @enderror"
+                                                <input type="text" name="color" class="form-control form-control-sm"
                                                     value="{{ $boatReg->boat->color }}"
                                                     placeholder="Color (e.g., gray, dark-blue, yellow)" readonly>
                                                 @error('color')
@@ -151,23 +150,28 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-12">
-                                                <label>Materials Used <span class="text-danger">*</span></label>
-                                                <input type="text" name="materials_used"
-                                                    class="form-control form-control-sm @error('materials_used') is-invalid @enderror"
-                                                    placeholder="Materials used in building the vessel" readonly
-                                                    value="{{ $boatReg->boat->materials }}">
-                                                @error('materials_used')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Materials Used <span class="text-danger">*</span></label>
+                                        <input type="text" name="materials_used"
+                                            class="form-control form-control-sm
+                                        "
+                                            placeholder="Materials used in building the vessel" readonly
+                                            value="{{ $boatReg->boat->materials }}">
+                                        @error('materials_used')
+                                            <div class="invalid-feedback" style="display: inline-block !important;">
+                                                {{ $message }}
                                             </div>
-                                            <hr class="dark horizontal">
+                                        @enderror
+                                    </div>
+                                    <hr class="dark horizontal">
+                                    <div class="col-md-12">
+                                        <div class="row">
                                             <div class="form-group col-md-4">
                                                 <label>Registered Length <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01" name="length"
-                                                    class="form-control form-control-sm @error('length') is-invalid @enderror"
+                                                    class="form-control form-control-sm"
                                                     value="{{ $boatReg->boat->length }}"
                                                     placeholder="Registered Length of the Vessel (in meters)" readonly>
                                                 @error('length')
@@ -179,7 +183,7 @@
                                             <div class="form-group col-md-4">
                                                 <label>Registered Breadth <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01" name="breadth"
-                                                    class="form-control form-control-sm @error('breadth') is-invalid @enderror"
+                                                    class="form-control form-control-sm"
                                                     value="{{ $boatReg->boat->breadth }}"
                                                     placeholder="Registered Breadth of the Vessel  (in meters)" readonly>
                                                 @error('breadth')
@@ -191,7 +195,7 @@
                                             <div class="form-group col-md-4">
                                                 <label>Registered Depth <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01" name="depth"
-                                                    class="form-control form-control-sm @error('depth') is-invalid @enderror"
+                                                    class="form-control form-control-sm"
                                                     value="{{ $boatReg->boat->depth }}"
                                                     placeholder="Registered Depth of the Vessel  (in meters)" readonly>
                                                 @error('depth')
@@ -200,11 +204,14 @@
                                                     </div>
                                                 @enderror
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
                                             <div class="form-group col-md-4">
                                                 <label>Tonnage Length <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01"
-                                                    name="tonnage_length"
-                                                    class="form-control form-control-sm @error('tonnage_length') is-invalid @enderror"
+                                                    name="tonnage_length" class="form-control form-control-sm"
                                                     value="{{ $boatReg->boat->tonnage_length }}"
                                                     placeholder="Tonnage Length of the Vessel (in meters)" readonly>
                                                 @error('tonnage_length')
@@ -216,8 +223,7 @@
                                             <div class="form-group col-md-4">
                                                 <label>Tonnage Breadth <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01"
-                                                    name="tonnage_breadth"
-                                                    class="form-control form-control-sm @error('tonnage_breadth') is-invalid @enderror"
+                                                    name="tonnage_breadth" class="form-control form-control-sm"
                                                     value="{{ $boatReg->boat->tonnage_breadth }}"
                                                     placeholder="Tonnage Breadth of the Vessel  (in meters)" readonly>
                                                 @error('tonnage_breadth')
@@ -229,7 +235,7 @@
                                             <div class="form-group col-md-4">
                                                 <label>Tonnage Depth <span class="text-danger">*</span></label>
                                                 <input type="number" min="0" step="0.01" name="tonnage_depth"
-                                                    class="form-control form-control-sm @error('tonnage_depth') is-invalid @enderror"
+                                                    class="form-control form-control-sm"
                                                     value="{{ $boatReg->boat->tonnage_depth }}"
                                                     placeholder="Tonnage Depth of the Vessel  (in meters)" readonly>
                                                 @error('tonnage_depth')
@@ -252,19 +258,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <label>Image of the Boat</label>
-                                                <img src="/images/user-upload/{{ $boatReg->boat->image }}"
-                                                    alt="image-preview" id="preview" class="img-fluid img-thumbnail"
-                                                    data-image="{{ $boatReg->boat->image }}">
-
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
@@ -273,7 +266,9 @@
                                     Go Back</a>
                             </div>
                         </form>
-
+                        <div class="overlay dark">
+                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -288,75 +283,17 @@
         const engine_make = document.querySelector('#engine-make');
         const horsepower = document.querySelector('#horsepower');
         const serial_number = document.querySelector('#serial_number');
-
         // check first if the vessel type has value of motorized
         if (vessel_type.value === 'Motorized') {
             motorized_group.style.display = 'block';
-            engine_make.setAttribute('readonly', true);
-            horsepower.setAttribute('readonly', true);
-            serial_number.setAttribute('readonly', true);
+            engine_make.setAttribute('required', true);
+            horsepower.setAttribute('required', true);
+            serial_number.setAttribute('required', true);
         } else {
             motorized_group.style.display = 'none';
-            engine_make.removeAttribute('readonly');
-            horsepower.removeAttribute('readonly');
-            serial_number.removeAttribute('readonly');
+            engine_make.removeAttribute('required');
+            horsepower.removeAttribute('required');
+            serial_number.removeAttribute('required');
         }
-
-        vessel_type.addEventListener('change', (e) => {
-            if (e.target.value === 'Motorized') {
-                motorized_group.style.display = 'block';
-                engine_make.setAttribute('readonly', true);
-                horsepower.setAttribute('readonly', true);
-                serial_number.setAttribute('readonly', true);
-            } else {
-                motorized_group.style.display = 'none';
-                engine_make.removeAttribute('readonly');
-                horsepower.removeAttribute('readonly');
-                serial_number.removeAttribute('readonly');
-            }
-        });
-    </script>
-
-    <script>
-        function previewImage() {
-            var preview = document.querySelector('#preview');
-            var file = document.querySelector('#image').files[0];
-            var reader = new FileReader();
-
-            reader.onloadend = function() {
-                preview.src = reader.result;
-            }
-
-            if (file) {
-                reader.readAsDataURL(file);
-            } else {
-                preview.src = "";
-            }
-        }
-
-        var imageInput = document.querySelector('#image');
-        imageInput.addEventListener('change', previewImage);
-    </script>
-
-    <script>
-        // Get the image element
-        const image = document.getElementById('preview');
-
-        // Get the data-image attribute value (the image filename)
-        const imageName = image.getAttribute('data-image');
-
-        // Check if the image exists
-        const imageExists = new Image();
-        imageExists.onload = function() {
-            // Image exists, set the src attribute to the original path
-            image.src = `/images/user-upload/${imageName}`;
-        };
-        imageExists.onerror = function() {
-            // Image doesn't exist, set the src attribute to the default image path
-            image.src = '/images/imgnotfound.png';
-        };
-
-        // Set the source of the imageExists to trigger the load or error event
-        imageExists.src = `/images/user-upload/${imageName}`;
     </script>
 @endsection

@@ -15,7 +15,6 @@ class Boat extends Model
         'owner_id',
         'register_boat_id',
         'vessel_name',
-        'image',
         'boat_type',
         'home_port',
         'place_built',
@@ -51,8 +50,4 @@ class Boat extends Model
         return $this->belongsTo(Boat::class);
     }
 
-    public function walkIn()
-    {
-        return $this->belongsTo(WalkInBoatOwner::class);
-    }
 }
