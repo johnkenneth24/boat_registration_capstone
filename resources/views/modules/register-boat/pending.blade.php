@@ -54,12 +54,78 @@
                                             <td class="">
                                                 <a href="{{ route('reg-boat.view', $pBoats->id) }}"
                                                     class="btn btn-sm btn-primary">View details</a>
-                                                <a href="{{ route('reg-boat.approve', $pBoats->id) }}"
-                                                    class="btn btn-sm btn-success">Approve</a>
-                                                <a href="{{ route('reg-boat.disapprove', $pBoats->id) }}"
-                                                    class="btn btn-sm btn-danger">Disapprove</a>
+                                                <button type="button" class="btn btn-sm btn-success" title="Approve"
+                                                    data-toggle="modal"
+                                                    data-target="#confirmationApprove{{ $pBoats->id }}">
+                                                    APPROVE
+                                                </button>
+
+                                                <button type="button" class="btn btn-sm btn-danger" title="Disapprove"
+                                                    data-toggle="modal"
+                                                    data-target="#confirmationDisapprove{{ $pBoats->id }}">
+                                                    DISAPPROVE
+                                                </button>
                                             </td>
                                         </tr>
+                                        {{-- confirmationDisapprove --}}
+                                        <div class="modal fade" id="confirmationDisapprove{{ $pBoats->id }}"
+                                            tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
+                                            aria-hidden="true" data-backdrop="static">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content modal-static">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="confirmationModalLabel">Confirm
+                                                            Disapproval
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body mt-2 mb-2 text-center">
+                                                        <i class="fas fa-exclamation-triangle fa-4x text-warning mb-3"></i>
+                                                        <h3>Are you sure you want to disapprove this registration?</h3>
+                                                        <span class="text-danger fw-bold">Note: This cannot be
+                                                            undone.</span>
+                                                    </div>
+                                                    <div class="modal-footer d-flex justify-content-around">
+                                                        <button type="button" class="btn btn-secondary px-5 rounded-3"
+                                                            data-dismiss="modal">Cancel</button>
+                                                        <a href="{{ route('reg-boat.disapprove', $pBoats->id) }}"
+                                                            class="btn btn-danger px-5 rounded-3">Yes, Disapprove</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- confirmApprove --}}
+                                        <div class="modal fade" id="confirmationApprove{{ $pBoats->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true"
+                                            data-backdrop="static">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content modal-static">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="confirmationModalLabel">Confirm
+                                                            Approval
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body mt-2 mb-2 text-center">
+                                                        <i class="fas fa-question fa-4x text-secondary mb-3"></i>
+                                                        <h3>Are you sure you want to Approve this registration?</h3>
+                                                        {{-- <span class="text-danger">Note: This cannot be undone.</span> --}}
+                                                    </div>
+                                                    <div class="modal-footer d-flex justify-content-around">
+                                                        <button type="button" class="btn btn-secondary px-5 rounded-3"
+                                                            data-dismiss="modal">Cancel</button>
+                                                        <a href="{{ route('reg-boat.approve', $pBoats->id) }}"
+                                                            class="btn btn-success px-5 rounded-3">Yes, Approve</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @empty
                                         <tr>
                                             <td colspan="5" class="text-center">No data available</td>

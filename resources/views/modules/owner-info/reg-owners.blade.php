@@ -43,8 +43,9 @@
                                             <td>{{ $regOwner->address }}</td>
                                             {{-- <td>{{ ucfirst($regOwner->status) }}</td> --}}
                                             <td class="d-flex justify-content-center align-middle">
-                                                <button type="button" class="btn btn-sm btn-warning mr-2" title="VIEW"
-                                                    data-toggle="modal" data-target="#viewModal{{ $regOwner->id }}">
+                                                <button type="button" class="btn btn-sm btn-warning mr-2 px-4 fw-bold"
+                                                    title="VIEW" data-toggle="modal"
+                                                    data-target="#viewModal{{ $regOwner->id }}">
                                                     VIEW
                                                 </button>
                                                 <a href="{{-- route('regOwner.edit',$regOwner->id) --}}" class="btn btn-sm btn-primary mr-2">EDIT</a>
@@ -54,6 +55,66 @@
                                                 </button>
                                             </td>
                                         </tr>
+                                        <div class="modal fade" id="viewModal{{ $regOwner->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true"
+                                            data-backdrop="static">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                <div class="modal-content modal-static">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewModalLabel">View Owner
+                                                            Details
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body mt-2 mb-2">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="fw-bold">Fullname:</label>
+                                                                    <input type="text"
+                                                                        class="form-control-plaintext form-control-sm"
+                                                                        readonly value="{{ $regOwner->fullname }}">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer d-flex justify-content-end">
+                                                        <button class="btn btn-primary px-5 fw-bold"
+                                                            data-target="#modalToggle2{{ $regOwner->id }}"
+                                                            data-dismiss="modal" data-toggle="modal">NEXT</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" id="modalToggle2{{ $regOwner->id }}" aria-hidden="true"
+                                            aria-labelledby="modalToggle2Label" tabindex="-1">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                <div class="modal-content modal-static">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalToggle2Label">View Owner
+                                                            Details
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body mt-2 mb-2 text-center">
+                                                        jdfjfbjf
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-primary"
+                                                            data-target="#viewModal{{ $regOwner->id }}" data-dismiss="modal"
+                                                            data-toggle="modal">Back to first</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @empty
                                         <tr>
                                             <td colspan="6" class="text-center">No Data</td>

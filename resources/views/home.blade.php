@@ -97,16 +97,23 @@
                     </div>
                 </div>
             @endunlessrole
-            @unlessrole('admin')
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card shadow" style="height: 335px;">
-                            <div class="card-header border-0">
-                                <h3 class="card-title fw-bold">Pending Registrations</h3>
-                            </div>
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover table-valign-middle">
-                                    <thead>
+            {{-- @unlessrole('admin') --}}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow" style="height: 335px;">
+                        <div class="card-header bg-gray-dark border-0">
+                            <h3 class="card-title fw-bold">Pending Registrations</h3>
+                        </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover table-valign-middle">
+                                <thead>
+                                    <tr class="align-middle">
+                                        <th>Registration Number</th>
+                                        <th>Registration Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($pendings as $pending)
                                         <tr class="align-middle">
                                             <th>Registration Number</th>
                                             <th>Registration Date</th>
@@ -139,14 +146,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card shadow " style="height: 335px;">
-                            <div class="card-header border-0">
-                                <h3 class="card-title fw-bold">Announcements</h3>
-                            </div>
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover table-valign-middle">
-                                    <thead>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow " style="height: 335px;">
+                        <div class="card-header bg-gray-dark border-0">
+                            <h3 class="card-title fw-bold">Announcements </h3>
+                        </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover table-valign-middle">
+                                <thead>
+                                    <tr class="text-center align-middle">
+                                        <th>Subject</th>
+                                        <th>Announcement Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($announcements as $announcement)
                                         <tr class="text-center align-middle">
                                             <th>Subject</th>
                                             <th>Announcement Date</th>
@@ -201,7 +217,7 @@
                         </div>
                     </div>
                 </div>
-            @endunlessrole
+           {{-- @endunlessrole --}}
         </div>
     </div>
 @endsection
