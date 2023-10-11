@@ -18,7 +18,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="row">
-                                        <input type="text" name="walkin_owner_adss_id" value="{{ $owner_adss }}">
+                                        <input type="hidden" name="walkin_owner_adss_id" value="{{ $owner_adss }}">
                                             <div class="form-group col-md-9">
                                                 <label for="">Name of Spouse</label>
                                                 <input type="text" name="name_spouse" id="" class="form-control-sm form-control  @error('name_spouse') is-invalid @enderror" placeholder="Enter Name of Spause">
@@ -142,7 +142,7 @@
 
                             </div>
                             <div class="card-footer d-flex justify-content-end">
-                                <a href="{{ route('owner-info.edit', $owner_livelihood ?? auth()->user()->id) }}"
+                                <a href="{{ route('walk-in.livelihood', $owner_adss) }}"
                                     class="btn btn-danger col-md-2 mr-2">Go
                                     back</a>
                                 <button type="submit" class="btn btn-primary col-md-2">Save</button>
