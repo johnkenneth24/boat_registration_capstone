@@ -1,3 +1,4 @@
+use Illuminate\Http\Request;
 @extends('layouts.app')
 
 @section('content')
@@ -15,8 +16,8 @@
                             </div>
                             @role('admin|staff')
                                 <div class="card-tools d-flex justify-content-end">
-                                    <div class="d-sm-none d-md-block">
-                                        <form action="{{-- route('reg-boat.index') --}}" method="get">
+                                    {{-- <div class="d-sm-none d-md-block">
+                                        <form action="#" method="get">
                                             @csrf
                                             <div class="form-group">
                                                 <input class="form-control form-control-md d-sm-none d-md-block mr-3"
@@ -24,10 +25,10 @@
                                                     autofocus>
                                             </div>
                                         </form>
-                                    </div>
+                                    </div> --}}
                                     <div>
-                                        <a href="{{ route('walk-in.create') }}" class="btn btn-success mb-1"> <span><i class="fa fa-plus"
-                                                    aria-hidden="true"></i></span>
+                                        <a href="{{ route('walk-in.create') }}" class="btn btn-success mb-1"> <span><i
+                                                    class="fa fa-plus" aria-hidden="true"></i></span>
                                             Create Registration (Walk-in)</a>
                                     </div>
                                 </div>

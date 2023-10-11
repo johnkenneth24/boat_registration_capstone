@@ -60,8 +60,6 @@ class OwnerInfoController extends Controller
             'emContact_person.regex' => 'Must not contain special characters or numbers',
             'emRelationship.regex' => 'Must not contain special characters or numbers',
             'emContact_no.regex' => 'Must not contain letters or special characters',
-            'emAddress.regex' => 'Must not contain special characters or numbers',
-
         ];
     }
 
@@ -89,7 +87,7 @@ class OwnerInfoController extends Controller
             'emContact_person' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'emRelationship' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'emContact_no' => ['nullable', 'string', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
-            'emAddress' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
+            'emAddress' => ['nullable'],
         ], $this->messages());
 
         // dd($validated);
@@ -259,7 +257,7 @@ class OwnerInfoController extends Controller
         $ownerInfo->status = 'registered';
         $ownerInfo->save();
 
-    return redirect()->route('owner-info.pending-owners')->with('success', 'Owner Information successfully approved!');
+        return redirect()->route('owner-info.pending-owners')->with('success', 'Owner Information successfully approved!');
     }
 
     public function archive($id)

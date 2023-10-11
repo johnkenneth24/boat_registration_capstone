@@ -26,6 +26,18 @@
                                 {{ Auth::user()->username }}!</h4>
                         </div>
                     </div>
+                    @role('user')
+                        @if ($expiredCount > 0)
+                            <div class="alert alert-custom shadow bg-danger fade show d-flex justify-content-start"
+                                role="alert">
+                                <div class="alert-icon me-2"><i class="fas fa-exclamation-triangle"></i></div>
+                                <div class="alert-text">You have <strong>{{ $expiredCount }}</strong> expired registration/s. <a
+                                        href="javascript:void(0)" class="text-black fw-bold">Click
+                                        here</a> to renew your registration.
+                                </div>
+                            </div>
+                        @endif
+                    @endrole
                 </div>
             </div>
             @unlessrole('user')
@@ -45,7 +57,7 @@
                                             <div class="icon">
                                                 <i class="fas fa-sync-alt" aria-hidden="true"></i>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="{{ route('reg-boat.index') }}" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -87,7 +99,7 @@
                                             <div class="icon">
                                                 <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="{{ route('reg-boat.index') }}" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -97,111 +109,112 @@
                     </div>
                 </div>
             @endunlessrole
-            @unlessrole('admin')
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card shadow" style="height: 335px;">
-                            <div class="card-header border-0">
-                                <h3 class="card-title fw-bold">Pending Registrations</h3>
-                            </div>
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover table-valign-middle">
-                                    <thead>
-                                        <tr class="align-middle">
-                                            <th>Registration Number</th>
-                                            <th>Registration Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($pendings as $pending)
-                                            <tr class="align-middle">
-                                                <td>
-                                                    @role('user')
-                                                        <a href="{{ route('reg-boat.index') }}">
-                                                            {{ $pending->registration_no }}
-                                                        </a>
-                                                    @endrole
-                                                    @role('staff|admin')
-                                                        <a href="{{ route('reg-boat.pending') }}">
-                                                            {{ $pending->registration_no }}
-                                                        </a>
-                                                    @endrole
-                                                </td>
-                                                <td>{{ date('M. d, Y', strtotime($pending->registration_date)) }}</td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="2" class="text-center">No Pending Registrations</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+            {{-- @unlessrole('admin') --}}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow" style="height: 335px;">
+                        <div class="card-header border-0">
+                            <h3 class="card-title fw-bold">Pending Registrations</h3>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card shadow " style="height: 335px;">
-                            <div class="card-header border-0">
-                                <h3 class="card-title fw-bold">Announcements</h3>
-                            </div>
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover table-valign-middle">
-                                    <thead>
-                                        <tr class="text-center align-middle">
-                                            <th>Subject</th>
-                                            <th>Announcement Date</th>
-                                            <th>Action</th>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover table-valign-middle">
+                                <thead>
+                                    <tr class="align-middle">
+                                        <th>Registration Number</th>
+                                        <th>Registration Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($pendings as $pending)
+                                        <tr class="align-middle">
+                                            <td>
+                                                @role('user')
+                                                    <a href="{{ route('reg-boat.index') }}">
+                                                        {{ $pending->registration_no }}
+                                                    </a>
+                                                @endrole
+                                                @role('staff|admin')
+                                                    <a href="{{ route('reg-boat.pending') }}">
+                                                        {{ $pending->registration_no }}
+                                                    </a>
+                                                @endrole
+                                            </td>
+                                            <td>{{ date('M. d, Y', strtotime($pending->registration_date)) }}</td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($announcements as $announcement)
-                                            <tr class="text-center align-middle">
-                                                <td>{{ $announcement->title }}</td>
-                                                <td>{{ $announcement->date->format('F d, Y') }}</td>
-                                                <td><button type="button" class="btn btn-sm btn-primary mr-2" title="VIEW"
-                                                        data-toggle="modal" data-target="#viewModal{{ $announcement->id }}">
-                                                        VIEW
-                                                    </button></td>
-                                            </tr>
-                                            <div class="modal fade" id="viewModal{{ $announcement->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="viewModalLabel{{ $announcement->id }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="viewModalLabel{{ $announcement->id }}">
-                                                                Announcement Details
-                                                            </h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true" class="text-danger"
-                                                                    title="Close">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body mt-2 mb-2 text-center">
-                                                            <h4 class="text-center">{{ $announcement->title }}</h4>
-                                                            <span
-                                                                class="font-italic">{{ $announcement->date->format('F d, Y') }}
-                                                            </span>
-                                                            <p class="text-center text-justify mt-3">
-                                                                {{ $announcement->content }}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @empty
-                                            <tr>
-                                                <td colspan="3" class="text-center">No Announcements Yet!</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @empty
+                                        <tr>
+                                            <td colspan="2" class="text-center">No Pending Registrations</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-            @endunlessrole
+                <div class="col-md-6">
+                    <div class="card shadow " style="height: 335px;">
+                        <div class="card-header border-0">
+                            <h3 class="card-title fw-bold">Announcements</h3>
+                        </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover table-valign-middle">
+                                <thead>
+                                    <tr class="text-center align-middle">
+                                        <th>Subject</th>
+                                        <th>Announcement Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($announcements as $announcement)
+                                        <tr class="text-center align-middle">
+                                            <td>{{ $announcement->title }}</td>
+                                            <td>{{ $announcement->date->format('F d, Y') }}</td>
+                                            <td><button type="button" class="btn btn-sm btn-primary mr-2" title="VIEW"
+                                                    data-toggle="modal" data-target="#viewModal{{ $announcement->id }}">
+                                                    VIEW
+                                                </button></td>
+                                        </tr>
+                                        <div class="modal fade" id="viewModal{{ $announcement->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="viewModalLabel{{ $announcement->id }}"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"
+                                                            id="viewModalLabel{{ $announcement->id }}">
+                                                            Announcement Details
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true" class="text-danger"
+                                                                title="Close">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body mt-2 mb-2 text-center">
+                                                        <h4 class="text-center">{{ $announcement->title }}</h4>
+                                                        <span
+                                                            class="font-italic">{{ $announcement->date->format('F d, Y') }}
+                                                        </span>
+                                                        <p class="text-center text-justify mt-3">
+                                                            {{ $announcement->content }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center">No Announcements Yet!</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- @endunlessrole --}}
         </div>
     </div>
 @endsection

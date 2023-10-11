@@ -25,9 +25,28 @@ class WalkInController extends Controller
         'Other',
     ];
 
-    public function index()
+    public function index(Request $request)
     {
-        $walk_in = WalkInBoatOwner::paginate('10');
+        // $search = $request->input('search');
+
+        // $query = WalkInBoatOwner::where(function ($query) use ($search) {
+        //         $query->where('registration_no', 'like', '%' . $search . '%')
+        //             ->orWhere('registration_date', 'like', '%' . $search . '%')
+        //             ->orWhereHas('ownerInfo', function ($query) use ($search) {
+        //                 $query->where('first_name', 'like', '%' . $search . '%')
+        //                     ->orWhere('middle_name', 'like', '%' . $search . '%')
+        //                     ->orWhere('last_name', 'like', '%' . $search . '%');
+        //             })
+        //             ->orWhereHas('boat', function ($query) use ($search) {
+        //                 $query->where('vessel_name', 'like', '%' . $search . '%')
+        //                     ->orWhere('boat_type', 'like', '%' . $search . '%');
+        //             });
+        //     })
+        //     ->orderBy('created_at', 'asc');
+
+        // $walk_in = $query->paginate(10);
+
+        $walk_in = WalkInBoatOwner::paginate(10);
 
         return view('modules.walk-in.index', compact('walk_in'));
     }
@@ -75,7 +94,7 @@ class WalkInController extends Controller
         ];
     }
 
-    public function store(Request $request,WalkInBoatOwner $id)
+    public function store(Request $request, WalkInBoatOwner $id)
     {
         $validated = $request->validate([
             'salutation' => ['required'],
@@ -101,10 +120,9 @@ class WalkInController extends Controller
             'emAddress' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
         ], $this->messages());
 
-        $walkInOwner = WalkInBoatOwner::where('id' , $id)->first();
+        $walkInOwner = WalkInBoatOwner::where('id', $id)->first();
 
-        if(!$walkInOwner)
-        {
+        if (!$walkInOwner) {
             $walkInOwner = WalkInBoatOwner::create([
                 'salutation' => $validated['salutation'],
                 'last_name' => $validated['last_name'],
@@ -128,9 +146,7 @@ class WalkInController extends Controller
                 'emContact_no' => $validated['emContact_no'],
                 'emAddress' => $validated['emAddress'],
             ]);
-        }
-        else
-        {
+        } else {
             $walkInOwner->update([
                 'salutation' => $validated['salutation'],
                 'last_name' => $validated['last_name'],
@@ -159,7 +175,6 @@ class WalkInController extends Controller
         session(['walkInOwner' => $walkInOwner->id]);
 
         return redirect(route('walk-in.livelihood'));
-
     }
 
     public function walkInLivelihood(Request $request)
@@ -170,7 +185,7 @@ class WalkInController extends Controller
         $livelihood = WalkInLivelihood::where('walkin_owner_id', $owner_livelihood)->first();
 
 
-        return view('modules.walk-in.livelihood', compact('source_of_income', 'livelihood', 'owner_livelihood') );
+        return view('modules.walk-in.livelihood', compact('source_of_income', 'livelihood', 'owner_livelihood'));
     }
 
     public function walkInLivelihoodStore(Request $request)
@@ -252,75 +267,31 @@ class WalkInController extends Controller
     public function walkInAdssStore(Request $request)
     {
         $validated = $request->validate([
-        'walkin_owner_adss_id' => 'required',
-        'name_spouse' => 'required',
-        'number_dependent'  => 'required',
-        'name_employer'  => 'required',
-        'desired_coverage'  => 'required',
-        'premium'  => 'required',
-        'cover_from'  => 'required',
-        'cover_to'  => 'required',
-        'primary_beneficiary'  => 'nullable',
-        'primary_relationship'  => 'nullable',
-        'secondary_beneficiary'  => 'nullable',
-        'secondary_relationship'  => 'nullable',
-        'minor_trustee'  => 'nullable',
-        'pcic_coverage'  => 'nullable',
-        'pcic_name'  => 'nullable',
-        'pcic_relationship'  => 'nullable',
-        'pcic_address'   => 'nullable',
+            'walkin_owner_adss_id' => 'required',
+            'name_spouse' => 'required',
+            'number_dependent'  => 'required',
+            'name_employer'  => 'required',
+            'desired_coverage'  => 'required',
+            'premium'  => 'required',
+            'cover_from'  => 'required',
+            'cover_to'  => 'required',
+            'primary_beneficiary'  => 'nullable',
+            'primary_relationship'  => 'nullable',
+            'secondary_beneficiary'  => 'nullable',
+            'secondary_relationship'  => 'nullable',
+            'minor_trustee'  => 'nullable',
+            'pcic_coverage'  => 'nullable',
+            'pcic_name'  => 'nullable',
+            'pcic_relationship'  => 'nullable',
+            'pcic_address'   => 'nullable',
         ]);
 
 
         $owner_adss = $request->session()->get('walkInOwner');
         $adss = WalkInAdss::where('walkin_owner_adss_id', $owner_adss)->first();
 
-        if(!$adss)
-        {
+        if (!$adss) {
             $adss = new WalkInAdss();
-
-            $adss->walkin_owner_adss_id = $validated['walkin_owner_adss_id'];
-            $adss->name_spouse = $validated['name_spouse'];
-            $adss->number_dependent = $validated['number_dependent'];
-            $adss->name_employer = $validated['name_employer'];
-            $adss->desired_coverage = $validated['desired_coverage'];
-            $adss->premium = $validated['premium'];
-            $adss->cover_from = $validated['cover_from'];
-            $adss->cover_to = $validated['cover_to'];
-            $adss->primary_beneficiary = $validated['primary_beneficiary'];
-            $adss->primary_relationship = $validated['primary_relationship'];
-            $adss->secondary_beneficiary = $validated['secondary_beneficiary'];
-            $adss->secondary_relationship = $validated['secondary_relationship'];
-            $adss->minor_trustee = $validated['minor_trustee'];
-            $adss->pcic_coverage = $validated['pcic_coverage'];
-            $adss->pcic_name = $validated['pcic_name'];
-            $adss->pcic_relationship = $validated['pcic_relationship'];
-            $adss->pcic_address = $validated['pcic_address'];
-
-            $adss->save();
-        } else {
-            $adss->update([
-            $adss->name_spouse = $validated['name_spouse'],
-            $adss->number_dependent = $validated['number_dependent'],
-            $adss->name_employer = $validated['name_employer'],
-            $adss->desired_coverage = $validated['desired_coverage'],
-            $adss->premium = $validated['premium'],
-            $adss->cover_from = $validated['cover_from'],
-            $adss->cover_to = $validated['cover_to'],
-            $adss->primary_beneficiary = $validated['primary_beneficiary'],
-            $adss->primary_relationship = $validated['primary_relationship'],
-            $adss->secondary_beneficiary = $validated['secondary_beneficiary'],
-            $adss->secondary_relationship = $validated['secondary_relationship'],
-            $adss->minor_trustee = $validated['minor_trustee'],
-            $adss->pcic_coverage = $validated['pcic_coverage'],
-            $adss->pcic_name = $validated['pcic_name'],
-            $adss->pcic_relationship = $validated['pcic_relationship'],
-            $adss->pcic_address = $validated['pcic_address'],
-            ]);
-
         }
-        return redirect()->route('walk-in.index')->with('success', 'Owner Information successfully saved!');
-
     }
-
 }
