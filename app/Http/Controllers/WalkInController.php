@@ -25,7 +25,7 @@ class WalkInController extends Controller
         'Other',
     ];
 
-    public function index()
+    public function index(Request $request)
     {
 
         return view('modules.walk-in.index');
@@ -74,7 +74,7 @@ class WalkInController extends Controller
         ];
     }
 
-    public function store(Request $request,WalkInBoatOwner $id)
+    public function store(Request $request, WalkInBoatOwner $id)
     {
         $validated = $request->validate([
             'salutation' => ['required'],
@@ -100,10 +100,9 @@ class WalkInController extends Controller
             'emAddress' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
         ], $this->messages());
 
-        $walkInOwner = WalkInBoatOwner::where('id' , $id)->first();
+        $walkInOwner = WalkInBoatOwner::where('id', $id)->first();
 
-        if(!$walkInOwner)
-        {
+        if (!$walkInOwner) {
             $walkInOwner = WalkInBoatOwner::create([
                 'salutation' => $validated['salutation'],
                 'last_name' => $validated['last_name'],
@@ -127,9 +126,7 @@ class WalkInController extends Controller
                 'emContact_no' => $validated['emContact_no'],
                 'emAddress' => $validated['emAddress'],
             ]);
-        }
-        else
-        {
+        } else {
             $walkInOwner->update([
                 'salutation' => $validated['salutation'],
                 'last_name' => $validated['last_name'],
@@ -158,7 +155,6 @@ class WalkInController extends Controller
         session(['walkInOwner' => $walkInOwner->id]);
 
         return redirect(route('walk-in.livelihood'));
-
     }
 
     public function walkInLivelihood(Request $request)
@@ -169,7 +165,7 @@ class WalkInController extends Controller
         $livelihood = WalkInLivelihood::where('walkin_owner_id', $owner_livelihood)->first();
 
 
-        return view('modules.walk-in.livelihood', compact('source_of_income', 'livelihood', 'owner_livelihood') );
+        return view('modules.walk-in.livelihood', compact('source_of_income', 'livelihood', 'owner_livelihood'));
     }
 
     public function walkInLivelihoodStore(Request $request)
@@ -251,35 +247,30 @@ class WalkInController extends Controller
     public function walkInAdssStore(Request $request)
     {
         $validated = $request->validate([
-        'walkin_owner_id' => 'required',
-        'name_spouse' => 'required',
-        'number_dependent'  => 'required',
-        'name_employer'  => 'required',
-        'desired_coverage'  => 'required',
-        'premium'  => 'required',
-        'cover_from'  => 'required',
-        'cover_to'  => 'required',
-        'primary_beneficiary'  => 'nullable',
-        'primary_relationship'  => 'nullable',
-        'secondary_beneficiary'  => 'nullable',
-        'secondary_relationship'  => 'nullable',
-        'minor_trustee'  => 'nullable',
-        'pcic_coverage'  => 'nullable',
-        'pcic_name'  => 'nullable',
-        'pcic_relationship'  => 'nullable',
-        'pcic_address'   => 'nullable',
+            'walkin_owner_id' => 'required',
+            'name_spouse' => 'required',
+            'number_dependent'  => 'required',
+            'name_employer'  => 'required',
+            'desired_coverage'  => 'required',
+            'premium'  => 'required',
+            'cover_from'  => 'required',
+            'cover_to'  => 'required',
+            'primary_beneficiary'  => 'nullable',
+            'primary_relationship'  => 'nullable',
+            'secondary_beneficiary'  => 'nullable',
+            'secondary_relationship'  => 'nullable',
+            'minor_trustee'  => 'nullable',
+            'pcic_coverage'  => 'nullable',
+            'pcic_name'  => 'nullable',
+            'pcic_relationship'  => 'nullable',
+            'pcic_address'   => 'nullable',
         ]);
 
         $owner_adss = $request->session()->get('walkInOwner');
         $adss = WalkInAdss::where('walkin_owner_id', $owner_adss)->first();
 
-        if(!$adss)
-        {
+        if (!$adss) {
             $adss = new WalkInAdss();
-
-            
         }
-
     }
-
 }
