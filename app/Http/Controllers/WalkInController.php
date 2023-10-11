@@ -27,8 +27,9 @@ class WalkInController extends Controller
 
     public function index(Request $request)
     {
+        $walk_in = WalkInBoatOwner::paginate('10');
 
-        return view('modules.walk-in.index');
+        return view('modules.walk-in.index', compact('walk_in'));
     }
     public function create($id = null)
     {
@@ -238,7 +239,7 @@ class WalkInController extends Controller
     public function walkInAdss(Request $request)
     {
         $owner_adss = $request->session()->get('walkInOwner');
-        $adss = WalkInAdss::where('walkin_owner_id', $owner_adss)->first();
+        $adss = WalkInAdss::where('walkin_owner_adss_id', $owner_adss)->first();
         $yes_no = ['Yes', 'No'];
 
         return view('modules.walk-in.adss', compact('yes_no', 'owner_adss'));
@@ -247,7 +248,7 @@ class WalkInController extends Controller
     public function walkInAdssStore(Request $request)
     {
         $validated = $request->validate([
-            'walkin_owner_id' => 'required',
+            'walkin_owner_adss_id' => 'required',
             'name_spouse' => 'required',
             'number_dependent'  => 'required',
             'name_employer'  => 'required',
@@ -266,8 +267,9 @@ class WalkInController extends Controller
             'pcic_address'   => 'nullable',
         ]);
 
+
         $owner_adss = $request->session()->get('walkInOwner');
-        $adss = WalkInAdss::where('walkin_owner_id', $owner_adss)->first();
+        $adss = WalkInAdss::where('walkin_owner_adss_id', $owner_adss)->first();
 
         if (!$adss) {
             $adss = new WalkInAdss();

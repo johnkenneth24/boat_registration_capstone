@@ -321,7 +321,6 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $walkin_owner_id
- * @property string $marital_status
  * @property string $name_spouse
  * @property string $number_dependent
  * @property string $name_employer
@@ -329,11 +328,11 @@ namespace App\Models{
  * @property string $premium
  * @property \Illuminate\Support\Carbon $cover_from
  * @property \Illuminate\Support\Carbon $cover_to
- * @property string $primary_beneficiary
- * @property string $primary_relationship
- * @property string $secondary_beneficiary
- * @property string $secondary_relationship
- * @property string $minor_trustee
+ * @property string|null $primary_beneficiary
+ * @property string|null $primary_relationship
+ * @property string|null $secondary_beneficiary
+ * @property string|null $secondary_relationship
+ * @property string|null $minor_trustee
  * @property string|null $pcic_coverage
  * @property string|null $pcic_name
  * @property string|null $pcic_relationship
@@ -349,7 +348,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereDesiredCoverage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereMaritalStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereMinorTrustee($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereNameEmployer($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereNameSpouse($value)

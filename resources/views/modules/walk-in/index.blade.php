@@ -38,84 +38,75 @@ use Illuminate\Http\Request;
                             <table class="table table-hover table-sm">
                                 <thead class="thead-dark">
                                     <tr class="text-center align-middle">
-                                        <th>Registration No.</th>
+                                        <th>Owner Fullname</th>
                                         <th>Vessel Name</th>
-                                        @role('staff|admin')
-                                            <th>Owner</th>
-                                        @endrole
                                         <th>Date of Registration</th>
-                                        {{-- -- @role('user') -- --}}
                                         <th>Status</th>
-                                        {{-- -- @endrole -- --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @forelse ($registeredBoats as $rBoats) --}}
-                                    <tr class="text-center align-middle">
-                                        <td>{{-- $rBoats->registration_no --}}</td>
-                                        <td>{{-- $rBoats->boat->vessel_name ?? '' --}}</td>
-                                        @role('staff|admin')
-                                            <td>{{-- $rBoats->ownerInfo->fullname --}}</td>
-                                        @endrole
+                                    @forelse ($walk_in as $w_in)
+                                        <tr class="text-center align-middle">
+                                            <td>{{ $w_in->fullname }}</td>
+                                            <td>Not yet available</td>
+                                            <td>Not yet available</td>
+                                            <td>Not yet available</td>
+                                            <td class="">
+                                                <a href="{{-- route('reg-boat.show', $w_in->id) --}}"
+                                                    class="btn btn-sm btn-success">View</a>
+                                                <a href="{{-- route('reg-boat.edit', $w_in->id) --}}"
+                                                    class="btn btn-sm btn-primary">Edit</a>
 
-                                        <td>{{-- date('M. d, Y', strtotime($rBoats->registration_date)) --}}</td>
-                                        {{-- -- @role('user') -- --}}
-                                        <td>{{-- $rBoats->status --}}</td>
-                                        {{-- -- @endrole -- --}}
-                                        <td class="">
-                                            {{-- -- <a href="{{-- route('reg-boat.process') }}"
-                                                    class="btn btn-sm btn-info">Process</a> --}}
-                                            <a href="{{-- route('reg-boat.show', $rBoats->id) --}}" class="btn btn-sm btn-success">View</a>
-                                            <a href="{{-- route('reg-boat.edit', $rBoats->id) --}}" class="btn btn-sm btn-primary">Edit</a>
-
-                                            <button type="button" class="btn btn-sm btn-danger" title="Delete"
-                                                data-toggle="modal" data-target="#confirmationModal{{-- $rBoats->id --}}">
-                                                DELETE
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="confirmationModal{{-- $rBoats->id --}}" tabindex="-1"
-                                        role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true"
-                                        data-backdrop="static">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content modal-static">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion
-                                                    </h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body mt-2 mb-2 text-center">
-                                                    <i class="fas fa-exclamation-triangle fa-4x text-warning"></i>
-                                                    <h3>Are you sure you want to delete this boat record? This cannot be
-                                                        undone.</h3>
-                                                </div>
-                                                <div class="modal-footer d-flex justify-content-center">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Cancel</button>
-                                                    <form action="{{-- route('reg-boat.destroy', $rBoats->id) --}}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
+                                                <button type="button" class="btn btn-sm btn-danger" title="Delete"
+                                                    data-toggle="modal"
+                                                    data-target="{{-- #confirmationModal$w_in->id }}--}}">
+                                                    DELETE
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="confirmationModal{{-- $w_in->id --}}" tabindex="-1"
+                                            role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true"
+                                            data-backdrop="static">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content modal-static">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body mt-2 mb-2 text-center">
+                                                        <i class="fas fa-exclamation-triangle fa-4x text-warning"></i>
+                                                        <h3>Are you sure you want to delete this boat record? This cannot be
+                                                            undone.</h3>
+                                                    </div>
+                                                    <div class="modal-footer d-flex justify-content-center">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cancel</button>
+                                                        <form action="{{-- route('reg-boat.destroy', $w_in->id) --}}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    {{-- @empty --}}
-                                    <tr>
-                                        <td colspan="5" class="text-center">No data available</td>
-                                    </tr>
-                                    {{-- @endforelse --}}
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center">No data available</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
                         <div class="card-footer clearfix">
-                            {{-- $registeredBoats->links() --}}
+                           {{ $walk_in->links()}}
                         </div>
                     </div>
                 </div>
