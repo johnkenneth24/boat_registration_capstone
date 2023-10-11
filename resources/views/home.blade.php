@@ -113,7 +113,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card shadow" style="height: 335px;">
-                        <div class="card-header border-0">
+                        <div class="card-header bg-gray-dark border-0">
                             <h3 class="card-title fw-bold">Pending Registrations</h3>
                         </div>
                         <div class="card-body table-responsive p-0">
@@ -153,8 +153,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card shadow " style="height: 335px;">
-                        <div class="card-header border-0">
-                            <h3 class="card-title fw-bold">Announcements</h3>
+                        <div class="card-header bg-gray-dark border-0">
+                            <h3 class="card-title fw-bold">Announcements </h3>
                         </div>
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover table-valign-middle">

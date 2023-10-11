@@ -89,8 +89,6 @@ class WalkInController extends Controller
             'emContact_person.regex' => 'Must not contain special characters or numbers',
             'emRelationship.regex' => 'Must not contain special characters or numbers',
             'emContact_no.regex' => 'Must not contain letters or special characters',
-            'emAddress.regex' => 'Must not contain special characters or numbers',
-
         ];
     }
 
@@ -117,7 +115,7 @@ class WalkInController extends Controller
             'emContact_person' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'emRelationship' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'emContact_no' => ['nullable', 'string', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
-            'emAddress' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
+            'emAddress' => ['nullable'],
         ], $this->messages());
 
         $walkInOwner = WalkInBoatOwner::where('id', $id)->first();
