@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/registeredOwners', 'regOwners')->name('owner-info.registered-owners');
             // Route::get('/pendingOwners', 'pendingOwners')->name('owner-info.pending-owners');
             // Route::get('/approve/{id}', 'approve')->name('owner-info.approve');
-            Route::get('/archive/[id}', 'archive')->name('owner-info.archive');
+            Route::get('/archive/{id}', 'archive')->name('owner-info.archive');
         });
     });
 
@@ -93,5 +93,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/walkin-livelihood-store', 'walkInLivelihoodStore')->name('walk-in.livelihoodStore');
         Route::get('/walkin-adss-form', 'walkInAdss')->name('walk-in.adss');
         Route::post('/walkin-adss-store', 'walkInAdssStore')->name('walk-in.adssStore');
+        Route::delete('/destroy/{id}', 'destroy')->name('walk-in.destroy');
     })->middleware('role:admin|staff');
 });

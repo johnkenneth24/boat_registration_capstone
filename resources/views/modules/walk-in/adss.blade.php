@@ -21,94 +21,94 @@
                                         <input type="hidden" name="walkin_owner_adss_id" value="{{ $owner_adss }}">
                                             <div class="form-group col-md-9">
                                                 <label for="">Name of Spouse</label>
-                                                <input type="text" name="name_spouse" id="" class="form-control-sm form-control  @error('name_spouse') is-invalid @enderror" placeholder="Enter Name of Spause">
+                                                <input type="text" value="{{ $adss?->name_spouse ?: old('name_spouse') }}" name="name_spouse" id="" class="form-control-sm form-control  @error('name_spouse') is-invalid @enderror" placeholder="Enter Name of Spause">
                                                 @error('name_spouse')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="">No. of Dependent</label>
-                                                <input type="number" name="number_dependent" id="" class="form-control-sm form-control  @error('number_dependent') is-invalid @enderror" placeholder="0">
+                                                <input type="number" name="number_dependent" value="{{ $adss?->number_dependent ?: old('') }}" id=""  class="form-control-sm form-control  @error('number_dependent') is-invalid @enderror" placeholder="0">
                                                 @error('number_dependent')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="">Name of Employer</label>
-                                                <input type="text" name="name_employer" id="" class="form-control-sm form-control  @error('name_employer') is-invalid @enderror" placeholder="Enter Name of Employer">
+                                                <input type="text" name="name_employer" value="{{ $adss?->name_employer ?: old('') }}" id=""  class="form-control-sm form-control  @error('name_employer') is-invalid @enderror" placeholder="Enter Name of Employer">
                                                 @error('name_employer')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="">Desired Coverage</label>
-                                                <input type="text" name="desired_coverage" id="" class="form-control-sm form-control  @error('desired_coverage') is-invalid @enderror" placeholder="Enter Desired Coverage">
+                                                <input type="text" name="desired_coverage" value="{{ $adss?->desired_coverage ?: old('') }}" id=""  class="form-control-sm form-control  @error('desired_coverage') is-invalid @enderror" placeholder="Enter Desired Coverage">
                                                 @error('desired_coverage')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="">Premium</label>
-                                                <input type="text" name="premium" id="" class="form-control-sm form-control  @error('premium') is-invalid @enderror" placeholder="Enter PRium">
+                                                <input type="text" name="premium" value="{{ $adss?->premium ?: old('') }}" id=""  class="form-control-sm form-control  @error('premium') is-invalid @enderror" placeholder="Enter PRium">
                                                 @error('premium')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="">Period Cover From</label>
-                                                <input type="date" name="cover_from" id="" class="form-control-sm form-control  @error('cover_from') is-invalid @enderror" placeholder="Enter Name of Employer">
+                                                <input type="date" name="cover_from" value="{{ $adss?->cover_from ?: old('') }}" id=""  class="form-control-sm form-control  @error('cover_from') is-invalid @enderror" placeholder="Enter Name of Employer">
                                                 @error('cover_from')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="">Period Cover To</label>
-                                                <input type="date" name="cover_to" id="" class="form-control-sm form-control  @error('cover_to') is-invalid @enderror" placeholder="Enter Name of Employer">
+                                                <input type="date" name="cover_to" value="{{ $adss?->cover_to ?: old('') }}" id=""  class="form-control-sm form-control  @error('cover_to') is-invalid @enderror" placeholder="Enter Name of Employer">
                                                 @error('cover_to')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-7">
                                                 <label for="">Primary Beneficiary</label>
-                                                <input type="text" name="primary_beneficiary" id="" class="form-control-sm form-control  @error('primary_beneficiary') is-invalid @enderror" placeholder="Enter Primary Beneficaiary">
+                                                <input type="text" name="primary_beneficiary" value="{{ $adss?->primary_beneficiary ?: old('') }}" id=""  class="form-control-sm form-control  @error('primary_beneficiary') is-invalid @enderror" placeholder="Enter Primary Beneficaiary">
                                                 @error('primary_beneficiary')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label for="">Relationship</label>
-                                                <input type="text" name="primary_relationship" id="" class="form-control-sm form-control  @error('primary_relationship') is-invalid @enderror" placeholder="Enter Relationship">
+                                                <input type="text" name="primary_relationship" value="{{ $adss?->primary_relationship ?: old('') }}" id=""  class="form-control-sm form-control  @error('primary_relationship') is-invalid @enderror" placeholder="Enter Relationship">
                                                 @error('primary_relationship')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-7">
                                                 <label for="">Secondary Beneficiary</label>
-                                                <input type="text" name="secondary_beneficiary" id="" class="form-control-sm form-control  @error('secondary_beneficiary') is-invalid @enderror" placeholder="Enter Secondary Beneficaiary">
+                                                <input type="text" name="secondary_beneficiary" value="{{ $adss?->secondary_beneficiary ?: old('') }}" id=""  class="form-control-sm form-control  @error('secondary_beneficiary') is-invalid @enderror" placeholder="Enter Secondary Beneficaiary">
                                                 @error('secondary_beneficiary')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label for="">Relationship</label>
-                                                <input type="text" name="secondary_relationship" id="" class="form-control-sm form-control  @error('secondary_relationship') is-invalid @enderror" placeholder="Enter Relationship">
+                                                <input type="text" name="secondary_relationship" value="{{ $adss?->secondary_relationship ?: old('') }}" id=""  class="form-control-sm form-control  @error('secondary_relationship') is-invalid @enderror" placeholder="Enter Relationship">
                                                 @error('secondary_relationship')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="">If minor, name of trustee</label>
-                                                <input type="text" name="minor_trustee" id="" class="form-control-sm form-control  @error('minor_trustee') is-invalid @enderror" placeholder="Enter Name of Trustee">
+                                                <input type="text" name="minor_trustee" value="{{ $adss?->minor_trustee ?: old('') }}" id=""  class="form-control-sm form-control  @error('minor_trustee') is-invalid @enderror" placeholder="Enter Name of Trustee">
                                                 @error('minor_trustee')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="">Has a family member coverage of insurance from Philippine Crop Insurance Corporation (PCIC)</label>
-                                                <select name="pcic_coverage" id="" class="form-control-sm form-control  @error('pcic_coverage') is-invalid @enderror col-md-3">
+                                                <select name="pcic_coverage" id=""  class="form-control-sm form-control  @error('pcic_coverage') is-invalid @enderror col-md-3">
                                                     <option value="">--Please Select--</option>
                                                 @foreach ($yes_no as $yesNo)
-                                                    <option value="{{ $yesNo }}">{{ $yesNo }}</option>
+                                                    <option value="{{ $yesNo }}" {{ ($adss?->pcic_coverage ?: old('pcic_coverage')) == $yesNo ? 'selected' : '' }}>{{ $yesNo }}</option>
                                                 @endforeach
                                                 </select>
                                                 @error('pcic_coverage')
@@ -117,21 +117,21 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="">Name of Farmer</label>
-                                                <input type="text" name="pcic_name" id="" class="form-control-sm form-control  @error('pcic_name') is-invalid @enderror" placeholder="Enter Name of Farmer">
+                                                <input type="text" name="pcic_name" value="{{ $adss?->pcic_name ?: old('') }}" id=""  class="form-control-sm form-control  @error('pcic_name') is-invalid @enderror" placeholder="Enter Name of Farmer">
                                                 @error('pcic_name')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="">Relationship</label>
-                                                <input type="text" name="pcic_relationship" id="" class="form-control-sm form-control  @error('pcic_relationship') is-invalid @enderror" placeholder="Enter Relationship">
+                                                <input type="text" name="pcic_relationship" value="{{ $adss?->pcic_relationship ?: old('') }}" id=""  class="form-control-sm form-control  @error('pcic_relationship') is-invalid @enderror" placeholder="Enter Relationship">
                                                 @error('pcic_relationship')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="">Address</label>
-                                                <input type="text" name="pcic_address" id="" class="form-control-sm form-control  @error('pcic_address') is-invalid @enderror" placeholder="Enter Address">
+                                                <input type="text" name="pcic_address" value="{{ $adss?->pcic_address ?: old('') }}" id=""  class="form-control-sm form-control  @error('pcic_address') is-invalid @enderror" placeholder="Enter Address">
                                                 @error('pcic_address')
                                                 <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
                                                 @enderror

@@ -40,13 +40,15 @@ class WalkInController extends Controller
         $civil_status = $this->civil_status;
         $educ_bcc = $this->educ_bcc;
 
+        $route = \Illuminate\Support\Facades\Route::currentRouteName();
+
         $ownerInfo = $id;
 
         if ($id) {
             $ownerInfo = WalkInBoatOwner::find($id);
         }
 
-        return view('modules.walk-in.create', compact('salutations', 'suffixes', 'genders', 'civil_status', 'educ_bcc', 'ownerInfo'));
+        return view('modules.walk-in.create', compact('route','salutations', 'suffixes', 'genders', 'civil_status', 'educ_bcc', 'ownerInfo'));
     }
 
     protected function messages()
@@ -73,7 +75,7 @@ class WalkInController extends Controller
         ];
     }
 
-    public function store(Request $request,WalkInBoatOwner $id)
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'salutation' => ['required'],
@@ -99,7 +101,9 @@ class WalkInController extends Controller
             'emAddress' => ['nullable'],
         ], $this->messages());
 
-        $walkInOwner = WalkInBoatOwner::where('id' , $id)->first();
+        $ownerInfo = $request->input('ownerInfo');
+
+        $walkInOwner = WalkInBoatOwner::where('id' , $ownerInfo)->first();
 
         if(!$walkInOwner)
         {
@@ -244,7 +248,7 @@ class WalkInController extends Controller
         $adss = WalkInAdss::where('walkin_owner_adss_id', $owner_adss)->first();
         $yes_no = ['Yes', 'No'];
 
-        return view('modules.walk-in.adss', compact('yes_no', 'owner_adss'));
+        return view('modules.walk-in.adss', compact('yes_no', 'adss', 'owner_adss'));
     }
 
     public function walkInAdssStore(Request $request)
@@ -319,6 +323,14 @@ class WalkInController extends Controller
         }
         return redirect()->route('walk-in.index')->with('success', 'Owner Information successfully saved!');
 
+    }
+
+    public function destroy($id)
+    {
+        $walkinOwner = WalkInBoatOwner::find($id);
+        $walkinOwner->delete();
+
+        return redirect()->route('walk-in.index')->with('success', 'Walk In Owner deleted successfully!');
     }
 
 }
