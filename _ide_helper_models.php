@@ -51,6 +51,7 @@ namespace App\Models{
  * @property string $boat_type
  * @property string|null $horsepower
  * @property string $vessel_name
+ * @property string|null $image
  * @property string $color
  * @property string $length
  * @property string $breadth
@@ -74,6 +75,7 @@ namespace App\Models{
  * @property-read \App\Models\OwnerInfo $owner
  * @property-read Boat|null $registerBoat
  * @property-read \App\Models\User $user
+ * @property-read \App\Models\WalkInBoatOwner|null $walkIn
  * @method static \Illuminate\Database\Eloquent\Builder|Boat newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Boat newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Boat onlyTrashed()
@@ -90,6 +92,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Boat whereHomePort($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Boat whereHorsepower($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Boat whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Boat whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Boat whereLength($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Boat whereMaterials($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Boat whereNetTonnage($value)
@@ -182,7 +185,6 @@ namespace App\Models{
  * @property string|null $emRelationship
  * @property string|null $emContact_no
  * @property string|null $emAddress
- * @property string $status
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -220,7 +222,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereOtherEducationalBackground($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereResidentSince($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereSalutation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereSuffix($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereUserId($value)
@@ -320,7 +321,7 @@ namespace App\Models{
  * App\Models\WalkInAdss
  *
  * @property int $id
- * @property int $walkin_owner_id
+ * @property int $walkin_owner_adss_id
  * @property string $name_spouse
  * @property string $number_dependent
  * @property string $name_employer
@@ -362,7 +363,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereSecondaryBeneficiary($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereSecondaryRelationship($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereWalkinOwnerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereWalkinOwnerAdssId($value)
  */
 	class WalkInAdss extends \Eloquent {}
 }
@@ -396,6 +397,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WalkInBoatRegistration> $WalkInRegBoat
+ * @property-read int|null $walk_in_reg_boat_count
  * @property-read mixed $full_name
  * @property-read \App\Models\WalkInAdss|null $walkInAdss
  * @property-read \App\Models\WalkInLivelihood|null $walkInLivelihood
@@ -432,6 +435,75 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner withoutTrashed()
  */
 	class WalkInBoatOwner extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\WalkInBoatRegistration
+ *
+ * @property int $id
+ * @property int $walkin_owner_id
+ * @property string $registration_no
+ * @property \Illuminate\Support\Carbon $registration_date
+ * @property string $registration_type
+ * @property string $vessel_name
+ * @property string $vessel_type
+ * @property string $home_port
+ * @property string $place_built
+ * @property string $year_built
+ * @property string $body_number
+ * @property string $color
+ * @property string $materials
+ * @property string $length
+ * @property string $breadth
+ * @property string $depth
+ * @property string $tonnage_length
+ * @property string $tonnage_breadth
+ * @property string $tonnage_depth
+ * @property string $net_tonnage
+ * @property string $gross_tonnage
+ * @property string|null $image
+ * @property string|null $horsepower
+ * @property string|null $engine_make
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\WalkInBoatOwner|null $walkInRegBoatOwner
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration query()
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereBodyNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereBreadth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereDepth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereEngineMake($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereGrossTonnage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereHomePort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereHorsepower($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereMaterials($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereNetTonnage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration wherePlaceBuilt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereRegistrationDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereRegistrationNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereRegistrationType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereTonnageBreadth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereTonnageDepth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereTonnageLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereVesselName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereVesselType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereWalkinOwnerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereYearBuilt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration withoutTrashed()
+ */
+	class WalkInBoatRegistration extends \Eloquent {}
 }
 
 namespace App\Models{

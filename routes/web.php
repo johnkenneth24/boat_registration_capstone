@@ -94,5 +94,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/walkin-adss-form', 'walkInAdss')->name('walk-in.adss');
         Route::post('/walkin-adss-store', 'walkInAdssStore')->name('walk-in.adssStore');
         Route::delete('/destroy/{id}', 'destroy')->name('walk-in.destroy');
+        Route::get('/registered-boat/{walkin}', 'registeredBoat')->name('walkin-regboat.index');
+        Route::get('/registered-boat/create/{walkin}', 'createRegBoat')->name('walkin-regboat.create');
+        Route::post('/registered-boat/store', 'walkInRegBoatStore')->name('walkin-regboat.store');
+
     })->middleware('role:admin|staff');
 });
