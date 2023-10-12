@@ -84,12 +84,14 @@
                                 <p>Pending Registration</p>
                             </a>
                         </li>
+                        @role('staff')
                         <li class="nav-item pl-3 pr-0 {{ request()->routeIs('walk-in.*') ? 'nav-tree-view-active' : '' }}">
                             <a href="{{ route('walk-in.index') }}" class="nav-link">
                                 <i class="fa fa-anchor" aria-hidden="true"></i>
                                 <p>Walk In Registration</p>
                             </a>
                         </li>
+                        @endrole
                         <li
                             class="nav-item pl-3 pr-0 {{ request()->routeIs('reg-boat.archived') ? 'nav-tree-view-active' : '' }}">
                             <a href="{{ route('reg-boat.archived') }}" class="nav-link">
