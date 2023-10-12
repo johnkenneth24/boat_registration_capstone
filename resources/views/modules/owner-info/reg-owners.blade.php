@@ -73,7 +73,7 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label class="fw-bold">Fullname:</label>
+                                                                    <label class="fw-bold text-primary mb-0">Fullname:</label>
                                                                     <input type="text"
                                                                         class="form-control-plaintext form-control-sm"
                                                                         readonly value="{{ $regOwner->fullname }}">
