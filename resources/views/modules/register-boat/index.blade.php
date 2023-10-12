@@ -62,37 +62,39 @@
                                             <th>Owner</th>
                                         @endrole
                                         <th>Date of Registration</th>
-                                        {{-- @role('user') --}}
                                         <th>Status</th>
-                                        {{-- @endrole --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($registeredBoats as $rBoats)
-                                        <tr class="text-center align-middle">
-                                            <td>{{ $rBoats->registration_no }}</td>
-                                            <td>{{ $rBoats->boat->vessel_name ?? '' }}</td>
+                                        <tr class="text-center justify-content-between">
+                                            <td class="align-middle">{{ $rBoats->registration_no }}</td>
+                                            <td class="align-middle">{{ $rBoats->boat->vessel_name ?? '' }}</td>
                                             @role('staff|admin')
-                                                <td>{{ $rBoats->ownerInfo->fullname }}</td>
+                                                <td class="align-middle">{{ $rBoats->ownerInfo->fullname }}</td>
                                             @endrole
-                                            <td>{{ date('M. d, Y', strtotime($rBoats->registration_date)) }}</td>
+                                            <td class="align-middle">
+                                                {{ date('M. d, Y', strtotime($rBoats->registration_date)) }}</td>
                                             <td class="align-middle">
                                                 @if ($rBoats->status == 'pending')
-                                                    <span class="badge badge-pill badge-warning" style="font-size: 1rem">
+                                                    <span class="badge rounded-2 badge-warning px-3 py-2 opacity-75"
+                                                        style="font-size: 0.8rem">
                                                         {{ ucFirst($rBoats->status) }}
                                                     </span>
                                                 @elseif($rBoats->status == 'registered')
-                                                    <span class="badge badge-pill badge-success" style="font-size: 1rem;">
+                                                    <span class="badge rounded-2 badge-success px-3 py-2 opacity-75"
+                                                        style="font-size: 0.8rem;">
                                                         {{ ucFirst($rBoats->status) }}
                                                     </span>
                                                 @elseif($rBoats->status == 'disapproved')
-                                                    <span class="badge badge-pill badge-danger" style="font-size: 1rem;">
+                                                    <span class="badge rounded-2 badge-danger px-3 py-2 opacity-75"
+                                                        style="font-size: 0.8rem;">
                                                         {{ ucFirst($rBoats->status) }}
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td class="">
+                                            <td class="align-middle">
                                                 {{-- <a href="{{ route('reg-boat.process') }}"
                                                     class="btn btn-sm btn-info">Process</a> --}}
                                                 <a href="{{ route('reg-boat.show', $rBoats->id) }}"
