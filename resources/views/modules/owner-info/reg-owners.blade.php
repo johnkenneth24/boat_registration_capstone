@@ -60,27 +60,148 @@
                                             data-backdrop="static">
                                             <div class="modal-dialog modal-lg modal-dialog-centered">
                                                 <div class="modal-content modal-static">
-                                                    <div class="modal-header">
+                                                    <div class="modal-header align-middle">
                                                         <h5 class="modal-title" id="viewModalLabel">View Owner
                                                             Details
                                                         </h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
+                                                        <button type="button" class="close align-middle"
+                                                            data-dismiss="modal" aria-label="Close"> <span
+                                                                class="small">Close &times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body mt-2 mb-2">
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="fw-bold text-primary mb-0">Fullname:</label>
+                                                                <div class="form-group ">
+                                                                    <label
+                                                                        class="fw-bold text-primary  mb-0">Fullname:</label>
                                                                     <input type="text"
-                                                                        class="form-control-plaintext form-control-sm"
+                                                                        class="form-control form-control-sm my-0 pt-0"
                                                                         readonly value="{{ $regOwner->fullname }}">
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label
+                                                                            class="fw-bold text-primary mb-0">Birthdate:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly
+                                                                            value="{{ $regOwner->birthdate->format('F d, Y') }}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label
+                                                                            class="fw-bold text-primary  mb-0">Age:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly value="{{ $regOwner->age }}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label
+                                                                        class="fw-bold text-primary mb-0">Birthplace:</label>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm my-0 pt-0"
+                                                                        readonly value="{{ $regOwner->birthplace }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label
+                                                                        class="fw-bold text-primary mb-0">Nationality:</label>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm my-0 pt-0"
+                                                                        readonly value="{{ $regOwner->nationality }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label
+                                                                        class="fw-bold text-primary mb-0">Address:</label>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm my-0 pt-0"
+                                                                        readonly value="{{ $regOwner->address }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="fw-bold text-primary mb-0">Resident
+                                                                        since:</label>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm my-0 pt-0"
+                                                                        readonly
+                                                                        value="{{ $regOwner->resident_since->format('F Y') }}">
+                                                                </div>
 
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-12">
+                                                                        <label class="fw-bold text-primary mb-0">Educational
+                                                                            Background:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly
+                                                                            value="{{ $regOwner->other_educational_background ?? ($regOwner->educ_background ?? '') }}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label
+                                                                            class="fw-bold text-primary mb-0">Sex:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly value="{{ $regOwner->gender }}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label class="fw-bold text-primary  mb-0">Contact
+                                                                            No:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly value="{{ $regOwner->contact_no }}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label class="fw-bold text-primary  mb-0">Marital
+                                                                            Status:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly
+                                                                            value="{{ $regOwner->civil_status }}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label class="fw-bold text-primary  mb-0">Number of
+                                                                            Children:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly
+                                                                            value="{{ $regOwner->children_count }}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row border border-danger rounded-2">
+                                                                    <div class="form-group col-md-12 mt-2">
+                                                                        <label class="fw-bold text-danger  mb-0">Emergency
+                                                                            Contact Person:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly
+                                                                            value="{{ $regOwner->emContact_person }}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label
+                                                                            class="fw-bold text-danger mb-0">Relationship:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly
+                                                                            value="{{ $regOwner->emRelationship }}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label class="fw-bold text-danger  mb-0">
+                                                                            Contact No.:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly
+                                                                            value="{{ $regOwner->emContact_no }}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-12">
+                                                                        <label
+                                                                            class="fw-bold text-danger  mb-0">Address:</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm my-0 pt-0"
+                                                                            readonly value="{{ $regOwner->emAddress }}">
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6"></div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer d-flex justify-content-end">
@@ -91,26 +212,168 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal fade" id="modalToggle2{{ $regOwner->id }}" aria-hidden="true"
-                                            aria-labelledby="modalToggle2Label" tabindex="-1">
+                                        <div class="modal fade" id="modalToggle2{{ $regOwner->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="modalToggle2Label" aria-hidden="true"
+                                            data-backdrop="static">
                                             <div class="modal-dialog modal-lg modal-dialog-centered">
                                                 <div class="modal-content modal-static">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="modalToggle2Label">View Owner
                                                             Details
                                                         </h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
+                                                        <button type="button" class="close align-middle"
+                                                            data-dismiss="modal" aria-label="Close"> <span
+                                                                class="small">Close &times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body mt-2 mb-2 text-center">
-                                                        jdfjfbjf
+                                                    <div class="modal-body mt-2 mb-2">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-6">
+                                                                        @php
+                                                                            if ($regOwner->livelihood->source_of_income) {
+                                                                                $saved_income = unserialize($regOwner->livelihood->source_of_income);
+                                                                            } else {
+                                                                                $saved_income = [];
+                                                                            }
+                                                                        @endphp
+                                                                        <label class="fw-bold text-primary  mb-0">Main
+                                                                            Source of
+                                                                            Income:</label> <br>
+                                                                        @foreach ($source_of_income as $item)
+                                                                            <label class="my-0 py-1">
+                                                                                <input type="checkbox"
+                                                                                    name="source_of_income[]"
+                                                                                    value="{{ $item }}"
+                                                                                    class="@error('source_of_income[]') is-invalid @enderror"
+                                                                                    {{ in_array($item, $saved_income) ? 'checked' : '' }}
+                                                                                    disabled>
+                                                                                {{ $item }}
+                                                                            </label><br>
+                                                                        @endforeach
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <label
+                                                                                    class="fw-bold text-primary  mb-0">Gear
+                                                                                    Used:</label>
+                                                                                <input type="text"
+                                                                                    class="form-control form-control-sm my-0 pt-0"
+                                                                                    readonly
+                                                                                    value="{{ $regOwner->livelihood->gear_used }}">
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <label
+                                                                                    class="fw-bold text-primary  mb-0">Culture
+                                                                                    Method:</label>
+                                                                                <input type="text"
+                                                                                    class="form-control form-control-sm my-0 pt-0"
+                                                                                    readonly
+                                                                                    value="{{ $regOwner->livelihood->culture_method }}">
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <label
+                                                                                    class="fw-bold text-primary  mb-0">Others:</label>
+                                                                                <input type="text"
+                                                                                    class="form-control form-control-sm my-0 pt-0"
+                                                                                    readonly
+                                                                                    value="{{ $regOwner->livelihood->specify }}">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-6">
+                                                                        @php
+                                                                            if ($regOwner->livelihood->source_of_income) {
+                                                                                $os_saved_income = unserialize($regOwner->livelihood->other_income_sources);
+                                                                            } else {
+                                                                                $os_saved_income = [];
+                                                                            }
+                                                                        @endphp
+                                                                        <label class="fw-bold text-primary  mb-0">Other
+                                                                            Source of
+                                                                            Income:</label> <br>
+                                                                        @foreach ($source_of_income as $item)
+                                                                            <label class="my-0 py-1">
+                                                                                <input type="checkbox"
+                                                                                    name="source_of_income[]"
+                                                                                    value="{{ $item }}"
+                                                                                    class="@error('source_of_income[]') is-invalid @enderror"
+                                                                                    {{ in_array($item, $os_saved_income) ? 'checked' : '' }}
+                                                                                    disabled>
+                                                                                {{ $item }}
+                                                                            </label><br>
+                                                                        @endforeach
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <label
+                                                                                    class="fw-bold text-primary  mb-0">Gear
+                                                                                    Used:</label>
+                                                                                <input type="text"
+                                                                                    class="form-control form-control-sm my-0 pt-0"
+                                                                                    readonly
+                                                                                    value="{{ $regOwner->livelihood->gear_used_os }}">
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <label
+                                                                                    class="fw-bold text-primary  mb-0">Culture
+                                                                                    Method:</label>
+                                                                                <input type="text"
+                                                                                    class="form-control form-control-sm my-0 pt-0"
+                                                                                    readonly
+                                                                                    value="{{ $regOwner->livelihood->culture_method_os }}">
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <label
+                                                                                    class="fw-bold text-primary  mb-0">Others:</label>
+                                                                                <input type="text"
+                                                                                    class="form-control form-control-sm my-0 pt-0"
+                                                                                    readonly
+                                                                                    value="{{ $regOwner->livelihood->specify_os }}">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12">
+                                                                    <label class="fw-bold text-primary mb-0">Name of
+                                                                        Organization:</label>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm my-0 pt-0"
+                                                                        readonly
+                                                                        value="{{ $regOwner->livelihood->org_name }}">
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label class="fw-bold text-primary  mb-0">Member
+                                                                        Since:</label>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm my-0 pt-0"
+                                                                        readonly
+                                                                        value="{{ $regOwner->livelihood->member_since }}">
+                                                                </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label
+                                                                        class="fw-bold text-primary mb-0">Position</label>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm my-0 pt-0"
+                                                                        readonly
+                                                                        value="{{ $regOwner->livelihood->position }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-primary"
-                                                            data-target="#viewModal{{ $regOwner->id }}" data-dismiss="modal"
-                                                            data-toggle="modal">Back to first</button>
+                                                            data-target="#viewModal{{ $regOwner->id }}"
+                                                            data-dismiss="modal" data-toggle="modal">Go back</button>
                                                     </div>
                                                 </div>
                                             </div>
