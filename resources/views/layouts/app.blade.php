@@ -118,6 +118,7 @@
         }
     </style>
     @yield('styles')
+    @livewireStyles
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -202,7 +203,7 @@
     </script> --}}
 
     @yield('scripts')
-
+    @livewireScripts
 </body>
 
 </html>
