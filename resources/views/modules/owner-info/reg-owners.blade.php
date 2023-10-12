@@ -38,9 +38,9 @@
                                 <tbody>
                                     @forelse ($regOwners as $regOwner)
                                         <tr>
-                                            <td>{{ $regOwner->full_name }}</td>
-                                            <td>{{ $regOwner->created_at->format('M. d, Y') }}</td>
-                                            <td>{{ $regOwner->address }}</td>
+                                            <td class="align-middle">{{ $regOwner->full_name }}</td>
+                                            <td class="align-middle">{{ $regOwner->created_at->format('M. d, Y') }}</td>
+                                            <td class="align-middle">{{ $regOwner->address }}</td>
                                             {{-- <td>{{ ucfirst($regOwner->status) }}</td> --}}
                                             <td class="d-flex justify-content-center align-middle">
                                                 <button type="button" class="btn btn-sm btn-warning mr-2 px-4 fw-bold"
@@ -230,6 +230,8 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="row">
+                                                                    <h5 class="fw-bold text-primary mb-0">Main Source of
+                                                                        Income:</h5> <br>
                                                                     <div class="form-group col-md-6">
                                                                         @php
                                                                             if ($regOwner->livelihood->source_of_income) {
@@ -238,9 +240,7 @@
                                                                                 $saved_income = [];
                                                                             }
                                                                         @endphp
-                                                                        <label class="fw-bold text-primary  mb-0">Main
-                                                                            Source of
-                                                                            Income:</label> <br>
+
                                                                         @foreach ($source_of_income as $item)
                                                                             <label class="my-0 py-1">
                                                                                 <input type="checkbox"
@@ -287,6 +287,8 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="row">
+                                                                    <h5 class="fw-bold text-primary mb-0">Other Source of
+                                                                        Income:</h5> <br>
                                                                     <div class="form-group col-md-6">
                                                                         @php
                                                                             if ($regOwner->livelihood->source_of_income) {
@@ -295,9 +297,7 @@
                                                                                 $os_saved_income = [];
                                                                             }
                                                                         @endphp
-                                                                        <label class="fw-bold text-primary  mb-0">Other
-                                                                            Source of
-                                                                            Income:</label> <br>
+
                                                                         @foreach ($source_of_income as $item)
                                                                             <label class="my-0 py-1">
                                                                                 <input type="checkbox"
