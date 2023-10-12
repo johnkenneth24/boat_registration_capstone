@@ -94,11 +94,16 @@
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td class="align-middle">
+                                            <td class="align-middle d-flex justify-content-end gap-2">
+                                                {{-- @unlessrole('user') --}}
+                                                @if ($rBoats->status == 'registered')
+                                                    @livewire('reg-boat.export', ['rBoats' => $rBoats], key($rBoats->id))
+                                                @endif
+                                                {{-- @endunlessrole --}}
                                                 {{-- <a href="{{ route('reg-boat.process') }}"
                                                     class="btn btn-sm btn-info">Process</a> --}}
                                                 <a href="{{ route('reg-boat.show', $rBoats->id) }}"
-                                                    class="btn btn-sm btn-success">View</a>
+                                                    class="btn btn-sm btn-success">VIEW</a>
                                                 @role('user')
                                                     <a href="{{ route('reg-boat.edit', $rBoats->id) }}"
                                                         class="btn btn-sm btn-primary">Edit</a>
