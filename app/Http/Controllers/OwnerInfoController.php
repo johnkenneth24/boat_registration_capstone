@@ -241,8 +241,9 @@ class OwnerInfoController extends Controller
     public function regOwners()
     {
         $regOwners = OwnerInfo::with('livelihood')->paginate(10);
+        $source_of_income = $this->source_of_income;
 
-        return view('modules.owner-info.reg-owners', compact('regOwners'));
+        return view('modules.owner-info.reg-owners', compact('regOwners', 'source_of_income'));
     }
 
     // public function pendingOwners()
