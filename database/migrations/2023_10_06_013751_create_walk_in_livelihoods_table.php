@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('org_name')->nullable();
             $table->string('member_since')->nullable();
             $table->string('position')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

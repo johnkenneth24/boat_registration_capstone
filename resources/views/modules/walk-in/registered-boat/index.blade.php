@@ -46,8 +46,7 @@
                                             <td>{{ $wrg->registration_date->format('F d, Y') }}</td>
                                             <td class="">
                                                 <a href="" class="btn btn-sm btn-primary">EXPORT</a>
-                                                <a href="{{-- route('walk-in.create',$wrg->id) --}}"
-                                                    class="btn btn-sm btn-success">VIEW</a>
+                                                <a href="{{ route('walkin-regboat.view', $wrg->id) }}" class="btn btn-sm btn-success">VIEW</a>
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
                                                     data-toggle="modal"
                                                     data-target="#confirmationModal{{$wrg->id }}">
@@ -61,23 +60,14 @@
                                             data-backdrop="static">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content modal-static">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion
-                                                        </h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
                                                     <div class="modal-body mt-2 mb-2 text-center">
-                                                        <i class="fas fa-exclamation-triangle fa-4x text-warning"></i>
-                                                        <h3>Are you sure you want to delete this boat record? This cannot be
-                                                            undone.</h3>
+                                                        <i class="fas fa-exclamation-triangle mb-2 fa-2x text-warning"></i>
+                                                        <h5>Are you sure you want to delete this boat record?</h5>
                                                     </div>
                                                     <div class="modal-footer d-flex justify-content-center">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Cancel</button>
-                                                        <form action="{{ route('walk-in.destroy', $wrg->id) }}"
+                                                        <form action="{{ route('walkin-regboat.delete', $wrg->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')
