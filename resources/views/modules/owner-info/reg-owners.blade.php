@@ -125,7 +125,6 @@
                                                                         readonly
                                                                         value="{{ $regOwner->resident_since->format('F Y') }}">
                                                                 </div>
-
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="row">
