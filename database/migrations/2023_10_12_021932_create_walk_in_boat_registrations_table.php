@@ -35,7 +35,8 @@ return new class extends Migration
             $table->string('gross_tonnage');
             $table->string('image')->nullable();
             $table->string('horsepower')->nullable();
-            $table->string('engine_make')->nullable(); 
+            $table->string('engine_make')->nullable();
+            $table->string('serial_number')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

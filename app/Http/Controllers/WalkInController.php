@@ -369,6 +369,7 @@ class WalkInController extends Controller
             'body_number.required' => 'Body number is required.',
             'color.required' => 'Color is required.',
             'color.regex' => 'Color must be letters only and a comma.',
+            'serial_number' => ['nullable', 'unique:boats,serial_number'],
             'length.required' => 'Length is required.',
             'breadth.required' => 'Breadth is required.',
             'tonnage_length.required' => 'Tonnage length is required.',
@@ -432,7 +433,82 @@ class WalkInController extends Controller
 
         $owners = WalkInBoatRegistration::create([
             'walkin_owner_id' => $owner_id,
-            'user_id' => auth()->user()->id,
+            'registration_no' => $validated['registration_no'],
+            'registration_date' => $validated['registration_date'],
+            'registration_type' => 'new',
+            'vessel_name' => $validated['vessel_name'],
+            'image' => $imageName,
+            'vessel_type' => $validated['vessel_type'],
+            'home_port' => $validated['home_port'],
+            'place_built' => $validated['place_built'],
+            'year_built' => $validated['year_built'],
+            'serial_number' => $validated['serial_number'],
+            'engine_make' => $validated['engine_make'],
+            'horsepower' => $validated['horsepower'] ?? '',
+            'color' => $validated['color'],
+            'length' => $validated['length'],
+            'breadth' => $validated['breadth'],
+            'depth' => $validated['depth'],
+            'body_number' => $validated['body_number'],
+            'materials' => $validated['materials_used'],
+            'tonnage_length' => $validated['tonnage_length'],
+            'tonnage_breadth' => $validated['tonnage_breadth'],
+            'tonnage_depth' => $validated['tonnage_depth'],
+            'gross_tonnage' => $validated['gross_tonnage'],
+            'net_tonnage' => $validated['net_tonnage'],
+        ]);
+
+        return redirect()->route('walkin-regboat.index', $owner_id)->with('success', 'Walk In Boat Registration Succesfully!');
+    }
+
+    public function walkInRegBoatView(WalkInBoatRegistration $walkin)
+    {
+        $type_vessel = ['Motorized', 'Non-Motorized'];
+
+        return view('modules.walk-in.registered-boat.view', compact('walkin', 'type_vessel'));
+    }
+
+    public function walkInRegBoatUpdate(Request $request, WalkInBoatRegistration $walkin)
+    {
+        $validated = $request->validate([
+            'registration_no' => 'required',
+            'registration_date' => 'required',
+            'vessel_name' => ['required', 'unique:boats,vessel_name'],
+            'vessel_type' => ['required'],
+            'home_port' => ['required'],
+            'place_built' => ['required'],
+            'year_built' => ['required'],
+            'engine_make' => ['nullable'],
+            'serial_number' => ['nullable', 'unique:boats,serial_number'],
+            'horsepower' => ['nullable'],
+            'body_number' => ['required'],
+            'color' => ['required', 'regex:/^[a-zA-Z, ]*$/'], // letters and comma only
+            'length' => ['required'],
+            'breadth' => ['required'],
+            'tonnage_length' => ['required'],
+            'tonnage_breadth' => ['required'],
+            'tonnage_depth' => ['required'],
+            'gross_tonnage' => ['required'],
+            'net_tonnage' => ['required'],
+            'depth' => ['required'],
+            'materials_used' => ['required'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5048'],
+        ], $this->messageRegBoatWalkin());
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+            $imageName = uniqid() . '.' . $ext;
+
+            // if images/user-upload does not exist, create it and move image into that folder
+            if (!is_dir(public_path('images/user-upload'))) {
+                mkdir(public_path('images/user-upload'), 0777, true);
+            }
+
+            $image->move(public_path('images/user-upload'), $imageName);
+        }
+
+        $walkin->update([
             'registration_no' => $validated['registration_no'],
             'registration_date' => $validated['registration_date'],
             'registration_type' => 'new',
@@ -457,8 +533,17 @@ class WalkInController extends Controller
             'net_tonnage' => $validated['net_tonnage'],
         ]);
 
-        return redirect()->route('walkin-regboat.index', $owner_id)->with('success', 'Walk In Boat Registration Succesfully!');
+
+        return redirect()->route('walkin-regboat.index', $walkin->walkin_owner_id)->with('success', 'Walk In Boat Registration Update Succesfully!');
+
     }
 
+    public function walkInRegBoatDelete($id)
+    {
+        $walkinRegBoat = WalkInBoatRegistration::find($id);
+        $walkinRegBoat->delete();
+
+        return redirect()->route('walkin-regboat.index', $walkinRegBoat->walkin_owner_id)->with('success', 'Walk In Owner deleted successfully!');
+    }
 
 }
