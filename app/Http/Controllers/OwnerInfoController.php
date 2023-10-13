@@ -74,8 +74,7 @@ class OwnerInfoController extends Controller
             'middle_name' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'suffix' => 'nullable',
             'address' => ['required', 'max:255'],
-            'resident_since' => ['required', '
-            date:Y-m'],
+            'resident_since' => ['required', 'date:Y-m'],
             'nationality' => ['required', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'gender' => 'required',
             'civil_status' => 'required',
