@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('pcic_name')->nullable();
             $table->string('pcic_relationship')->nullable();
             $table->string('pcic_address')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

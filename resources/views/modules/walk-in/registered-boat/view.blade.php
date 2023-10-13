@@ -337,20 +337,27 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <label>Upload Colored Image of the Boat</label>
-                                                <input type="file" name="image"
-                                                    class="form-control form-control-sm  @error('image') is-invalid @enderror"
-                                                    value="{{ old('image') }}" id="image" required>
+                                                @if ($walkin->image)
+                                                    <input type="file" name="image"
+                                                        class="form-control form-control-sm  @error('image') is-invalid @enderror"
+                                                        value="{{ $walkin->image }}" id="image">
+                                                @else
+                                                    <input type="file" name="image"
+                                                        class="form-control form-control-sm  @error('image') is-invalid @enderror"
+                                                        value="{{ $walkin->image }}" id="image" required>
+                                                @endif
                                                 @error('image')
                                                     <div class="invalid-feedback" style="display: inline-block !important;">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
-                                                <img src="/images/user-upload/{{ $walkin->image }}" alt="" id="preview"
-                                                    class="img-fluid img-thumbnail mb-2">
+                                                <img src="/images/user-upload/{{ $walkin->image }}"
+                                                    alt="image-preview" id="preview" class="img-fluid img-thumbnail"
+                                                    data-image="{{ $walkin->image }}">
+
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
@@ -401,6 +408,25 @@
             serial_number.removeAttribute('required');
         }
     });
+</script>
+
+<script>
+    // Get the image element
+    const image = document.getElementById('preview');
+    // Get the data-image attribute value (the image filename)
+    const imageName = image.getAttribute('data-image');
+    // Check if the image exists
+    const imageExists = new Image();
+    imageExists.onload = function() {
+        // Image exists, set the src attribute to the original path
+        image.src = `/images/user-upload/${imageName}`;
+    };
+    imageExists.onerror = function() {
+        // Image doesn't exist, set the src attribute to the default image path
+        image.src = '/images/imgnotfound.png';
+    };
+    // Set the source of the imageExists to trigger the load or error event
+    imageExists.src = `/images/user-upload/${imageName}`;
 </script>
 
     <script>

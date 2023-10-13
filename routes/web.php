@@ -102,3 +102,4 @@ Route::middleware('auth')->group(function () {
         Route::delete('/registered-boat/delete/{id}', 'walkInRegBoatDelete')->name('walkin-regboat.delete');
     })->middleware('role:admin|staff');
 });
+

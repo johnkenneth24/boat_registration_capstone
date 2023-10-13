@@ -241,6 +241,7 @@ namespace App\Models{
  * @property string $registration_date
  * @property string $registration_type
  * @property string $status
+ * @property string|null $approved_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -251,6 +252,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|RegisterBoat newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RegisterBoat onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|RegisterBoat query()
+ * @method static \Illuminate\Database\Eloquent\Builder|RegisterBoat whereApprovedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RegisterBoat whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RegisterBoat whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RegisterBoat whereId($value)
@@ -343,6 +345,7 @@ namespace App\Models{
  * @property-read \App\Models\WalkInBoatOwner|null $walkInBoatOwnerAdss
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss query()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereCoverFrom($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereCoverTo($value)
@@ -364,6 +367,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereSecondaryRelationship($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereWalkinOwnerAdssId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss withoutTrashed()
  */
 	class WalkInAdss extends \Eloquent {}
 }
@@ -465,6 +470,7 @@ namespace App\Models{
  * @property string|null $image
  * @property string|null $horsepower
  * @property string|null $engine_make
+ * @property string|null $serial_number
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -492,6 +498,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereRegistrationDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereRegistrationNo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereRegistrationType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereSerialNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereTonnageBreadth($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereTonnageDepth($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereTonnageLength($value)
@@ -528,6 +535,7 @@ namespace App\Models{
  * @property-read \App\Models\WalkInBoatOwner|null $walkInBoatOwnerLivelihood
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood query()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereCultureMethod($value)
@@ -544,6 +552,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereSpecifyOs($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereWalkinOwnerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood withoutTrashed()
  */
 	class WalkInLivelihood extends \Eloquent {}
 }
