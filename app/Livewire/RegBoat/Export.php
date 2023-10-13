@@ -36,15 +36,16 @@ class Export extends Component
         $templateProcessor->setValue('ton_depth', $this->rBoats->boat->tonnage_depth);
         $templateProcessor->setValue('gross_tonnage', $this->rBoats->boat->gross_tonnage);
         $templateProcessor->setValue('net_tonnage', $this->rBoats->boat->net_tonnage);
-        $templateProcessor->setValue('engine_make', $this->rBoats->boat->engine_make ?? "not applicable");
-        $templateProcessor->setValue('serial_number', $this->rBoats->boat->serial_number ?? 'not applicable');
-        $templateProcessor->setValue('horsepower', $this->rBoats->boat->horsepower ?? 'not applicable');
+
+        $templateProcessor->setValue('engine_make', $this->rBoats->boat?->engine_make ?? '');
+        $templateProcessor->setValue('serial_number', $this->rBoats->boat?->serial_number ?? '');
+        $templateProcessor->setValue('horsepower', $this->rBoats->boat?->horsepower ?? '');
+
+
 
         $templateProcessor->setValue('or_no',  '____________');
         $templateProcessor->setValue('date',  '____________');
 
-        // $templateProcessor->setValue('valid_until',  $this->rBoats->approved_at);
-        // make valid until 1 year since approved_at date
         $templateProcessor->setValue('valid_until',  date('F d, Y', strtotime($this->rBoats->approved_at . ' + 1 year')));
 
 

@@ -29,7 +29,7 @@
                                         title="Derived from: https://www.flaticon.com/free-icons/personal-information">
                                 </div>
                                 <div class="col-md-9">
-                                    <table class="table table-sm table-borderless table-hover table-responsive-sm">
+                                    {{-- <table class="table table-sm table-borderless table-hover table-responsive-sm">
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Fullname:</th>
@@ -85,7 +85,109 @@
                                                 <td>{{ $ownerInfo->emAddress ?? '' }}</td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> --}}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label class="fw-bold  mb-0">Fullname:</label>
+                                                <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                    readonly value="{{ $ownerInfo->fullname ?? auth()->user()->name }}">
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label class="fw-bold mb-0">Birthdate:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly
+                                                        value="{{ $ownerInfo?->birthdate?->format('F d, Y') ?? '' }}">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="fw-bold  mb-0">Age:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly value="{{ $ownerInfo->age ?? '' }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="fw-bold mb-0">Birthplace:</label>
+                                                <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                    readonly value="{{ $ownerInfo->birthplace ?? '' }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="fw-bold mb-0">Nationality:</label>
+                                                <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                    readonly value="{{ $ownerInfo->nationality ?? '' }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="fw-bold mb-0">Address:</label>
+                                                <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                    readonly value="{{ $ownerInfo->address ?? '' }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="fw-bold mb-0">Resident
+                                                    since:</label>
+                                                <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                    readonly
+                                                    value="{{ $ownerInfo?->resident_since?->format('F Y') ?? '' }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <label class="fw-bold mb-0">Educational
+                                                        Background:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly
+                                                        value="{{ $ownerInfo->other_educational_background ?? ($ownerInfo->educ_background ?? '') }}">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="fw-bold mb-0">Sex:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly value="{{ $ownerInfo->gender ?? '' }}">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="fw-bold  mb-0">Contact
+                                                        No:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly value="{{ $ownerInfo->contact_no ?? '' }}">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="fw-bold  mb-0">Marital
+                                                        Status:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly value="{{ $ownerInfo->civil_status ?? '' }}">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="fw-bold  mb-0">Number of
+                                                        Children:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly value="{{ $ownerInfo->children_count ?? '' }}">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-12 mt-2">
+                                                    <label class="fw-bold text-danger  mb-0">Emergency
+                                                        Contact Person:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly value="{{ $ownerInfo->emContact_person ?? '' }}">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="fw-bold text-danger mb-0">Relationship:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly value="{{ $ownerInfo->emRelationship ?? '' }}">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="fw-bold text-danger  mb-0">
+                                                        Contact No.:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly value="{{ $ownerInfo->emContact_no ?? '' }}">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label class="fw-bold text-danger  mb-0">Address:</label>
+                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                        readonly value="{{ $ownerInfo->emAddress ?? '' }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 {{-- insert button --}}
                                 <div class="col-md-12 text-right">

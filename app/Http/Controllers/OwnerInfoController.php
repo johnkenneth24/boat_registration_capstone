@@ -86,7 +86,7 @@ class OwnerInfoController extends Controller
             'educ_background' => 'required',
             'other_educational_background' => ['nullable', 'string'],
             'children_count' => ['nullable', 'min:0'],
-            'emContact_person' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
+            'emContact_person' => ['nullable', 'string'],
             'emRelationship' => ['nullable', 'string', 'regex:/^[a-zA-Z\s]*$/'],
             'emContact_no' => ['nullable', 'string', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
             'emAddress' => ['nullable'],
