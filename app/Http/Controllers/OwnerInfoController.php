@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Livelihood;
+use App\Models\Adss;
 use App\Models\OwnerInfo;
+use App\Models\Livelihood;
 use Illuminate\Http\Request;
 
 class OwnerInfoController extends Controller
@@ -269,5 +270,87 @@ class OwnerInfoController extends Controller
         $ownerInfo->save();
 
         return redirect()->route('owner-info.pending-owners')->with('success', 'Owner Information archived successfully!');
+    }
+
+    public function adss($id = null)
+    {
+
+        if ($id) {
+            $adss = Adss::with('owner_info')->find($id);
+        } else {
+            $adss = Adss::with('owner_info')->find(auth()->user()->id);
+        }
+
+        return view('modules.owner-info.user-info.adss', compact('adss', 'id'));
+    }
+
+    public function adssStore(Request $request)
+    {
+        $validated = $request->validate([
+            'owner_info_id' => 'required',
+            'spouse_name' => 'nullable',
+            'number_dependent' => ['required', 'integer'],
+            'employer_name' => 'required',
+            'desired_coverage' => 'required',
+            'premium' => 'nullable',
+            'cover_from' => ['required'],
+            'cover_to' => ['required'],
+            'primary_beneficiary' => ['required', 'string'],
+            'primary_relationship' => ['required', 'string'],
+            'secondary_beneficiary' => ['required', 'string'],
+            'secondary_relationship' => ['required', 'string'],
+            'minor_trustee' => 'nullable',
+            'pcic_coverage' => 'nullable',
+            'pcic_name' => 'nullable',
+            'pcic_relationship' => 'nullable',
+            'pcic_address' => 'nullable',
+        ]);
+
+
+        $adss = Adss::where('owner_info_id', $validated['owner_info_id'])->first();
+
+        if (!$adss) {
+            $adss = new Adss();
+            $adss->owner_info_id = $validated['owner_info_id'];
+            $adss->spouse_name = $validated['spouse_name'];
+            $adss->number_dependent = $validated['number_dependent'];
+            $adss->employer_name = $validated['employer_name'];
+            $adss->desired_coverage = $validated['desired_coverage'];
+            $adss->premium = $validated['premium'];
+            $adss->cover_from = $validated['cover_from'];
+            $adss->cover_to = $validated['cover_to'];
+            $adss->primary_beneficiary = $validated['primary_beneficiary'];
+            $adss->primary_relationship = $validated['primary_relationship'];
+            $adss->secondary_beneficiary = $validated['secondary_beneficiary'];
+            $adss->secondary_relationship = $validated['secondary_relationship'];
+            $adss->minor_trustee = $validated['minor_trustee'];
+            $adss->pcic_coverage = $validated['pcic_coverage'];
+            $adss->pcic_name = $validated['pcic_name'];
+            $adss->pcic_relationship = $validated['pcic_relationship'];
+            $adss->pcic_address = $validated['pcic_address'];
+
+            $adss->save();
+        } else {
+            $adss->update([
+                'spouse_name' => $validated['spouse_name'],
+                'number_dependent' => $validated['number_dependent'],
+                'employer_name' => $validated['employer_name'],
+                'desired_coverage' => $validated['desired_coverage'],
+                'premium' => $validated['premium'],
+                'cover_from' => $validated['cover_from'],
+                'cover_to' => $validated['cover_to'],
+                'primary_beneficiary' => $validated['primary_beneficiary'],
+                'primary_relationship' => $validated['primary_relationship'],
+                'secondary_beneficiary' => $validated['secondary_beneficiary'],
+                'secondary_relationship' => $validated['secondary_relationship'],
+                'minor_trustee' => $validated['minor_trustee'],
+                'pcic_coverage' => $validated['pcic_coverage'],
+                'pcic_name' => $validated['pcic_name'],
+                'pcic_relationship' => $validated['pcic_relationship'],
+                'pcic_address' => $validated['pcic_address'],
+            ]);
+        }
+
+        return redirect()->route('owner-info.index')->with('success', 'Beneficiary information successfully saved!');
     }
 }

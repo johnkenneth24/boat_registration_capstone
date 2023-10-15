@@ -33,6 +33,7 @@ class OwnerInfo extends Model
         'emRelationship',
         'emContact_no',
         'emAddress',
+        'other_educational_background',
     ];
 
     protected $casts = [
@@ -80,5 +81,10 @@ class OwnerInfo extends Model
     public function registerBoat()
     {
         return $this->hasMany(RegisterBoat::class);
+    }
+
+    public function adss()
+    {
+        return $this->hasOne(Adss::class);
     }
 }
