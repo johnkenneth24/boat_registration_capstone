@@ -19,6 +19,7 @@ class OwnerInfoController extends Controller
     public function index()
     {
         $ownerInfo = OwnerInfo::where('user_id', auth()->user()->id)->first();
+        $adss = Adss::where('owner_info_id', auth()->user()->id)->first();
 
         // dd($ownerInfo);
         return view('modules.owner-info.user-info.index', compact('ownerInfo'));
