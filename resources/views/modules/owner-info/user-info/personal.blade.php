@@ -39,7 +39,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label>Firstname <span class="text-danger">*</span></label>
                                         <input type="text" name="first_name"
                                             class="form-control form-control-sm @error('first_name') is-invalid @enderror"
@@ -63,7 +63,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-md-2">
+                                    <div class="form-group col-md-1">
                                         <label>Suffix</label>
                                         <select name="suffix" class="form-control form-control-sm">
                                             <option value="">--N/A--</option>
@@ -181,7 +181,8 @@
                                                     {{ ($ownerInfo?->educ_background ?: old('educational_background')) == $educ ? 'selected' : '' }}>
                                                     {{ $educ }}</option>
                                             @endforeach
-                                            <option value="Others">
+                                            <option value="Others"
+                                                {{ ($ownerInfo?->educ_background ?: old('educational_background')) == 'Others' ? 'selected' : '' }}>
                                                 Others (Please specify)
                                             </option>
                                         </select>
@@ -226,7 +227,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-2">
                                         <label>Relationship <span class="text-danger">*</span></label>
                                         <input type="text" name="emRelationship"
                                             class="form-control form-control-sm @error('emRelationship') is-invalid @enderror"
@@ -251,7 +252,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-4">
                                         <label>Address <span class="text-danger">*</span></label>
                                         <input type="text" name="emAddress"
                                             class="form-control form-control-sm @error('emAddress') is-invalid @enderror"
@@ -285,19 +286,26 @@
 @endsection
 
 @section('scripts')
+    {{-- script to show other educational background if selected educ_background is equal to Others --}}
     <script>
-        const $educ_select = document.querySelector('#educational_background');
-        const $other_educ = document.querySelector('#otherEducationalBackground');
-        const $educ = document.querySelector('#educ');
+        document.addEventListener('DOMContentLoaded', function() {
+            const $educ_select = document.querySelector('#educational_background');
+            const $other_educ = document.querySelector('#otherEducationalBackground');
+            const $educ = document.querySelector('#educ');
 
-        $educ_select.addEventListener('change', function() {
-            if (this.value === 'Others') {
-                $other_educ.style.display = 'block';
-                $other_educ.querySelector('input').setAttribute('required', true);
-            } else {
-                $other_educ.style.display = 'none';
-                $other_educ.querySelector('input').removeAttribute('required');
+            function toggleOtherEducationalField() {
+                if ($educ_select.value === 'Others') {
+                    $other_educ.style.display = 'block';
+                    $other_educ.querySelector('input').setAttribute('required', true);
+                } else {
+                    $other_educ.style.display = 'none';
+                    $other_educ.querySelector('input').removeAttribute('required');
+                }
             }
+
+            toggleOtherEducationalField(); // Initial state based on selected value
+
+            $educ_select.addEventListener('input', toggleOtherEducationalField);
         });
     </script>
 

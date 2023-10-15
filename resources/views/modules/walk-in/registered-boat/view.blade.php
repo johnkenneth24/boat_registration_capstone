@@ -41,7 +41,8 @@
                                 <h4 class="text-uppercase">Boat Registration</h4>
                             </div>
                         </div>
-                        <form action="{{ route('walkin-regboat.update', [$walkin]) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('walkin-regboat.update', [$walkin]) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body mt-0">
@@ -64,7 +65,7 @@
                                     <div class="form-group col-md-6">
                                         <label>Registration Date</label>
                                         <input type="hidden" name="registration_date" readonly value="{{ date('Y-m-d') }}">
-                                        <input type="date"  class="form-control form-control-sm"
+                                        <input type="date" class="form-control form-control-sm"
                                             value="{{ $walkin->registration_date->format('Y-m-d') }}">
                                     </div>
                                     <div class="col-md-12 mt-1 mb-2 py-1 bg-dark">
@@ -131,7 +132,8 @@
                                                         id="vessel_type">
                                                         <option value="">--Please Select--</option>
                                                         @foreach ($type_vessel as $tv)
-                                                        <option value="{{ $tv }}" @selected($walkin->vessel_type == $tv)>{{ $tv }}</>
+                                                            <option value="{{ $tv }}"
+                                                                @selected($walkin->vessel_type == $tv)>{{ $tv }}</>
                                                         @endforeach
                                                     </select>
                                                     @error('vessel_type')
@@ -322,7 +324,7 @@
                                             <div class="form-group col-md-6">
                                                 <label>Net Tonnage</label>
                                                 <input type="number" min="0" step="0.01" name="net_tonnage"
-                                                     required value="{{ $walkin->net_tonnage }}" required
+                                                    required value="{{ $walkin->net_tonnage }}" required
                                                     class="form-control form-control-sm @error('net_tonnage') is-invalid @enderror">
                                                 @error('net_tonnage')
                                                     <div class="invalid-feedback" style="display: inline-block !important;">
@@ -351,8 +353,8 @@
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
-                                                <img src="/images/user-upload/{{ $walkin->image }}"
-                                                    alt="image-preview" id="preview" class="img-fluid img-thumbnail"
+                                                <img src="/images/user-upload/{{ $walkin->image }}" alt="image-preview"
+                                                    id="preview" class="img-fluid img-thumbnail"
                                                     data-image="{{ $walkin->image }}">
 
                                             </div>
@@ -375,28 +377,15 @@
 @endsection
 
 @section('scripts')
-<script>
-    const vessel_type = document.querySelector('#vessel_type');
-    const motorized_group = document.querySelector('#motorized-group');
-    const engine_make = document.querySelector('#engine-make');
-    const horsepower = document.querySelector('#horsepower');
-    const serial_number = document.querySelector('#serial_number');
+    <script>
+        const vessel_type = document.querySelector('#vessel_type');
+        const motorized_group = document.querySelector('#motorized-group');
+        const engine_make = document.querySelector('#engine-make');
+        const horsepower = document.querySelector('#horsepower');
+        const serial_number = document.querySelector('#serial_number');
 
-    // check first if the vessel type has value of motorized
-    if (vessel_type.value === 'Motorized') {
-        motorized_group.style.display = 'block';
-        engine_make.setAttribute('required', true);
-        horsepower.setAttribute('required', true);
-        serial_number.setAttribute('required', true);
-    } else {
-        motorized_group.style.display = 'none';
-        engine_make.removeAttribute('required');
-        horsepower.removeAttribute('required');
-        serial_number.removeAttribute('required');
-    }
-
-    vessel_type.addEventListener('change', (e) => {
-        if (e.target.value === 'Motorized') {
+        // check first if the vessel type has value of motorized
+        if (vessel_type.value === 'Motorized') {
             motorized_group.style.display = 'block';
             engine_make.setAttribute('required', true);
             horsepower.setAttribute('required', true);
@@ -407,27 +396,21 @@
             horsepower.removeAttribute('required');
             serial_number.removeAttribute('required');
         }
-    });
-</script>
 
-<script>
-    // Get the image element
-    const image = document.getElementById('preview');
-    // Get the data-image attribute value (the image filename)
-    const imageName = image.getAttribute('data-image');
-    // Check if the image exists
-    const imageExists = new Image();
-    imageExists.onload = function() {
-        // Image exists, set the src attribute to the original path
-        image.src = `/images/user-upload/${imageName}`;
-    };
-    imageExists.onerror = function() {
-        // Image doesn't exist, set the src attribute to the default image path
-        image.src = '/images/imgnotfound.png';
-    };
-    // Set the source of the imageExists to trigger the load or error event
-    imageExists.src = `/images/user-upload/${imageName}`;
-</script>
+        vessel_type.addEventListener('change', (e) => {
+            if (e.target.value === 'Motorized') {
+                motorized_group.style.display = 'block';
+                engine_make.setAttribute('required', true);
+                horsepower.setAttribute('required', true);
+                serial_number.setAttribute('required', true);
+            } else {
+                motorized_group.style.display = 'none';
+                engine_make.removeAttribute('required');
+                horsepower.removeAttribute('required');
+                serial_number.removeAttribute('required');
+            }
+        });
+    </script>
 
     <script>
         function previewImage() {
@@ -445,5 +428,24 @@
         }
         var imageInput = document.querySelector('#image');
         imageInput.addEventListener('change', previewImage);
+    </script>
+
+    <script>
+        // Get the image element
+        const image = document.getElementById('preview');
+        // Get the data-image attribute value (the image filename)
+        const imageName = image.getAttribute('data-image');
+        // Check if the image exists
+        const imageExists = new Image();
+        imageExists.onload = function() {
+            // Image exists, set the src attribute to the original path
+            image.src = `/images/user-upload/${imageName}`;
+        };
+        imageExists.onerror = function() {
+            // Image doesn't exist, set the src attribute to the default image path
+            image.src = '/images/imgnotfound.png';
+        };
+        // Set the source of the imageExists to trigger the load or error event
+        imageExists.src = `/images/user-upload/${imageName}`;
     </script>
 @endsection

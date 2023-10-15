@@ -1,6 +1,3 @@
-
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -18,122 +15,210 @@
                                     </div>
                                     <div class="row">
                                         <div class="row">
-                                        <input type="hidden" name="walkin_owner_adss_id" value="{{ $owner_adss }}">
+                                            <input type="hidden" name="walkin_owner_adss_id" value="{{ $owner_adss }}">
                                             <div class="form-group col-md-9">
                                                 <label for="">Name of Spouse</label>
-                                                <input type="text" value="{{ $adss?->name_spouse ?: old('name_spouse') }}" name="name_spouse" id="" class="form-control-sm form-control  @error('name_spouse') is-invalid @enderror" placeholder="Enter Name of Spause">
+                                                <input type="text"
+                                                    value="{{ $adss?->name_spouse ?: old('name_spouse') }}"
+                                                    name="name_spouse" required
+                                                    class="form-control-sm form-control  @error('name_spouse') is-invalid @enderror"
+                                                    placeholder="Enter Name of Spouse">
                                                 @error('name_spouse')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="">No. of Dependent</label>
-                                                <input type="number" name="number_dependent" value="{{ $adss?->number_dependent ?: old('') }}" id=""  class="form-control-sm form-control  @error('number_dependent') is-invalid @enderror" placeholder="0">
+                                                <input type="number" name="number_dependent"
+                                                    value="{{ $adss?->number_dependent ?: old('') }}" id=""
+                                                    class="form-control-sm form-control  @error('number_dependent') is-invalid @enderror"
+                                                    placeholder="0" min="0" max="10" required>
                                                 @error('number_dependent')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="">Name of Employer</label>
-                                                <input type="text" name="name_employer" value="{{ $adss?->name_employer ?: old('') }}" id=""  class="form-control-sm form-control  @error('name_employer') is-invalid @enderror" placeholder="Enter Name of Employer">
+                                                <input type="text" name="name_employer"
+                                                    value="{{ $adss?->name_employer ?: old('') }}" required
+                                                    class="form-control-sm form-control  @error('name_employer') is-invalid @enderror"
+                                                    placeholder="Enter Name of Employer">
                                                 @error('name_employer')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="">Desired Coverage</label>
-                                                <input type="text" name="desired_coverage" value="{{ $adss?->desired_coverage ?: old('') }}" id=""  class="form-control-sm form-control  @error('desired_coverage') is-invalid @enderror" placeholder="Enter Desired Coverage">
+                                                <input type="text" name="desired_coverage"
+                                                    value="{{ $adss?->desired_coverage ?: old('') }}" required
+                                                    class="form-control-sm form-control  @error('desired_coverage') is-invalid @enderror"
+                                                    placeholder="Enter Desired Coverage">
                                                 @error('desired_coverage')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="">Premium</label>
-                                                <input type="text" name="premium" value="{{ $adss?->premium ?: old('') }}" id=""  class="form-control-sm form-control  @error('premium') is-invalid @enderror" placeholder="Enter PRium">
+                                                <input type="text" name="premium"
+                                                    value="{{ $adss?->premium ?: old('') }}" required
+                                                    class="form-control-sm form-control  @error('premium') is-invalid @enderror"
+                                                    placeholder="Enter premium">
                                                 @error('premium')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="">Period Cover From</label>
-                                                <input type="date" name="cover_from" value="{{ $adss?->cover_from ?: old('') }}" id=""  class="form-control-sm form-control  @error('cover_from') is-invalid @enderror" placeholder="Enter Name of Employer">
+                                                <label for="cover_from">Period Cover From</label>
+                                                <input type="date" name="cover_from"
+                                                    value="{{ $adss?->cover_from ?: old('') }}"
+                                                    class="form-control-sm form-control @error('cover_from') is-invalid @enderror"
+                                                    min="{{ date('Y-m-d') }}" required>
+
                                                 @error('cover_from')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="">Period Cover To</label>
-                                                <input type="date" name="cover_to" value="{{ $adss?->cover_to ?: old('') }}" id=""  class="form-control-sm form-control  @error('cover_to') is-invalid @enderror" placeholder="Enter Name of Employer">
+                                                <input type="date" name="cover_to"
+                                                    value="{{ $adss?->cover_to ?: old('') }}" required
+                                                    class="form-control-sm form-control  @error('cover_to') is-invalid @enderror"
+                                                    min="{{ date('Y-m-d') }}">
                                                 @error('cover_to')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-7">
                                                 <label for="">Primary Beneficiary</label>
-                                                <input type="text" name="primary_beneficiary" value="{{ $adss?->primary_beneficiary ?: old('') }}" id=""  class="form-control-sm form-control  @error('primary_beneficiary') is-invalid @enderror" placeholder="Enter Primary Beneficaiary">
+                                                <input type="text" name="primary_beneficiary"
+                                                    value="{{ $adss?->primary_beneficiary ?: old('') }}" id=""
+                                                    class="form-control-sm form-control  @error('primary_beneficiary') is-invalid @enderror"
+                                                    placeholder="Enter Primary Beneficaiary">
                                                 @error('primary_beneficiary')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label for="">Relationship</label>
-                                                <input type="text" name="primary_relationship" value="{{ $adss?->primary_relationship ?: old('') }}" id=""  class="form-control-sm form-control  @error('primary_relationship') is-invalid @enderror" placeholder="Enter Relationship">
+                                                <input type="text" name="primary_relationship"
+                                                    value="{{ $adss?->primary_relationship ?: old('') }}" id=""
+                                                    class="form-control-sm form-control  @error('primary_relationship') is-invalid @enderror"
+                                                    placeholder="Enter Relationship">
                                                 @error('primary_relationship')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-7">
                                                 <label for="">Secondary Beneficiary</label>
-                                                <input type="text" name="secondary_beneficiary" value="{{ $adss?->secondary_beneficiary ?: old('') }}" id=""  class="form-control-sm form-control  @error('secondary_beneficiary') is-invalid @enderror" placeholder="Enter Secondary Beneficaiary">
+                                                <input type="text" name="secondary_beneficiary"
+                                                    value="{{ $adss?->secondary_beneficiary ?: old('') }}" id=""
+                                                    class="form-control-sm form-control  @error('secondary_beneficiary') is-invalid @enderror"
+                                                    placeholder="Enter Secondary Beneficaiary">
                                                 @error('secondary_beneficiary')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-5">
                                                 <label for="">Relationship</label>
-                                                <input type="text" name="secondary_relationship" value="{{ $adss?->secondary_relationship ?: old('') }}" id=""  class="form-control-sm form-control  @error('secondary_relationship') is-invalid @enderror" placeholder="Enter Relationship">
+                                                <input type="text" name="secondary_relationship"
+                                                    value="{{ $adss?->secondary_relationship ?: old('') }}"
+                                                    id=""
+                                                    class="form-control-sm form-control  @error('secondary_relationship') is-invalid @enderror"
+                                                    placeholder="Enter Relationship">
                                                 @error('secondary_relationship')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="">If minor, name of trustee</label>
-                                                <input type="text" name="minor_trustee" value="{{ $adss?->minor_trustee ?: old('') }}" id=""  class="form-control-sm form-control  @error('minor_trustee') is-invalid @enderror" placeholder="Enter Name of Trustee">
+                                                <input type="text" name="minor_trustee"
+                                                    value="{{ $adss?->minor_trustee ?: old('') }}" id=""
+                                                    class="form-control-sm form-control  @error('minor_trustee') is-invalid @enderror"
+                                                    placeholder="Enter Name of Trustee">
                                                 @error('minor_trustee')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="">Has a family member coverage of insurance from Philippine Crop Insurance Corporation (PCIC)</label>
-                                                <select name="pcic_coverage" id=""  class="form-control-sm form-control  @error('pcic_coverage') is-invalid @enderror col-md-3">
+                                                <label for="">Has a family member or a worker of a farmer who has
+                                                    an
+                                                    existing insurance coverage with the Philippine Crop Insurance
+                                                    Corporation
+                                                    (PCIC)?</label>
+                                                <select name="pcic_coverage" id="pcic_coverage"
+                                                    class="form-control-sm form-control @error('pcic_coverage') is-invalid @enderror col-md-3"
+                                                    required>
                                                     <option value="">--Please Select--</option>
-                                                @foreach ($yes_no as $yesNo)
-                                                    <option value="{{ $yesNo }}" {{ ($adss?->pcic_coverage ?: old('pcic_coverage')) == $yesNo ? 'selected' : '' }}>{{ $yesNo }}</option>
-                                                @endforeach
+                                                    @foreach ($yes_no as $yesNo)
+                                                        <option value="{{ $yesNo }}"
+                                                            {{ ($adss?->pcic_coverage ?: old('pcic_coverage')) == $yesNo ? 'selected' : '' }}>
+                                                            {{ $yesNo }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('pcic_coverage')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-4" id="pcic_name_field">
                                                 <label for="">Name of Farmer</label>
-                                                <input type="text" name="pcic_name" value="{{ $adss?->pcic_name ?: old('') }}" id=""  class="form-control-sm form-control  @error('pcic_name') is-invalid @enderror" placeholder="Enter Name of Farmer">
+                                                <input type="text" name="pcic_name"
+                                                    value="{{ $adss?->pcic_name ?: old('') }}" id=""
+                                                    class="form-control-sm form-control @error('pcic_name') is-invalid @enderror"
+                                                    placeholder="Enter Name of Farmer">
                                                 @error('pcic_name')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-4" id="pcic_relationship_field">
                                                 <label for="">Relationship</label>
-                                                <input type="text" name="pcic_relationship" value="{{ $adss?->pcic_relationship ?: old('') }}" id=""  class="form-control-sm form-control  @error('pcic_relationship') is-invalid @enderror" placeholder="Enter Relationship">
+                                                <input type="text" name="pcic_relationship"
+                                                    value="{{ $adss?->pcic_relationship ?: old('') }}" id=""
+                                                    class="form-control-sm form-control @error('pcic_relationship') is-invalid @enderror"
+                                                    placeholder="Enter Relationship">
                                                 @error('pcic_relationship')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-4" id="pcic_address_field">
                                                 <label for="">Address</label>
-                                                <input type="text" name="pcic_address" value="{{ $adss?->pcic_address ?: old('') }}" id=""  class="form-control-sm form-control  @error('pcic_address') is-invalid @enderror" placeholder="Enter Address">
+                                                <input type="text" name="pcic_address"
+                                                    value="{{ $adss?->pcic_address ?: old('') }}" id=""
+                                                    class="form-control-sm form-control @error('pcic_address') is-invalid @enderror"
+                                                    placeholder="Enter Address">
                                                 @error('pcic_address')
-                                                <span id="exampleInputEmail1-error" class="error invalid-feedback">{{ $message }}</span>
+                                                    <div class="invalid-feedback" style="display: inline-block !important;">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -161,121 +246,31 @@
 
 @section('scripts')
     <script>
-        const checkboxes = document.querySelectorAll('input[name="source_of_income[]"]');
-        const gearInput = document.querySelector('#gear');
-        const gearDiv = document.querySelector('#gear_div');
+        // Get the select element
+        const pcicCoverageSelect = document.getElementById('pcic_coverage');
 
-        const cultureInput = document.querySelector('#culture');
-        const cultureDiv = document.querySelector('#culture_div');
+        // Get the fields to hide/show
+        const pcicNameField = document.getElementById('pcic_name_field');
+        const pcicRelationshipField = document.getElementById('pcic_relationship_field');
+        const pcicAddressField = document.getElementById('pcic_address_field');
 
-        const specifyInput = document.querySelector('#specify');
-        const specifyDiv = document.querySelector('#specify_div');
-
-        const otherCheckboxes = document.querySelectorAll('input[name="other_income_sources[]"]');
-        const gearInputOs = document.querySelector('#gear_os');
-        const gearInputOsDiv = document.querySelector('#gear_os_div');
-
-        const cultureInputOs = document.querySelector('#culture_os');
-        const cultureInputOsDiv = document.querySelector('#culture_os_div');
-
-        const specifyInputOs = document.querySelector('#specify_os');
-        const specifyInputOsDiv = document.querySelector('#specify_os_div');
-
-        // check first if the checkbox is checked and gearInput is not empty, if checked and has value, then display the gearInput field
-        checkboxes.forEach(function(checkbox) {
-            if (checkbox.checked && gearInput.value !== '') {
-                gearDiv.style.display = 'block';
-            }
-
-            if (checkbox.checked && cultureInput.value !== '') {
-                cultureDiv.style.display = 'block';
-            }
-
-            if (checkbox.checked && specifyInput.value !== '') {
-                specifyDiv.style.display = 'block';
+        // Add an event listener to the select element
+        pcicCoverageSelect.addEventListener('change', function() {
+            // Check if the selected value is 'no'
+            if (pcicCoverageSelect.value === 'No') {
+                // If 'no' is selected, hide the fields
+                pcicNameField.style.display = 'none';
+                pcicRelationshipField.style.display = 'none';
+                pcicAddressField.style.display = 'none';
+            } else {
+                // If a different value is selected, show the fields
+                pcicNameField.style.display = 'block';
+                pcicRelationshipField.style.display = 'block';
+                pcicAddressField.style.display = 'block';
             }
         });
 
-        otherCheckboxes.forEach(function(checkbox) {
-            if (checkbox.checked && gearInputOs.value !== '') {
-                gearInputOsDiv.style.display = 'block';
-            }
-
-            if (checkbox.checked && cultureInputOs.value !== '') {
-                cultureInputOsDiv.style.display = 'block';
-            }
-
-            if (checkbox.checked && specifyInputOs.value !== '') {
-                specifyInputOsDiv.style.display = 'block';
-            }
-        });
-
-
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('input', function() {
-                if (this.checked) {
-                    if (this.value === 'Capture Fishing') {
-                        gearDiv.style.display = 'block';
-                        gearInput.setAttribute('required', 'required');
-                    } else if (this.value === 'Aquaculture') {
-                        cultureDiv.style.display = 'block';
-                        cultureInput.setAttribute('required', 'required');
-                    } else if (this.value === 'Other') {
-                        specifyDiv.style.display = 'block';
-                        specifyInput.setAttribute('required', 'required');
-
-                    }
-                } // if unchecked remove the input
-                else {
-                    if (this.value === 'Capture Fishing') {
-                        gearInput.removeAttribute('required');
-                        gearInput.value = '';
-                        gearDiv.style.display = 'none';
-                    } else if (this.value === 'Aquaculture') {
-                        cultureInput.removeAttribute('required');
-                        cultureInput.value = '';
-                        cultureDiv.style.display = 'none';
-                    } else if (this.value === 'Other') {
-                        specifyInput.removeAttribute('required');
-                        specifyInput.value = '';
-                        specifyDiv.style.display = 'none';
-                    }
-                }
-            });
-        });
-
-        otherCheckboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('input', function() {
-                if (this.checked) {
-                    if (this.value === 'Capture Fishing') {
-                        gearInputOsDiv.style.display = 'block';
-                        gearInputOs.setAttribute('required', 'required');
-                    } else if (this.value === 'Aquaculture') {
-                        cultureInputOsDiv.style.display = 'block';
-                        cultureInputOs.setAttribute('required', 'required');
-                    } else if (this.value === 'Other') {
-                        specifyInputOsDiv.style.display = 'block';
-                        specifyInputOs.setAttribute('required', 'required');
-
-                    }
-                } // if unchecked remove the input
-                else {
-                    if (this.value === 'Capture Fishing') {
-                        gearInputOs.removeAttribute('required');
-                        gearInputOs.value = '';
-                        gearInputOsDiv.style.display = 'none';
-                    } else if (this.value === 'Aquaculture') {
-                        cultureInputOs.removeAttribute('required');
-                        cultureInputOs.value = '';
-                        cultureInputOsDiv.style.display = 'none';
-                    } else if (this.value === 'Other') {
-                        specifyInputOs.removeAttribute('required');
-                        specifyInputOs.value = '';
-                        specifyInputOsDiv.style.display = 'none';
-                    }
-                }
-            });
-        });
+        // Trigger the change event initially to set the initial visibility
+        pcicCoverageSelect.dispatchEvent(new Event('change'));
     </script>
 @endsection
-

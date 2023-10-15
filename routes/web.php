@@ -75,31 +75,32 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('owner-info.store');
         Route::get('/livelihood', 'livelihood')->name('owner-info.livelihood');
         Route::post('/storelivelihood', 'livelihoodStore')->name('owner-info.livelihoodStore');
+        Route::get('/adss-form/{id}', 'adss')->name('owner-info.adss');
+        Route::post('/adss-form/store', 'adssStore')->name('owner-info.adss-store');
 
         Route::middleware(['role:admin|staff'])->group(function () {
             Route::get('/registeredOwners', 'regOwners')->name('owner-info.registered-owners');
-            // Route::get('/pendingOwners', 'pendingOwners')->name('owner-info.pending-owners');
-            // Route::get('/approve/{id}', 'approve')->name('owner-info.approve');
             Route::get('/archive/{id}', 'archive')->name('owner-info.archive');
         });
     });
 
     Route::controller(WalkInController::class)->prefix('walk-in')->group(function () {
-        Route::get('/', 'index')->name('walk-in.index');
-        Route::get('/create/{id?}', 'create')->name('walk-in.create');
-        Route::get('/walk-in-owner-edit{id}', 'create')->name('walkin-owner.edit');
-        Route::post('/store', 'store')->name('walk-in.store');
-        Route::get('/walkin-livelihood', 'walkInLivelihood')->name('walk-in.livelihood');
-        Route::post('/walkin-livelihood-store', 'walkInLivelihoodStore')->name('walk-in.livelihoodStore');
-        Route::get('/walkin-adss-form', 'walkInAdss')->name('walk-in.adss');
-        Route::post('/walkin-adss-store', 'walkInAdssStore')->name('walk-in.adssStore');
-        Route::delete('/destroy/{id}', 'destroy')->name('walk-in.destroy');
-        Route::get('/registered-boat/{walkin}', 'registeredBoat')->name('walkin-regboat.index');
-        Route::get('/registered-boat/create/{walkin}', 'createRegBoat')->name('walkin-regboat.create');
-        Route::post('/registered-boat/store', 'walkInRegBoatStore')->name('walkin-regboat.store');
-        Route::get('/registered-boat/view/{walkin}', 'walkInRegBoatView')->name('walkin-regboat.view');
-        Route::put('/registered-boat/update/{walkin}', 'walkInRegBoatUpdate')->name('walkin-regboat.update');
-        Route::delete('/registered-boat/delete/{id}', 'walkInRegBoatDelete')->name('walkin-regboat.delete');
-    })->middleware('role:admin|staff');
+        Route::middleware('role:admin|staff')->group(function () {
+            Route::get('/', 'index')->name('walk-in.index');
+            Route::get('/create/{id?}', 'create')->name('walk-in.create');
+            Route::get('/walk-in-owner-edit{id}', 'create')->name('walkin-owner.edit');
+            Route::post('/store', 'store')->name('walk-in.store');
+            Route::get('/walkin-livelihood', 'walkInLivelihood')->name('walk-in.livelihood');
+            Route::post('/walkin-livelihood-store', 'walkInLivelihoodStore')->name('walk-in.livelihoodStore');
+            Route::get('/walkin-adss-form', 'walkInAdss')->name('walk-in.adss');
+            Route::post('/walkin-adss-store', 'walkInAdssStore')->name('walk-in.adssStore');
+            Route::delete('/destroy/{id}', 'destroy')->name('walk-in.destroy');
+            Route::get('/registered-boat/{walkin}', 'registeredBoat')->name('walkin-regboat.index');
+            Route::get('/registered-boat/create/{walkin}', 'createRegBoat')->name('walkin-regboat.create');
+            Route::post('/registered-boat/store', 'walkInRegBoatStore')->name('walkin-regboat.store');
+            Route::get('/registered-boat/view/{walkin}', 'walkInRegBoatView')->name('walkin-regboat.view');
+            Route::put('/registered-boat/update/{walkin}', 'walkInRegBoatUpdate')->name('walkin-regboat.update');
+            Route::delete('/registered-boat/delete/{id}', 'walkInRegBoatDelete')->name('walkin-regboat.delete');
+        });
+    });
 });
-
