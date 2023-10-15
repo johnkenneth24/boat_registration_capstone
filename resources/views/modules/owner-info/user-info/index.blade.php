@@ -134,9 +134,15 @@
                                                 <div class="form-group col-md-12">
                                                     <label class="fw-bold mb-0">Educational
                                                         Background:</label>
-                                                    <input type="text" class="form-control form-control-sm my-0 pt-0"
-                                                        readonly
-                                                        value="{{ $ownerInfo->other_educational_background ?? ($ownerInfo->educ_background ?? '') }}">
+                                                    @if ($ownerInfo->educ_background === 'Others')
+                                                        <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                            readonly
+                                                            value="{{ $ownerInfo->other_educational_background ?? '' }}">
+                                                    @else
+                                                        <input type="text" class="form-control form-control-sm my-0 pt-0"
+                                                            readonly
+                                                            value="{{ $ownerInfo->other_educational_background ?? ($ownerInfo->educ_background ?? '') }}">
+                                                    @endif
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label class="fw-bold mb-0">Sex:</label>
@@ -161,9 +167,7 @@
                                                     <input type="text" class="form-control form-control-sm my-0 pt-0"
                                                         readonly value="{{ $ownerInfo->children_count ?? '' }}">
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-12 mt-2">
+                                                <div class="form-group col-md-12">
                                                     <label class="fw-bold text-danger  mb-0">Emergency
                                                         Contact Person:</label>
                                                     <input type="text" class="form-control form-control-sm my-0 pt-0"
@@ -191,6 +195,13 @@
                                 </div>
                                 {{-- insert button --}}
                                 <div class="col-md-12 text-right">
+                                    @if ($ownerInfo != null)
+                                        <a href="{{ route('owner-info.adss', $ownerInfo->id ?? auth()->user()->id) }}"
+                                            class="btn btn-success mb-2 me-2"> Add
+                                            Beneficiaries
+                                            for
+                                            Insurance</a>
+                                    @endif
                                     <a href="{{ route('owner-info.edit', $ownerInfo->id ?? auth()->user()->id) }}"
                                         class="btn col-md-2 mb-2 btn-primary">Edit</a>
                                 </div>

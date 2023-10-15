@@ -164,8 +164,11 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="">Has a family member coverage of insurance from
-                                                    Philippine Crop Insurance Corporation (PCIC) ?</label>
+                                                <label for="">Has a family member or a worker of a farmer who has
+                                                    an
+                                                    existing insurance coverage with the Philippine Crop Insurance
+                                                    Corporation
+                                                    (PCIC)?</label>
                                                 <select name="pcic_coverage" id="pcic_coverage"
                                                     class="form-control-sm form-control @error('pcic_coverage') is-invalid @enderror col-md-3"
                                                     required>
