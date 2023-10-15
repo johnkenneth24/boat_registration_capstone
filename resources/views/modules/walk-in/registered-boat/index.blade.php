@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@livewireStyles
+
 @section('content')
     <div class="content">
         <div class="container-fluid">
@@ -45,7 +47,7 @@
                                             <td>{{ $wrg->vessel_type }}</td>
                                             <td>{{ $wrg->registration_date->format('F d, Y') }}</td>
                                             <td class="">
-                                                <a href="" class="btn btn-sm btn-primary">EXPORT</a>
+                                                @livewire('walk-in-boat-reg.export',  ['wrg' => $wrg], key($wrg->id))
                                                 <a href="{{ route('walkin-regboat.view', $wrg->id) }}" class="btn btn-sm btn-success">VIEW</a>
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
                                                     data-toggle="modal"
@@ -94,3 +96,5 @@
         </div>
     </div>
 @endsection
+
+@livewireScripts
