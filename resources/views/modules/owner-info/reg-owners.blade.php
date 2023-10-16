@@ -48,6 +48,7 @@
                                                     data-target="#viewModal{{ $regOwner->id }}">
                                                     VIEW
                                                 </button>
+                                                @livewire('owner-info.export', ['ownerInfo' => $regOwner], key($regOwner->id))
                                                 {{-- <a href="{{ route('regOwner.edit',$regOwner->id) }}" class="btn btn-sm btn-primary mr-2">EDIT</a>
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
                                                     data-toggle="modal" data-target="#confirmationModal{{ $regOwner->id }}">
