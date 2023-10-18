@@ -10,9 +10,10 @@
                     <x-success></x-success>
                     <div class="card  card-outline card-warning mt-5 shadow-lg">
                         <div class="card-header pb-0">
-                            <div class="card-title align-middle mb-0">
+                            <div class="card-title justify-center align-items-center d-flex mb-0">
                                 @role('staff|admin')
-                                    <h4>{{ $walkin->fullname }} | Registered Boats</h4>
+                                    <a href="{{ route('walk-in.index') }}" class="btn btn-primary me-2"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+                                    <h4 class="mb-0">{{ $walkin->fullname }} | Registered Boats</h4>
                                 @endrole
                             </div>
                             @role('admin|staff')
