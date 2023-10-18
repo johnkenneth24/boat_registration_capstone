@@ -93,7 +93,7 @@
                                     <div class="form-group col-md-6">
                                         <label>Period of Cover To <span class="text-danger">*</span></label>
                                         <input type="date" name="cover_to" required
-                                            value="{{ $adss?->cover_to?->format('Y-m-d') ?: old('cover_to') }}"
+                                            value="{{ $adss?->cover_to? ->format('Y-m-d') ?: old('cover_to') }}"
                                             class="form-control-sm form-control  @error('cover_to') is-invalid @enderror"
                                             min="{{ date('Y-m-d') }}">
                                         @error('cover_to')
