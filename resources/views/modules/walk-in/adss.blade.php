@@ -55,7 +55,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="">Desired Coverage</label>
-                                                <input type="text" name="desired_coverage"
+                                                <input type="number" name="desired_coverage"
                                                     value="{{ $adss?->desired_coverage ?: old('') }}" required
                                                     class="form-control-sm form-control  @error('desired_coverage') is-invalid @enderror"
                                                     placeholder="Enter Desired Coverage">

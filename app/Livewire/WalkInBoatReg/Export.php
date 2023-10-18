@@ -49,10 +49,16 @@ class Export extends Component
         $templateProcessor->setValue('net_tonnage', $this->wrg->net_tonnage);
         $templateProcessor->setValue('engine_make', $this->wrg?->engine_make ?? '');
         $templateProcessor->setValue('serial_number', $this->wrg?->serial_number ?? '');
-        $templateProcessor->setValue('hp', $this->wrg?->horsepower ?? '');
+        $templateProcessor->setValue('hp', $this->wrg->horsepower ?? '');
+        $templateProcessor->setValue('non', $this->wrg->vessel_type == 'Non-Motorized' ? '/' : '');
+        $templateProcessor->setValue('motorize', $this->wrg->vessel_type == 'Motorized' ? '/' : '');
+        $templateProcessor->setValue('beneficiary', $walkinAdss->primary_beneficiary);
+        $templateProcessor->setValue('amount', $walkinAdss->desired_coverage);
 
+        // $templateProcessor->setImageValue('boat_image', array( asset('images/user-upload/' . $this->wrg->image), 'width' => 100, 'height' => 100, 'ratio' => true));
+        $imagePath = 'images/user-upload/' . $this->wrg->image;
 
-
+        $templateProcessor->setImageValue('boatImage', $imagePath);
 
 
         $templateProcessor->setValue('or_no',  '____________');

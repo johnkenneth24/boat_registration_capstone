@@ -10,7 +10,7 @@
                         <div class="card-header pb-0">
                             <div class="card-title align-middle mb-0">
                                 @role('staff|admin')
-                                    <h4>Walk In Registered Boats</h4>
+                                    <h4 class="mb-0">Walk In Registered Boats</h4>
                                 @endrole
                             </div>
                             @role('admin|staff')
