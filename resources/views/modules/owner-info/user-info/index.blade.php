@@ -29,63 +29,6 @@
                                         title="Derived from: https://www.flaticon.com/free-icons/personal-information">
                                 </div>
                                 <div class="col-md-9">
-                                    {{-- <table class="table table-sm table-borderless table-hover table-responsive-sm">
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">Fullname:</th>
-                                                <td>
-                                                    {{ $ownerInfo->full_name ?? '' }}
-                                                </td>
-                                                <th scope="row">Gender:</th>
-                                                <td>{{ $ownerInfo->gender ?? '' }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Address:</th>
-                                                <td>{{ $ownerInfo->address ?? '' }}</td>
-                                                <th scope="row">Resident Since:</th>
-                                                <td>{{ $ownerInfo?->resident_since?->format('F Y') ?? '' }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Nationality:</th>
-                                                <td>{{ $ownerInfo->nationality ?? '' }}</td>
-                                                <th scope="row">Civil Status:</th>
-                                                <td>{{ $ownerInfo->civil_status ?? '' }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Contact Number:</th>
-                                                <td>{{ $ownerInfo->contact_no ?? '' }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Birthdate:</th>
-                                                <td>{{ $ownerInfo?->birthdate?->format('F d, Y') ?? '' }}</td>
-                                                <th scope="row">Age:</th>
-                                                <td>{{ $ownerInfo->age ?? '' }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Birthplace:</th>
-                                                <td>{{ $ownerInfo->birthplace ?? '' }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Educational Background:</th>
-                                                <td>{{ $ownerInfo->educ_background ?? ($ownerInfo->other_educ_background ?? '') }}
-                                                </td>
-                                                <th scope="row">No. of Children:</th>
-                                                <td>{{ $ownerInfo->children_count ?? 'none' }}</td>
-                                            </tr>
-                                            <tr class="table-danger">
-                                                <th scope="row">Emergency contact person:</th>
-                                                <td>{{ $ownerInfo->emContact_person ?? '' }}</td>
-                                                <th scope="row">Relationship</th>
-                                                <td>{{ $ownerInfo->emRelationship ?? '' }}</td>
-                                            </tr>
-                                            <tr class="table-danger">
-                                                <th scope="row">Contact no.:</th>
-                                                <td>{{ $ownerInfo->emContact_no ?? '' }}</td>
-                                                <th scope="row">Address</th>
-                                                <td>{{ $ownerInfo->emAddress ?? '' }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table> --}}
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group ">
@@ -200,7 +143,7 @@
                                             class="btn btn-success mb-2 me-2"> Add
                                             Beneficiaries
                                             for
-                                            Insurance</a>
+                                            Insurance (ADS<sup>2</sup> )</a>
                                     @endif
                                     <a href="{{ route('owner-info.edit', $ownerInfo->id ?? auth()->user()->id) }}"
                                         class="btn col-md-2 mb-2 btn-primary">Edit</a>

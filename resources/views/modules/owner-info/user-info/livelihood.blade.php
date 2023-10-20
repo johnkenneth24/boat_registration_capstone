@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mt-5">
-                        <form action="{{ route('owner-info.livelihoodStore') }}" method="post">
+                        <form action="{{ route('owner-info.livelihoodStore') }}" method="post" autocomplete="off">
                             @csrf
                             <div class="card-body">
                                 <div class="row border border-secondary">

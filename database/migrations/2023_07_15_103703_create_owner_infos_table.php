@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('emRelationship')->nullable();
             $table->string('emContact_no')->nullable();
             $table->string('emAddress')->nullable();
+            $table->string('type')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

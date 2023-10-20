@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('register_boats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('owner_info_id')->nullable()->constrained('owner_infos')->onDelete('cascade');
             $table->string('registration_no')->unique();
             $table->date('registration_date');

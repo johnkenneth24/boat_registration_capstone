@@ -37,7 +37,7 @@
                                         <th>Name</th>
                                         <th>Application Date</th>
                                         <th>Address</th>
-                                        {{-- <th>Status</th> --}}
+                                        <th>Walk-in</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -47,8 +47,19 @@
                                             <td class="align-middle">{{ $regOwner->full_name }}</td>
                                             <td class="align-middle">{{ $regOwner->created_at->format('M. d, Y') }}</td>
                                             <td class="align-middle">{{ $regOwner->address }}</td>
-                                            {{-- <td>{{ ucfirst($regOwner->status) }}</td> --}}
-                                            <td class="d-flex justify-content-center align-middle">
+                                            <td class="align-middle">
+                                                @if ($regOwner->type == 'walk-in')
+                                                    <span class="badge badge-success">Yes</span>
+                                                @else
+                                                    <span class="badge badge-danger">No</span>
+                                                @endif
+                                            </td>
+                                            <td class="d-flex justify-content-end align-middle">
+                                                @if ($regOwner->type == 'walk-in')
+                                                    <a href="{{ route('walkin-regboat.create', $regOwner->id) }}"
+                                                        class="btn btn-sm btn-primary mr-2" title="Register Boat">REGISTER
+                                                        BOAT</a>
+                                                @endif
                                                 <button type="button" class="btn btn-sm btn-warning mr-2 px-4 fw-bold"
                                                     title="VIEW" data-toggle="modal"
                                                     data-target="#viewModal{{ $regOwner->id }}">
@@ -136,7 +147,8 @@
                                                             <div class="col-md-6">
                                                                 <div class="row">
                                                                     <div class="form-group col-md-12">
-                                                                        <label class="fw-bold text-primary mb-0">Educational
+                                                                        <label
+                                                                            class="fw-bold text-primary mb-0">Educational
                                                                             Background:</label>
                                                                         <input type="text"
                                                                             class="form-control form-control-sm my-0 pt-0"

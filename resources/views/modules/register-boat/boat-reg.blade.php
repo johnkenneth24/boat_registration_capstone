@@ -41,7 +41,8 @@
                                 <h4 class="text-uppercase">Boat Registration</h4>
                             </div>
                         </div>
-                        <form action="{{ route('reg-boat.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('reg-boat.store') }}" method="post" enctype="multipart/form-data"
+                            autocomplete="off">
                             @csrf
                             <div class="card-body mt-0">
                                 <div class="row border border-secondary">
@@ -320,7 +321,7 @@
                                             <div class="form-group col-md-6">
                                                 <label>Net Tonnage</label>
                                                 <input type="number" min="0" step="0.01" name="net_tonnage"
-                                                     required value="{{ old('net_tonnage') }}" required
+                                                    required value="{{ old('net_tonnage') }}" required
                                                     class="form-control form-control-sm @error('net_tonnage') is-invalid @enderror">
                                                 @error('net_tonnage')
                                                     <div class="invalid-feedback" style="display: inline-block !important;">

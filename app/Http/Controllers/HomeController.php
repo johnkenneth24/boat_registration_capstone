@@ -22,7 +22,8 @@ class HomeController extends Controller
         $pendingCount = $rBoats->where('status', 'pending')->count();
         $renewalCount = $rBoats->where('status', 'renewal')->count();
 
-        $expiredCount = $rBoats->where('status', 'registered')->where('approved_at', '<', now()->subYear())->count();
+        $expiredCount = $rBoats->where('status', 'registered')->where('approved_at', '<', now()->endOfYear())->count();
+
 
         // dd($expiredCount);
 

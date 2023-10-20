@@ -34,6 +34,7 @@ class OwnerInfo extends Model
         'emContact_no',
         'emAddress',
         'other_educational_background',
+        'type',
     ];
 
     protected $casts = [

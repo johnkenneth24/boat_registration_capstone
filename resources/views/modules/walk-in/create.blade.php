@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-outline card-warning mt-5">
-                        <form action="{{ route('walk-in.store') }}" method="post">
+                        <form action="{{ route('walk-in.store') }}" method="post" autocomplete="off">
                             @csrf
                             <div class="card-body mt-0">
                                 <div class="row border border-secondary">
@@ -311,20 +311,13 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
-                                <a href="{{ route('walk-in.index') }}" class="btn btn-danger col-md-2 mr-2">
+                                <a href="{{ route('owner-info.registered-owners') }}"
+                                    class="btn btn-danger col-md-2 mr-2">
                                     <span><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
                                     Go back</a>
-                                {{-- @if ($route !== 'walk-in.view') --}}
                                 <button type="submit" class="btn btn-primary col-md-2">Next
                                     <span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
                                 </button>
-                                {{-- @else
-                                    <a href="{{ route('walk-in.livelihood', $ownerInfo) }}" class="btn btn-primary col-md-2">
-                                        Next
-                                        <span><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
-                                    </a>
-                                @endif --}}
-
                             </div>
                         </form>
                         <div class="overlay dark">
