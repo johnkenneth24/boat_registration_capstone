@@ -9,7 +9,7 @@
                     <div class="card  card-outline card-warning mt-5">
                         <div class="card-header">
                             <div class="card-title mb-0">
-                                <h4>Archived Boat Registrations</h4>
+                                <h4>Archived Records</h4>
                             </div>
                             <div class="card-tools d-flex justify-content-end mb-0">
                                 <div class="d-sm-none d-md-block">
@@ -44,7 +44,7 @@
                                         <tr class="text-center align-middle">
                                             <td>{{ $arcBoats->registration_no }}</td>
                                             @role('staff')
-                                                <td>{{ $arcBoats->ownerInfo->fullname }}</td>
+                                                <td>{{ $arcBoats?->ownerInfo?->fullname ?? '' }}</td>
                                             @endrole
 
                                             <td>{{ date('M. d, Y', strtotime($arcBoats->registration_date)) }}</td>
@@ -52,10 +52,10 @@
                                             <td class="">
                                                 <a href="{{ route('reg-boat.view', $arcBoats->id) }}"
                                                     class="btn btn-sm btn-primary">View details</a>
-                                                <a href="{{ route('reg-boat.approve', $arcBoats->id) }}"
+                                                {{-- <a href="{{ route('reg-boat.approve', $arcBoats->id) }}"
                                                     class="btn btn-sm btn-success">Approve</a>
                                                 <a href="{{ route('reg-boat.disapprove', $arcBoats->id) }}"
-                                                    class="btn btn-sm btn-danger">Disapprove</a>
+                                                    class="btn btn-sm btn-danger">Disapprove</a> --}}
                                             </td>
                                         </tr>
                                     @empty

@@ -354,7 +354,7 @@ class RegisterBoatController extends Controller
     public function disapprove($id)
     {
         $boatReg = RegisterBoat::find($id);
-        $boatReg->status = 'disapprove';
+        $boatReg->status = 'disapproved';
         $boatReg->save();
 
         return redirect()->route('reg-boat.pending')->with('success', 'Boat Registration successfully disapproved!');

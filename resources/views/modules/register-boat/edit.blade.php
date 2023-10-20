@@ -41,7 +41,7 @@
                                 <h4 class="text-uppercase">Boat Registration</h4>
                             </div>
                         </div>
-                        <form action="{{ route('reg-boat.update', $boatReg->id) }}" method="post"
+                        <form action="{{ route('reg-boat.update', $boatReg->id) }}" method="post" autocomplete="off"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

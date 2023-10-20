@@ -77,19 +77,26 @@
                                             <td class="align-middle">
                                                 {{ date('M. d, Y', strtotime($rBoats->registration_date)) }}</td>
                                             <td class="align-middle">
-                                                @if ($rBoats->status == 'pending')
+                                                @if ($rBoats->status == 'registered')
+                                                    @if (\Carbon\Carbon::parse($rBoats->approved_at)->endOfYear() < \Carbon\Carbon::now())
+                                                        <span class="badge rounded-2 badge-danger px-3 py-2 opacity-75"
+                                                            style="font-size: 0.8rem;">
+                                                            Expired
+                                                        </span>
+                                                    @else
+                                                        <span class="badge rounded-2 badge-success px-3 py-2 opacity-75"
+                                                            style="font-size: 0.8rem;">
+                                                            {{ ucFirst($rBoats->status) }}
+                                                        </span>
+                                                    @endif
+                                                @elseif ($rBoats->status == 'pending')
                                                     <span class="badge rounded-2 badge-warning px-3 py-2 opacity-75"
-                                                        style="font-size: 0.8rem">
-                                                        {{ ucFirst($rBoats->status) }}
-                                                    </span>
-                                                @elseif($rBoats->status == 'registered')
-                                                    <span class="badge rounded-2 badge-success px-3 py-2 opacity-75"
                                                         style="font-size: 0.8rem;">
                                                         {{ ucFirst($rBoats->status) }}
                                                     </span>
-                                                @elseif($rBoats->status == 'disapproved')
+                                                @elseif ($rBoats->status == 'disapproved')
                                                     <span class="badge rounded-2 badge-danger px-3 py-2 opacity-75"
-                                                        style="font-size: 0.8rem;">
+                                                        style="font-size 0.8rem;">
                                                         {{ ucFirst($rBoats->status) }}
                                                     </span>
                                                 @endif

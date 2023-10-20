@@ -52,13 +52,6 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::controller(ApplicantListController::class)->prefix('applist')->group(function () {
-        Route::get('/', 'index')->name('applist.index');
-        Route::get('process', 'process_registration')->name('applist.process');
-        Route::get('mfr-form', 'mfr_form')->name('applist.mfr-form');
-        Route::get('ads-form', 'adss_form')->name('applist.ads-form');
-    });
-
     // routes admin and staff only can access
     Route::controller(AnnouncementsController::class)->prefix('announcement')->group(function () {
         Route::get('/', 'index')->name('announcement.index');
@@ -86,7 +79,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(WalkInController::class)->prefix('walk-in')->group(function () {
         Route::middleware('role:admin|staff')->group(function () {
-            Route::get('/', 'index')->name('walk-in.index');
+            // Route::get('/', 'index')->name('walk-in.index');
             Route::get('/create/{id?}', 'create')->name('walk-in.create');
             Route::get('/walk-in-owner-edit{id}', 'create')->name('walkin-owner.edit');
             Route::post('/store', 'store')->name('walk-in.store');
@@ -94,7 +87,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/walkin-livelihood-store', 'walkInLivelihoodStore')->name('walk-in.livelihoodStore');
             Route::get('/walkin-adss-form', 'walkInAdss')->name('walk-in.adss');
             Route::post('/walkin-adss-store', 'walkInAdssStore')->name('walk-in.adssStore');
-            Route::delete('/destroy/{id}', 'destroy')->name('walk-in.destroy');
+            // Route::delete('/destroy/{id}', 'destroy')->name('walk-in.destroy');
             Route::get('/registered-boat/{walkin}', 'registeredBoat')->name('walkin-regboat.index');
             Route::get('/registered-boat/create/{walkin}', 'createRegBoat')->name('walkin-regboat.create');
             Route::post('/registered-boat/store', 'walkInRegBoatStore')->name('walkin-regboat.store');

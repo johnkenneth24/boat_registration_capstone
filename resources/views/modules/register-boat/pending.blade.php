@@ -42,7 +42,7 @@
                                         <tr class="text-center align-middle">
                                             <td>{{ $pBoats->registration_no }}</td>
                                             @role('staff')
-                                                <td>{{ $pBoats->ownerInfo->fullname }}</td>
+                                                <td>{{ $pBoats?->ownerInfo?->fullname ?? '' }}</td>
                                             @endrole
 
                                             <td>{{ date('M. d, Y', strtotime($pBoats->registration_date)) }}</td>

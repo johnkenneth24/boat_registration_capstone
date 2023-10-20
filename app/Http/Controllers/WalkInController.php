@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adss;
 use App\Models\OwnerInfo;
+use App\Models\Livelihood;
 use App\Models\WalkInAdss;
+use Illuminate\Support\Arr;
+use App\Models\RegisterBoat;
 use Illuminate\Http\Request;
 use App\Models\WalkInBoatOwner;
-use App\Models\WalkInBoatRegistration;
 use App\Models\WalkInLivelihood;
+use App\Models\WalkInBoatRegistration;
 
 class WalkInController extends Controller
 {
@@ -46,7 +50,7 @@ class WalkInController extends Controller
         $ownerInfo = $id;
 
         if ($id) {
-            $ownerInfo = WalkInBoatOwner::find($id);
+            $ownerInfo = OwnerInfo::find($id);
         }
 
         return view('modules.walk-in.create', compact('route', 'salutations', 'suffixes', 'genders', 'civil_status', 'educ_bcc', 'ownerInfo'));
@@ -106,10 +110,10 @@ class WalkInController extends Controller
 
         $ownerInfo = $request->input('ownerInfo');
 
-        $walkInOwner = WalkInBoatOwner::where('id', $ownerInfo)->first();
+        $walkInOwner = OwnerInfo::where('id', $ownerInfo)->first();
 
         if (!$walkInOwner) {
-            $walkInOwner = WalkInBoatOwner::create([
+            $walkInOwner = OwnerInfo::create([
                 'salutation' => $validated['salutation'],
                 'last_name' => $validated['last_name'],
                 'first_name' => $validated['first_name'],
@@ -131,6 +135,7 @@ class WalkInController extends Controller
                 'emRelationship' => $validated['emRelationship'],
                 'emContact_no' => $validated['emContact_no'],
                 'emAddress' => $validated['emAddress'],
+                'type' => 'walk-in',
             ]);
         } else {
             $walkInOwner->update([
@@ -168,7 +173,7 @@ class WalkInController extends Controller
         $source_of_income = $this->source_of_income;
         $owner_livelihood = $request->session()->get('walkInOwner');
 
-        $livelihood = WalkInLivelihood::where('walkin_owner_id', $owner_livelihood)->first();
+        $livelihood = Livelihood::where('owner_info_id', $owner_livelihood)->first();
 
 
         return view('modules.walk-in.livelihood', compact('source_of_income', 'livelihood', 'owner_livelihood'));
@@ -200,12 +205,12 @@ class WalkInController extends Controller
         $owner_livelihood = $request->session()->get('walkInOwner');
 
 
-        $livelihood = WalkInLivelihood::where('walkin_owner_id', $owner_livelihood)->first();
+        $livelihood = Livelihood::where('owner_info_id', $owner_livelihood)->first();
 
         if (!$livelihood) {
-            $livelihood = new WalkInLivelihood();
+            $livelihood = new Livelihood();
 
-            $livelihood->walkin_owner_id = $owner_livelihood;
+            $livelihood->owner_info_id = $owner_livelihood;
             $livelihood->source_of_income = serialize($source_of_income);
             $livelihood->gear_used = $validated['gear_used'];
             $livelihood->culture_method = $validated['culture_method'];
@@ -244,7 +249,7 @@ class WalkInController extends Controller
     public function walkInAdss(Request $request)
     {
         $owner_adss = $request->session()->get('walkInOwner');
-        $adss = WalkInAdss::where('walkin_owner_adss_id', $owner_adss)->first();
+        $adss = Adss::where('owner_info_id', $owner_adss)->first();
         $yes_no = ['Yes', 'No'];
 
         return view('modules.walk-in.adss', compact('yes_no', 'adss', 'owner_adss'));
@@ -274,15 +279,15 @@ class WalkInController extends Controller
 
 
         $owner_adss = $request->session()->get('walkInOwner');
-        $adss = WalkInAdss::where('walkin_owner_adss_id', $owner_adss)->first();
+        $adss = Adss::where('owner_info_id', $owner_adss)->first();
 
         if (!$adss) {
-            $adss = new WalkInAdss();
+            $adss = new Adss();
 
-            $adss->walkin_owner_adss_id = $validated['walkin_owner_adss_id'];
-            $adss->name_spouse = $validated['name_spouse'];
+            $adss->owner_info_id = $validated['walkin_owner_adss_id'];
+            $adss->spouse_name = $validated['name_spouse'];
             $adss->number_dependent = $validated['number_dependent'];
-            $adss->name_employer = $validated['name_employer'];
+            $adss->employer_name = $validated['name_employer'];
             $adss->desired_coverage = $validated['desired_coverage'];
             $adss->premium = $validated['premium'];
             $adss->cover_from = $validated['cover_from'];
@@ -300,9 +305,9 @@ class WalkInController extends Controller
             $adss->save();
         } else {
             $adss->update([
-                $adss->name_spouse = $validated['name_spouse'],
+                $adss->spouse_name = $validated['name_spouse'],
                 $adss->number_dependent = $validated['number_dependent'],
-                $adss->name_employer = $validated['name_employer'],
+                $adss->employer_name = $validated['name_employer'],
                 $adss->desired_coverage = $validated['desired_coverage'],
                 $adss->premium = $validated['premium'],
                 $adss->cover_from = $validated['cover_from'],
@@ -318,35 +323,29 @@ class WalkInController extends Controller
                 $adss->pcic_address = $validated['pcic_address'],
             ]);
         }
-        return redirect()->route('walk-in.index')->with('success', 'Owner Information successfully saved!');
+        return redirect()->route('owner-info.registered-owners')->with('success', 'Walk-In Information successfully saved!');
     }
 
-    public function destroy($id)
+    // public function registeredBoat(RegisterBoat $walkin)
+    // {
+    //     $walkin_reg_boat = RegisterBoat::where('owner_info_id', $walkin->id)
+    //         ->orderBy('registration_date', 'asc')
+    //         ->get();
+
+    //     return view('modules.walk-in.registered-boat.index', compact('walkin', 'walkin_reg_boat'));
+    // }
+
+    public function createRegBoat(RegisterBoat $registerboat, $walkin)
     {
-        $walkinOwner = WalkInBoatOwner::find($id);
-        $walkinOwner->delete();
+        // dd($walkin);
 
-        return redirect()->route('walk-in.index')->with('success', 'Walk In Owner deleted successfully!');
-    }
-
-    public function registeredBoat(WalkInBoatOwner $walkin)
-    {
-        $walkin_reg_boat = WalkInBoatRegistration::where('walkin_owner_id', $walkin->id)
-            ->orderBy('registration_date', 'asc')
-            ->get();
-
-        return view('modules.walk-in.registered-boat.index', compact('walkin', 'walkin_reg_boat'));
-    }
-
-    public function createRegBoat(WalkInBoatOwner $walkin)
-    {
-        $reg_nos = WalkInBoatRegistration::all();
+        $reg_nos = RegisterBoat::all();
         $reg_no = $reg_nos->max('registration_no') ?? 0;
         $latestregNo = intval(substr($reg_no, 8)) + 1;
         $addSeries = sprintf("%04d", $latestregNo);
         $latestregNo = date('Y-m-') . $addSeries;
 
-        return view('modules.walk-in.registered-boat.create', compact('walkin', 'latestregNo'));
+        return view('modules.walk-in.registered-boat.create', compact('registerboat', 'walkin', 'latestregNo'));
     }
 
     protected function messageRegBoatWalkin()
@@ -383,6 +382,7 @@ class WalkInController extends Controller
     public function walkInRegBoatStore(Request $request)
     {
         $validated = $request->validate([
+            'owner_id' => 'required',
             'registration_no' => 'required',
             'registration_date' => 'required',
             'vessel_name' => ['required', 'unique:boats,vessel_name'],
@@ -424,15 +424,27 @@ class WalkInController extends Controller
         }
 
         $owner_id = $request->input('owner_id');
+        // 
+        $boatReg = RegisterBoat::where('registration_no', $validated['registration_no'])->first();
 
-        $owners = WalkInBoatRegistration::create([
-            'walkin_owner_id' => $owner_id,
-            'registration_no' => $validated['registration_no'],
-            'registration_date' => $validated['registration_date'],
-            'registration_type' => 'new',
+        if ($boatReg) {
+            $boatReg->update(Arr::only($validated, ['registration_date']));
+        } else {
+            $boatReg = RegisterBoat::create([
+                'owner_info_id' => $owner_id,
+                'registration_no' => $validated['registration_no'],
+                'registration_date' => $validated['registration_date'],
+                'registration_type' => 'new',
+                'status' => 'approved',
+                'approved_at' => now(),
+            ]);
+        }
+
+        $boatReg->boat()->create([
+            'owner_id' => $owner_id,
             'vessel_name' => $validated['vessel_name'],
             'image' => $imageName,
-            'vessel_type' => $validated['vessel_type'],
+            'boat_type' => $validated['vessel_type'],
             'home_port' => $validated['home_port'],
             'place_built' => $validated['place_built'],
             'year_built' => $validated['year_built'],
@@ -452,7 +464,7 @@ class WalkInController extends Controller
             'net_tonnage' => $validated['net_tonnage'],
         ]);
 
-        return redirect()->route('walkin-regboat.index', $owner_id)->with('success', 'Walk In Boat Registration Succesfully!');
+        return redirect()->route('owner-info.registered-owners', $owner_id)->with('success', 'Walk In Boat Registration Succesfully!');
     }
 
     public function walkInRegBoatView(WalkInBoatRegistration $walkin)

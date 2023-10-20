@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mt-5">
-                        <form action="{{ route('walk-in.adssStore') }}" method="post">
+                        <form action="{{ route('walk-in.adssStore') }}" method="post" autocomplete="off">
                             @csrf
                             <div class="card-body">
                                 <div class="row border border-secondary">

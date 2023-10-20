@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-outline card-warning mt-5">
-                        <form action="{{ route('owner-info.adss-store') }}" method="post">
+                        <form action="{{ route('owner-info.adss-store') }}" method="post" autocomplete="off">
                             @csrf
                             <div class="card-body mt-0">
                                 <div class="row border border-secondary">
