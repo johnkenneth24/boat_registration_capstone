@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('owner_infos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->references('id')->on('users')->onDelete('cascade');
             $table->string('salutation');
             $table->string('first_name');
             $table->string('last_name');
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('age');
             $table->string('birthplace');
             $table->string('educ_background');
+            $table->string('other_educational_background')->nullable();
             $table->integer('children_count')->nullable();
             $table->string('emContact_person')->nullable();
             $table->string('emRelationship')->nullable();

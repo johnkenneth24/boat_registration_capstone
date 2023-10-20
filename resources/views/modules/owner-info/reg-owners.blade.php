@@ -12,16 +12,22 @@
                                 <h4>Registered Owners</h4>
                             </div>
                             <div class="card-tools d-flex justify-content-end mb-0">
-                                <div class="d-sm-none d-md-block">
+                                <div class="d-none d-md-block">
                                     <form action="{{ route('owner-info.registered-owners') }}" method="get">
                                         @csrf
                                         <div class="form-group mb-0">
-                                            <input class="form-control form-control-md d-sm-none d-md-block mr-3 mb-0"
+                                            <input class="form-control form-control-md d-none d-md-block mr-3 mb-0"
                                                 type="search" placeholder="Search..." name="search" style="width: 300px;"
-                                                autofocus>
+                                                autocomplete="off" autofocus>
                                         </div>
                                     </form>
                                 </div>
+                                <div>
+                                    <a href="{{ route('walk-in.create') }}" class="btn btn-success mb-1"> <span><i
+                                                class="fa fa-plus" aria-hidden="true"></i></span>
+                                        Create Registration (Walk-in)</a>
+                                </div>
+
                             </div>
                         </div>
                         <div class="card-body p-0">
