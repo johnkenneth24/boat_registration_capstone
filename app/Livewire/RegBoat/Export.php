@@ -13,12 +13,14 @@ class Export extends Component
     public $path_export_afmnbufi = 'docx/AFMNMBUFI.docx';
     public $rBoats;
 
+    public $certificate_number = null;
+
     public function export()
     {
         $path = storage_path($this->path_export_cert);
         $templateProcessor = new TemplateProcessor($path);
 
-        $templateProcessor->setValue('cert_num', '0001-2023');
+        $templateProcessor->setValue('cert_num', $this->rBoats->certification->certificate_no);
         $templateProcessor->setValue('reg_no', $this->rBoats->registration_no);
         $templateProcessor->setValue('vessel_name', $this->rBoats->boat->vessel_name);
         $templateProcessor->setValue('boat_type', $this->rBoats->boat->boat_type);
@@ -82,10 +84,10 @@ class Export extends Component
 
         $templateProcessor->setValue('reg_no', $this->rBoats->registration_no);
 
-        $templateProcessor->setValue('beneficiary', $this->rBoats->ownerInfo->adss->primary_beneficiary);
-        $templateProcessor->setValue('from', $this->rBoats->ownerInfo->adss->cover_from->format('F d, Y'));
-        $templateProcessor->setValue('to', $this->rBoats->ownerInfo->adss->cover_to->format('F d, Y'));
-        $templateProcessor->setValue('amount', $this->rBoats->ownerInfo->adss->desired_coverage);
+        $templateProcessor->setValue('beneficiary', $this->rBoats->ownerInfo?->adss?->primary_beneficiary ?? '');
+        $templateProcessor->setValue('from', $this->rBoats->ownerInfo?->adss?->cover_from?->format('F d, Y') ?? '');
+        $templateProcessor->setValue('to', $this->rBoats->ownerInfo?->adss?->cover_to?->format('F d, Y') ?? '');
+        $templateProcessor->setValue('amount', $this->rBoats->ownerInfo?->adss?->desired_coverage ?? '');
 
         $templateProcessor->setValue('a', $this->rBoats?->boat?->boat_type == 'Non-Motorized' ? '☑' : '☐');
         $templateProcessor->setValue('b', $this->rBoats?->boat?->boat_type == 'Motorized' ? '☑' : '☐');

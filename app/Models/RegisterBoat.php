@@ -32,4 +32,9 @@ class RegisterBoat extends Model
     {
         return $this->hasOne(Boat::class);
     }
+
+    public function certification()
+    {
+        return $this->hasOne(Certification::class);
+    }
 }

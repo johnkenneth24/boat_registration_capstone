@@ -9,6 +9,7 @@ use App\Models\WalkInAdss;
 use Illuminate\Support\Arr;
 use App\Models\RegisterBoat;
 use Illuminate\Http\Request;
+use App\Models\Certification;
 use App\Models\WalkInBoatOwner;
 use App\Models\WalkInLivelihood;
 use App\Models\WalkInBoatRegistration;
@@ -423,21 +424,36 @@ class WalkInController extends Controller
             $image->move(public_path('images/user-upload'), $imageName);
         }
 
+        // get max certification_no from Certification model
+        $cert = Certification::all();
+        $maxCert = $cert->max('certificate_no') ?? 0;
+        $latestCertNo = intval(substr($maxCert, 8)) + 1;
+        $addSeries = sprintf("%04d", $latestCertNo);
+        $latestCertNo = date('Y-') . $addSeries;
+
+
         $owner_id = $request->input('owner_id');
         // 
         $boatReg = RegisterBoat::where('registration_no', $validated['registration_no'])->first();
 
-        if ($boatReg) {
-            $boatReg->update(Arr::only($validated, ['registration_date']));
+        if (!$boatReg) {
+            $boatReg = new RegisterBoat();
+            $boatReg->owner_info_id = $owner_id;
+            $boatReg->registration_no = $validated['registration_no'];
+            $boatReg->registration_date = $validated['registration_date'];
+            $boatReg->registration_type = 'new';
+            $boatReg->status = 'registered';
+            $boatReg->approved_at = now();
+            $boatReg->save();
+
+            $certification = new Certification();
+            $certification->certificate_no = $latestCertNo;
+            $certification->register_boat_id = $boatReg->id;
+            $certification->save();
         } else {
-            $boatReg = RegisterBoat::create([
-                'owner_info_id' => $owner_id,
-                'registration_no' => $validated['registration_no'],
-                'registration_date' => $validated['registration_date'],
-                'registration_type' => 'new',
-                'status' => 'approved',
-                'approved_at' => now(),
-            ]);
+            $boatReg->update(Arr::only($validated, [
+                'registration_date',
+            ]));
         }
 
         $boatReg->boat()->create([

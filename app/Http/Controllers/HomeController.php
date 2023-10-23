@@ -18,13 +18,23 @@ class HomeController extends Controller
     {
 
         $rBoats = RegisterBoat::all();
-        $registeredCount = $rBoats->where('status', 'registered')->count();
+        $registeredCount = $rBoats->where('status', 'registered')->filter(function ($boat) {
+            $approvalDate = \Carbon\Carbon::parse($boat->approved_at);
+            $currentYear = now()->year;
+            return $approvalDate->year >= $currentYear && $approvalDate->endOfYear() >= now();
+        })->count();
+
         $pendingCount = $rBoats->where('status', 'pending')->count();
         $renewalCount = $rBoats->where('status', 'renewal')->count();
 
-        $expiredCount = $rBoats->where('status', 'registered')->where('approved_at', '<', now()->endOfYear())->count();
+        $expiredCount = $rBoats->where('status', 'registered')->filter(function ($boat) {
+            $approvalDate = \Carbon\Carbon::parse($boat->approved_at);
+            $currentYear = now()->year;
+            return $approvalDate->year < $currentYear && $approvalDate->endOfYear() < now();
+        })->count();
 
 
+        // dd($rBoats);
         // dd($expiredCount);
 
         $user = auth()->user()->roles->first()->name;

@@ -45,11 +45,10 @@
                                             <div class="icon">
                                                 <i class="fas fa-sync-alt" aria-hidden="true"></i>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="{{ route('reg-boat.index') }}" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-3 col-6">
                                         <div class="small-box bg-danger">
                                             <div class="inner">
@@ -63,7 +62,6 @@
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-3 col-6">
                                         <div class="small-box bg-success">
                                             <div class="inner">
@@ -77,7 +75,6 @@
                                                 info <i class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-3 col-6">
                                         <div class="small-box bg-warning">
                                             <div class="inner">
@@ -87,7 +84,7 @@
                                             <div class="icon">
                                                 <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="{{ route('reg-boat.index') }}" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
