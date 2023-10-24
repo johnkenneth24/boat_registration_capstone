@@ -55,7 +55,7 @@
             <li class="nav-item">
                 <a href="#"
                     class="nav-link pb-2 {{ request()->routeIs(['reg-boat.index', 'reg-boat.pending']) ? 'nav-item-active' : '' }}">
-                    <i class="nav-icon fa fa-file-alt" aria-hidden="true"></i>
+                    <i class="nav-icon fa fa-ship" aria-hidden="true"></i>
                     <p>Boat Registration<i class="right fas fa-angle-right"></i></p>
                 </a>
                 <ul class="nav-treeview">
@@ -78,6 +78,12 @@
                 </ul>
             </li>
             @unlessrole('user')
+                <li class="nav-item {{ request()->routeIs('reg-boat.reports') ? 'nav-item-active' : '' }}">
+                    <a href="{{ route('reg-boat.reports') }}" class="nav-link">
+                        <i class=" nav-icon fa fa-file" aria-hidden="true"></i>
+                        <p>Reports</p>
+                    </a>
+                </li>
                 <li class="nav-item {{ request()->routeIs('reg-boat.archived') ? 'nav-item-active' : '' }}">
                     <a href="{{ route('reg-boat.archived') }}" class="nav-link">
                         <i class=" nav-icon fa fa-trash" aria-hidden="true"></i>

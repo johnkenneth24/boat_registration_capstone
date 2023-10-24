@@ -105,6 +105,13 @@ class RegisterBoatController extends Controller
         return view('modules.register-boat.archived', compact('archivedBoats'));
     }
 
+    public function reports()
+    {
+        $reports = RegisterBoat::paginate(10);
+
+        return view('modules.reports.index', compact('reports'));
+    }
+
     public function create()
     {
         $reg_nos = RegisterBoat::all();
