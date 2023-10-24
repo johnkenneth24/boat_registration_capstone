@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Boat;
 use App\Models\OwnerInfo;
+use Illuminate\Support\Arr;
 use App\Models\RegisterBoat;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
+use App\Models\Certification;
 
 class RegisterBoatController extends Controller
 {
@@ -102,6 +103,13 @@ class RegisterBoatController extends Controller
 
 
         return view('modules.register-boat.archived', compact('archivedBoats'));
+    }
+
+    public function reports()
+    {
+        $reports = RegisterBoat::paginate(10);
+
+        return view('modules.reports.index', compact('reports'));
     }
 
     public function create()
@@ -348,8 +356,26 @@ class RegisterBoatController extends Controller
         $boatReg->approved_at = now();
         $boatReg->save();
 
+        // Check if a Certification with the matching register_boat_id exists
+        $certification = Certification::firstOrNew(['register_boat_id' => $boatReg->id]);
+
+        // If it doesn't exist, create a new Certification
+        if (!$certification->exists) {
+            // get max certification_no from Certification model
+            $cert = Certification::all();
+            $maxCert = $cert->max('certificate_no') ?? 0;
+            $latestCertNo = intval(substr($maxCert, 8)) + 1;
+            $addSeries = sprintf("%04d", $latestCertNo);
+            $latestCertNo = date('Y-') . $addSeries;
+
+            $certification->certificate_no = $latestCertNo;
+            $certification->register_boat_id = $boatReg->id;
+            $certification->save();
+        }
+
         return redirect()->route('reg-boat.pending')->with('success', 'Boat Registration successfully approved!');
     }
+
 
     public function disapprove($id)
     {

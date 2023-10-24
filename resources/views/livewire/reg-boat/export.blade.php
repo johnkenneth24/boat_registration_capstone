@@ -3,7 +3,7 @@
         EXPORT
     </button>
     <div class="dropdown-menu">
-        <a class="dropdown-item" href="#" wire:click="export" wire:loading.attr="disabled">Export MFR</a>
+        <a class="dropdown-item" href="#" wire:click="export" wire:loading.attr="disabled">Export CERTIFICATE</a>
         <a class="dropdown-item" href="#" wire:click="exportPcic" wire:loading.attr="disabled">Export PCIC</a>
         {{-- <a class="dropdown-item" href="#" wire:click="exportAfn" wire:loading.attr="disabled">Export Afn</a> --}}
     </div>

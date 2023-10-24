@@ -104,6 +104,10 @@
                                             <td class="align-middle d-flex justify-content-end gap-2">
                                                 {{-- @unlessrole('user') --}}
                                                 @if ($rBoats->status == 'registered')
+                                                    {{-- @if (\Carbon\Carbon::parse($rBoats->approved_at)->endOfYear() < \Carbon\Carbon::now())
+                                                        <a href="{{ route('reg-boat.show',$rBoats->id) }}"
+                                                            class="btn btn-sm btn-dark">RENEW</a>
+                                                    @endif --}}
                                                     @livewire('reg-boat.export', ['rBoats' => $rBoats], key($rBoats->id))
                                                 @endif
                                                 {{-- @endunlessrole --}}

@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\AnnouncementsController;
-use App\Http\Controllers\OwnerInfoController;
-use App\Http\Controllers\RegisterBoatController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WalkInController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WalkInController;
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\OwnerInfoController;
+use App\Http\Controllers\RegisterBoatController;
+use App\Http\Controllers\AnnouncementsController;
 
 // on open of site
 Route::redirect('/', '/login');
@@ -17,6 +18,7 @@ Auth::routes();
 // Routes protected by the 'auth' middleware
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // Route::get('/reports', [App\Http\Controllers\ReportsController::class, 'index'])->name('reports');
 
     Route::controller(UserController::class)->prefix('users')->group(function () {
         Route::middleware(['role:admin'])->group(function () {
@@ -49,6 +51,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/disapprove/{id}', 'disapprove')->name('reg-boat.disapprove');
             Route::get('/view/{id}', 'view')->name('reg-boat.view');
             Route::get('/archived', 'archived')->name('reg-boat.archived');
+            Route::get('/reports', 'reports')->name('reg-boat.reports');
         });
     });
 
@@ -61,6 +64,10 @@ Route::middleware('auth')->group(function () {
         Route::put('update/{announcement}', 'update')->name('announcement.update');
         Route::delete('destroy/{announcement}', 'destroy')->name('announcement.destroy');
     })->middleware(['role:admin', 'role:staff']);
+
+    // Route::controller(ReportsController::class)->prefix('reports')->group(function () {
+    //     Route::get('/', 'index')->name('reports.index');
+    // })->middleware(['role:admin', 'role:staff']);
 
     Route::controller(OwnerInfoController::class)->prefix('owner-info')->group(function () {
         Route::get('/', 'index')->name('owner-info.index');
