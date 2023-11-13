@@ -138,7 +138,7 @@
                                         <label>Contact No. <span class="text-danger">*</span></label>
                                         <input type="text" name="contact_no"
                                             class="form-control form-control-sm @error('contact_no') is-invalid @enderror"
-                                            value="{{ $ownerInfo?->contact_no ?: old('contact_no') }}"
+                                            value="{{ auth()->user()->contact_no ?: old('contact_no') }}"
                                             placeholder="Enter Contact No." required pattern="[0-9]{11}"
                                             title="Please enter a 11-digit numeric contact number (09xxxxxxxxx)">
                                         @error('contact_no')
@@ -150,7 +150,7 @@
                                     <div class="form-group col-md-3">
                                         <label>Birthdate <span class="text-danger">*</span></label>
                                         <input type="date" name="birthdate" class="form-control form-control-sm bdate"
-                                            required
+                                            max="date('Y-m-d')" required
                                             value="{{ $ownerInfo?->birthdate->format('Y-m-d') ?: old('birthdate') }}">
                                     </div>
                                     <div class="form-group col-md-1">

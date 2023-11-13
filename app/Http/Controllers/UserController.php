@@ -16,8 +16,7 @@ class UserController extends Controller
             $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('id_number', 'like', '%' . $search . '%')
                 ->orWhere('username', 'like', '%' . $search . '%')
-                ->orWhere('contact_no', 'like', '%' . $search . '%')
-                ->orWhere('email', 'like', '%' . $search . '%');
+                ->orWhere('contact_no', 'like', '%' . $search . '%');
         })->orderBy('id_number', 'asc');
 
         $users = $query->paginate(10);
@@ -43,8 +42,7 @@ class UserController extends Controller
             'name.required' => 'The name field is required.',
             'username.required' => 'The username field is required.',
             'username.unique' => 'The username has already been taken.',
-            'email.required' => 'The email field is required.',
-            'email.unique' => 'The email has already been taken.',
+            'contact_no.unique' => 'The contact number has already been taken.',
             'contact_no.required' => 'The contact number field is required.',
             'contact_no.min' => 'The contact number must be 11 digits.',
             'contact_no.max' => 'The contact number must be 11 digits.',
@@ -61,8 +59,8 @@ class UserController extends Controller
             'id_number' => 'required|unique:users',
             'name' => 'required',
             'username' => 'required|unique:users',
-            'email' => 'required|unique:users',
-            'contact_no' => ['required', 'decimal', 'regex:/^(09\d{9})|(0\d{10})$/'],
+            // 'email' => 'required|unique:users',
+            'contact_no' => ['required', 'decimal', 'regex:/^(09\d{9})|(0\d{10})$/', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
         ], $this->messages());
 
@@ -70,7 +68,7 @@ class UserController extends Controller
             'id_number' => $validated['id_number'],
             'name' => $validated['name'],
             'username' => $validated['username'],
-            'email' => $validated['email'],
+            // 'email' => $validated['email'],
             'contact_no' => $validated['contact_no'],
             'password' => Hash::make($validated['password']),
         ])->assignRole('staff');
@@ -91,11 +89,12 @@ class UserController extends Controller
             'id_number' => 'required|unique:users,id_number,' . $id,
             'name' => 'required',
             'username' => 'required|unique:users,username,' . $id,
-            'email' => 'required|unique:users,email,' . $id,
+            // 'email' => 'required|unique:users,email,' . $id,
             'contact_no' => [
                 'required',
                 'string',
                 'regex:/^(09\d{9})|(0\d{10})$/',
+                'unique:users,contact_no,' . $id,
             ],
             'password' => 'required|min:8|confirmed',
         ], $this->messages()); // validates the request from the input fields
@@ -107,7 +106,7 @@ class UserController extends Controller
         $user->id_number = $validated['id_number'];
         $user->name = $validated['name'];
         $user->username = $validated['username'];
-        $user->email = $validated['email'];
+        // $user->email = $validated['email'];
         $user->contact_no = $validated['contact_no'];
         $user->password = bcrypt($validated['password']);
         // $user->role = $validated['role'];
@@ -149,7 +148,7 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users,email,' . auth()->user()->id,
+            // 'email' => 'required|unique:users,email,' . auth()->user()->id,
             'contact_no' => ['required', 'min:11', 'regex:/^09\d{9}$/'],
             'username' => 'required|unique:users,username,' . auth()->user()->id,
         ], $this->messages());
@@ -158,7 +157,7 @@ class UserController extends Controller
 
         $user->update([
             'name' => $validated['name'],
-            'email' => $validated['email'],
+            // 'email' => $validated['email'],
             'contact_no' => $validated['contact_no'],
             'username' => $validated['username'],
         ]);

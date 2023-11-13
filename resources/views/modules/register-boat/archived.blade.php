@@ -42,25 +42,33 @@
                                 <tbody>
                                     @forelse ($archivedBoats as $arcBoats)
                                         <tr class="text-center align-middle">
-                                            <td>{{ $arcBoats->registration_no }}</td>
+                                            <td>{{ $arcBoats?->registration_no ?? '' }}</td>
                                             @role('staff')
                                                 <td>{{ $arcBoats?->ownerInfo?->fullname ?? '' }}</td>
                                             @endrole
 
-                                            <td>{{ date('M. d, Y', strtotime($arcBoats->registration_date)) }}</td>
-                                            <td>{{ $arcBoats->status }}</td>
+                                            <td>
+                                                @isset($arcBoats->registration_date)
+                                                    {{ date('M. d, Y', strtotime($arcBoats->registration_date)) }}
+                                                @endisset
+                                            </td>
+                                            <td>{{ $arcBoats?->status ?? '' }}</td>
                                             <td class="">
                                                 <a href="{{ route('reg-boat.view', $arcBoats->id) }}"
                                                     class="btn btn-sm btn-primary">View details</a>
-                                                {{-- <a href="{{ route('reg-boat.approve', $arcBoats->id) }}"
-                                                    class="btn btn-sm btn-success">Approve</a>
-                                                <a href="{{ route('reg-boat.disapprove', $arcBoats->id) }}"
-                                                    class="btn btn-sm btn-danger">Disapprove</a> --}}
+                                                {{-- undo disapproval --}}
+                                                @if ($arcBoats->status == 'disapproved')
+                                                    <a href="{{ route('reg-boat.undo', $arcBoats->id) }}"
+                                                        class="btn btn-sm btn-warning">
+                                                        Undo Disapproval
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center">No data available</td>
+                                            <td colspan="5" class="text-center">No data available
+                                            </td>
                                         </tr>
                                     @endforelse
                                 </tbody>
