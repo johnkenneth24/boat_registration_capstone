@@ -89,7 +89,7 @@
                                                             {{ ucFirst($rBoats->status) }}
                                                         </span>
                                                     @endif
-                                                @elseif ($rBoats->status == 'pending')
+                                                @elseif ($rBoats->status == 'pending' || $rBoats->status == 'pending for renewal')
                                                     <span class="badge rounded-2 badge-warning px-3 py-2 opacity-75"
                                                         style="font-size: 0.8rem;">
                                                         {{ ucFirst($rBoats->status) }}
@@ -104,11 +104,12 @@
                                             <td class="align-middle d-flex justify-content-end gap-2">
                                                 {{-- @unlessrole('user') --}}
                                                 @if ($rBoats->status == 'registered')
-                                                    {{-- @if (\Carbon\Carbon::parse($rBoats->approved_at)->endOfYear() < \Carbon\Carbon::now())
-                                                        <a href="{{ route('reg-boat.show',$rBoats->id) }}"
-                                                            class="btn btn-sm btn-dark">RENEW</a>
-                                                    @endif --}}
-                                                    @livewire('reg-boat.export', ['rBoats' => $rBoats], key($rBoats->id))
+                                                    @if (\Carbon\Carbon::parse($rBoats->approved_at)->endOfYear() < \Carbon\Carbon::now())
+                                                        <a href="{{ route('reg-boat.renewal', $rBoats->id) }}"
+                                                            class="btn btn-sm btn-warning">RENEW</a>
+                                                    @else
+                                                        @livewire('reg-boat.export', ['rBoats' => $rBoats], key($rBoats->id))
+                                                    @endif
                                                 @endif
                                                 {{-- @endunlessrole --}}
                                                 {{-- <a href="{{ route('reg-boat.process') }}"

@@ -29,11 +29,10 @@ class DatabaseSeeder extends Seeder
             Role::create(['name' => 'user']);
         }
 
-        if (!User::where('email', 'admin@example.com')->first()) {
+        if (!User::where('username', 'admin')->first()) {
             $user = User::create([
                 'name' => 'Municipal Agriculture Office',
                 'username' => 'admin',
-                'email' => 'admin@gmail.com',
                 'password' => Hash::make('admin1234'),
                 'id_number' => 'BRIMS-001',
                 'contact_no' => '09123456789',
@@ -41,17 +40,15 @@ class DatabaseSeeder extends Seeder
             $user->assignRole('admin');
         }
 
-        if (!User::where('email', 'staff@example.com')->first()) {
+        if (!User::where('username', 'staff')->first()) {
             $user = User::create([
                 'name' => 'Staff',
                 'username' => 'staff',
-                'email' => 'staff@gmail.com',
                 'password' => Hash::make('staff1234'),
                 'id_number' => 'BRIMS-002',
                 'contact_no' => '09123456790',
             ]);
             $user->assignRole('staff');
         }
-
     }
 }

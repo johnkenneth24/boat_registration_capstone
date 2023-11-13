@@ -44,12 +44,13 @@
                         </div>
                         <div class="form-group mb-2 mt-4">
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                <input type="email" name="email"
-                                    class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
-                                    autocomplete="email" required placeholder="Email">
+                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                <input type="text" name="contact_no" pattern="[0-9]{11}"
+                                    class="form-control @error('contact_no') is-invalid @enderror"
+                                    value="{{ old('contact_no') }}" autocomplete="contact_no" required title="09xxxxxxxxx"
+                                    placeholder="09xxxxxxxxx">
                             </div>
-                            @error('email')
+                            @error('contact_no')
                                 <div class="invalid-feedback" style="display: inline-block !important;">
                                     {{ $message }}
                                 </div>
