@@ -139,8 +139,8 @@
                                         <input type="text" name="contact_no"
                                             class="form-control form-control-sm @error('contact_no') is-invalid @enderror"
                                             value="{{ $ownerInfo?->contact_no ?: old('contact_no') }}"
-                                            placeholder="Enter Contact No." required pattern="[0-9]{11}"
-                                            title="Please enter a 11-digit numeric contact number (09xxxxxxxxx)">
+                                            placeholder="639xxxxxxxxx" required pattern="[0-9]{12}"
+                                            title="Please enter a 12-digit numeric contact number (639xxxxxxxxx)">
                                         @error('contact_no')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}
@@ -244,8 +244,8 @@
                                         <input type="text" name="emContact_no"
                                             class="form-control form-control-sm @error('emContact_no') is-invalid @enderror"
                                             value="{{ $ownerInfo?->emContact_no ?: old('emContact_no') }}"
-                                            placeholder="Contact No. of emergency contact" pattern="[0-9]{11}"
-                                            title="Please enter a 11-digit numeric contact number  (09xxxxxxxxx)">
+                                            placeholder="639xxxxxxxxx" required pattern="[0-9]{12}"
+                                            title="Please enter a 12-digit numeric contact number (639xxxxxxxxx)">
                                         @error('emContact_no')
                                             <div class="invalid-feedback" style="display: inline-block !important;">
                                                 {{ $message }}

@@ -32,6 +32,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    
     public function ownerInfo()
     {
         return $this->hasOne(OwnerInfo::class);

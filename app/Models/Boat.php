@@ -36,6 +36,8 @@ class Boat extends Model
         'materials',
     ];
 
+    
+
     public function owner()
     {
         return $this->belongsTo(OwnerInfo::class);
