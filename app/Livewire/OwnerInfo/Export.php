@@ -28,6 +28,7 @@ class Export extends Component
             $templateProcessor->setValue(chr(97 + $letter), $isChecked . ' ' . $salutation . ' ');
         }
 
+
         $templateProcessor->setValue('lastname', $this->ownerInfo->last_name);
         $templateProcessor->setValue('firstname', $this->ownerInfo->first_name);
         $templateProcessor->setValue('middlename', $this->ownerInfo->middle_name ?? '');
@@ -107,17 +108,15 @@ class Export extends Component
         $templateProcessor->setValue('culture_used_os', $this->ownerInfo->livelihood->culture_method_os);
         $templateProcessor->setValue('specify_os', $this->ownerInfo->livelihood->specify_os);
 
-
-
-
         $templateProcessor->setValue('fullname', $this->ownerInfo->fullname);
         $templateProcessor->setValue('date_accomplished', now()->format('F d, Y'));
 
-
-
-
         $filename = 'MFR-' . $this->ownerInfo->fullname;
         $tempPath = 'reports/' . $filename . '.docx';
+
+        if (!file_exists(public_path('reports'))) {
+            mkdir(public_path('reports'), 0777, true);
+        }
 
         $templateProcessor->saveAs($tempPath);
         return response()->download(public_path($tempPath));

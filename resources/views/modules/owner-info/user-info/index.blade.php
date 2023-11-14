@@ -96,7 +96,8 @@
                                                     <label class="fw-bold  mb-0">Contact
                                                         No:</label>
                                                     <input type="text" class="form-control form-control-sm my-0 pt-0"
-                                                        readonly value="{{ $ownerInfo?->contact_no ?? '' }}">
+                                                        readonly
+                                                        value="{{ $ownerInfo?->contact_no ?? auth()->user()->contact_no }}">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label class="fw-bold  mb-0">Marital

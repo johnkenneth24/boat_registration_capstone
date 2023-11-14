@@ -8,7 +8,11 @@ use Illuminate\Support\Arr;
 use App\Models\RegisterBoat;
 use Illuminate\Http\Request;
 use App\Models\Certification;
+
 use App\Notifications\BoatRegistered;
+
+use Illuminate\Validation\Rule;
+
 
 class RegisterBoatController extends Controller
 {
@@ -53,7 +57,7 @@ class RegisterBoatController extends Controller
     {
         $search = $request->input('search');
 
-        $query = RegisterBoat::where('status', 'pending')
+        $query = RegisterBoat::whereIn('status', ['pending', 'pending for renewal'])
             ->with(['ownerInfo', 'boat'])
             ->where(function ($query) use ($search) {
                 $query->where('registration_no', 'like', '%' . $search . '%')
@@ -81,7 +85,7 @@ class RegisterBoatController extends Controller
 
         $query = RegisterBoat::withTrashed()
             ->where(function ($query) use ($search) {
-                $query->where('status', 'disapprove')
+                $query->where('status', 'disapproved')
                     ->orWhere('deleted_at', '<>', null); // archived
             })
             ->with(['ownerInfo', 'boat'])
@@ -392,5 +396,116 @@ class RegisterBoatController extends Controller
         $boatReg->save();
 
         return redirect()->route('reg-boat.pending')->with('success', 'Boat Registration successfully disapproved!');
+    }
+
+    public function undo($id)
+    {
+        $boatReg = RegisterBoat::find($id);
+        $boatReg->status = 'pending';
+        $boatReg->approved_at = null;
+        $boatReg->save();
+
+        return redirect()->route('reg-boat.archived')->with('success', 'Boat Registration successfully restored!');
+    }
+
+
+    public function renewal(Request $request, $id)
+    {
+
+        $boatReg = RegisterBoat::with('boat')->find($id);
+
+        // dd($boatReg);
+
+        return view('modules.register-boat.renewal', compact('boatReg'));
+    }
+
+    public function renewalUpdate(Request $request, $id)
+    {
+
+        $boatReg = RegisterBoat::with('boat')->find($id);
+
+        $validated = $request->validate([
+            'owner_id' => 'nullable',
+            'registration_no' => 'required',
+            'registration_date' => 'required',
+            'vessel_name' => [
+                'required',
+                Rule::unique('boats', 'vessel_name')->ignore($boatReg->boat->id),
+            ],
+            'vessel_type' => ['required'],
+            'home_port' => ['required'],
+            'place_built' => ['required'],
+            'year_built' => ['required'],
+            'engine_make' => ['nullable'],
+            'serial_number' => ['nullable', Rule::unique('boats', 'serial_number')->ignore($boatReg->boat->id),],
+            'horsepower' => ['nullable'],
+            'body_number' => ['required'],
+            'color' => ['required', 'regex:/^[a-zA-Z, ]*$/'], // letters and comma only
+            'length' => ['required'],
+            'breadth' => ['required'],
+            'tonnage_length' => ['required'],
+            'tonnage_breadth' => ['required'],
+            'tonnage_depth' => ['required'],
+            'gross_tonnage' => ['required'],
+            'net_tonnage' => ['required'],
+            'depth' => ['required'],
+            'materials_used' => ['required'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5048'],
+        ], $this->messages());
+
+
+        $boatReg->update([
+            'registration_no' => $validated['registration_no'],
+            'registration_date' => $validated['registration_date'],
+            'registration_type' => 'renewal',
+            'status' => 'pending for renewal',
+            'approved_at' => null,
+        ]);
+
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+            $imageName = uniqid() . '.' . $ext;
+
+            // if images/user-upload does not exist, create it and move image into that folder
+            if (!is_dir(public_path('images/user-upload'))) {
+                mkdir(public_path('images/user-upload'), 0777, true);
+            }
+
+            $image->move(public_path('images/user-upload'), $imageName);
+
+            // check first if image exists in the folder, if it does, delete it, else, do nothing
+            if (file_exists(public_path('images/user-upload/' . $boatReg->boat->image))) {
+                unlink(public_path('images/user-upload/' . $boatReg->boat->image));
+            }
+        } else {
+            $imageName = $boatReg->boat->image;
+        }
+
+        $boatReg->boat->update([
+            'vessel_name' => $validated['vessel_name'],
+            'image' => $imageName,
+            'boat_type' => $validated['vessel_type'],
+            'home_port' => $validated['home_port'],
+            'place_built' => $validated['place_built'],
+            'year_built' => $validated['year_built'],
+            'engine_make' => $validated['engine_make'] ?? '',
+            'serial_number' => $validated['serial_number'] ?? '',
+            'horsepower' => $validated['horsepower'] ?? '',
+            'color' => $validated['color'],
+            'length' => $validated['length'],
+            'breadth' => $validated['breadth'],
+            'depth' => $validated['depth'],
+            'body_number' => $validated['body_number'],
+            'materials' => $validated['materials_used'],
+            'tonnage_length' => $validated['tonnage_length'],
+            'tonnage_breadth' => $validated['tonnage_breadth'],
+            'tonnage_depth' => $validated['tonnage_depth'],
+            'gross_tonnage' => $validated['gross_tonnage'],
+            'net_tonnage' => $validated['net_tonnage'],
+        ]);
+
+        return redirect()->route('reg-boat.index')->with('success', 'Boat record updated. Please wait for confirmation regarding your renewal registration!');
     }
 }
