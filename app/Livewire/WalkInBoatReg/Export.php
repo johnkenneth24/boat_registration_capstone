@@ -70,6 +70,10 @@ class Export extends Component
         $filename = 'BRIMS-' . $this->wrg->registration_no . '-cert';
         $tempPath = 'reports/' . $filename . '.docx';
 
+        if (!file_exists(public_path('reports'))) {
+            mkdir(public_path('reports'), 0777, true);
+        }
+
         $templateProcessor->saveAs($tempPath);
         return response()->download(public_path($tempPath));
     }

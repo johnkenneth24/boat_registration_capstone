@@ -26,7 +26,7 @@
                                                         details
                                                         here</h5>
                                                 </div>
-                                                <div class="form-group col-md-9">
+                                                <div class="form-group col-md-12">
                                                     <label>Fullname</label>
                                                     <input type="text" name="name"
                                                         class="form-control form-control-sm @error('name') is-invalid @enderror"
@@ -37,7 +37,7 @@
                                                         </div>
                                                     @enderror
                                                 </div>
-                                                <div class="form-group col-md-3">
+                                                <div class="form-group col-md-4">
                                                     <label>Username</label>
                                                     <input type="text" name="username"
                                                         class="form-control form-control-sm @error('username') is-invalid @enderror"
@@ -48,19 +48,9 @@
                                                         </div>
                                                     @enderror
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Email</label>
-                                                    <input type="email" name="email"
-                                                        class="form-control form-control-sm @error('email') is-invalid @enderror"
-                                                        value="{{ old('email', auth()->user()->email) }}">
-                                                    @error('email')
-                                                        <div class="invalid-feedback" style="display: inline-block !important;">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
+
                                                 <input type="hidden" name="role" value="{{ auth()->user()->role }}">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-8">
                                                     <label>Contact Number</label>
                                                     <input type="text" name="contact_no"
                                                         class="form-control form-control-sm @error('contact_no') is-invalid @enderror"

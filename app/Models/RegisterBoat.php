@@ -17,6 +17,8 @@ class RegisterBoat extends Model
         'registration_date',
         'owner_info_id',
         'registration_type',
+        'status',
+        'approved_at',
     ];
 
     protected $dates = [

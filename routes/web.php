@@ -46,12 +46,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/show/{id}', 'show')->name('reg-boat.show');
         Route::delete('destroy/{id}', 'destroy')->name('reg-boat.destroy');
 
+        Route::get('/renewal/{id}', 'renewal')->name('reg-boat.renewal');
+        Route::put('/renewal-store/{id}', 'renewalUpdate')->name('reg-boat.renewalStore');
+
+
         Route::middleware(['role:admin|staff'])->group(function () {
             Route::get('/approve/{id}', 'approve')->name('reg-boat.approve');
             Route::get('/disapprove/{id}', 'disapprove')->name('reg-boat.disapprove');
             Route::get('/view/{id}', 'view')->name('reg-boat.view');
             Route::get('/archived', 'archived')->name('reg-boat.archived');
             Route::get('/reports', 'reports')->name('reg-boat.reports');
+            Route::get('/undo-disappoval/{id}', 'undo')->name('reg-boat.undo');
         });
     });
 

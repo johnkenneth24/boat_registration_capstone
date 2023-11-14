@@ -25,7 +25,7 @@ class HomeController extends Controller
         })->count();
 
         $pendingCount = $rBoats->where('status', 'pending')->count();
-        $renewalCount = $rBoats->where('status', 'renewal')->count();
+        $renewalCount = $rBoats->where('registration_type', 'renewal')->count();
 
         $expiredCount = $rBoats->where('status', 'registered')->filter(function ($boat) {
             $approvalDate = \Carbon\Carbon::parse($boat->approved_at);
@@ -42,10 +42,10 @@ class HomeController extends Controller
         // dd($user);
 
         if ($user == 'admin' || $user == 'staff') {
-            $pendings = RegisterBoat::where('status', 'pending')->get();
+            $pendings = RegisterBoat::whereIn('status', ['pending', 'pending for renewal'])->get();
         } else {
             $user_id = auth()->user()->id;
-            $pendings = RegisterBoat::where('user_id', $user_id)->where('status', 'pending')->paginate(10);
+            $pendings = RegisterBoat::where('user_id', $user_id)->whereIn('status', ['pending', 'pending for renewal'])->paginate(10);
         }
 
         $owner_info = OwnerInfo::where('user_id', auth()->user()->id)->first();
