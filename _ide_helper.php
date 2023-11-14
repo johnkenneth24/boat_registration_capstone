@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.15.0.
+ * Generated for Laravel 10.29.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -435,6 +435,18 @@
         {
                         /** @var \Illuminate\Foundation\Application $instance */
                         return $instance->runningInConsole();
+        }
+                    /**
+         * Determine if the application is running any of the given console commands.
+         *
+         * @param string|array $commands
+         * @return bool 
+         * @static 
+         */ 
+        public static function runningConsoleCommand(...$commands)
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->runningConsoleCommand(...$commands);
         }
                     /**
          * Determine if the application is running unit tests.
@@ -2775,6 +2787,18 @@
                         return $instance->getCustomDirectives();
         }
                     /**
+         * Indicate that the following callable should be used to prepare strings for compilation.
+         *
+         * @param callable $callback
+         * @return \Illuminate\View\Compilers\BladeCompiler 
+         * @static 
+         */ 
+        public static function prepareStringsForCompilationUsing($callback)
+        {
+                        /** @var \Illuminate\View\Compilers\BladeCompiler $instance */
+                        return $instance->prepareStringsForCompilationUsing($callback);
+        }
+                    /**
          * Register a new precompiler.
          *
          * @param callable $precompiler
@@ -2848,6 +2872,7 @@
          *
          * @param string $path
          * @return bool 
+         * @throws \ErrorException
          * @static 
          */ 
         public static function isExpired($path)
@@ -3639,6 +3664,18 @@
         {
                         /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
                         return $instance->recordPendingBatch($pendingBatch);
+        }
+                    /**
+         * Specify if commands should be serialized and restored when being batched.
+         *
+         * @param bool $serializeAndRestore
+         * @return \Illuminate\Support\Testing\Fakes\BusFake 
+         * @static 
+         */ 
+        public static function serializeAndRestore($serializeAndRestore = true)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\BusFake $instance */
+                        return $instance->serializeAndRestore($serializeAndRestore);
         }
          
     }
@@ -7851,7 +7888,7 @@
      * @method static \Illuminate\Http\Client\PendingRequest sink(string|resource $to)
      * @method static \Illuminate\Http\Client\PendingRequest timeout(int $seconds)
      * @method static \Illuminate\Http\Client\PendingRequest connectTimeout(int $seconds)
-     * @method static \Illuminate\Http\Client\PendingRequest retry(int $times, Closure|int $sleepMilliseconds = 0, callable|null $when = null, bool $throw = true)
+     * @method static \Illuminate\Http\Client\PendingRequest retry(int $times, \Closure|int $sleepMilliseconds = 0, callable|null $when = null, bool $throw = true)
      * @method static \Illuminate\Http\Client\PendingRequest withOptions(array $options)
      * @method static \Illuminate\Http\Client\PendingRequest withMiddleware(callable $middleware)
      * @method static \Illuminate\Http\Client\PendingRequest withRequestMiddleware(callable $middleware)
@@ -10398,6 +10435,18 @@
                         return $instance->pushedJobs();
         }
                     /**
+         * Specify if jobs should be serialized and restored when being "pushed" to the queue.
+         *
+         * @param bool $serializeAndRestore
+         * @return \Illuminate\Support\Testing\Fakes\QueueFake 
+         * @static 
+         */ 
+        public static function serializeAndRestore($serializeAndRestore = true)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\QueueFake $instance */
+                        return $instance->serializeAndRestore($serializeAndRestore);
+        }
+                    /**
          * Get the connection name for the queue.
          *
          * @return string 
@@ -11245,7 +11294,7 @@
          *
          * @param string|null $key
          * @param mixed $default
-         * @return \Symfony\Component\HttpFoundation\ParameterBag|mixed 
+         * @return \Symfony\Component\HttpFoundation\InputBag|mixed 
          * @static 
          */ 
         public static function json($key = null, $default = null)
@@ -11407,7 +11456,7 @@
                     /**
          * Set the JSON payload for the request.
          *
-         * @param \Symfony\Component\HttpFoundation\ParameterBag $json
+         * @param \Symfony\Component\HttpFoundation\InputBag $json
          * @return \Illuminate\Http\Request 
          * @static 
          */ 
@@ -13334,7 +13383,7 @@
                     /**
          * Create a new redirect response to a controller action.
          *
-         * @param string $action
+         * @param array|string $action
          * @param mixed $parameters
          * @param int $status
          * @param array $headers
@@ -16855,6 +16904,18 @@
                         return $instance->withKeyResolver($keyResolver);
         }
                     /**
+         * Set the callback that should be used to attempt to resolve missing named routes.
+         *
+         * @param callable $missingNamedRouteResolver
+         * @return \Illuminate\Routing\UrlGenerator 
+         * @static 
+         */ 
+        public static function resolveMissingNamedRoutesUsing($missingNamedRouteResolver)
+        {
+                        /** @var \Illuminate\Routing\UrlGenerator $instance */
+                        return $instance->resolveMissingNamedRoutesUsing($missingNamedRouteResolver);
+        }
+                    /**
          * Get the root controller namespace.
          *
          * @return string 
@@ -18226,6 +18287,20 @@
                         return $instance->asset($asset, $buildDirectory);
         }
                     /**
+         * Get the content of a given asset.
+         *
+         * @param string $asset
+         * @param string|null $buildDirectory
+         * @return string 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function content($asset, $buildDirectory = null)
+        {
+                        /** @var \Illuminate\Foundation\Vite $instance */
+                        return $instance->content($asset, $buildDirectory);
+        }
+                    /**
          * Get a unique hash representing the current manifest, or null if there is no manifest.
          *
          * @param string|null $buildDirectory
@@ -18335,7 +18410,238 @@
      
 }
 
-        namespace Livewire { 
+        namespace Illuminate\Notifications\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class Vonage {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getRestUrl()
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->getRestUrl();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getApiUrl()
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->getApiUrl();
+        }
+                    /**
+         * Set the Http Client to used to make API requests.
+         * 
+         * This allows the default http client to be swapped out for a HTTPlug compatible
+         * replacement.
+         *
+         * @static 
+         */ 
+        public static function setHttpClient($client)
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->setHttpClient($client);
+        }
+                    /**
+         * Get the Http Client used to make API requests.
+         *
+         * @static 
+         */ 
+        public static function getHttpClient()
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->getHttpClient();
+        }
+                    /**
+         * Set the factory used to create API specific clients.
+         *
+         * @static 
+         */ 
+        public static function setFactory($factory)
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->setFactory($factory);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getFactory()
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->getFactory();
+        }
+                    /**
+         * 
+         *
+         * @deprecated Use a configured APIResource with a HandlerInterface
+         * Request business logic is being removed from the User Client Layer.
+         * @static 
+         */ 
+        public static function signRequest($request, $credentials)
+        {
+                        return \Vonage\Client::signRequest($request, $credentials);
+        }
+                    /**
+         * 
+         *
+         * @deprecated Use a configured APIResource with a HandlerInterface
+         * Request business logic is being removed from the User Client Layer.
+         * @static 
+         */ 
+        public static function authRequest($request, $credentials)
+        {
+                        return \Vonage\Client::authRequest($request, $credentials);
+        }
+                    /**
+         * 
+         *
+         * @throws ClientException
+         * @static 
+         */ 
+        public static function generateJwt($claims = [])
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->generateJwt($claims);
+        }
+                    /**
+         * 
+         *
+         * @deprecated Use a configured APIResource with a HandlerInterface
+         * Request business logic is being removed from the User Client Layer.
+         * @static 
+         */ 
+        public static function get($url, $params = [])
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->get($url, $params);
+        }
+                    /**
+         * 
+         *
+         * @deprecated Use a configured APIResource with a HandlerInterface
+         * Request business logic is being removed from the User Client Layer.
+         * @static 
+         */ 
+        public static function post($url, $params)
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->post($url, $params);
+        }
+                    /**
+         * 
+         *
+         * @deprecated Use a configured APIResource with a HandlerInterface
+         * Request business logic is being removed from the User Client Layer.
+         * @static 
+         */ 
+        public static function postUrlEncoded($url, $params)
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->postUrlEncoded($url, $params);
+        }
+                    /**
+         * 
+         *
+         * @deprecated Use a configured APIResource with a HandlerInterface
+         * Request business logic is being removed from the User Client Layer.
+         * @static 
+         */ 
+        public static function put($url, $params)
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->put($url, $params);
+        }
+                    /**
+         * 
+         *
+         * @deprecated Use a configured APIResource with a HandlerInterface
+         * Request business logic is being removed from the User Client Layer.
+         * @static 
+         */ 
+        public static function delete($url)
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->delete($url);
+        }
+                    /**
+         * Wraps the HTTP Client, creates a new PSR-7 request adding authentication, signatures, etc.
+         *
+         * @throws ClientExceptionInterface
+         * @static 
+         */ 
+        public static function send($request)
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->send($request);
+        }
+                    /**
+         * 
+         *
+         * @deprecated Use the Verify Client, this shouldn't be here and will be removed.
+         * @static 
+         */ 
+        public static function serialize($entity)
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->serialize($entity);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getLogger()
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->getLogger();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getCredentials()
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->getCredentials();
+        }
+                    /**
+         * 
+         *
+         * @param string|int $level Level of message that we are logging
+         * @param array<mixed> $context Additional information for context
+         * @static 
+         */ 
+        public static function log($level, $message, $context = [])
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->log($level, $message, $context);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setLogger($logger)
+        {
+                        /** @var \Vonage\Client $instance */
+                        return $instance->setLogger($logger);
+        }
+         
+    }
+     
+}
+
+    namespace Livewire { 
             /**
      * 
      *
@@ -19741,7 +20047,7 @@ namespace  {
             }
              
                 /**
-             * Get the first record matching the attributes or create it.
+             * Get the first record matching the attributes. If the record is not found, create it.
              *
              * @param array $attributes
              * @param array $values
@@ -19752,6 +20058,20 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->firstOrCreate($attributes, $values);
+            }
+             
+                /**
+             * Attempt to create the record. If a unique constraint violation occurs, attempt to find the matching record.
+             *
+             * @param array $attributes
+             * @param array $values
+             * @return \Illuminate\Database\Eloquent\Model|static 
+             * @static 
+             */ 
+            public static function createOrFirst($attributes = [], $values = [])
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->createOrFirst($attributes, $values);
             }
              
                 /**
@@ -20113,6 +20433,20 @@ namespace  {
             }
              
                 /**
+             * Execute the given Closure within a transaction savepoint if needed.
+             *
+             * @template TModelValue
+             * @param \Closure():  TModelValue  $scope
+             * @return \Illuminate\Database\Eloquent\TModelValue 
+             * @static 
+             */ 
+            public static function withSavepointIfNeeded($scope)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->withSavepointIfNeeded($scope);
+            }
+             
+                /**
              * Get the underlying query builder instance.
              *
              * @return \Illuminate\Database\Query\Builder 
@@ -20343,6 +20677,39 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->chunkById($count, $callback, $column, $alias);
+            }
+             
+                /**
+             * Chunk the results of a query by comparing IDs in descending order.
+             *
+             * @param int $count
+             * @param callable $callback
+             * @param string|null $column
+             * @param string|null $alias
+             * @return bool 
+             * @static 
+             */ 
+            public static function chunkByIdDesc($count, $callback, $column = null, $alias = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->chunkByIdDesc($count, $callback, $column, $alias);
+            }
+             
+                /**
+             * Chunk the results of a query by comparing IDs in a given order.
+             *
+             * @param int $count
+             * @param callable $callback
+             * @param string|null $column
+             * @param string|null $alias
+             * @param bool $descending
+             * @return bool 
+             * @static 
+             */ 
+            public static function orderedChunkById($count, $callback, $column = null, $alias = null, $descending = false)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->orderedChunkById($count, $callback, $column, $alias, $descending);
             }
              
                 /**
@@ -21167,7 +21534,7 @@ namespace  {
              * @param \Illuminate\Contracts\Database\Query\Expression|string $table
              * @param \Closure|string $first
              * @param string|null $operator
-             * @param string|null $second
+             * @param \Illuminate\Contracts\Database\Query\Expression|string|null $second
              * @param string $type
              * @param bool $where
              * @return \Illuminate\Database\Query\Builder 
@@ -21185,7 +21552,7 @@ namespace  {
              * @param \Illuminate\Contracts\Database\Query\Expression|string $table
              * @param \Closure|string $first
              * @param string $operator
-             * @param string $second
+             * @param \Illuminate\Contracts\Database\Query\Expression|string $second
              * @param string $type
              * @return \Illuminate\Database\Query\Builder 
              * @static 
@@ -21203,7 +21570,7 @@ namespace  {
              * @param string $as
              * @param \Closure|string $first
              * @param string|null $operator
-             * @param string|null $second
+             * @param \Illuminate\Contracts\Database\Query\Expression|string|null $second
              * @param string $type
              * @param bool $where
              * @return \Illuminate\Database\Query\Builder 
@@ -21222,7 +21589,7 @@ namespace  {
              * @param \Illuminate\Contracts\Database\Query\Expression|string $table
              * @param \Closure|string $first
              * @param string|null $operator
-             * @param string|null $second
+             * @param \Illuminate\Contracts\Database\Query\Expression|string|null $second
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -21238,7 +21605,7 @@ namespace  {
              * @param \Illuminate\Contracts\Database\Query\Expression|string $table
              * @param \Closure|string $first
              * @param string $operator
-             * @param string $second
+             * @param \Illuminate\Contracts\Database\Query\Expression|string|null $second
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -21255,7 +21622,7 @@ namespace  {
              * @param string $as
              * @param \Closure|string $first
              * @param string|null $operator
-             * @param string|null $second
+             * @param \Illuminate\Contracts\Database\Query\Expression|string|null $second
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -21271,7 +21638,7 @@ namespace  {
              * @param \Illuminate\Contracts\Database\Query\Expression|string $table
              * @param \Closure|string $first
              * @param string|null $operator
-             * @param string|null $second
+             * @param \Illuminate\Contracts\Database\Query\Expression|string|null $second
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -21287,7 +21654,7 @@ namespace  {
              * @param \Illuminate\Contracts\Database\Query\Expression|string $table
              * @param \Closure|string $first
              * @param string $operator
-             * @param string $second
+             * @param \Illuminate\Contracts\Database\Query\Expression|string $second
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -21304,7 +21671,7 @@ namespace  {
              * @param string $as
              * @param \Closure|string $first
              * @param string|null $operator
-             * @param string|null $second
+             * @param \Illuminate\Contracts\Database\Query\Expression|string|null $second
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -21320,7 +21687,7 @@ namespace  {
              * @param \Illuminate\Contracts\Database\Query\Expression|string $table
              * @param \Closure|string|null $first
              * @param string|null $operator
-             * @param string|null $second
+             * @param \Illuminate\Contracts\Database\Query\Expression|string|null $second
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -23314,6 +23681,7 @@ namespace  {
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
+            class Vonage extends \Illuminate\Notifications\Facades\Vonage {}
             class Livewire extends \Livewire\Livewire {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      

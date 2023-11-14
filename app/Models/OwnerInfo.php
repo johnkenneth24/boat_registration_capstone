@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Notifiable;
 
 
 class OwnerInfo extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Notifiable;
 
     protected $fillable = [
         'user_id',
@@ -41,6 +43,12 @@ class OwnerInfo extends Model
         'birthdate' => 'date',
         'resident_since' => 'datetime:Y-m',
     ];
+
+    public function routeNotificationForVonage(Notification $notification): string
+    {
+        return $this->contact_no;
+    }
+
 
     public function getFullNameAttribute()
     {

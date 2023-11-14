@@ -12,6 +12,63 @@
 
 namespace App\Models{
 /**
+ * App\Models\Adss
+ *
+ * @property int $id
+ * @property int $owner_info_id
+ * @property string $spouse_name
+ * @property string $number_dependent
+ * @property string $employer_name
+ * @property string $desired_coverage
+ * @property string $premium
+ * @property \Illuminate\Support\Carbon $cover_from
+ * @property \Illuminate\Support\Carbon $cover_to
+ * @property string|null $primary_beneficiary
+ * @property string|null $primary_relationship
+ * @property string|null $secondary_beneficiary
+ * @property string|null $secondary_relationship
+ * @property string|null $minor_trustee
+ * @property string|null $pcic_coverage
+ * @property string|null $pcic_name
+ * @property string|null $pcic_relationship
+ * @property string|null $pcic_address
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\OwnerInfo $owner_info
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereCoverFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereCoverTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereDesiredCoverage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereEmployerName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereMinorTrustee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereNumberDependent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereOwnerInfoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss wherePcicAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss wherePcicCoverage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss wherePcicName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss wherePcicRelationship($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss wherePremium($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss wherePrimaryBeneficiary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss wherePrimaryRelationship($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereSecondaryBeneficiary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereSecondaryRelationship($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereSpouseName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Adss withoutTrashed()
+ */
+	class Adss extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Announcements
  *
  * @property int $id
@@ -36,7 +93,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Announcements whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Announcements withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Announcements withoutTrashed()
- * @mixin \Eloquent
  */
 	class Announcements extends \Eloquent {}
 }
@@ -46,24 +102,21 @@ namespace App\Models{
  * App\Models\Boat
  *
  * @property int $id
- * @property int $user_id
+ * @property int|null $user_id
  * @property int $owner_id
+ * @property int|null $register_boat_id
  * @property string $boat_type
- * @property string|null $horsepower
- * @property string $vessel_name
  * @property string|null $image
+ * @property string $vessel_name
  * @property string $color
  * @property string $length
  * @property string $breadth
  * @property string $depth
  * @property string $body_number
+ * @property string|null $horsepower
  * @property string $materials
  * @property string $year_built
  * @property string $gross_tonnage
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int|null $register_boat_id
  * @property string $home_port
  * @property string $place_built
  * @property string|null $engine_make
@@ -72,9 +125,12 @@ namespace App\Models{
  * @property string $tonnage_breadth
  * @property string $tonnage_depth
  * @property string $net_tonnage
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\OwnerInfo $owner
  * @property-read Boat|null $registerBoat
- * @property-read \App\Models\User $user
+ * @property-read \App\Models\User|null $user
  * @property-read \App\Models\WalkInBoatOwner|null $walkIn
  * @method static \Illuminate\Database\Eloquent\Builder|Boat newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Boat newQuery()
@@ -115,10 +171,32 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Certification
+ *
+ * @property int $id
+ * @property int $register_boat_id
+ * @property string $certificate_no
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\RegisterBoat $registerBoat
+ * @method static \Illuminate\Database\Eloquent\Builder|Certification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Certification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Certification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Certification whereCertificateNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Certification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Certification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Certification whereRegisterBoatId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Certification whereUpdatedAt($value)
+ */
+	class Certification extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Livelihood
  *
  * @property int $id
- * @property int $user_id
+ * @property int|null $user_id
  * @property int $owner_info_id
  * @property string|null $source_of_income
  * @property string|null $gear_used
@@ -134,7 +212,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\OwnerInfo $ownerInfo
- * @property-read \App\Models\User $user
+ * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|Livelihood newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Livelihood newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Livelihood query()
@@ -154,7 +232,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Livelihood whereSpecifyOs($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Livelihood whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Livelihood whereUserId($value)
- * @mixin \Eloquent
  */
 	class Livelihood extends \Eloquent {}
 }
@@ -164,7 +241,7 @@ namespace App\Models{
  * App\Models\OwnerInfo
  *
  * @property int $id
- * @property int $user_id
+ * @property int|null $user_id
  * @property string $salutation
  * @property string $first_name
  * @property string $last_name
@@ -180,21 +257,25 @@ namespace App\Models{
  * @property int $age
  * @property string $birthplace
  * @property string $educ_background
+ * @property string|null $other_educational_background
  * @property int|null $children_count
  * @property string|null $emContact_person
  * @property string|null $emRelationship
  * @property string|null $emContact_no
  * @property string|null $emAddress
+ * @property string|null $type
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $other_educational_background
+ * @property-read \App\Models\Adss|null $adss
  * @property-read \App\Models\Boat|null $boat
  * @property-read mixed $full_name
  * @property-read \App\Models\Livelihood|null $livelihood
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RegisterBoat> $registerBoat
  * @property-read int|null $register_boat_count
- * @property-read \App\Models\User $user
+ * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo onlyTrashed()
@@ -223,6 +304,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereResidentSince($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereSalutation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereSuffix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OwnerInfo withTrashed()
@@ -236,7 +318,8 @@ namespace App\Models{
  * App\Models\RegisterBoat
  *
  * @property int $id
- * @property int $user_id
+ * @property int|null $user_id
+ * @property int|null $owner_info_id
  * @property string $registration_no
  * @property string $registration_date
  * @property string $registration_type
@@ -245,8 +328,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int|null $owner_info_id
  * @property-read \App\Models\Boat|null $boat
+ * @property-read \App\Models\Certification|null $certification
  * @property-read \App\Models\OwnerInfo|null $ownerInfo
  * @method static \Illuminate\Database\Eloquent\Builder|RegisterBoat newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RegisterBoat newQuery()
@@ -313,7 +396,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
- * @mixin \Eloquent
  */
 	class User extends \Eloquent {}
 }
@@ -322,51 +404,11 @@ namespace App\Models{
 /**
  * App\Models\WalkInAdss
  *
- * @property int $id
- * @property int $walkin_owner_adss_id
- * @property string $name_spouse
- * @property string $number_dependent
- * @property string $name_employer
- * @property string $desired_coverage
- * @property string $premium
- * @property \Illuminate\Support\Carbon $cover_from
- * @property \Illuminate\Support\Carbon $cover_to
- * @property string|null $primary_beneficiary
- * @property string|null $primary_relationship
- * @property string|null $secondary_beneficiary
- * @property string|null $secondary_relationship
- * @property string|null $minor_trustee
- * @property string|null $pcic_coverage
- * @property string|null $pcic_name
- * @property string|null $pcic_relationship
- * @property string|null $pcic_address
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\WalkInBoatOwner|null $walkInBoatOwnerAdss
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss query()
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereCoverFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereCoverTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereDesiredCoverage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereMinorTrustee($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereNameEmployer($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereNameSpouse($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereNumberDependent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss wherePcicAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss wherePcicCoverage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss wherePcicName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss wherePcicRelationship($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss wherePremium($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss wherePrimaryBeneficiary($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss wherePrimaryRelationship($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereSecondaryBeneficiary($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereSecondaryRelationship($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss whereWalkinOwnerAdssId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInAdss withoutTrashed()
  */
@@ -377,31 +419,6 @@ namespace App\Models{
 /**
  * App\Models\WalkInBoatOwner
  *
- * @property int $id
- * @property string $salutation
- * @property string $first_name
- * @property string $last_name
- * @property string|null $middle_name
- * @property string|null $suffix
- * @property string $address
- * @property \Illuminate\Support\Carbon $resident_since
- * @property string $nationality
- * @property string $gender
- * @property string $civil_status
- * @property string $contact_no
- * @property \Illuminate\Support\Carbon $birthdate
- * @property int $age
- * @property string $birthplace
- * @property string $educ_background
- * @property int|null $children_count
- * @property string|null $emContact_person
- * @property string|null $emRelationship
- * @property string|null $emContact_no
- * @property string|null $emAddress
- * @property string $status
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WalkInBoatRegistration> $WalkInRegBoat
  * @property-read int|null $walk_in_reg_boat_count
  * @property-read mixed $full_name
@@ -411,31 +428,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner query()
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereAge($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereBirthdate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereBirthplace($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereChildrenCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereCivilStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereContactNo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereEducBackground($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereEmAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereEmContactNo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereEmContactPerson($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereEmRelationship($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereFirstName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereLastName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereMiddleName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereNationality($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereResidentSince($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereSalutation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereSuffix($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatOwner withoutTrashed()
  */
@@ -446,67 +438,11 @@ namespace App\Models{
 /**
  * App\Models\WalkInBoatRegistration
  *
- * @property int $id
- * @property int $walkin_owner_id
- * @property string $registration_no
- * @property \Illuminate\Support\Carbon $registration_date
- * @property string $registration_type
- * @property string $vessel_name
- * @property string $vessel_type
- * @property string $home_port
- * @property string $place_built
- * @property string $year_built
- * @property string $body_number
- * @property string $color
- * @property string $materials
- * @property string $length
- * @property string $breadth
- * @property string $depth
- * @property string $tonnage_length
- * @property string $tonnage_breadth
- * @property string $tonnage_depth
- * @property string $net_tonnage
- * @property string $gross_tonnage
- * @property string|null $image
- * @property string|null $horsepower
- * @property string|null $engine_make
- * @property string|null $serial_number
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\WalkInBoatOwner|null $walkInRegBoatOwner
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration query()
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereBodyNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereBreadth($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereColor($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereDepth($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereEngineMake($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereGrossTonnage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereHomePort($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereHorsepower($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereLength($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereMaterials($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereNetTonnage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration wherePlaceBuilt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereRegistrationDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereRegistrationNo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereRegistrationType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereSerialNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereTonnageBreadth($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereTonnageDepth($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereTonnageLength($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereVesselName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereVesselType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereWalkinOwnerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration whereYearBuilt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInBoatRegistration withoutTrashed()
  */
@@ -517,41 +453,11 @@ namespace App\Models{
 /**
  * App\Models\WalkInLivelihood
  *
- * @property int $id
- * @property int $walkin_owner_id
- * @property string|null $source_of_income
- * @property string|null $gear_used
- * @property string|null $culture_method
- * @property string|null $specify
- * @property string|null $other_income_sources
- * @property string|null $gear_used_os
- * @property string|null $culture_method_os
- * @property string|null $specify_os
- * @property string|null $org_name
- * @property string|null $member_since
- * @property string|null $position
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\WalkInBoatOwner|null $walkInBoatOwnerLivelihood
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood query()
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereCultureMethod($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereCultureMethodOs($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereGearUsed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereGearUsedOs($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereMemberSince($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereOrgName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereOtherIncomeSources($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood wherePosition($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereSourceOfIncome($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereSpecify($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereSpecifyOs($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood whereWalkinOwnerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WalkInLivelihood withoutTrashed()
  */

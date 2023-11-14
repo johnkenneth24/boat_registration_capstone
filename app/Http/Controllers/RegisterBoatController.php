@@ -8,7 +8,11 @@ use Illuminate\Support\Arr;
 use App\Models\RegisterBoat;
 use Illuminate\Http\Request;
 use App\Models\Certification;
+
+use App\Notifications\BoatRegistered;
+
 use Illuminate\Validation\Rule;
+
 
 class RegisterBoatController extends Controller
 {
@@ -353,6 +357,12 @@ class RegisterBoatController extends Controller
     public function approve($id)
     {
         $boatReg = RegisterBoat::find($id);
+
+        $user = OwnerInfo::where('id', $boatReg->owner_info_id)->first();
+
+        // dd($user);
+        $user->notify(new BoatRegistered());
+
         $boatReg->status = 'registered';
         $boatReg->approved_at = now();
         $boatReg->save();
@@ -373,6 +383,7 @@ class RegisterBoatController extends Controller
             $certification->register_boat_id = $boatReg->id;
             $certification->save();
         }
+
 
         return redirect()->route('reg-boat.pending')->with('success', 'Boat Registration successfully approved!');
     }
