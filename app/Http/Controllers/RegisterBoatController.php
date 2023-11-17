@@ -159,7 +159,8 @@ class RegisterBoatController extends Controller
 
     public function regBoat(Request $request)
     {
-        $validated = $request->validate([
+
+        $rules = [
             'owner_id' => 'nullable',
             'registration_no' => 'required',
             'registration_date' => 'required',
@@ -172,18 +173,26 @@ class RegisterBoatController extends Controller
             'serial_number' => ['nullable', 'unique:boats,serial_number'],
             'horsepower' => ['nullable'],
             'body_number' => ['required'],
-            'color' => ['required', 'regex:/^[a-zA-Z, ]*$/'], // letters and comma only
-            'length' => ['required'],
-            'breadth' => ['required'],
-            'tonnage_length' => ['required'],
-            'tonnage_breadth' => ['required'],
-            'tonnage_depth' => ['required'],
-            'gross_tonnage' => ['required'],
-            'net_tonnage' => ['required'],
-            'depth' => ['required'],
+            'color' => ['required', 'regex:/^[a-zA-Z, ]*$/'],
             'materials_used' => ['required'],
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5048'],
-        ], $this->messages());
+        ];
+
+        $user = auth()->user();
+
+        if ($user->hasRole(['staff', 'admin'])) {
+            $rules['length'] = 'required';
+            $rules['breadth'] = 'required';
+            $rules['depth'] = 'required';
+            $rules['tonnage_length'] = 'required';
+            $rules['tonnage_breadth'] = 'required';
+            $rules['tonnage_depth'] = 'required';
+            $rules['gross_tonnage'] = 'required';
+            $rules['net_tonnage'] = 'required';
+        }
+
+
+        $validated = $request->validate($rules, $this->messages());
 
         // dd($validated);
 
@@ -230,16 +239,16 @@ class RegisterBoatController extends Controller
             'serial_number' => $validated['serial_number'],
             'horsepower' => $validated['horsepower'] ?? '',
             'color' => $validated['color'],
-            'length' => $validated['length'],
-            'breadth' => $validated['breadth'],
-            'depth' => $validated['depth'],
+            'length' => $validated['length'] ?? '',
+            'breadth' => $validated['breadth'] ?? '',
+            'depth' => $validated['depth'] ?? '',
             'body_number' => $validated['body_number'],
             'materials' => $validated['materials_used'],
-            'tonnage_length' => $validated['tonnage_length'],
-            'tonnage_breadth' => $validated['tonnage_breadth'],
-            'tonnage_depth' => $validated['tonnage_depth'],
-            'gross_tonnage' => $validated['gross_tonnage'],
-            'net_tonnage' => $validated['net_tonnage'],
+            'tonnage_length' => $validated['tonnage_length'] ?? '',
+            'tonnage_breadth' => $validated['tonnage_breadth'] ?? '',
+            'tonnage_depth' => $validated['tonnage_depth']  ?? '',
+            'gross_tonnage' => $validated['gross_tonnage'] ?? '',
+            'net_tonnage' => $validated['net_tonnage']  ?? '',
         ]);
 
         return redirect()->route('reg-boat.index')->with('success', 'Boat record added. Please wait for confirmation regarding your registration!');
@@ -254,32 +263,42 @@ class RegisterBoatController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'vessel_name' => ['required'],
+
+        $boat = Boat::with('registerBoat')->where('register_boat_id', $id)->first();
+
+        $rules = [
+            'vessel_name' => ['required', Rule::unique('boats', 'vessel_name')->ignore($boat->id),],
             'vessel_type' => ['required'],
             'home_port' => ['required'],
             'place_built' => ['required'],
             'year_built' => ['required'],
             'engine_make' => ['nullable'],
-            'serial_number' => ['nullable'],
+            'serial_number' => ['nullable', Rule::unique('boats', 'serial_number')->ignore($boat->id),],
             'horsepower' => ['nullable'],
             'body_number' => ['required'],
-            'color' => ['required', 'regex:/^[a-zA-Z, ]*$/'], // letters and comma only
-            'length' => ['required'],
-            'breadth' => ['required'],
-            'tonnage_length' => ['required'],
-            'tonnage_breadth' => ['required'],
-            'tonnage_depth' => ['required'],
-            'gross_tonnage' => ['required'],
-            'net_tonnage' => ['required'],
-            'depth' => ['required'],
+            'color' => ['required', 'regex:/^[a-zA-Z, ]*$/'],
             'materials_used' => ['required'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:5048'],
-        ], $this->messages());
+        ];
+
+        $user = auth()->user();
+
+        if ($user->hasRole(['staff', 'admin'])) {
+            $rules['length'] = 'required';
+            $rules['breadth'] = 'required';
+            $rules['depth'] = 'required';
+            $rules['tonnage_length'] = 'required';
+            $rules['tonnage_breadth'] = 'required';
+            $rules['tonnage_depth'] = 'required';
+            $rules['gross_tonnage'] = 'required';
+            $rules['net_tonnage'] = 'required';
+        }
+
+
+        $validated = $request->validate($rules, $this->messages());
 
         // dd($validated);
 
-        $boat = Boat::with('registerBoat')->where('register_boat_id', $id)->first();
         // dd($boat);
 
         // if validated image is null, use the old image name
@@ -314,16 +333,16 @@ class RegisterBoatController extends Controller
             'serial_number' => $validated['serial_number'] ?? '',
             'horsepower' => $validated['horsepower'] ?? '',
             'color' => $validated['color'],
-            'length' => $validated['length'],
-            'breadth' => $validated['breadth'],
-            'depth' => $validated['depth'],
+            'length' => $validated['length'] ?? '',
+            'breadth' => $validated['breadth'] ?? '',
+            'depth' => $validated['depth'] ?? '',
             'body_number' => $validated['body_number'],
             'materials' => $validated['materials_used'],
-            'tonnage_length' => $validated['tonnage_length'],
-            'tonnage_breadth' => $validated['tonnage_breadth'],
-            'tonnage_depth' => $validated['tonnage_depth'],
-            'gross_tonnage' => $validated['gross_tonnage'],
-            'net_tonnage' => $validated['net_tonnage'],
+            'tonnage_length' => $validated['tonnage_length'] ?? '',
+            'tonnage_breadth' => $validated['tonnage_breadth'] ?? '',
+            'tonnage_depth' => $validated['tonnage_depth'] ?? '',
+            'gross_tonnage' => $validated['gross_tonnage'] ?? '',
+            'net_tonnage' => $validated['net_tonnage'] ?? '',
         ]);
 
         return redirect()->route('reg-boat.index')->with('success', 'Boat record updated. Please wait for confirmation regarding your registration!');

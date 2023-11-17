@@ -239,102 +239,104 @@
                                                 @enderror
                                             </div>
                                             <hr class="dark horizontal">
-                                            <div class="form-group col-md-4">
-                                                <label>Registered Length <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="length"
-                                                    class="form-control form-control-sm @error('length') is-invalid @enderror"
-                                                    value="{{ $boatReg->boat->length }}"
-                                                    placeholder="Registered Length of the Vessel (in meters)" required>
-                                                @error('length')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label>Registered Breadth <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="breadth"
-                                                    class="form-control form-control-sm @error('breadth') is-invalid @enderror"
-                                                    value="{{ $boatReg->boat->breadth }}"
-                                                    placeholder="Registered Breadth of the Vessel  (in meters)" required>
-                                                @error('breadth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label>Registered Depth <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="depth"
-                                                    class="form-control form-control-sm @error('depth') is-invalid @enderror"
-                                                    value="{{ $boatReg->boat->depth }}"
-                                                    placeholder="Registered Depth of the Vessel  (in meters)" required>
-                                                @error('depth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label>Tonnage Length <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01"
-                                                    name="tonnage_length"
-                                                    class="form-control form-control-sm @error('tonnage_length') is-invalid @enderror"
-                                                    value="{{ $boatReg->boat->tonnage_length }}"
-                                                    placeholder="Tonnage Length of the Vessel (in meters)" required>
-                                                @error('tonnage_length')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label>Tonnage Breadth <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01"
-                                                    name="tonnage_breadth"
-                                                    class="form-control form-control-sm @error('tonnage_breadth') is-invalid @enderror"
-                                                    value="{{ $boatReg->boat->tonnage_breadth }}"
-                                                    placeholder="Tonnage Breadth of the Vessel  (in meters)" required>
-                                                @error('tonnage_breadth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label>Tonnage Depth <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="tonnage_depth"
-                                                    class="form-control form-control-sm @error('tonnage_depth') is-invalid @enderror"
-                                                    value="{{ $boatReg->boat->tonnage_depth }}"
-                                                    placeholder="Tonnage Depth of the Vessel  (in meters)" required>
-                                                @error('tonnage_depth')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Gross Tonnage <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="gross_tonnage"
-                                                    required value="{{ $boatReg->boat->gross_tonnage }}" required
-                                                    class="form-control form-control-sm @error('gross_tonnage') is-invalid @enderror">
-                                                @error('gross_tonnage')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Net Tonnage <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.01" name="net_tonnage"
-                                                    required value="{{ $boatReg->boat->net_tonnage }}" required
-                                                    class="form-control form-control-sm @error('net_tonnage') is-invalid @enderror">
-                                                @error('net_tonnage')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
+                                            @unlessrole('user')
+                                                <div class="form-group col-md-4">
+                                                    <label>Registered Length <span class="text-danger">*</span></label>
+                                                    <input type="number" min="0" step="0.01" name="length"
+                                                        class="form-control form-control-sm @error('length') is-invalid @enderror"
+                                                        value="{{ $boatReg->boat->length }}"
+                                                        placeholder="Registered Length of the Vessel (in meters)" required>
+                                                    @error('length')
+                                                        <div class="invalid-feedback" style="display: inline-block !important;">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Registered Breadth <span class="text-danger">*</span></label>
+                                                    <input type="number" min="0" step="0.01" name="breadth"
+                                                        class="form-control form-control-sm @error('breadth') is-invalid @enderror"
+                                                        value="{{ $boatReg->boat->breadth }}"
+                                                        placeholder="Registered Breadth of the Vessel  (in meters)" required>
+                                                    @error('breadth')
+                                                        <div class="invalid-feedback" style="display: inline-block !important;">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Registered Depth <span class="text-danger">*</span></label>
+                                                    <input type="number" min="0" step="0.01" name="depth"
+                                                        class="form-control form-control-sm @error('depth') is-invalid @enderror"
+                                                        value="{{ $boatReg->boat->depth }}"
+                                                        placeholder="Registered Depth of the Vessel  (in meters)" required>
+                                                    @error('depth')
+                                                        <div class="invalid-feedback" style="display: inline-block !important;">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Tonnage Length <span class="text-danger">*</span></label>
+                                                    <input type="number" min="0" step="0.01"
+                                                        name="tonnage_length"
+                                                        class="form-control form-control-sm @error('tonnage_length') is-invalid @enderror"
+                                                        value="{{ $boatReg->boat->tonnage_length }}"
+                                                        placeholder="Tonnage Length of the Vessel (in meters)" required>
+                                                    @error('tonnage_length')
+                                                        <div class="invalid-feedback" style="display: inline-block !important;">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Tonnage Breadth <span class="text-danger">*</span></label>
+                                                    <input type="number" min="0" step="0.01"
+                                                        name="tonnage_breadth"
+                                                        class="form-control form-control-sm @error('tonnage_breadth') is-invalid @enderror"
+                                                        value="{{ $boatReg->boat->tonnage_breadth }}"
+                                                        placeholder="Tonnage Breadth of the Vessel  (in meters)" required>
+                                                    @error('tonnage_breadth')
+                                                        <div class="invalid-feedback" style="display: inline-block !important;">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Tonnage Depth <span class="text-danger">*</span></label>
+                                                    <input type="number" min="0" step="0.01" name="tonnage_depth"
+                                                        class="form-control form-control-sm @error('tonnage_depth') is-invalid @enderror"
+                                                        value="{{ $boatReg->boat->tonnage_depth }}"
+                                                        placeholder="Tonnage Depth of the Vessel  (in meters)" required>
+                                                    @error('tonnage_depth')
+                                                        <div class="invalid-feedback" style="display: inline-block !important;">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Gross Tonnage <span class="text-danger">*</span></label>
+                                                    <input type="number" min="0" step="0.01" name="gross_tonnage"
+                                                        required value="{{ $boatReg->boat->gross_tonnage }}" required
+                                                        class="form-control form-control-sm @error('gross_tonnage') is-invalid @enderror">
+                                                    @error('gross_tonnage')
+                                                        <div class="invalid-feedback" style="display: inline-block !important;">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Net Tonnage <span class="text-danger">*</span></label>
+                                                    <input type="number" min="0" step="0.01" name="net_tonnage"
+                                                        required value="{{ $boatReg->boat->net_tonnage }}" required
+                                                        class="form-control form-control-sm @error('net_tonnage') is-invalid @enderror">
+                                                    @error('net_tonnage')
+                                                        <div class="invalid-feedback" style="display: inline-block !important;">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            @endunlessrole
                                         </div>
                                     </div>
 

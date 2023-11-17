@@ -116,10 +116,8 @@
                                                     class="btn btn-sm btn-info">Process</a> --}}
                                                 <a href="{{ route('reg-boat.show', $rBoats->id) }}"
                                                     class="btn btn-sm btn-success">VIEW</a>
-                                                @role('user')
-                                                    <a href="{{ route('reg-boat.edit', $rBoats->id) }}"
-                                                        class="btn btn-sm btn-primary">Edit</a>
-                                                @endrole
+                                                <a href="{{ route('reg-boat.edit', $rBoats->id) }}"
+                                                    class="btn btn-sm btn-primary">Edit</a>
                                                 <button type="button" class="btn btn-sm btn-danger" title="Delete"
                                                     data-toggle="modal"
                                                     data-target="#confirmationModal{{ $rBoats->id }}">
