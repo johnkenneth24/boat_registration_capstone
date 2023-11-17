@@ -43,18 +43,8 @@
                                                 <input type="text" name="role" class="form-control form-control-sm"
                                                     readonly value="{{ ucfirst($user->roles->first()->name) }}">
                                             </div>
-                                            <div class="form-group col-md-5">
-                                                <label>Email</label>
-                                                <input type="email" name="email"
-                                                    class="form-control form-control-sm @error('email') is-invalid @enderror"
-                                                    required value="{{ $user->email }}">
-                                                @error('email')
-                                                    <div class="invalid-feedback" style="display: inline-block !important;">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group col-md-5">
+
+                                            <div class="form-group col-md-10">
                                                 <label>Contact No.</label>
                                                 <input type="text" name="contact_no"
                                                     class="form-control form-control-sm @error('contact_no') is-invalid @enderror"
@@ -110,9 +100,8 @@
                                         </div>
                                     </div>
                                     <div class="card-footer d-flex justify-content-end">
-                                        <a href="{{ route('users.index') }}"
-                                            class="btn btn-danger col-md-2 mr-2"><span><i
-                                                            class="fa fa-arrow-left" aria-hidden="true"></i></span>Cancel</a>
+                                        <a href="{{ route('users.index') }}" class="btn btn-danger col-md-2 mr-2"><span><i
+                                                    class="fa fa-arrow-left" aria-hidden="true"></i></span>Cancel</a>
                                         <button type="submit" class="btn btn-primary col-md-2">Update</button>
                                     </div>
                                 </form>
