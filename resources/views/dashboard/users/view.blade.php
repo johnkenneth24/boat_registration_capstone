@@ -42,13 +42,8 @@
                                                 <input type="text" name="username" class="form-control form-control-sm"
                                                     readonly value="{{ $user->username }}">
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Email</label>
-                                                <input type="email" name="email" class="form-control form-control-sm"
-                                                    readonly value="{{ $user->email }}">
 
-                                            </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-12">
                                                 <label>Contact No.</label>
                                                 <input type="text" name="contact_no" class="form-control form-control-sm"
                                                     readonly value="{{ $user->contact_no }}">

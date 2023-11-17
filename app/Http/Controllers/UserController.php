@@ -59,22 +59,21 @@ class UserController extends Controller
             'id_number' => 'required|unique:users',
             'name' => 'required',
             'username' => 'required|unique:users',
-            // 'email' => 'required|unique:users',
-            'contact_no' => ['required', 'decimal', 'regex:/^(09\d{9})|(0\d{10})$/', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
+            'contact_no' => ['required', 'regex:/^(09\d{9})|(0\d{10})$/', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'],
         ], $this->messages());
 
         $user = User::create([
             'id_number' => $validated['id_number'],
             'name' => $validated['name'],
             'username' => $validated['username'],
-            // 'email' => $validated['email'],
             'contact_no' => $validated['contact_no'],
             'password' => Hash::make($validated['password']),
         ])->assignRole('staff');
 
         return redirect()->route('users.index')->with('success', 'Staff Account created successfully.');
     }
+
 
     public function edit($id)
     {
