@@ -29,13 +29,13 @@
                                             </div>
                                             <input type="text" name="registration_no"
                                                 class="form-control form-control-sm" readonly
-                                                value="{{ $boatReg->registration_no }}">
+                                                value="{{ $boatReg?->registration_no ?? '' }}">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Registration Date</label>
                                         <input type="date" name="registration_date" class="form-control form-control-sm"
-                                            readonly value="{{ $boatReg->registration_date }}">
+                                            readonly value="{{ $boatReg?->registration_date ?? '' }}">
                                     </div>
                                     <div class="col-md-12 mt-1 mb-2 py-1 bg-dark">
                                         <h6 class="font-weight-bolder text-white m-0">Boat Details</h6>
