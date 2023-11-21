@@ -8,8 +8,9 @@ use Illuminate\Support\Arr;
 use App\Models\RegisterBoat;
 use Illuminate\Http\Request;
 use App\Models\Certification;
-
+use App\Notifications\Disapproved;
 use App\Notifications\BoatRegistered;
+use App\Notifications\Renewal;
 
 use Illuminate\Validation\Rule;
 
@@ -411,6 +412,12 @@ class RegisterBoatController extends Controller
     public function disapprove($id)
     {
         $boatReg = RegisterBoat::find($id);
+
+        $user = OwnerInfo::where('id', $boatReg->owner_info_id)->first();
+
+        // dd($user);
+        $user->notify(new Disapproved());
+
         $boatReg->status = 'disapproved';
         $boatReg->save();
 
