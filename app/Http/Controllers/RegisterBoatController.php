@@ -261,6 +261,27 @@ class RegisterBoatController extends Controller
         return view('modules.register-boat.edit', compact('boatReg'));
     }
 
+    public function updatePending(Request $request, $id)
+    {
+
+        $boat = Boat::where('id', $id)->first();
+
+        $validated = $request->validate([
+            'length' => 'required',
+            'breadth' => 'required',
+            'depth' => 'required',
+            'tonnage_length' => 'required',
+            'tonnage_breadth' => 'required',
+            'tonnage_depth' => 'required',
+            'gross_tonnage' => 'required',
+            'net_tonnage' => 'required',
+        ]);
+
+        $boat->update($validated);
+
+        return redirect()->back()->with('success', 'Boat record updated.');
+    }
+
     public function update(Request $request, $id)
     {
 

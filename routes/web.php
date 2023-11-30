@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/archived', 'archived')->name('reg-boat.archived');
             Route::get('/reports', 'reports')->name('reg-boat.reports');
             Route::get('/undo-disappoval/{id}', 'undo')->name('reg-boat.undo');
+            route::put('update-pending/{id}', 'updatePending')->name('reg-boat.update-pending');
         });
     });
 

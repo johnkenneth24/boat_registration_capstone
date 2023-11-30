@@ -42,7 +42,11 @@
                                 <tbody>
                                     @forelse ($archivedBoats as $arcBoats)
                                         <tr class="text-center align-middle">
-                                            <td>{{ $arcBoats?->registration_no ?? '' }}</td>
+                                            <td>
+                                                @isset($arcBoats->registration_no)
+                                                    {{ $arcBoats->registration_no }}
+                                                @endisset
+                                            </td>
                                             @role('staff')
                                                 <td>{{ $arcBoats?->ownerInfo?->fullname ?? '' }}</td>
                                             @endrole

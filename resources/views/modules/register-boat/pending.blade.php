@@ -49,7 +49,7 @@
                                             <td>{{ $pBoats->status }}</td>
                                             <td class="">
                                                 <a href="{{ route('reg-boat.view', $pBoats->id) }}"
-                                                    class="btn btn-sm btn-primary">View details</a>
+                                                    class="btn btn-sm btn-primary">View Details</a>
                                                 <button type="button" class="btn btn-sm btn-success" title="Approve"
                                                     data-toggle="modal"
                                                     data-target="#confirmationApprove{{ $pBoats->id }}">
