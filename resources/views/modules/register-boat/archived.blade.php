@@ -58,7 +58,7 @@
                                             </td>
                                             <td>{{ $arcBoats?->status ?? '' }}</td>
                                             <td class="">
-                                                <a href="{{ route('reg-boat.view', $arcBoats->id) }}"
+                                                <a href="{{ route('reg-boat.archived-view', $arcBoats->id) }}"
                                                     class="btn btn-sm btn-primary">View details</a>
                                                 {{-- undo disapproval --}}
                                                 @if ($arcBoats->status == 'disapproved')

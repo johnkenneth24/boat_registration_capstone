@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/approve/{id}', 'approve')->name('reg-boat.approve');
             Route::get('/disapprove/{id}', 'disapprove')->name('reg-boat.disapprove');
             Route::get('/view/{id}', 'view')->name('reg-boat.view');
+            Route::get('/archived-view/{id}', 'archivedView')->name('reg-boat.archived-view');
             Route::get('/archived', 'archived')->name('reg-boat.archived');
             Route::get('/reports', 'reports')->name('reg-boat.reports');
             Route::get('/undo-disappoval/{id}', 'undo')->name('reg-boat.undo');
