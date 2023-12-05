@@ -378,16 +378,42 @@ class RegisterBoatController extends Controller
 
     public function destroy($id)
     {
-        $boatReg = RegisterBoat::find($id);
+        $boatReg = RegisterBoat::with('boat')->find($id);
+
+        if ($boatReg->boat) {
+            $boatReg->boat->delete();
+        }
 
         $boatReg->delete();
         return redirect()->route('reg-boat.index')->with('success', 'Boat record deleted successfully!');
     }
+
     public function view($id)
     {
-        $boatReg = RegisterBoat::with('boat')->find($id);
+        // Fetch a specific boat registration record by ID, including the associated boat information
+        // Retrieve both soft-deleted (trashed) records
+        $boatReg = RegisterBoat::with(['boat' => function ($query) {
+            $query->withTrashed();
+        }])
+            ->withTrashed()
+            ->find($id);
 
+        // Return a view, passing the boat registration data to the view
         return view('modules.register-boat.pending-view', compact('boatReg'));
+    }
+
+    public function archivedView($id)
+    {
+        // Fetch a specific boat registration record by ID, including the associated boat information
+        // Retrieve both soft-deleted (trashed) records
+        $boatReg = RegisterBoat::with(['boat' => function ($query) {
+            $query->withTrashed();
+        }])
+            ->withTrashed()
+            ->find($id);
+
+        // Return a view, passing the boat registration data to the view
+        return view('modules.register-boat.archived-view', compact('boatReg'));
     }
 
     public function approve($id)
