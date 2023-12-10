@@ -24,4 +24,9 @@
             </button>
         </div>
     </form>
+    @if (session()->has('error'))
+        <div class="alert alert-danger mt-4">
+            {{ session('error') }}
+        </div>
+    @endif
 </div>
