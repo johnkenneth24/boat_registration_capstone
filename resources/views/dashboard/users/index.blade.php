@@ -66,8 +66,8 @@
                                                 {{-- hides this action buttons once user has role of admin --}}
                                                 @if (!$user->hasRole('admin'))
                                                     @role('admin')
-                                                        <a href="{{ route('users.edit', $user->id) }}"
-                                                            class="btn btn-sm btn-primary mr-2" title="Edit">EDIT</a>
+                                                        {{-- <a href="{{ route('users.edit', $user->id) }}"
+                                                            class="btn btn-sm btn-primary mr-2" title="Edit">EDIT</a> --}}
                                                         <a href="{{ route('users.show', $user->id) }}"
                                                             class="btn btn-sm btn-warning mr-2" title="View">VIEW</a>
                                                         <button type="button" class="btn btn-sm btn-danger" title="Delete"
