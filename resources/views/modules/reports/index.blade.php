@@ -6,6 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <x-success></x-success>
+                    {{-- <x-errors></x-errors> --}}
                     <div class="card  card-outline card-warning mt-5">
                         <div class="card-header">
                             <div class="card-title">
@@ -17,10 +18,8 @@
                             </div>
                         </div>
                         <div class="card-body p-0">
-                            @if (session()->has('message'))
-                                <div class="alert alert-success">{{ session('message') }}</div>
-                            @endif
                             <table class="table table-sm table-hover">
+
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Registration No.</th>

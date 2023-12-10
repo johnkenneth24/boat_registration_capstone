@@ -71,7 +71,7 @@ class Export extends Component
         $templateProcessor->setValue('date_to', date('F d, Y', strtotime($this->endDate)));
 
         if ($this->registerBoats->isEmpty()) {
-            session()->flash('message', 'No records found for the selected date.');
+            return back()->with('error', 'No records found for the selected date.');
         } else {
             if ($this->type === 'all') {
                 $count = $this->registerBoats->count();
@@ -103,7 +103,8 @@ class Export extends Component
                 if ($count > 0) {
                     $templateProcessor->cloneRow('n', $count);
                 } else {
-                    session()->flash('message', 'No records found for the selected date.');
+                    return back()->with('error', 'No records found for the selected date.');
+                    // session()->flash('message', 'No records found for the selected date.');
                 }
 
                 foreach ($pending as $key => $value) {
@@ -119,7 +120,8 @@ class Export extends Component
                 if ($count > 0) {
                     $templateProcessor->cloneRow('n', $count);
                 } else {
-                    session()->flash('message', 'No records found for the selected date.');
+                    return back()->with('error', 'No records found for the selected date.');
+                    // session()->flash('message', 'No records found for the selected date.');
                 }
 
                 foreach ($registered as $key => $value) {
@@ -135,7 +137,8 @@ class Export extends Component
                 if ($count > 0) {
                     $templateProcessor->cloneRow('n', $count);
                 } else {
-                    session()->flash('message', 'No records found for the selected date.');
+                    return back()->with('error', 'No records found for the selected date.');
+                    // session()->flash('message', 'No records found for the selected date.');
                 }
 
                 foreach ($disapproved as $key => $value) {
@@ -151,7 +154,8 @@ class Export extends Component
                 if ($count > 0) {
                     $templateProcessor->cloneRow('n', $count);
                 } else {
-                    session()->flash('message', 'No records found for the selected date.');
+                    return back()->with('error', 'No records found for the selected date.');
+                    // session()->flash('message', 'No records found for the selected date.');
                 }
 
                 foreach ($expired as $key => $value) {
@@ -167,7 +171,8 @@ class Export extends Component
                 if ($count > 0) {
                     $templateProcessor->cloneRow('n', $count);
                 } else {
-                    session()->flash('message', 'No records found for the selected date.');
+                    return back()->with('error', 'No records found for the selected date.');
+                    // session()->flash('message', 'No records found for the selected date.');
                 }
 
                 foreach ($motorized as $key => $value) {
@@ -183,7 +188,8 @@ class Export extends Component
                 if ($count > 0) {
                     $templateProcessor->cloneRow('n', $count);
                 } else {
-                    session()->flash('message', 'No records found for the selected date.');
+                    return back()->with('error', 'No records found for the selected date.');
+                    // session()->flash('message', 'No records found for the selected date.');
                 }
 
                 foreach ($non_motorized as $key => $value) {
