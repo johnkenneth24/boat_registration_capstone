@@ -53,6 +53,20 @@ class Export extends Component
             ->where('registration_date', '<=', $this->endDate)
             ->get();
 
+        $motorized = RegisterBoat::with('boat')
+            ->whereHas('boat', function ($query) {
+                $query->where('boat_type', 'Motorized');
+            })
+            ->where('registration_date', '>=', $this->startDate)
+            ->where('registration_date', '<=', $this->endDate)
+            ->get();
+
+        $non_motorized = RegisterBoat::with('boat')->whereHas('boat', function ($query) {
+            $query->where('boat_type', 'Non-Motorized');
+        })->where('registration_date', '>=', $this->startDate)
+            ->where('registration_date', '<=', $this->endDate)
+            ->get();
+
         $templateProcessor->setValue('date_from', date('F d, Y', strtotime($this->startDate)));
         $templateProcessor->setValue('date_to', date('F d, Y', strtotime($this->endDate)));
 
@@ -141,6 +155,38 @@ class Export extends Component
                 }
 
                 foreach ($expired as $key => $value) {
+                    $templateProcessor->setValue('n#' . ($key + 1), $key + 1);
+                    $templateProcessor->setValue('reg_no#' . ($key + 1), $value->registration_no);
+                    $templateProcessor->setValue('date_reg#' . ($key + 1), date('M. d, Y', strtotime($value->registration_date)));
+                    $templateProcessor->setValue('vessel_name#' . ($key + 1), $value->boat->vessel_name);
+                    $templateProcessor->setValue('owner#' . ($key + 1), $value->ownerInfo->fullname);
+                    $templateProcessor->setValue('status#' . ($key + 1), $value->status);
+                }
+            } elseif ($this->type === 'motorized') {
+                $count = $motorized->count();
+                if ($count > 0) {
+                    $templateProcessor->cloneRow('n', $count);
+                } else {
+                    session()->flash('message', 'No records found for the selected date.');
+                }
+
+                foreach ($motorized as $key => $value) {
+                    $templateProcessor->setValue('n#' . ($key + 1), $key + 1);
+                    $templateProcessor->setValue('reg_no#' . ($key + 1), $value->registration_no);
+                    $templateProcessor->setValue('date_reg#' . ($key + 1), date('M. d, Y', strtotime($value->registration_date)));
+                    $templateProcessor->setValue('vessel_name#' . ($key + 1), $value->boat->vessel_name);
+                    $templateProcessor->setValue('owner#' . ($key + 1), $value->ownerInfo->fullname);
+                    $templateProcessor->setValue('status#' . ($key + 1), $value->status);
+                }
+            } elseif ($this->type === 'non-motorized') {
+                $count = $non_motorized->count();
+                if ($count > 0) {
+                    $templateProcessor->cloneRow('n', $count);
+                } else {
+                    session()->flash('message', 'No records found for the selected date.');
+                }
+
+                foreach ($non_motorized as $key => $value) {
                     $templateProcessor->setValue('n#' . ($key + 1), $key + 1);
                     $templateProcessor->setValue('reg_no#' . ($key + 1), $value->registration_no);
                     $templateProcessor->setValue('date_reg#' . ($key + 1), date('M. d, Y', strtotime($value->registration_date)));

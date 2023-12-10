@@ -16,6 +16,8 @@
                 <option value="registered">Registered</option>
                 <option value="disapproved">Disapproved</option>
                 <option value="expired">Expired</option>
+                <option value="motorized">Motorized Boats</option>
+                <option value="non-motorized">Non-Motorized Boats</option>
             </select>
             <button type="submit" class="btn btn-sm form-control btn-primary">
                 <span><i class="fa fa-download" aria-hidden="true"></i></span> Export
